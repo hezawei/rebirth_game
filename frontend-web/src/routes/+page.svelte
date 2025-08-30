@@ -5,24 +5,13 @@
   import ProfileForm from './ProfileForm.svelte'
   import IntroAnimation from './IntroAnimation.svelte'
 
-  // 【核心修复 & 调试】从环境变量读取 Supabase 配置并添加详细日志
-  const supabaseUrl = import.meta.env.VITE_PUBLIC_SUPABASE_URL as string;
-  const supabaseAnonKey = import.meta.env.VITE_PUBLIC_SUPABASE_ANON_KEY as string;
-
-  console.log("--- DEBUG START ---");
-  console.log("Value of VITE_PUBLIC_SUPABASE_URL:", supabaseUrl);
-  console.log("Type of VITE_PUBLIC_SUPABASE_URL:", typeof supabaseUrl);
-  console.log("Value of VITE_PUBLIC_SUPABASE_ANON_KEY:", supabaseAnonKey ? 'Loaded (first 5 chars): ' + supabaseAnonKey.substring(0, 5) : 'NOT LOADED or EMPTY');
-  console.log("Type of VITE_PUBLIC_SUPABASE_ANON_KEY:", typeof supabaseAnonKey);
-
+  // 【最终修复】使用占位符，等待构建脚本替换
+  const supabaseUrl = '__VITE_PUBLIC_SUPABASE_URL__';
+  const supabaseAnonKey = '__VITE_PUBLIC_SUPABASE_ANON_KEY__';
   const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-  console.log("Supabase client instance created:", supabase ? 'Yes' : 'No');
-  console.log("--- DEBUG END ---");
-
-
-  const API_HOST = import.meta.env.VITE_PUBLIC_API_HOST;
-  const API_BASE_URL = API_HOST ? `https://${API_HOST}` : 'http://localhost:8000';
+  const API_HOST = '__VITE_PUBLIC_API_HOST__';
+  const API_BASE_URL = API_HOST.startsWith('__') ? 'http://localhost:8000' : `https://${API_HOST}`;
 
   let currentUser: any = null
   let userProfile: any = null
@@ -129,10 +118,6 @@
     window.location.href = `http://localhost:8501/?wish=${encodeURIComponent(wish)}&user_id=${currentUser.id}`
   }
 </script>
-
-<h2 style="color: red; position: absolute; top: 10px; left: 10px; z-index: 9999;">
-  DEPLOYMENT_SUCCESS_FLAG_V4
-</h2>
 
 {#if loading}
   <div class="loading">
