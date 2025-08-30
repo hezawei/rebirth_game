@@ -15,7 +15,7 @@ services:
         sync: false
 
   - name: rebirth-game-frontend
-    type: static
+    type: static_site
     env: static
     plan: free
     rootDir: frontend-web
