@@ -20,10 +20,10 @@ services:
     rootDir: frontend-web
     buildCommand: |
       npm install && npm run build -- --debug
-      # 在所有构建出的JS文件中强行替换占位符
-      find build -type f -name "*.js" -exec sed -i "s|__VITE_PUBLIC_SUPABASE_URL__|$VITE_PUBLIC_SUPABASE_URL|g" {} +
-      find build -type f -name "*.js" -exec sed -i "s|__VITE_PUBLIC_SUPABASE_ANON_KEY__|$VITE_PUBLIC_SUPABASE_ANON_KEY|g" {} +
-      find build -type f -name "*.js" -exec sed -i "s|__VITE_PUBLIC_API_HOST__|$VITE_PUBLIC_API_HOST|g" {} +
+      # 全局替换 build 目录下所有文件中的占位符
+      find build -type f -exec sed -i "s|__VITE_PUBLIC_SUPABASE_URL__|$VITE_PUBLIC_SUPABASE_URL|g" {} +
+      find build -type f -exec sed -i "s|__VITE_PUBLIC_SUPABASE_ANON_KEY__|$VITE_PUBLIC_SUPABASE_ANON_KEY|g" {} +
+      find build -type f -exec sed -i "s|__VITE_PUBLIC_API_HOST__|$VITE_PUBLIC_API_HOST|g" {} +
     staticPublishPath: build
     envVars:
       # 将后端服务的 host (域名) 注入到前端构建环境中
