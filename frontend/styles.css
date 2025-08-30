@@ -1,0 +1,384 @@
+/* frontend/styles.css - Updated 2025-08-19 */
+/* FORCE REFRESH - CSS CACHE BUSTER v3 */
+
+/* Hide Streamlit menu, header and footer */
+#MainMenu, header, footer {
+    visibility: hidden;
+}
+
+/* 隐藏 Streamlit 的原生折叠按钮 */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stBaseButton-headerNoPadding"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* 允许主页面图片正常显示，只禁用特定的全屏按钮 */
+
+/* 禁用所有可能的图片全屏按钮 */
+button[title*="fullscreen"],
+button[aria-label*="fullscreen"],
+button[title*="expand"],
+button[aria-label*="expand"],
+*[onclick*="fullscreen"],
+*[onclick*="expand"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* 禁用所有模态框和对话框 */
+[data-baseweb="modal"],
+[role="dialog"],
+.ReactModal__Overlay,
+.ReactModal__Content {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Hide all Streamlit default buttons on the right */
+.stActionButton,
+[data-testid="stActionButton"],
+.stDeployButton,
+[data-testid="stDeployButton"],
+.stToolbar,
+[data-testid="stToolbar"],
+.css-1rs6os,
+.css-1vbkxwb {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Sidebar should be visible but styled - FIX WIDTH ISSUE */
+.css-1d391kg,
+[data-testid="stSidebar"],
+.stSidebar,
+section[data-testid="stSidebar"] {
+    background-color: #1E1E1E !important;
+    border-right: 2px solid #FFD700 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    /* 强制设置最小宽度 */
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+    flex-basis: 300px !important;
+}
+
+/* Force sidebar to be visible */
+[data-testid="stSidebar"] > div {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
+}
+
+/* Sidebar toggle button - make sure it's visible */
+[data-testid="collapsedControl"] {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    left: 0 !important;
+}
+
+/* 确保主容器不会覆盖侧边栏 - 规则已合并到下方 */
+
+/* 修复Streamlit布局问题 */
+.stApp > div {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+/* 确保侧边栏正常显示 */
+[data-testid="stSidebar"] {
+    order: -1 !important;
+    flex-shrink: 0 !important;
+    width: 210px !important;
+    min-width: 210px !important;
+    max-width: 210px !important;
+}
+
+/* JavaScript强制修复侧边栏宽度 */
+
+/* Dark background theme - use stronger selectors */
+html, body {
+    background-color: #0E1117 !important;
+    color: white !important;
+}
+
+.stApp {
+    background-color: #0E1117 !important;
+}
+
+/* Root element background fix */
+#root {
+    background-color: #0E1117 !important;
+}
+
+/* Main container background - 合并规则避免冲突 */
+.main {
+    background-color: #0E1117 !important;
+}
+
+.main .block-container {
+    background-color: #0E1117 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* Text color fixes for all text elements */
+.stMarkdown, .stText, p, h1, h2, h3, h4, h5, h6, div, span {
+    color: white !important;
+}
+
+/* Force main containers to have dark background */
+.stApp > div, .main, main {
+    background-color: #0E1117 !important;
+}
+
+/* Story image styling - 替换 st.image */
+.story-image {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Story image placeholder styling */
+.story-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    margin: 0 auto;
+}
+
+/* Main gate image styling */
+.main-gate-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+    margin: 20px auto;
+    box-shadow: 0 8px 32px rgba(108, 99, 255, 0.3);
+}
+
+/* Gate placeholder styling */
+.gate-placeholder {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.2), rgba(255, 215, 0, 0.2));
+    border: 2px solid rgba(108, 99, 255, 0.5);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFD700;
+    font-size: 2rem;
+    margin: 20px auto;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+
+
+
+
+/* Story text container styling */
+.story-text-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: -50px;
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Button styling - ensure text is always visible */
+div.stButton > button {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(108, 99, 255, 0.8) !important;
+    color: white !important;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+div.stButton > button:hover {
+    background-color: rgba(108, 99, 255, 0.8) !important;
+    color: white !important;
+    border: 1px solid white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+}
+
+/* Primary button styling */
+div.stButton > button[kind="primary"] {
+    background-color: rgba(108, 99, 255, 0.8) !important;
+    color: white !important;
+    border: 1px solid rgba(108, 99, 255, 1) !important;
+}
+
+/* Input field styling */
+.stTextInput > div > div > input {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(108, 99, 255, 0.5) !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+/* Input field focus state */
+.stTextInput > div > div > input:focus {
+    border: 1px solid rgba(108, 99, 255, 0.8) !important;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.3) !important;
+}
+
+/* Input field placeholder text */
+.stTextInput > div > div > input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Title styling */
+.main-title {
+    text-align: center;
+    color: #6C63FF;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Subtitle styling */
+.sub-title {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Choice button container */
+.choice-container {
+    margin: 2rem 0;
+}
+
+/* Sidebar styling - multiple selectors to ensure coverage */
+section[data-testid="stSidebar"] {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    border-right: 1px solid rgba(108, 99, 255, 0.3) !important;
+}
+
+.css-1d391kg, .css-1lcbmhc, .css-1outpf7, .css-1cypcdb {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    border-right: 1px solid rgba(108, 99, 255, 0.3) !important;
+}
+
+/* Sidebar text color */
+section[data-testid="stSidebar"] *,
+.css-1d391kg *, .css-1lcbmhc *, .css-1outpf7 *, .css-1cypcdb * {
+    color: white !important;
+}
+
+/* Sidebar header styling */
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+    color: #6C63FF !important;
+}
+
+/* Loading animation styling */
+.stSpinner > div {
+    border-color: #6C63FF !important;
+}
+
+/* Metric styling (for sidebar metrics) */
+.css-1xarl3l {
+    background-color: rgba(108, 99, 255, 0.1) !important;
+    border: 1px solid rgba(108, 99, 255, 0.3) !important;
+    border-radius: 10px !important;
+}
+
+/* Warning and error message styling */
+.stAlert {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+    border: 1px solid rgba(255, 193, 7, 0.5) !important;
+    color: white !important;
+}
+
+/* Success message styling */
+.stSuccess {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+    border: 1px solid rgba(40, 167, 69, 0.5) !important;
+    color: white !important;
+}
+
+/* Info message styling */
+.stInfo {
+    background-color: rgba(108, 99, 255, 0.1) !important;
+    border: 1px solid rgba(108, 99, 255, 0.5) !important;
+    color: white !important;
+}
+
+/* Column styling */
+.css-1r6slb0 {
+    background-color: transparent !important;
+}
+
+/* Ensure text elements are white - more specific selectors */
+.stApp *, .main *, .stMarkdown *, .stText * {
+    color: white !important;
+}
+
+/* Fix for fullscreen overlay */
+.stApp > div > div > div > div[data-testid="stImageFullScreen"] {
+    background-color: #0E1117 !important;
+}
+
+/* Fix for any modal or overlay backgrounds */
+.stModal, .stOverlay, [data-testid="stModal"] {
+    background-color: #0E1117 !important;
+}
+
+/* Fix for image viewer background */
+div[data-testid="stImageViewer"] {
+    background-color: #0E1117 !important;
+}
+
+/* 【新增】为编年史页面的图片占位符添加样式 */
+.chronicle-image-placeholder {
+    width: 100%;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.3);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+

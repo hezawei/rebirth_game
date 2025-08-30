@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+python-dotenv
+openai>=1.0
+anthropic
+google-generativeai
+streamlit
+requests
+loguru
+sqlalchemy
+alembic
+psycopg2-binary
+PyJWT
