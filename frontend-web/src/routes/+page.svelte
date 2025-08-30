@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { createClient, type AuthChangeEvent, type Session } from '@supabase/supabase-js'
-  import Auth from '../lib/components/Auth.svelte'
-  import ProfileForm from '../lib/components/ProfileForm.svelte'
-  import IntroAnimation from '../lib/components/IntroAnimation.svelte'
+  import Auth from './Auth.svelte'
+  import ProfileForm from './ProfileForm.svelte'
+  import IntroAnimation from './IntroAnimation.svelte'
 
   // Initialize Supabase client
   const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co'
