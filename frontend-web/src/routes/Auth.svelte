@@ -1,11 +1,6 @@
 <script lang="ts">
-  import { createClient } from '@supabase/supabase-js'
+  import { supabase } from '$lib/supabase' // 【核心修正】从中央配置文件导入
   import { createEventDispatcher } from 'svelte'
-
-  // Initialize Supabase client
-  const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co'
-  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmdmdpY3NoZHNlcWR0eWNvZnZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDAzMDcsImV4cCI6MjA3MTI1NjMwN30.7oY3rhXDMSNZGKmgkU_nQ3h0Bw2hUbYEaXh4F-D8MaA'
-  const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
   const dispatch = createEventDispatcher()
 
