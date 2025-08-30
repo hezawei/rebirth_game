@@ -5,9 +5,9 @@
   import ProfileForm from './ProfileForm.svelte'
   import IntroAnimation from './IntroAnimation.svelte'
 
-  // Initialize Supabase client
-  const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co'
-  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmdmdpY3NoZHNlcWR0eWNvZnZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDAzMDcsImV4cCI6MjA3MTI1NjMwN30.7oY3rhXDMSNZGKmgkU_nQ3h0Bw2hUbYEaXh4F-D8MaA'
+  // 【核心修复】从环境变量读取 Supabase 配置
+  const supabaseUrl = import.meta.env.VITE_PUBLIC_SUPABASE_URL as string;
+  const supabaseAnonKey = import.meta.env.VITE_PUBLIC_SUPABASE_ANON_KEY as string;
   const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
   const API_HOST = import.meta.env.VITE_PUBLIC_API_HOST;
@@ -118,6 +118,10 @@
     window.location.href = `http://localhost:8501/?wish=${encodeURIComponent(wish)}&user_id=${currentUser.id}`
   }
 </script>
+
+<h2 style="color: red; position: absolute; top: 10px; left: 10px; z-index: 9999;">
+  DEPLOYMENT_SUCCESS_FLAG_V4
+</h2>
 
 {#if loading}
   <div class="loading">
