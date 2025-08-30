@@ -17,7 +17,6 @@ services:
   - name: rebirth-game-frontend
     type: web
     runtime: static
-    plan: free
     rootDir: frontend-web
     buildCommand: npm install && npm run build
     staticPublishPath: build
