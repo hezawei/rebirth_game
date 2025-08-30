@@ -1,7 +1,7 @@
 services:
   - type: web
     name: rebirth-game-backend
-    env: docker
+    runtime: docker # 使用 'runtime' 替代过时的 'env'
     # 环境变量将通过在Render仪表盘中创建的名为 .env 的 Secret File 来提供
     secretFile:
       name: .env
