@@ -2,21 +2,10 @@ services:
   - type: web
     name: rebirth-game-backend
     env: docker
-    # Render会自动检测Dockerfile并构建
-    # 环境变量建议在Render仪表盘中设置，以保证安全
-    # 但为了方便，我们可以从.env文件同步
-    envVars:
-      - key: DATABASE_URL
-        from: .env
-      - key: DOUBAO_API_KEY
-        from: .env
-      - key: SUPABASE_URL
-        from: .env
-      - key: SUPABASE_ANON_KEY
-        from: .env
-      # 添加其他需要的环境变量
-      - key: PYTHON_VERSION
-        value: 3.11
+    # 环境变量将通过在Render仪表盘中创建的名为 .env 的 Secret File 来提供
+    secretFile:
+      name: .env
+      mountPath: /app/.env
     healthCheck:
       path: /health
       initialDelaySeconds: 30
