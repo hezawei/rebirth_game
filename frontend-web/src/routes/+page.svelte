@@ -1,9 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { supabase } from '$lib/supabase'
+  import { createClient } from '@supabase/supabase-js'
   import Auth from '$lib/components/Auth.svelte'
   import ProfileForm from '$lib/components/ProfileForm.svelte'
   import IntroAnimation from '$lib/components/IntroAnimation.svelte'
+
+  // Initialize Supabase client
+  const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co'
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmdmdpY3NoZHNlcWR0eWNvZnZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDAzMDcsImV4cCI6MjA3MTI1NjMwN30.7oY3rhXDMSNZGKmgkU_nQ3h0Bw2hUbYEaXh4F-D8MaA'
+  export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
   const API_HOST = import.meta.env.VITE_PUBLIC_API_HOST;
   const API_BASE_URL = API_HOST ? `https://${API_HOST}` : 'http://localhost:8000';
