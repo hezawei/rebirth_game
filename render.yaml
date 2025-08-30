@@ -3,7 +3,7 @@ services:
     name: rebirth-game-backend
     runtime: docker
     plan: free # 明确指定使用免费套餐
-    healthCheckPath: /health # 使用更简洁、兼容性更好的健康检查路径
+    healthCheckPath: /story/health # 修正为正确的健康检查路径
     envVars:
       # 以下密钥将在 Render 仪表盘中提示你手动输入
       - key: DATABASE_URL
