@@ -27,6 +27,10 @@ services:
           type: web
           name: rebirth-game-backend
           property: host
+      - key: VITE_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: VITE_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
     routes:
       - type: rewrite
         source: /*
