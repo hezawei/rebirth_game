@@ -1,11 +1,15 @@
 services:
   - type: web
     name: rebirth-game-backend
-    runtime: docker # 使用 'runtime' 替代过时的 'env'
-    # 环境变量将通过在Render仪表盘中创建的名为 .env 的 Secret File 来提供
-    secretFile:
-      name: .env
-      mountPath: /app/.env
-    healthCheck:
-      path: /health
-      initialDelaySeconds: 30
+    runtime: docker
+    healthCheckPath: /health # 使用更简洁、兼容性更好的健康检查路径
+    envVars:
+      # 以下密钥将在 Render 仪表盘中提示你手动输入
+      - key: DATABASE_URL
+        sync: false
+      - key: DOUBAO_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
