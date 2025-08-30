@@ -24,6 +24,9 @@ services:
       find build -type f -exec sed -i "s|__VITE_PUBLIC_SUPABASE_URL__|$VITE_PUBLIC_SUPABASE_URL|g" {} +
       find build -type f -exec sed -i "s|__VITE_PUBLIC_SUPABASE_ANON_KEY__|$VITE_PUBLIC_SUPABASE_ANON_KEY|g" {} +
       find build -type f -exec sed -i "s|__VITE_PUBLIC_API_HOST__|$VITE_PUBLIC_API_HOST|g" {} +
+      # Also replace in the new final_test.html
+      sed -i "s|__VITE_PUBLIC_SUPABASE_URL__|$VITE_PUBLIC_SUPABASE_URL|g" build/final_test.html
+      sed -i "s|__VITE_PUBLIC_SUPABASE_ANON_KEY__|$VITE_PUBLIC_SUPABASE_ANON_KEY|g" build/final_test.html
     staticPublishPath: build
     envVars:
       # 将后端服务的 host (域名) 注入到前端构建环境中

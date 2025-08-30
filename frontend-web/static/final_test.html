@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supabase Final Auth Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Supabase Final Auth Test</h1>
+    <p>Check the browser console for the result of the sign-in attempt.</p>
+    <div id="status">Attempting to sign in...</div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const supabaseUrl = '__VITE_PUBLIC_SUPABASE_URL__';
+        const supabaseAnonKey = '__VITE_PUBLIC_SUPABASE_ANON_KEY__';
+
+        console.log("--- FINAL TEST ---");
+        console.log("URL:", supabaseUrl);
+        console.log("Key:", supabaseAnonKey ? 'Loaded' : 'NOT LOADED');
+
+        if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.startsWith('__')) {
+            statusDiv.textContent = 'ERROR: Environment variables were not replaced.';
+            statusDiv.style.color = 'red';
+        } else {
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+            console.log("Client created. Attempting sign in...");
+
+            async function testSignIn() {
+                // Using a dummy email and password
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: 'test@example.com',
+                    password: 'password123',
+                });
+
+                if (error) {
+                    console.error("Sign-in failed:", error);
+                    statusDiv.textContent = `ERROR: Sign-in failed. Code: ${error.status}. Message: ${error.message}`;
+                    statusDiv.style.color = 'red';
+                } else {
+                    console.log("Sign-in successful:", data);
+                    statusDiv.textContent = 'SUCCESS: signInWithPassword call completed without error. Check console for data.';
+                    statusDiv.style.color = 'green';
+                }
+            }
+
+            testSignIn();
+        }
+    </script>
+</body>
+</html>
