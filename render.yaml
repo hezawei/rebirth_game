@@ -18,7 +18,7 @@ services:
     type: web
     runtime: static
     rootDir: frontend-web
-    buildCommand: npm install && npm run build
+    buildCommand: npm install && npm run build -- --debug
     staticPublishPath: build
     envVars:
       # 将后端服务的 host (域名) 注入到前端构建环境中

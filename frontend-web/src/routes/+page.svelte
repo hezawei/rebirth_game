@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { supabase } from '../lib/supabase.ts'
+  import { supabase } from '$lib/supabase'
   import Auth from '$lib/components/Auth.svelte'
   import ProfileForm from '$lib/components/ProfileForm.svelte'
   import IntroAnimation from '$lib/components/IntroAnimation.svelte'
