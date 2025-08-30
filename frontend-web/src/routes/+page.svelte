@@ -5,13 +5,12 @@
   import ProfileForm from './ProfileForm.svelte'
   import IntroAnimation from './IntroAnimation.svelte'
 
-  // 【最终修复】使用占位符，等待构建脚本替换
-  const supabaseUrl = '__VITE_PUBLIC_SUPABASE_URL__';
-  const supabaseAnonKey = '__VITE_PUBLIC_SUPABASE_ANON_KEY__';
+  // 【最终修复】硬编码验证过的密钥
+  const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co';
+  const supabaseAnonKey = 'sb_publishable_vPg-W99DuyVSBmNFyKad8Q_spNvqLoJ';
   const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-  const API_HOST = '__VITE_PUBLIC_API_HOST__';
-  const API_BASE_URL = API_HOST.startsWith('__') ? 'http://localhost:8000' : `https://${API_HOST}`;
+  const API_BASE_URL = 'https://rebirth-game-backend.onrender.com';
 
   let currentUser: any = null
   let userProfile: any = null
