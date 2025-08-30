@@ -5,7 +5,8 @@
   import ProfileForm from '$lib/components/ProfileForm.svelte'
   import IntroAnimation from '$lib/components/IntroAnimation.svelte'
 
-  const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_URL || 'http://localhost:8000';
+  const API_HOST = import.meta.env.VITE_PUBLIC_API_HOST;
+  const API_BASE_URL = API_HOST ? `https://${API_HOST}` : 'http://localhost:8000';
 
   let currentUser: any = null
   let userProfile: any = null
