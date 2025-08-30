@@ -22,11 +22,12 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: build
     envVars:
-      - key: VITE_PUBLIC_API_URL
+      # 将后端服务的 host (域名) 注入到前端构建环境中
+      - key: VITE_PUBLIC_API_HOST
         fromService:
           type: web
           name: rebirth-game-backend
-          property: url
+          property: host
     routes:
       - type: rewrite
         source: /*
