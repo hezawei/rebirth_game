@@ -12,15 +12,17 @@
 
     <script>
         const statusDiv = document.getElementById('status');
-        const supabaseUrl = '__VITE_PUBLIC_SUPABASE_URL__';
-        const supabaseAnonKey = '__VITE_PUBLIC_SUPABASE_ANON_KEY__';
+        
+        // --- Hardcoded values for final test ---
+        const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co';
+        const supabaseAnonKey = 'sb_publishable_vPg-W99DuyVSBmNFyKad8Q_spNvqLoJ'; // Using the new publishable key
 
-        console.log("--- FINAL TEST ---");
+        console.log("--- FINAL HARDCODED TEST ---");
         console.log("URL:", supabaseUrl);
         console.log("Key:", supabaseAnonKey ? 'Loaded' : 'NOT LOADED');
 
-        if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.startsWith('__')) {
-            statusDiv.textContent = 'ERROR: Environment variables were not replaced.';
+        if (!supabaseUrl || !supabaseAnonKey) {
+            statusDiv.textContent = 'ERROR: Hardcoded values are missing.';
             statusDiv.style.color = 'red';
         } else {
             const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
