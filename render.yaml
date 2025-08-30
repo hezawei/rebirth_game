@@ -1,7 +1,7 @@
 services:
-  - type: web
-    name: rebirth-game-backend
-    runtime: docker
+  - name: rebirth-game-backend
+    type: web
+    env: docker
     plan: free
     healthCheckPath: /story/health
     envVars:
@@ -14,14 +14,14 @@ services:
       - key: SUPABASE_ANON_KEY
         sync: false
 
-  - type: static site
-    name: rebirth-game-frontend
+  - name: rebirth-game-frontend
+    type: static
+    env: static
     plan: free
     rootDir: frontend-web
     buildCommand: npm install && npm run build
     publishDir: build
     envVars:
-      # 将后端服务的URL注入到前端构建环境中
       - key: VITE_PUBLIC_API_URL
         fromService:
           type: web
