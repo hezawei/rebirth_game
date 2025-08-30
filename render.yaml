@@ -15,12 +15,12 @@ services:
         sync: false
 
   - name: rebirth-game-frontend
-    type: static_site
-    env: static
+    type: web
+    runtime: static
     plan: free
     rootDir: frontend-web
     buildCommand: npm install && npm run build
-    publishDir: build
+    staticPublishPath: build
     envVars:
       - key: VITE_PUBLIC_API_URL
         fromService:
