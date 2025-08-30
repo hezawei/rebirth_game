@@ -5,6 +5,8 @@
   import ProfileForm from '$lib/components/ProfileForm.svelte'
   import IntroAnimation from '$lib/components/IntroAnimation.svelte'
 
+  const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_URL || 'http://localhost:8000';
+
   let currentUser: any = null
   let userProfile: any = null
   let showAnimation = false
@@ -54,7 +56,7 @@
         return
       }
 
-      const response = await fetch('http://localhost:8000/users/profile', {
+      const response = await fetch(`${API_BASE_URL}/users/profile`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

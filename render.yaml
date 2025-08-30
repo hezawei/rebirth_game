@@ -2,10 +2,9 @@ services:
   - type: web
     name: rebirth-game-backend
     runtime: docker
-    plan: free # 明确指定使用免费套餐
-    healthCheckPath: /story/health # 修正为正确的健康检查路径
+    plan: free
+    healthCheckPath: /story/health
     envVars:
-      # 以下密钥将在 Render 仪表盘中提示你手动输入
       - key: DATABASE_URL
         sync: false
       - key: DOUBAO_API_KEY
@@ -14,3 +13,21 @@ services:
         sync: false
       - key: SUPABASE_ANON_KEY
         sync: false
+
+  - type: static
+    name: rebirth-game-frontend
+    plan: free
+    rootDir: frontend-web
+    buildCommand: npm install && npm run build
+    publishDir: build
+    envVars:
+      # 将后端服务的URL注入到前端构建环境中
+      - key: VITE_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: rebirth-game-backend
+          property: url
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
