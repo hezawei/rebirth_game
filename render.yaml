@@ -18,7 +18,10 @@ services:
     type: web
     runtime: static
     rootDir: frontend-web
-    buildCommand: npm install && npm run build -- --debug
+    buildCommand: |
+      npm install && npm run build -- --debug
+      sed -i "s|%VITE_PUBLIC_SUPABASE_URL%|$VITE_PUBLIC_SUPABASE_URL|g" build/test.html
+      sed -i "s|%VITE_PUBLIC_SUPABASE_ANON_KEY%|$VITE_PUBLIC_SUPABASE_ANON_KEY|g" build/test.html
     staticPublishPath: build
     envVars:
       # 将后端服务的 host (域名) 注入到前端构建环境中

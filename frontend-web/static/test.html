@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Connection Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Supabase Connection Test</h1>
+    <p>Check the browser console for logs.</p>
+    <div id="status">Testing...</div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+
+        // --- 这些值应该由 Render 注入 ---
+        const supabaseUrl = '%VITE_PUBLIC_SUPABASE_URL%';
+        const supabaseAnonKey = '%VITE_PUBLIC_SUPABASE_ANON_KEY%';
+
+        console.log("--- PURE HTML TEST ---");
+        console.log("URL from placeholder:", supabaseUrl);
+        console.log("Key from placeholder:", supabaseAnonKey ? 'Loaded' : 'NOT LOADED');
+
+        if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.startsWith('%')) {
+            statusDiv.textContent = 'ERROR: Environment variables were not replaced by Render.';
+            statusDiv.style.color = 'red';
+        } else {
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+            console.log("Supabase client created:", supabase);
+            statusDiv.textContent = 'SUCCESS: Supabase client created. Check console for details.';
+            statusDiv.style.color = 'green';
+        }
+    </script>
+</body>
+</html>
