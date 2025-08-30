@@ -5,10 +5,21 @@
   import ProfileForm from './ProfileForm.svelte'
   import IntroAnimation from './IntroAnimation.svelte'
 
-  // 【核心修复】从环境变量读取 Supabase 配置
+  // 【核心修复 & 调试】从环境变量读取 Supabase 配置并添加详细日志
   const supabaseUrl = import.meta.env.VITE_PUBLIC_SUPABASE_URL as string;
   const supabaseAnonKey = import.meta.env.VITE_PUBLIC_SUPABASE_ANON_KEY as string;
+
+  console.log("--- DEBUG START ---");
+  console.log("Value of VITE_PUBLIC_SUPABASE_URL:", supabaseUrl);
+  console.log("Type of VITE_PUBLIC_SUPABASE_URL:", typeof supabaseUrl);
+  console.log("Value of VITE_PUBLIC_SUPABASE_ANON_KEY:", supabaseAnonKey ? 'Loaded (first 5 chars): ' + supabaseAnonKey.substring(0, 5) : 'NOT LOADED or EMPTY');
+  console.log("Type of VITE_PUBLIC_SUPABASE_ANON_KEY:", typeof supabaseAnonKey);
+
   const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+  console.log("Supabase client instance created:", supabase ? 'Yes' : 'No');
+  console.log("--- DEBUG END ---");
+
 
   const API_HOST = import.meta.env.VITE_PUBLIC_API_HOST;
   const API_BASE_URL = API_HOST ? `https://${API_HOST}` : 'http://localhost:8000';
