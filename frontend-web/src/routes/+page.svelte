@@ -1,43 +1,60 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { createClient, type AuthChangeEvent, type Session } from '@supabase/supabase-js';
+  import Auth from './Auth.svelte';
+  import Game from './Game.svelte';
+  import ProfileForm from './ProfileForm.svelte';
+  import IntroAnimation from './IntroAnimation.svelte';
+  import WelcomeBack from './WelcomeBack.svelte';
+  import { userStore, gameStateStore, lastSessionStore } from '../lib/stores';
 
-  let status = "Initializing...";
+  let introComplete = false;
+  let initialWish = ''; // To store the wish from the animation
+  let forceNewGame = false; // Flag from WelcomeBack component
 
-  onMount(async () => {
-    try {
-      const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co';
-      const supabaseAnonKey = 'sb_publishable_vPg-W99DuyVSBmNFyKad8Q_spNvqLoJ';
-      
-      console.log("--- SVELTEKIT FINAL TEST ---");
-      console.log("URL:", supabaseUrl);
-      console.log("Key:", supabaseAnonKey ? 'Loaded' : 'NOT LOADED');
+  function handleIntroComplete(event: CustomEvent) {
+    initialWish = event.detail.wish;
+    introComplete = true;
+  }
 
-      const supabase = createClient(supabaseUrl, supabaseAnonKey);
-      console.log("Client created. Attempting sign in...");
-      status = "Client created. Attempting sign in...";
-
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: 'test@example.com',
-        password: 'password123',
-      });
-
-      if (error) {
-        console.error("Sign-in failed:", error);
-        status = `ERROR: Sign-in failed. Code: ${error.status}. Message: ${error.message}`;
-      } else {
-        console.log("Sign-in successful:", data);
-        status = 'SUCCESS: signInWithPassword call returned a 400 error as expected. This means authentication is working.';
-      }
-    } catch (e: any) {
-        console.error("A critical error occurred:", e);
-        status = `CRITICAL ERROR: ${e.message}`;
+  // Subscribe to userStore to reset state on logout
+  userStore.subscribe(user => {
+    if (!user) {
+      introComplete = false;
+      initialWish = '';
+      forceNewGame = false; // Also reset this flag
     }
   });
+
 </script>
 
-<h1>SvelteKit Final Auth Test</h1>
-<p>Check the browser console for the result of the sign-in attempt.</p>
-<div style="font-weight: bold; font-size: 20px;">
-  Status: <span style="{status.startsWith('ERROR') || status.startsWith('CRITICAL') ? 'color: red;' : 'color: green;'}">{status}</span>
-</div>
+<main>
+  {#if $gameStateStore}
+    <!-- Priority 1: Restoring from chronicle -->
+    <Game session={$userStore} />
+  {:else if $userStore}
+    {#if $userStore.nickname}
+      {#if $lastSessionStore && !forceNewGame}
+        <!-- Priority 2: User has a last session and hasn't chosen to start a new one -->
+        <WelcomeBack on:newgame={() => forceNewGame = true} />
+      {:else if !introComplete}
+        <!-- Priority 3: No last session, or user chose new game -> play intro -->
+        <IntroAnimation on:complete={handleIntroComplete} />
+      {:else}
+        <!-- Priority 4: Intro is complete, play the game -->
+        <Game session={$userStore} wish={initialWish} />
+      {/if}
+    {:else}
+      <!-- If user profile is NOT complete, show the profile form -->
+      <ProfileForm />
+    {/if}
+  {:else}
+    <!-- Otherwise, show the Auth component -->
+    <Auth />
+  {/if}
+</main>
+
+<style>
+  main {
+    width: 100%;
+    height: 100%;
+  }
+</style>

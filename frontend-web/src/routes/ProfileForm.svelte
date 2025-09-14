@@ -1,231 +1,164 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { userStore } from '$lib/stores';
+  import { api } from '$lib/apiService';
 
-  export let user: any
-  const dispatch = createEventDispatcher()
+  let nickname = '';
+  let age: number | undefined = undefined;
+  let identity = '';
 
-  let nickname = ''
-  let age: number | null = null
-  let identity = ''
-  let photoFile: File | null = null
-  let loading = false
-  let error = ''
+  let loading = false;
+  let error = '';
+  let success = '';
 
   async function handleSubmit() {
-    if (!nickname.trim()) {
-      error = '请输入昵称'
-      return
-    }
+    loading = true;
+    error = '';
+    success = '';
 
-    loading = true
-    error = ''
+    // Basic validation
+    if (!nickname || !age || !identity) {
+      error = '所有字段都必须填写';
+      loading = false;
+      return;
+    }
 
     try {
-      let photoUrl = ''
-
-      // 暂时跳过照片上传功能，直接使用空字符串
-      // TODO: 需要在Supabase中创建avatars bucket后再启用
-      if (photoFile) {
-        console.log('照片上传功能暂时禁用，等待Supabase bucket配置')
-        photoUrl = '' // 暂时设为空
-      }
-
-      // 暂时跳过后端API调用，直接使用本地数据
-      // TODO: 修复JWT验证后再启用后端API
-      const userData = {
-        id: user.id,
-        nickname: nickname.trim(),
-        age: age,
-        identity: identity.trim() || null,
-        photo_url: photoUrl || null,
-        created_at: new Date().toISOString()
-      }
-
-      console.log('用户资料（暂存本地）:', userData)
-      dispatch('profileCreated', { user: userData })
-
+      const updatedProfile = await api.updateProfile({ nickname, age, identity });
+      userStore.update(updatedProfile);
+      success = '个人资料更新成功！游戏即将开始...';
+      // The parent page (+page.svelte) will detect the updated user store
+      // and automatically transition to the next step (the animation).
     } catch (err: any) {
-      error = err.message
+      error = err.message;
     } finally {
-      loading = false
-    }
-  }
-
-  function handleFileChange(event: Event) {
-    const target = event.target as HTMLInputElement
-    if (target.files && target.files[0]) {
-      photoFile = target.files[0]
+      loading = false;
     }
   }
 </script>
 
-<div class="profile-container">
-  <div class="profile-card">
-    <h2>完善个人资料</h2>
-    <p class="subtitle">请填写您的基本信息，开始重生之旅</p>
-
-    {#if error}
-      <div class="error">{error}</div>
-    {/if}
+<div class="profile-form-container">
+  <div class="form-box">
+    <h1 class="main-title">📝 完善你的灵魂档案</h1>
+    <p class="sub-title">在开始重生之前，我们需要了解你的过去</p>
 
     <form on:submit|preventDefault={handleSubmit}>
       <div class="form-group">
-        <label for="nickname">昵称 *</label>
-        <input
-          id="nickname"
-          type="text"
-          bind:value={nickname}
-          placeholder="请输入您的昵称"
-          required
-          disabled={loading}
-        />
+        <label for="nickname">你的昵称是？</label>
+        <input id="nickname" type="text" bind:value={nickname} placeholder="例如：探险家" />
       </div>
-
       <div class="form-group">
-        <label for="age">年龄</label>
-        <input
-          id="age"
-          type="number"
-          bind:value={age}
-          placeholder="请输入您的年龄"
-          min="1"
-          max="150"
-          disabled={loading}
-        />
-      </div>
-
+        <label for="age">你在地球OL的等级？(年龄)</label>
+        <input id="age" type="number" bind:value={age} placeholder="例如：25" />
+      </div>j
       <div class="form-group">
-        <label for="identity">身份</label>
-        <input
-          id="identity"
-          type="text"
-          bind:value={identity}
-          placeholder="例如：学生、程序员、设计师等"
-          disabled={loading}
-        />
+        <label for="identity">你的前世身份是？</label>
+        <input id="identity" type="text" bind:value={identity} placeholder="例如：一位程序员" />
       </div>
 
-      <div class="form-group">
-        <label for="photo">个人照片</label>
-        <input
-          id="photo"
-          type="file"
-          accept="image/*"
-          on:change={handleFileChange}
-          disabled={loading}
-        />
-        <small>支持 JPG、PNG 格式，文件大小不超过 5MB</small>
-      </div>
-
-      <button type="submit" disabled={loading || !nickname.trim()}>
-        {loading ? '创建中...' : '开始重生之旅'}
+      <button type="submit" class="primary-button" disabled={loading}>
+        {loading ? '正在存档...' : '✔️ 确认档案并继续'}
       </button>
     </form>
+
+    {#if error}
+      <div class="error-box">{error}</div>
+    {/if}
+    {#if success}
+      <div class="success-box">{success}</div>
+    {/if}
   </div>
 </div>
 
 <style>
-  .profile-container {
+  .profile-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1rem;
+    background-color: #0E1117;
+    color: white;
+    font-family: sans-serif;
   }
 
-  .profile-card {
-    background: white;
-    padding: 2rem;
+  .form-box {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem 3rem;
     border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(108, 99, 255, 0.3);
     width: 100%;
     max-width: 500px;
+    text-align: center;
   }
 
-  h2 {
-    text-align: center;
+  .main-title {
+    color: #6C63FF;
+    font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: #333;
-    font-size: 1.8rem;
   }
 
-  .subtitle {
-    text-align: center;
-    color: #666;
+  .sub-title {
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2rem;
-    font-size: 0.9rem;
   }
 
   .form-group {
     margin-bottom: 1.5rem;
+    text-align: left;
   }
 
   label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555;
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.5);
+    color: white;
+    border-radius: 10px;
     font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
   }
-
   input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #6C63FF;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
   }
 
-  input[type="file"] {
-    padding: 0.5rem;
-  }
-
-  small {
-    display: block;
-    margin-top: 0.25rem;
-    color: #888;
-    font-size: 0.8rem;
-  }
-
-  button[type="submit"] {
+  .primary-button {
     width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 0.75rem;
+    background-color: rgba(108, 99, 255, 0.8);
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    border: 1px solid rgba(108, 99, 255, 1);
+    border-radius: 25px;
+    font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
   }
-
-  button[type="submit"]:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  .primary-button:hover:not(:disabled) {
+    background-color: rgba(108, 99, 255, 1);
   }
-
-  button[type="submit"]:disabled {
-    background: #ccc;
+  .primary-button:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
   }
 
-  .error {
-    background: #fee;
-    color: #c33;
+  .error-box, .success-box {
+    margin-top: 1rem;
     padding: 0.75rem;
     border-radius: 8px;
-    margin-bottom: 1rem;
-    border: 1px solid #fcc;
-    text-align: center;
+  }
+
+  .error-box {
+    background-color: rgba(224, 49, 49, 0.2);
+    border: 1px solid #e03131;
+  }
+
+  .success-box {
+    background-color: rgba(34, 139, 230, 0.2);
+    border: 1px solid #228be6;
   }
 </style>

@@ -1,98 +1,35 @@
 <script lang="ts">
-  import { createClient } from '@supabase/supabase-js'
-  import { createEventDispatcher } from 'svelte'
+  import { userStore } from '../lib/stores';
 
-  // Initialize Supabase client
-  const supabaseUrl = 'https://wfvgicshdseqdtycofvl.supabase.co'
-  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmdmdpY3NoZHNlcWR0eWNvZnZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU3MDAzMDcsImV4cCI6MjA3MTI1NjMwN30.7oY3rhXDMSNZGKmgkU_nQ3h0Bw2hUbYEaXh4F-D8MaA'
-  const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-  const dispatch = createEventDispatcher()
-
-  let email = ''
-  let password = ''
-  let isLogin = true
-  let loading = false
-  let error = ''
-  let showResendEmail = false
-  let devMode = true // 开发模式
-
-  async function resendConfirmation() {
-    loading = true
-    try {
-      const { error: resendError } = await supabase.auth.resend({
-        type: 'signup',
-        email: email
-      })
-      if (resendError) throw resendError
-      error = '验证邮件已重新发送，请检查您的邮箱。'
-    } catch (err: any) {
-      error = `重发邮件失败: ${err.message}`
-    } finally {
-      loading = false
-    }
-  }
+  let email = '';
+  let password = '';
+  let isLogin = true;
+  let loading = false;
+  let error = '';
+  let successMessage = '';
 
   async function handleAuth() {
-    loading = true
-    error = ''
+    loading = true;
+    error = '';
+    successMessage = '';
 
     try {
       if (isLogin) {
-        const { data, error: authError } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        })
-        if (authError) throw authError
-        if (data.user) {
-          dispatch('authenticated', { user: data.user })
-        }
+        // --- Login Logic ---
+        await userStore.login(email, password);
+        // The userStore will update, and the main +page.svelte will reactively
+        // switch to the Game component. No need to dispatch events.
       } else {
-        const { data, error: authError } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: window.location.origin
-          }
-        })
-        if (authError) throw authError
-
-        if (data.user) {
-          if (data.user.email_confirmed_at) {
-            // 邮箱已验证，直接登录
-            dispatch('authenticated', { user: data.user })
-          } else {
-            // 邮箱未验证，显示提示信息
-            error = '注册成功！请检查您的邮箱并点击验证链接完成注册。'
-            // 3秒后自动切换到登录模式
-            setTimeout(() => {
-              isLogin = true
-              error = ''
-            }, 3000)
-          }
-        }
+        // --- Registration Logic ---
+        await userStore.register(email, password);
+        successMessage = '注册成功！请使用您的新账户登录。';
+        // Switch to login view after successful registration
+        isLogin = true;
       }
     } catch (err: any) {
-      if (err.message === 'Email not confirmed') {
-        if (devMode) {
-          // 开发模式：创建一个临时用户对象
-          const tempUser = {
-            id: 'dev-user-' + Date.now(),
-            email: email,
-            email_confirmed_at: new Date().toISOString()
-          }
-          dispatch('authenticated', { user: tempUser })
-          return
-        } else {
-          error = '邮箱未验证。请检查您的邮箱并点击验证链接。'
-          showResendEmail = true
-        }
-      } else {
-        error = err.message
-        showResendEmail = false
-      }
+      error = err.message || '发生未知错误';
     } finally {
-      loading = false
+      loading = false;
     }
   }
 </script>
@@ -101,24 +38,11 @@
   <div class="auth-card">
     <h2>{isLogin ? '登录' : '注册'}</h2>
 
-    {#if devMode}
-      <div class="dev-notice">
-        🚧 开发模式：邮箱验证已跳过
-      </div>
+    {#if successMessage}
+      <div class="success">{successMessage}</div>
     {/if}
-    
     {#if error}
       <div class="error">{error}</div>
-      {#if showResendEmail}
-        <button
-          type="button"
-          class="resend-button"
-          on:click={resendConfirmation}
-          disabled={loading}
-        >
-          重新发送验证邮件
-        </button>
-      {/if}
     {/if}
 
     <form on:submit|preventDefault={handleAuth}>
@@ -236,31 +160,6 @@
     text-decoration: underline;
   }
 
-  .resend-button {
-    width: 100%;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    color: #667eea;
-    border: 1px solid #667eea;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    transition: all 0.3s;
-  }
-
-  .resend-button:hover:not(:disabled) {
-    background: #667eea;
-    color: white;
-  }
-
-  .resend-button:disabled {
-    background: #f5f5f5;
-    color: #ccc;
-    border-color: #ddd;
-    cursor: not-allowed;
-  }
-
   .error {
     background: #fee;
     color: #c33;
@@ -270,15 +169,13 @@
     border: 1px solid #fcc;
   }
 
-  .dev-notice {
-    background: #fff3cd;
-    color: #856404;
-    padding: 0.5rem;
+  .success {
+    background: #e6fffa;
+    color: #00bfa5;
+    padding: 0.75rem;
     border-radius: 5px;
     margin-bottom: 1rem;
-    border: 1px solid #ffeaa7;
-    text-align: center;
-    font-size: 0.9rem;
+    border: 1px solid #a7f3d0;
   }
 
   p {

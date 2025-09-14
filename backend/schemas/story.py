@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
+from datetime import datetime
 
 
 class StoryStartRequest(BaseModel):
@@ -47,3 +48,31 @@ class ErrorResponse(BaseModel):
     error: str = Field(..., description="错误信息")
     detail: Optional[str] = Field(None, description="详细错误信息")
     code: Optional[str] = Field(None, description="错误代码")
+
+
+# --- 重生编年史 (Chronicle) 相关模型 ---
+
+class GameSessionSummary(BaseModel):
+    """游戏会话的简要信息，用于列表展示"""
+    id: int
+    wish: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class StoryNodeDetail(BaseModel):
+    """故事节点的详细信息，用于展示历史记录"""
+    id: int
+    story_text: str
+    image_url: str
+    user_choice: Optional[str] = None
+    choices: List[str] # 存储的是JSON字符串，需要解析
+    chapter_number: int # 假设元数据中有章节号
+
+    class Config:
+        from_attributes = True
+
+class GameSessionDetail(GameSessionSummary):
+    """单个游戏会话的完整历史记录"""
+    nodes: List[StoryNodeDetail]

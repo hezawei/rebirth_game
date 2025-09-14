@@ -46,7 +46,7 @@ class ImageService:
 
         if not self.image_library:
             LOGGER.error("图片库为空，无法提供图片！")
-            return f"/static/error_placeholder.png"
+            return f"/error_placeholder.png"
 
         # 【核心修改】实现基于档名关键字的简易匹配
         keyword_map = {
@@ -71,7 +71,7 @@ class ImageService:
             selected_image = random.choice(self.image_library)
             LOGGER.info(f"未匹配到关键字，随机选择了图片: {selected_image}")
 
-        return f"/static/{selected_image}"
+        return f"/{selected_image}"
 
     def generate_image_realtime(self, story_text: str) -> str:
         """

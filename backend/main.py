@@ -52,7 +52,8 @@ else:
 
 # 注册路由
 app.include_router(story.router, prefix="/story", tags=["Story"])
-app.include_router(user.router)
+app.include_router(user.auth_router) # 注册认证路由
+app.include_router(user.profile_router) # 注册用户资料路由
 
 # 根路径
 @app.get("/")

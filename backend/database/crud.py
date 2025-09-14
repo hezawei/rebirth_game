@@ -1,10 +1,37 @@
 # backend/database/crud.py
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session
 from . import models
+from backend.schemas import user as user_schema
+from backend.core import security
 from schemas.story import RawStoryData
 from config.logging_config import LOGGER  # 导入日志
 from typing import Optional
 import uuid
+
+# ===== 认证相关的 CRUD 函数 =====
+
+def get_user_by_email(db: Session, email: str) -> Optional[models.User]:
+    """根据邮箱地址获取用户"""
+    return db.query(models.User).filter(models.User.email == email).first()
+
+def create_user(db: Session, user: user_schema.UserCreate) -> models.User:
+    """创建新用户，包含密码哈希"""
+    hashed_password = security.get_password_hash(user.password)
+    # 使用 email 的一部分作为默认 nickname
+    default_nickname = user.email.split('@')[0]
+    db_user = models.User(
+        email=user.email, 
+        hashed_password=hashed_password,
+        nickname=default_nickname
+    )
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    LOGGER.info(f"创建新用户: {user.email}")
+    return db_user
+
+# ===== 游戏流程相关的 CRUD 函数 =====
 
 def create_game_session(db: Session, wish: str, user_id: str) -> models.GameSession:
     db_session = models.GameSession(wish=wish, user_id=user_id)
@@ -75,6 +102,20 @@ def calculate_chapter_number(db: Session, session_id: int, node_id: int) -> int:
     LOGGER.warning(f"无法找到节点 {node_id} 在会话 {session_id} 中的位置，返回默认章节号1")
     return 1
 
+def get_latest_node_by_session(db: Session, session_id: int, user_id: str) -> Optional[models.StoryNode]:
+    """获取指定会话的最新节点，并验证所有权"""
+    session = db.query(models.GameSession).filter(
+        models.GameSession.id == session_id,
+        models.GameSession.user_id == user_id
+    ).first()
+    
+    if not session:
+        return None # Session doesn't exist or doesn't belong to the user
+
+    return db.query(models.StoryNode).filter(
+        models.StoryNode.session_id == session_id
+    ).order_by(models.StoryNode.created_at.desc()).first()
+
 # 【核心修改】重命名并重写此函数
 def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
     """
@@ -122,23 +163,7 @@ def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
     LOGGER.info(f"已成功完成回溯，当前故事线的终点为节点 {target_node.id}。")
     return target_node
 
-# ===== 用户相关 CRUD 函数 =====
-
-def create_user(db: Session, user_id: str, nickname: str, age: Optional[int] = None,
-                identity: Optional[str] = None, photo_url: Optional[str] = None) -> models.User:
-    """创建新用户"""
-    db_user = models.User(
-        id=user_id,
-        nickname=nickname,
-        age=age,
-        identity=identity,
-        photo_url=photo_url
-    )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    LOGGER.info(f"创建新用户: {user_id} ({nickname})")
-    return db_user
+# ===== 用户资料相关的 CRUD 函数 =====
 
 def get_user_by_id(db: Session, user_id: str) -> Optional[models.User]:
     """根据ID获取用户"""
@@ -165,3 +190,19 @@ def update_user_profile(db: Session, user_id: str, nickname: Optional[str] = Non
     db.refresh(user)
     LOGGER.info(f"更新用户资料: {user_id}")
     return user
+
+# ===== 重生编年史相关的 CRUD 函数 =====
+
+def get_sessions_by_user(db: Session, user_id: str) -> list[models.GameSession]:
+    """获取指定用户的所有游戏会话，按时间倒序排列"""
+    return db.query(models.GameSession).filter(models.GameSession.user_id == user_id).order_by(models.GameSession.created_at.desc()).all()
+
+def get_session_details(db: Session, session_id: int, user_id: str) -> Optional[models.GameSession]:
+    """
+    获取单个游戏会话的详细信息，包括所有故事节点。
+    同时验证该会话是否属于当前用户。
+    """
+    return db.query(models.GameSession).filter(
+        models.GameSession.id == session_id,
+        models.GameSession.user_id == user_id
+    ).first()

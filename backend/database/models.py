@@ -20,11 +20,16 @@ def get_uuid_column():
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(get_uuid_column(), primary_key=True, default=lambda: str(uuid.uuid4()))  # 与 Supabase Auth 的 user id 对应
-    nickname = Column(String(50), nullable=False)
-    age = Column(Integer)
-    identity = Column(String(100))  # 身份
-    photo_url = Column(String(255))  # 个人照片 URL
+    id = Column(get_uuid_column(), primary_key=True, default=lambda: str(uuid.uuid4()))
+    email = Column(String(100), unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    
+    # 保留个人信息字段，设为可选
+    nickname = Column(String(50), nullable=True)
+    age = Column(Integer, nullable=True)
+    identity = Column(String(100), nullable=True)
+    photo_url = Column(String(255), nullable=True)
+    
     created_at = Column(DateTime, server_default=func.now())
 
     game_sessions = relationship("GameSession", back_populates="user")

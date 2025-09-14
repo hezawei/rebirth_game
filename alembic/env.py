@@ -30,8 +30,9 @@ from config.settings import settings
 
 target_metadata = Base.metadata
 
-# 【新增】从settings中获取数据库URL
-DATABASE_URL = settings.database_url
+# 【核心修正】从settings中获取数据库URL，并提供明确的fallback
+# 这确保了即使没有.env文件，alembic也能找到正确的SQLite数据库
+DATABASE_URL = settings.database_url or "sqlite:///rebirth_game.db"
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

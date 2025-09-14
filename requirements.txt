@@ -12,4 +12,7 @@ loguru
 sqlalchemy
 alembic
 psycopg2-binary
-PyJWT
+
+# --- 认证依赖 ---
+passlib[bcrypt]
+python-jose
