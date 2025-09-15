@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # --- Configuration ---
-PROJECT_DIR=$(pwd)
+# Get the directory where the script is located, making it runnable from anywhere
+PROJECT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 VENV_DIR="$PROJECT_DIR/.venv"
 GUNICORN_LOG_FILE="$PROJECT_DIR/gunicorn.log"
 GUNICORN_PID_FILE="$PROJECT_DIR/gunicorn.pid"
 
 # Gunicorn settings
+GUNICORN_WORKER_CLASS="uvicorn.workers.UvicornWorker" # <-- 使用Uvicorn的异步工人
 GUNICORN_WORKERS=4 # Adjust based on your server's CPU cores (e.g., 2 * cores + 1)
 GUNICORN_BIND="127.0.0.1:8000"
 GUNICORN_APP="backend.main:app"
@@ -25,17 +27,19 @@ start() {
         pkill -f "gunicorn: master \[backend.main:app\]"
     fi
 
-    # 2. Activate virtual environment and start Gunicorn
+    # 2. Start Gunicorn using the virtual environment's executable
     echo "Starting Gunicorn in the background..."
-    source "$VENV_DIR/bin/activate"
-    gunicorn --workers $GUNICORN_WORKERS \
-             --bind $GUNICORN_BIND \
-             --log-level info \
-             --log-file $GUNICORN_LOG_FILE \
-             --pid $GUNICORN_PID_FILE \
-             --daemon \
-             $GUNICORN_APP
-    deactivate
+    GUNICORN_EXEC="$VENV_DIR/bin/gunicorn"
+    
+    $GUNICORN_EXEC --worker-class $GUNICORN_WORKER_CLASS \
+                   --workers $GUNICORN_WORKERS \
+                   --bind $GUNICORN_BIND \
+                   --timeout 120 \
+                   --log-level debug \
+                   --log-file $GUNICORN_LOG_FILE \
+                   --pid $GUNICORN_PID_FILE \
+                   --daemon \
+                   $GUNICORN_APP
     
     sleep 2 # Give Gunicorn a moment to start
 

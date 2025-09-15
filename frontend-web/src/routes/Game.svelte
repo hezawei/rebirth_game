@@ -6,6 +6,7 @@
 
   export let session: any;
   export let wish: string = ''; // New prop from intro animation
+  export let initialState: any = null; // New prop for restoring state from chronicle
 
   // Initialize state variables to their default "empty" state.
   let storyHistory: { role: string; content: string }[] = [];
@@ -19,7 +20,20 @@
   onMount(() => {
     // 【终极修正】All instance-specific initialization logic now lives in onMount.
     
-    // Priority 1: Check for state from Chronicle or WelcomeBack page.
+    // Priority 1: Check for state passed directly as a prop (from chronicle retry).
+    if (initialState) {
+      currentSegment = initialState;
+      storyHistory = [{ role: 'assistant', content: initialState.text }];
+      chapterCount = initialState.metadata?.chapter_number || 0;
+      sessionId = initialState.session_id;
+      nodeId = initialState.node_id;
+      
+      // The restored session is now the "last active" one.
+      lastSessionStore.set(sessionId);
+      return; // Stop further execution
+    }
+
+    // Priority 2: Check for state from the store (from WelcomeBack page).
     const restoredState = get(gameStateStore);
     if (restoredState) {
       currentSegment = restoredState;
@@ -28,12 +42,12 @@
       sessionId = restoredState.session_id;
       nodeId = restoredState.node_id;
       
-      // Important: Clear the store AFTER using the data within the same lifecycle tick.
+      // Important: Clear the store AFTER using the data.
       gameStateStore.set(null);
       return; // Stop further execution
     }
 
-    // Priority 2: If no restored state, check for a wish from the intro animation.
+    // Priority 3: If no restored state, check for a wish from the intro animation.
     if (wish && !currentSegment) {
       startNewStory();
     }

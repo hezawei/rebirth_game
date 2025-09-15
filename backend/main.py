@@ -5,7 +5,7 @@ FastAPI应用主入口
 import sys
 import os
 from pathlib import Path
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, APIRouter
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -51,9 +51,16 @@ else:
     LOGGER.warning(f"静态文件目录不存在: {images_path}")
 
 # 注册路由
-app.include_router(story.router, prefix="/story", tags=["Story"])
-app.include_router(user.auth_router) # 注册认证路由
-app.include_router(user.profile_router) # 注册用户资料路由
+# 创建一个主API路由器，并添加 /api 前缀
+api_router = APIRouter(prefix="/api")
+
+# 将所有子路由器包含到主API路由器中
+api_router.include_router(story.router, prefix="/story", tags=["Story"])
+api_router.include_router(user.auth_router) # auth_router 已经有 /auth 前缀
+api_router.include_router(user.profile_router) # profile_router 已经有 /users 前缀
+
+# 将主API路由器包含到应用中
+app.include_router(api_router)
 
 # 根路径
 @app.get("/")

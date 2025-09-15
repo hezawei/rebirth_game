@@ -18,7 +18,7 @@ class Settings(BaseSettings):
 
     # LLM配置
     default_model: str = "gpt-4o-mini"  # OpenAI模型名称（当使用OpenAI时）
-    max_tokens: int = 1000
+    max_tokens: int = 500
     temperature: float = 0.8
 
     # 豆包特定配置
@@ -29,6 +29,11 @@ class Settings(BaseSettings):
     supabase_url: Optional[str] = None
     supabase_anon_key: Optional[str] = None
     database_url: Optional[str] = None
+
+    # --- 安全与认证 ---
+    secret_key: str = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
 
     class Config:
         env_file = [".env"]

@@ -6,7 +6,7 @@ from backend.schemas import user as user_schema
 from backend.core import security
 from schemas.story import RawStoryData
 from config.logging_config import LOGGER  # 导入日志
-from typing import Optional
+from typing import Optional, List
 import uuid
 
 # ===== 认证相关的 CRUD 函数 =====
@@ -69,7 +69,7 @@ def get_session_by_id(db: Session, session_id: int) -> models.GameSession:
     """根据ID获取游戏会话"""
     return db.query(models.GameSession).filter(models.GameSession.id == session_id).first()
 
-def get_session_history(db: Session, session_id: int) -> list[models.StoryNode]:
+def get_session_history(db: Session, session_id: int) -> List[models.StoryNode]:
     return db.query(models.StoryNode).filter(models.StoryNode.session_id == session_id).order_by(models.StoryNode.created_at).all()
 
 def get_node_by_id(db: Session, node_id: int) -> models.StoryNode:
@@ -193,7 +193,7 @@ def update_user_profile(db: Session, user_id: str, nickname: Optional[str] = Non
 
 # ===== 重生编年史相关的 CRUD 函数 =====
 
-def get_sessions_by_user(db: Session, user_id: str) -> list[models.GameSession]:
+def get_sessions_by_user(db: Session, user_id: str) -> List[models.GameSession]:
     """获取指定用户的所有游戏会话，按时间倒序排列"""
     return db.query(models.GameSession).filter(models.GameSession.user_id == user_id).order_by(models.GameSession.created_at.desc()).all()
 

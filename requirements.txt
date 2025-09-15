@@ -1,11 +1,13 @@
 fastapi
 uvicorn[standard]
-pydantic
+pydantic[email]
+email-validator
 pydantic-settings
 python-dotenv
 openai>=1.0
 anthropic
 google-generativeai
+gunicorn>=20.1.0
 streamlit
 requests
 loguru
@@ -16,3 +18,4 @@ psycopg2-binary
 # --- 认证依赖 ---
 passlib[bcrypt]
 python-jose
+python-multipart

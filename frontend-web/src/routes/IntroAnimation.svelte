@@ -40,7 +40,7 @@
     } catch (err) {
       console.error("Video play failed:", err);
       // If play fails, skip the animation
-      dispatch('complete');
+      dispatch('complete', { wish: '一个随机的冒险者' });
     }
   }
 

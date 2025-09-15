@@ -5,10 +5,18 @@
   import IntroAnimation from './IntroAnimation.svelte';
   import WelcomeBack from './WelcomeBack.svelte';
   import { userStore, gameStateStore, lastSessionStore } from '../lib/stores';
+  import { get } from 'svelte/store';
 
   let introComplete = false;
   let initialWish = ''; // To store the wish from the animation
   let forceNewGame = false; // Flag from WelcomeBack component
+
+  // Consume the one-time state from chronicle/retry before rendering.
+  let restoredGameState = get(gameStateStore);
+  if (restoredGameState) {
+    // Clear the store immediately so it's not used again on refresh.
+    gameStateStore.set(null);
+  }
 
   function handleIntroComplete(event: CustomEvent) {
     initialWish = event.detail.wish;
@@ -21,15 +29,16 @@
       introComplete = false;
       initialWish = '';
       forceNewGame = false; // Also reset this flag
+      restoredGameState = null; // Clear restored state on logout
     }
   });
 
 </script>
 
 <main>
-  {#if $gameStateStore}
-    <!-- Priority 1: Restoring from chronicle -->
-    <Game session={$userStore} />
+  {#if restoredGameState}
+    <!-- Priority 1: Restoring from chronicle, passing state as a prop -->
+    <Game session={$userStore} initialState={restoredGameState} />
   {:else if $userStore}
     {#if $userStore.nickname}
       {#if $lastSessionStore && !forceNewGame}

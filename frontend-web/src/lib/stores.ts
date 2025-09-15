@@ -19,6 +19,27 @@ function createPersistentStore<T>(key: string, startValue: T) {
   return store;
 }
 
+// Helper for creating a store that syncs with sessionStorage
+function createSessionStore<T>(key: string, startValue: T) {
+  const isBrowser = typeof window !== 'undefined';
+  const storedValue = isBrowser ? sessionStorage.getItem(key) : null;
+  const initialValue = storedValue ? JSON.parse(storedValue) : startValue;
+  
+  const store = writable<T>(initialValue);
+
+  store.subscribe(value => {
+    if (isBrowser) {
+      if (value === null || value === undefined) {
+        sessionStorage.removeItem(key);
+      } else {
+        sessionStorage.setItem(key, JSON.stringify(value));
+      }
+    }
+  });
+
+  return store;
+}
+
 
 // Define the shape of the user object
 interface User {
@@ -83,8 +104,9 @@ export const userStore = {
  * Stores the state of a game session to be restored.
  * This is used by the Chronicle page to pass a specific game state
  * back to the main Game page for a "retry".
+ * It uses sessionStorage to survive page reloads.
  */
-export const gameStateStore = writable<any>(null);
+export const gameStateStore = createSessionStore<any>('gameState', null);
 
 /**
  * Stores the ID of the last active game session, persisted in localStorage.

@@ -1,6 +1,6 @@
 // src/lib/apiService.ts
 
-const BACKEND_URL = 'http://127.0.0.1:8000';
+const BACKEND_URL = '/api';
 
 // Function to get the token from localStorage
 function getToken(): string | null {

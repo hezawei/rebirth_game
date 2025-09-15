@@ -3,6 +3,7 @@ from typing import Optional
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
+from config.settings import settings
 
 # --- Password Hashing ---
 # Use CryptContext for handling password hashing and verification
@@ -18,13 +19,11 @@ def get_password_hash(password: str) -> str:
 
 
 # --- JSON Web Token (JWT) ---
-# !! 安全警告 !!
-# 在生产环境中，这个密钥必须是一个非常复杂且保密的字符串，
-# 并且应该通过环境变量加载，而不是硬编码在代码里。
-# 你可以使用 `openssl rand -hex 32` 命令生成一个安全的密钥。
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Token有效期30分钟
+# --- JSON Web Token (JWT) ---
+# 配置现在从 config.settings 中加载，实现了统一管理
+SECRET_KEY = settings.secret_key
+ALGORITHM = settings.algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.access_token_expire_minutes
 
 class TokenData(BaseModel):
     """Token中存储的数据模型"""
