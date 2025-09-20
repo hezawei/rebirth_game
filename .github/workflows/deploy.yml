@@ -63,7 +63,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}       # 服务器 IP 或域名
-          username: ${{ secrets.SERVER_USER }}   # 服务器用户名 (例如: root 或你创建的其他用户)
+          username: ${{ secrets.SERVER_USERNAME }}   # 服务器用户名 (例如: root 或你创建的其他用户)
           key: ${{ secrets.SERVER_SSH_KEY }}    # 用于 SSH 连接的私钥
           script: |
             # 使用 set -e 确保任何命令失败都会使整个脚本失败
