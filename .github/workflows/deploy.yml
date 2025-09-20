@@ -8,7 +8,7 @@ on:
   # 当有代码推送到 master 分支时触发
   push:
     branches:
-      - master
+      - main
       # 你也可以用 main 分支，根据你的仓库设置
       # - main
 
