@@ -1,0 +1,38 @@
+# .github/workflows/ci.yml
+# 这是一个持续集成(CI)工作流，用于在代码推送时进行基础检查。
+# 它不执行任何部署操作。
+
+name: Continuous Integration
+
+on:
+  # 当有代码推送到 main 分支时触发
+  push:
+    branches:
+      - main
+  # 当有 Pull Request 合并到 main 分支时触发
+  pull_request:
+    branches:
+      - main
+
+  # 允许你从 GitHub Actions 页面手动触发此工作流
+  workflow_dispatch:
+
+jobs:
+  # 定义一个名为 'ci-check' 的任务
+  ci-check:
+    # 运行此任务的虚拟机环境
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤1: 检出代码
+      # 拉取你的仓库代码到 Actions 虚拟机中，以便后续步骤可以访问它。
+      - name: 1. Checkout Code
+        uses: actions/checkout@v4
+
+      # 步骤2: 运行一个简单的检查
+      # 这是一个占位符，未来可以替换为代码风格检查(lint)、单元测试等。
+      - name: 2. Run a simple check
+        run: |
+          echo "CI check passed."
+          echo "Code has been successfully checked out."
+          ls -la
