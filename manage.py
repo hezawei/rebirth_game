@@ -53,7 +53,17 @@ def _is_server_environment() -> bool:
     has_compose_file = os.path.exists(COMPOSE_FILE)
     has_docker_compose = _docker_compose_available()
     
-    # 检查是否有运行中的项目容器（更可靠的服务器环境判断）
+    # 检查操作系统 - Windows通常是本地开发环境
+    is_windows = platform.system() == "Windows"
+    
+    # 检查当前工作目录是否在典型服务器路径
+    current_path = os.getcwd()
+    is_server_path = any(current_path.startswith(path) for path in ['/root/', '/opt/', '/home/', '/var/'])
+    
+    # 检查是否有node_modules（本地开发环境的标志）
+    has_node_modules = os.path.exists(os.path.join(FRONTEND_DIR, 'node_modules'))
+    
+    # 检查是否有运行中的项目容器
     has_running_containers = False
     try:
         result = subprocess.run(
@@ -65,31 +75,28 @@ def _is_server_environment() -> bool:
     except:
         pass
     
-    # 检查当前工作目录是否在典型服务器路径
-    current_path = os.getcwd()
-    is_server_path = any(current_path.startswith(path) for path in ['/root/', '/opt/', '/home/', '/var/'])
-    
-    # 检查是否有node_modules（本地开发环境的标志）
-    has_node_modules = os.path.exists(os.path.join(FRONTEND_DIR, 'node_modules'))
-    
     # 调试输出
+    print(f"[DEBUG] OS: {platform.system()}")
     print(f"[DEBUG] COMPOSE_FILE: {COMPOSE_FILE}, exists: {has_compose_file}")
     print(f"[DEBUG] Docker Compose available: {has_docker_compose}")
     print(f"[DEBUG] Running containers: {has_running_containers}")
     print(f"[DEBUG] Server path: {is_server_path} (cwd: {current_path})")
     print(f"[DEBUG] Node modules: {has_node_modules}")
     
-    # 服务器环境判定优先级：
-    # 1. 有运行的Docker容器 = 很可能是服务器
-    # 2. 在服务器典型路径 + 有Docker Compose = 服务器
-    # 3. 没有本地node_modules + 有Docker = 服务器
-    if has_running_containers and has_compose_file:
-        return True
+    # 服务器环境判定逻辑（优先级从高到低）：
+    # 1. Windows系统 = 本地开发环境（除非明确在Linux容器中）
+    if is_windows:
+        return False
+    
+    # 2. Linux + 在服务器典型路径 + 有Docker Compose = 服务器
     if is_server_path and has_compose_file and has_docker_compose:
         return True
-    if not has_node_modules and has_compose_file and has_docker_compose:
+        
+    # 3. Linux + 没有本地node_modules + 有Docker + 有运行容器 = 服务器  
+    if not has_node_modules and has_compose_file and has_docker_compose and has_running_containers:
         return True
     
+    # 4. 默认为本地开发环境
     return False
 
 def _run(cmd: list[str]) -> subprocess.CompletedProcess:
@@ -176,9 +183,14 @@ def ensure_postgres_ready_and_env():
 
     # 等待端口就绪
     print("等待 PostgreSQL 就绪...")
-    for _ in range(60):
+    for i in range(120):  # 增加到120秒
         if _is_port_open("127.0.0.1", host_port):
+            # 端口开放后再等待5秒确保数据库完全就绪
+            print("端口已开放，等待数据库初始化完成...")
+            time.sleep(5)
             break
+        if i % 10 == 0:  # 每10秒显示一次进度
+            print(f"等待中... ({i}/120秒)")
         time.sleep(1)
     else:
         raise RuntimeError("等待 PostgreSQL 超时，端口未就绪")

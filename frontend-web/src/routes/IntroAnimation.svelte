@@ -7,7 +7,7 @@
   const dispatch = createEventDispatcher();
 
   let currentStep = 0; // 0: Gateway, 1: Playing Intro, 2: Wish Input, 3: Playing Outro
-  let videoSrc = '/开场动画.mp4'; // 恢复原始视频
+  let videoSrc = '/starting.webm'; // 使用webm格式
   let videoPlayer: HTMLVideoElement;
   let showSkipButton = false;
   let wish = ''; // 用于绑定输入框
@@ -94,7 +94,7 @@
     text3 = `很好，${nickname}，你的首个使命是「${prep.main_quest}」，准备迎接命运的召唤吧！`;
 
     currentStep = 3;
-    videoSrc = '/穿越动画.mp4';
+    videoSrc = '/interact_1.webm';
     setTimeout(async () => {
       try {
         await videoPlayer.play();
