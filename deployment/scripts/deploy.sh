@@ -151,8 +151,13 @@ build_and_start() {
         docker system prune -f || warn "清理Docker缓存时出现警告"
         
         # 构建镜像
-        info "正在构建Docker镜像..."
-        docker compose -f "$COMPOSE_FILE" build --no-cache
+        if [[ "$FORCE_REBUILD" == "true" ]]; then
+            info "正在强制重建Docker镜像（无缓存）..."
+            docker compose -f "$COMPOSE_FILE" build --no-cache
+        else
+            info "正在构建Docker镜像（利用缓存）..."
+            docker compose -f "$COMPOSE_FILE" build
+        fi
     else
         success "镜像无变更，跳过构建步骤 ⚡"
     fi
@@ -267,8 +272,10 @@ main() {
         info "开始强制重建部署..."
         # 删除构建标记，强制重建
         rm -f /tmp/.rebirth_last_build_hash
+        export FORCE_REBUILD=true
     else
         info "开始智能部署..."
+        export FORCE_REBUILD=false
     fi
     
     check_prerequisites

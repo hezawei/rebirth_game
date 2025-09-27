@@ -1,6 +1,6 @@
 """add story metadata, speculative nodes, saves, and wish moderation log
 
-Revision ID: 20250924_233500_story_metadata_and_saves
+Revision ID: 20250924_story_metadata
 Revises: 20250921_214000_convert_user_ids_to_uuid
 Create Date: 2025-09-24 23:35:00.000000
 """
@@ -12,7 +12,7 @@ from sqlalchemy.dialects import postgresql
 
 
 # revision identifiers, used by Alembic.
-revision: str = "20250924_233500_story_metadata_and_saves"
+revision: str = "20250924_story_metadata"
 down_revision: Union[str, None] = "20250921_214000"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None

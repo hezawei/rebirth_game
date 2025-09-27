@@ -23,14 +23,19 @@ RUN echo "deb https://mirrors.aliyun.com/debian/ trixie main" > /etc/apt/sources
 # 设置工作目录
 WORKDIR /app
 
-# 复制并安装Python依赖（使用锁定版本）
-COPY deployment/configs/requirements-lock.txt ./requirements-lock.txt
+# 配置pip镜像源（单独一层，很少变化）
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip config set install.trusted-host pypi.tuna.tsinghua.edu.cn && \
-    pip install --upgrade pip && \
+    pip install --upgrade pip
+
+# 复制依赖文件（依赖变化时才重建后续层）
+COPY deployment/configs/requirements-lock.txt ./requirements-lock.txt
+
+# 安装Python依赖（利用pip缓存 + 检查已安装包）
+RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r requirements-lock.txt
 
-# 复制项目代码
+# 复制项目代码（代码变化时只重建这一层）
 COPY backend/ ./backend/
 COPY config/ ./config/
 COPY alembic/ ./alembic/
