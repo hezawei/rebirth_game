@@ -8,8 +8,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
-# 安装系统依赖
-RUN apt-get update && \
+# 使用国内源加速安装系统依赖
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
     libpq-dev \
     gcc \
@@ -21,8 +22,10 @@ WORKDIR /app
 
 # 复制并安装Python依赖（利用Docker缓存层）
 COPY requirements.txt .
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
+    pip config set install.trusted-host pypi.tuna.tsinghua.edu.cn && \
+    pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 # 复制项目代码
 COPY backend/ ./backend/
