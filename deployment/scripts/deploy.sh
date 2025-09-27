@@ -198,7 +198,7 @@ main() {
     # 执行部署步骤
     check_prerequisites
     update_code
-    check_environment
+    check_config
     build_and_start
     post_deploy_verification
     show_deployment_info
