@@ -80,50 +80,23 @@ update_code() {
 }
 
 # --- 环境配置检查 ---
-check_environment() {
+check_config() {
     info "检查环境配置..."
     
-    if [ ! -f "$ENV_FILE" ]; then
-        if [ -f "$CONFIG_DIR/.env.example" ]; then
-            warn "未找到 .env 文件，将基于 .env.example 创建"
-            cp "$CONFIG_DIR/.env.example" "$ENV_FILE"
-            warn "请编辑 $ENV_FILE 文件，配置必要的API密钥"
-            read -p "配置完成后按回车继续..."
-        else
-            error "未找到 .env 文件和 .env.example 模板"
-            exit 1
-        fi
-    fi
-    
-    # 检查必要的环境变量
-    source "$ENV_FILE"
-    local has_llm_key=false
-    
-    if [ -n "${OPENAI_API_KEY:-}" ] && [ "${OPENAI_API_KEY}" != "" ]; then
-        success "OpenAI API密钥已配置"
-        has_llm_key=true
-    fi
-    
-    if [ -n "${DOUBAO_API_KEY:-}" ] && [ "${DOUBAO_API_KEY}" != "" ]; then
-        success "豆包API密钥已配置"  
-        has_llm_key=true
-    fi
-    
-    if [ -n "${GOOGLE_API_KEY:-}" ] && [ "${GOOGLE_API_KEY}" != "" ]; then
-        success "Google API密钥已配置"
-        has_llm_key=true
-    fi
-    
-    if [ -n "${ANTHROPIC_API_KEY:-}" ] && [ "${ANTHROPIC_API_KEY}" != "" ]; then
-        success "Anthropic API密钥已配置"
-        has_llm_key=true
-    fi
-    
-    if [ "$has_llm_key" = false ]; then
-        error "未配置任何LLM API密钥，请在$ENV_FILE中配置至少一个"
+    # 检查项目配置文件是否存在
+    if [ ! -f "$PROJECT_ROOT/config/settings.py" ]; then
+        error "未找到 config/settings.py 配置文件"
         exit 1
     fi
     
+    # 检查配置文件中的API密钥是否已配置（非空且不是占位符）
+    if grep -q '"api_key": "[^"]\{10,\}"' "$PROJECT_ROOT/config/settings.py"; then
+        success "发现配置文件中包含API密钥配置"
+    else
+        warn "注意：请确保 config/settings.py 中的API密钥已正确配置"
+    fi
+    
+    info "项目使用内置配置系统 (config/settings.py)，无需 .env 文件"
     success "环境配置检查通过"
 }
 

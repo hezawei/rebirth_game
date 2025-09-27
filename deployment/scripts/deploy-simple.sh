@@ -32,18 +32,12 @@ fi
 echo -e "${YELLOW}📥 拉取最新代码...${NC}"
 git pull origin main || echo "无Git或拉取失败，跳过代码更新"
 
-# 检查环境文件
-if [ ! -f ".env" ]; then
-    if [ -f "$CONFIG_DIR/.env.example" ]; then
-        echo -e "${YELLOW}⚙️ 创建环境配置文件...${NC}"
-        cp "$CONFIG_DIR/.env.example" .env
-        echo -e "${YELLOW}⚠️  请编辑 .env 文件配置API密钥后重新运行此脚本${NC}"
-        exit 1
-    else
-        echo -e "${RED}❌ 未找到环境配置文件${NC}"
-        exit 1
-    fi
+# 检查配置文件
+if [ ! -f "config/settings.py" ]; then
+    echo -e "${RED}❌ 未找到 config/settings.py 配置文件${NC}"
+    exit 1
 fi
+echo -e "${GREEN}✅ 使用内置配置系统 (config/settings.py)${NC}"
 
 # 停止旧服务
 echo -e "${YELLOW}🛑 停止旧服务...${NC}"

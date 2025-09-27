@@ -35,22 +35,18 @@ services:
       db:
         condition: service_healthy
     environment:
-      # 数据库连接
+      # 数据库连接（覆盖settings.py中的默认值）
       DATABASE_URL: postgresql+psycopg2://${PGUSER:-rebirth}:${PGPASSWORD_ENC:-StrongPass%21}@db:5432/${PGDATABASE:-rebirth}
       ENFORCE_DB_VENDOR: postgresql
       
       # 服务器配置
       GUNICORN_WORKERS: ${GUNICORN_WORKERS:-4}
       
-      # API Keys
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      DOUBAO_API_KEY: ${DOUBAO_API_KEY:-}
-      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      
       # 应用配置
       APP_ENV: production
       LOG_LEVEL: ${LOG_LEVEL:-info}
+      
+      # 注意：API密钥已在 config/settings.py 中配置，无需环境变量
       
     ports:
       - "${APP_PORT:-8000}:8000"
