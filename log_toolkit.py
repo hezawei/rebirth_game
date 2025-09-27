@@ -4,15 +4,67 @@ import shlex
 from pathlib import Path
 from typing import Optional
 
-from rich.console import Console
-from rich.panel import Panel
-from rich.prompt import Prompt, IntPrompt
-from rich.text import Text
+try:
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.prompt import Prompt, IntPrompt
+    from rich.text import Text
+    HAS_RICH = True
+except ModuleNotFoundError:
+    HAS_RICH = False
+
+    class Console:  # type: ignore[override]
+        def print(self, *args, **kwargs):
+            text = " ".join(str(arg) for arg in args)
+            print(text)
+
+    class Panel(str):  # type: ignore[override]
+        def __new__(cls, content, title=None, subtitle=None, expand=False):
+            lines = []
+            if title:
+                lines.append(f"[{title}]")
+            lines.append(str(content))
+            if subtitle:
+                lines.append(f"({subtitle})")
+            return str.__new__(cls, "\n".join(lines))
+
+    class Prompt:  # type: ignore[override]
+        @staticmethod
+        def ask(prompt: str, choices=None, default=None):
+            while True:
+                suffix = f" [default: {default}]" if default is not None else ""
+                response = input(f"{prompt}{suffix}: ").strip()
+                if not response and default is not None:
+                    response = default
+                if choices and response not in choices:
+                    print(f"请输入以下选项之一: {choices}")
+                    continue
+                return response
+
+    class IntPrompt:  # type: ignore[override]
+        @staticmethod
+        def ask(prompt: str, default=None):
+            while True:
+                suffix = f" [default: {default}]" if default is not None else ""
+                response = input(f"{prompt}{suffix}: ").strip()
+                if not response and default is not None:
+                    return default
+                try:
+                    return int(response)
+                except ValueError:
+                    print("请输入整数。")
+
+    class Text(str):  # type: ignore[override]
+        def __new__(cls, content, style=None):
+            return str.__new__(cls, str(content))
 
 COMPOSE_FILE = Path("deployment/configs/docker-compose.yml")
 DEFAULT_TAIL_LINES = 200
 
 console = Console()
+
+if not HAS_RICH:
+    console.print("提示: 未安装 rich 库，log_toolkit 正在使用简易文本模式运行。")
 
 
 def run_compose_logs(service: str, *, tail: int = DEFAULT_TAIL_LINES, follow: bool = False, keyword: Optional[str] = None) -> None:

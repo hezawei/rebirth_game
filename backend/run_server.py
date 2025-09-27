@@ -57,6 +57,14 @@ def compute_workers() -> int:
     return max(3, cpu * 2 + 1)
 
 
+def get_timeout() -> int:
+    """Gunicorn worker timeout in seconds (default 180)."""
+    env_timeout = os.getenv("GUNICORN_TIMEOUT")
+    if env_timeout and env_timeout.isdigit():
+        return int(env_timeout)
+    return 180
+
+
 def main():
     try:
         apply_db_migrations()
@@ -68,14 +76,16 @@ def main():
         raise
 
     workers = compute_workers()
+    timeout = get_timeout()
     cmd = [
         "gunicorn",
         "-w", str(workers),
         "-k", "uvicorn.workers.UvicornWorker",
         "--bind", "0.0.0.0:8000",
+        "--timeout", str(timeout),
         "backend.main:app",
     ]
-    LOGGER.info(f"Starting Gunicorn with {workers} workers...")
+    LOGGER.info(f"Starting Gunicorn with {workers} workers and timeout={timeout}s ...")
     os.execvp(cmd[0], cmd)
 
 
