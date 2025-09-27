@@ -49,11 +49,48 @@ def _docker_compose_available() -> bool:
 
 def _is_server_environment() -> bool:
     """检测是否为服务器环境（Docker Compose部署）"""
-    return (
-        os.path.exists(COMPOSE_FILE) and
-        _docker_compose_available() and
-        not os.path.exists(FRONTEND_DIR)  # 服务器上通常没有本地前端开发目录
-    )
+    # 检查基本条件
+    has_compose_file = os.path.exists(COMPOSE_FILE)
+    has_docker_compose = _docker_compose_available()
+    
+    # 检查是否有运行中的项目容器（更可靠的服务器环境判断）
+    has_running_containers = False
+    try:
+        result = subprocess.run(
+            ["docker", "ps", "--filter", "name=rebirth-", "--format", "{{.Names}}"],
+            capture_output=True, text=True, check=False
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            has_running_containers = True
+    except:
+        pass
+    
+    # 检查当前工作目录是否在典型服务器路径
+    current_path = os.getcwd()
+    is_server_path = any(current_path.startswith(path) for path in ['/root/', '/opt/', '/home/', '/var/'])
+    
+    # 检查是否有node_modules（本地开发环境的标志）
+    has_node_modules = os.path.exists(os.path.join(FRONTEND_DIR, 'node_modules'))
+    
+    # 调试输出
+    print(f"[DEBUG] COMPOSE_FILE: {COMPOSE_FILE}, exists: {has_compose_file}")
+    print(f"[DEBUG] Docker Compose available: {has_docker_compose}")
+    print(f"[DEBUG] Running containers: {has_running_containers}")
+    print(f"[DEBUG] Server path: {is_server_path} (cwd: {current_path})")
+    print(f"[DEBUG] Node modules: {has_node_modules}")
+    
+    # 服务器环境判定优先级：
+    # 1. 有运行的Docker容器 = 很可能是服务器
+    # 2. 在服务器典型路径 + 有Docker Compose = 服务器
+    # 3. 没有本地node_modules + 有Docker = 服务器
+    if has_running_containers and has_compose_file:
+        return True
+    if is_server_path and has_compose_file and has_docker_compose:
+        return True
+    if not has_node_modules and has_compose_file and has_docker_compose:
+        return True
+    
+    return False
 
 def _run(cmd: list[str]) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, check=False, capture_output=True, text=True)
@@ -326,8 +363,12 @@ def docker_compose_start():
     if not os.path.exists(COMPOSE_FILE):
         raise RuntimeError(f"Docker Compose配置文件不存在: {COMPOSE_FILE}")
     
+    # 切换到项目根目录
+    os.chdir(PROJECT_ROOT)
+    
     cmd = ["docker", "compose", "-f", COMPOSE_FILE, "up", "-d"]
     print(f"执行命令: {' '.join(cmd)}")
+    print(f"工作目录: {os.getcwd()}")
     result = subprocess.run(cmd, check=True)
     print("✅ Docker Compose服务启动成功")
     return result
@@ -335,8 +376,12 @@ def docker_compose_start():
 def docker_compose_stop():
     """停止Docker Compose服务"""
     print("--- 停止Docker Compose服务 ---")
+    # 切换到项目根目录
+    os.chdir(PROJECT_ROOT)
+    
     cmd = ["docker", "compose", "-f", COMPOSE_FILE, "down"]
     print(f"执行命令: {' '.join(cmd)}")
+    print(f"工作目录: {os.getcwd()}")
     result = subprocess.run(cmd, check=True)
     print("✅ Docker Compose服务已停止")
     return result
@@ -351,6 +396,9 @@ def docker_compose_restart():
 def docker_compose_status():
     """显示Docker Compose服务状态"""
     print("--- Docker Compose服务状态 ---")
+    # 切换到项目根目录
+    os.chdir(PROJECT_ROOT)
+    
     cmd = ["docker", "compose", "-f", COMPOSE_FILE, "ps"]
     subprocess.run(cmd)
     
