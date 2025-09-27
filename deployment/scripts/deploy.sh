@@ -45,13 +45,25 @@ check_prerequisites() {
         exit 1
     fi
     
-    # 检查Docker Compose
-    if ! docker compose version &> /dev/null; then
-        error "Docker Compose 未安装或版本过低。"
+    # 检查Docker Compose文件
+    if [[ ! -f "$COMPOSE_FILE" ]]; then
+        error "Docker Compose文件不存在: $COMPOSE_FILE"
         exit 1
     fi
     
     success "环境检查通过"
+}
+
+# --- 环境配置检查 ---
+check_config() {
+    info "检查配置文件..."
+    
+    if [[ ! -f "$COMPOSE_FILE" ]]; then
+        error "Docker Compose文件不存在: $COMPOSE_FILE"
+        exit 1
+    fi
+    
+    success "配置检查通过"
 }
 
 # --- 代码更新函数 ---
@@ -281,6 +293,7 @@ main() {
     check_prerequisites
     update_code
     check_config
+    build_frontend
     build_and_start
     post_deploy_verification
     show_deployment_info
