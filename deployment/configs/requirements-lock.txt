@@ -23,6 +23,7 @@ python-jose[cryptography]==3.5.0
 python-multipart==0.0.20
 rich==14.1.0
 volcengine-python-sdk[ark]==4.0.22
+Pillow==10.4.0
 
 # 核心依赖
 pydantic-core==2.33.2

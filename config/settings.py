@@ -86,6 +86,8 @@ class Settings(BaseSettings):
     image_first_read_timeout_seconds: float = 60.0  # 首次请求读取超时（秒）
     image_retry_read_timeout_seconds: float = 30.0  # 重试请求读取超时（秒）
     image_max_retries: int = 1                      # 最大重试次数（不含首发）
+    enable_webp_conversion: bool = True             # 是否在生成后尝试转换为WebP
+    webp_quality: int = 80                          # WebP 输出质量（0-100）
 
     # --- LLM 通用设置 ---
     openai_response_format_json: bool = True # 保留用于OpenAI兼容层的总开关

@@ -386,10 +386,26 @@ async def start_new_story(
     cache_key = f"{user_id}:{hash(wish_norm)}"
     LOGGER.debug(f"[Start] 生成缓存键: {cache_key}")
     
+    cached_data = None
+    cache_wait_seconds = getattr(settings, "start_cache_wait_seconds", 8)
+    poll_interval = 0.4
+    elapsed = 0.0
+
     with _CACHE_LOCK:
         cached_data = _FIRST_STORY_CACHE.pop(cache_key, None)
-        LOGGER.info(f"[Start] 🔍 缓存查询结果: {'命中' if cached_data else '未命中'}")
-    
+        LOGGER.info(f"[Start] 🔍 缓存查询结果: {'命中' if cached_data else '未命中'} (初始)")
+
+    while cached_data is None and elapsed < cache_wait_seconds:
+        remaining = cache_wait_seconds - elapsed
+        wait = poll_interval if remaining > poll_interval else remaining
+        LOGGER.info(f"[Start] ⏳ 缓存未就绪，等待 {wait:.1f}s 后重试 (已等待 {elapsed:.1f}s / {cache_wait_seconds}s)")
+        threading.Event().wait(wait)
+        elapsed += wait
+        with _CACHE_LOCK:
+            cached_data = _FIRST_STORY_CACHE.pop(cache_key, None)
+            if cached_data:
+                LOGGER.info(f"[Start] 🔁 等待后命中缓存: session={cached_data['session_id']}, node={cached_data['node_id']}, 总等待 {elapsed:.1f}s")
+
     if cached_data is not None:
         # 使用预生成的session和node
         session_id = cached_data["session_id"]

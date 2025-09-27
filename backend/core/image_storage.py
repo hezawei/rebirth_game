@@ -12,6 +12,11 @@ from urllib.parse import urlparse
 from config.logging_config import LOGGER
 from config.settings import settings, resolve_public_base_url
 
+try:
+    from PIL import Image  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover - Pillow 可选依赖
+    Image = None
+
 
 class ImageStorageService:
     """图像存储服务类"""
@@ -52,11 +57,20 @@ class ImageStorageService:
             # 生成唯一的文件名
             filename = self._generate_filename(image_url, story_context)
             local_path = self.storage_dir / filename
-            
-            # 检查文件是否已存在（避免重复下载）
+            webp_path = local_path.with_suffix('.webp')
+
+            # 如果已经存在 WebP 版本，直接返回
+            if settings.enable_webp_conversion and webp_path.exists():
+                web_url = self._normalize_public_url(f"{self.web_path_prefix}/{webp_path.name}")
+                LOGGER.info(f"[WebP] 命中已存在的WebP文件，直接返回: {webp_path.name}")
+                return web_url
+
+            # 检查原始文件是否已存在（避免重复下载）
             if local_path.exists():
-                web_url = self._normalize_public_url(f"{self.web_path_prefix}/{filename}")
                 LOGGER.info(f"图像已存在，直接返回: {filename}")
+                converted = self._convert_to_webp(local_path)
+                chosen_path = converted or local_path
+                web_url = self._normalize_public_url(f"{self.web_path_prefix}/{chosen_path.name}")
                 LOGGER.info(f"[图像访问URL]: {web_url}")
                 return web_url
             
@@ -85,11 +99,14 @@ class ImageStorageService:
                 pass  # 如果刷新失败也继续
             
             LOGGER.info(f"✅ 图像下载成功: {filename} (大小: {local_path.stat().st_size} 字节)")
-            
+
+            converted = self._convert_to_webp(local_path)
+            chosen_path = converted or local_path
+
             # 返回完整的web访问路径
-            web_url = self._normalize_public_url(f"{self.web_path_prefix}/{filename}")
+            web_url = self._normalize_public_url(f"{self.web_path_prefix}/{chosen_path.name}")
             LOGGER.info(f"[图像访问URL]: {web_url}")
-            LOGGER.info(f"[本地文件路径]: {local_path}")
+            LOGGER.info(f"[本地文件路径]: {chosen_path}")
             return web_url
             
         except Exception as e:
@@ -139,6 +156,42 @@ class ImageStorageService:
         if url.startswith(local_base):
             return url.replace(local_base, self.backend_base_url, 1)
         return url
+
+    def _convert_to_webp(self, source_path: Path) -> Optional[Path]:
+        """尝试将下载的图片转换为 WebP，成功时返回目标路径。"""
+        if not settings.enable_webp_conversion:
+            return None
+        if Image is None:
+            LOGGER.warning("[WebP] Pillow 未安装，跳过WebP转换")
+            return None
+        if source_path.suffix.lower() == '.webp':
+            return source_path
+
+        target_path = source_path.with_suffix('.webp')
+        quality = getattr(settings, 'webp_quality', 80)
+        try:
+            with Image.open(source_path) as img:
+                img.save(target_path, format='WEBP', quality=max(1, min(100, quality)), method=6)
+            original_size = source_path.stat().st_size
+            webp_size = target_path.stat().st_size
+            ratio = (webp_size / original_size) if original_size else 0
+            LOGGER.info(
+                f"[WebP] 转换成功: {target_path.name} 大小 {webp_size} 字节 (原始 {original_size} 字节, 压缩比 {ratio:.2f})"
+            )
+            try:
+                source_path.unlink()
+                LOGGER.debug(f"[WebP] 已删除原始文件: {source_path.name}")
+            except OSError as exc:
+                LOGGER.warning(f"[WebP] 删除原始文件失败: {exc}")
+            return target_path
+        except Exception as exc:
+            LOGGER.warning(f"[WebP] 转换失败，保留原图: {exc}")
+            if target_path.exists():
+                try:
+                    target_path.unlink()
+                except OSError:
+                    pass
+            return None
     
     def cleanup_old_images(self, days_old: int = 30) -> int:
         """
