@@ -18,7 +18,6 @@ from database import crud, models
 from .user import get_current_user
 from core.content_moderation import check_wish_safety_llm
 from core.prompt_templates import PREPARE_LEVEL_PROMPT
-from config.settings import settings
 from core.llm_clients import llm_client
 from core.story_state import build_story_history, extract_chapter_number, build_story_segment_from_node
 from core.speculation import speculation_service, speculation_get_metrics
@@ -375,6 +374,8 @@ async def start_new_story(
     Returns:
         StorySegment: 包含故事文本、选择选项和图片的响应
     """
+    from config.settings import settings
+    
     user_id = current_user.id
     LOGGER.info(f"[Start] 👤 用户 {user_id} 收到新故事请求，愿望: {request.wish[:50]}...")
 
@@ -477,7 +478,6 @@ async def start_new_story(
     # 【调试】检查图片文件是否真实存在
     if result.image_url and '/static/generated/' in result.image_url:
         filename = result.image_url.split('/')[-1]
-        from config.settings import settings
         local_file_path = settings.BASE_DIR / "assets" / "generated_images" / filename
         file_exists = local_file_path.exists()
         file_size = local_file_path.stat().st_size if file_exists else 0

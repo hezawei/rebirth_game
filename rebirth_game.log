@@ -18266,3 +18266,117 @@ success_rate_delta
 2025-09-27 20:36:36 | INFO     | backend.main:startup_event:239 - 调试模式: True
 2025-09-27 20:36:36 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
 2025-09-27 20:36:36 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 20:36:51 | INFO     | backend.database.crud:create_user:36 - 创建新用户: 690161230@qq.com
+2025-09-27 20:44:12 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_ca3d1551e2cf46494ab3b0a8f2306a1a.png -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_ca3d1551e2cf46494ab3b0a8f2306a1a.png exists=False size=0
+2025-09-27 20:44:12 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_ca3d1551e2cf46494ab3b0a8f2306a1a.png
+2025-09-27 20:44:25 | INFO     | api.story:prepare_start_level:265 - [PrepareStart] 🚀 开始生成故事概要，愿望：关羽...
+2025-09-27 20:44:25 | DEBUG    | api.story:prepare_start_level:267 - [PrepareStart] 构建提示词上下文...
+2025-09-27 20:44:25 | DEBUG    | api.story:prepare_start_level:269 - [PrepareStart] 上下文构建完成，推荐章节数: 9
+2025-09-27 20:44:25 | INFO     | api.story:prepare_start_level:276 - [PrepareStart] 📝 调用LLM生成关卡元信息，提示词长度: 473
+2025-09-27 20:44:27 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:44:27 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 882
+2025-09-27 20:44:27 | INFO     | api.story:prepare_start_level:278 - [PrepareStart] ✅ LLM响应完成，响应长度: 204
+2025-09-27 20:44:27 | INFO     | api.story:prepare_start_level:305 - [PrepareStart] 📊 JSON解析成功，包含字段: ['level_title', 'background', 'main_quest']
+2025-09-27 20:44:27 | DEBUG    | api.story:prepare_start_level:317 - [PrepareStart] 解析结果 - title: 重返长坂坡, background: 公元208年，赤壁之战前夕，关羽奉命护送刘备家眷撤离江陵。长江风急浪涌，追兵如影随形，昔日忠义之士陷..., quest: 在三个时辰内安全护送家眷抵达江夏...
+2025-09-27 20:44:27 | INFO     | api.story:_background_generate_with_pregeneration:72 - [预生成] 开始完整故事生成流程: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:44:27 | INFO     | api.story:prepare_start_level:349 - [预生成] 已启动后台完整故事生成线程: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:44:27 | INFO     | api.story:_background_generate_with_pregeneration:75 - [预生成] 调用story_engine.start_story开始: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:44:27 | INFO     | core.story_engine:start_story:386 - 收到新的故事开始请求，愿望是: '关羽'
+2025-09-27 20:44:30 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:44:30 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1421
+2025-09-27 20:44:30 | INFO     | core.story_engine:start_story:402 - [LLM raw][start] 长度=930 预览='{"text": "寒风卷起战旗残片，关羽立于古城墙断垣之上，目光如炬凝视着远处烽火连天的战场。他手中青龙偃月刀横在膝前，刀锋映着血色残阳，仿佛在低语未竟之志。敌军已围城三日，粮道断绝，百姓哀鸣不绝。他心中那根名为‘忠义’的弦，正被历史的重压拉至崩裂边缘。若再不动手，此城将陷，千人血染黄沙。他猛然抬头，望见城楼暗角处一缕微光闪烁——那是昔日盟友留下的密信标记，暗示一条隐秘地道仍在运转。是孤身闯入敌营刺杀主将？还是唤醒旧部，以血肉之躯撕开包围圈？命运的抉择，就在此刻。", "choices": [{"option": "披上敌军溃兵的破甲，混入尸堆中潜行至主帐，以刀光定乾坤", "summary'
+2025-09-27 20:44:30 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=930 预览='{"text": "寒风卷起战旗残片，关羽立于古城墙断垣之上，目光如炬凝视着远处烽火连天的战场。他手中青龙偃月刀横在膝前，刀锋映着血色残阳，仿佛在低语未竟之志。敌军已围城三日，粮道断绝，百姓哀鸣不绝。他心中那根名为‘忠义’的弦，正被历史的重压拉至崩裂边缘。若再不动手，此城将陷，千人血染黄沙。他猛然抬头，望见城楼暗角处一'
+2025-09-27 20:44:30 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=930 预览='{"text": "寒风卷起战旗残片，关羽立于古城墙断垣之上，目光如炬凝视着远处烽火连天的战场。他手中青龙偃月刀横在膝前，刀锋映着血色残阳，仿佛在低语未竟之志。敌军已围城三日，粮道断绝，百姓哀鸣不绝。他心中那根名为‘忠义’的弦，正被历史的重压拉至崩裂边缘。若再不动手，此城将陷，千人血染黄沙。他猛然抬头，望见城楼暗角处一'
+2025-09-27 20:44:30 | INFO     | core.image_service:get_image_for_story:167 - [ImageService] 🎨 开始为故事获取图片，故事文本长度: 225
+2025-09-27 20:44:30 | INFO     | core.image_service:get_image_for_story:174 - [ImageService] 🤖 AI图像生成已启用，优先尝试AI生成...
+2025-09-27 20:44:30 | INFO     | core.image_service:generate_image_realtime:68 - [AIImageGen] 🚀 开始即时生成图片，故事文本长度: 225
+2025-09-27 20:44:30 | DEBUG    | core.image_service:generate_image_realtime:72 - [AIImageGen] 导入图像生成客户端和存储服务...
+2025-09-27 20:44:30 | INFO     | core.image_generation:__init__:24 - 图像生成客户端初始化完成，使用提供商: openai
+2025-09-27 20:44:30 | INFO     | core.image_storage:__init__:29 - 图像存储服务初始化完成，存储目录: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images
+2025-09-27 20:44:30 | INFO     | core.image_storage:__init__:30 - 图像web访问前缀: http://127.0.0.1:8000/static/generated
+2025-09-27 20:44:30 | DEBUG    | core.image_service:generate_image_realtime:77 - [AIImageGen] 提取图像提示词...
+2025-09-27 20:44:30 | INFO     | core.image_service:generate_image_realtime:79 - [AIImageGen] 📝 生成的图像提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗残片，关羽立...
+2025-09-27 20:44:30 | INFO     | core.image_service:generate_image_realtime:82 - [AIImageGen] 🎨 调用AI生成图像中...
+2025-09-27 20:44:30 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗残片，关羽立...
+2025-09-27 20:44:42 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 796 (attempt 1/2)
+2025-09-27 20:44:42 | INFO     | core.image_service:generate_image_realtime:84 - [AIImageGen] ✅ AI图像生成API调用成功，响应长度: 189
+2025-09-27 20:44:42 | DEBUG    | core.image_service:generate_image_realtime:87 - [AIImageGen] 提取图像URL...
+2025-09-27 20:44:42 | WARNING  | core.image_service:_extract_image_url:138 - 无法从AI响应中提取图像URL: {"usageMetadata":{"promptTokenCount":227,"totalTokenCount":227,"trafficType":"ON_DEMAND","promptTokensDetails":[{"modality":"TEXT","tokenCount":227}]}}
+Vertex AI 过滤了你的请求内容，无法生成回复，请更换内容后再重试!...
+2025-09-27 20:44:42 | WARNING  | core.image_service:generate_image_realtime:105 - [AIImageGen] ⚠️ 无法从AI响应中提取图像URL，降级到随机图库
+2025-09-27 20:44:42 | INFO     | core.image_service:get_random_image_from_library:48 - [ImageLibrary] 从图库随机选择图片，图库大小: 6
+2025-09-27 20:44:42 | INFO     | core.image_service:get_random_image_from_library:59 - [ImageLibrary] ✅ 随机选择图片: rebirth_gate_placeholder.png
+2025-09-27 20:44:42 | INFO     | core.image_service:get_random_image_from_library:60 - [ImageLibrary] 🎯 返回图片URL: http://127.0.0.1:8000/static/rebirth_gate_placeholder.png
+2025-09-27 20:44:42 | INFO     | core.image_service:get_image_for_story:181 - [ImageService] ✅ AI生成成功: http://127.0.0.1:8000/static/rebirth_gate_placeholder.png
+2025-09-27 20:44:42 | INFO     | core.story_engine:start_story:447 - 新故事生成成功
+2025-09-27 20:44:42 | INFO     | api.story:_background_generate_with_pregeneration:77 - [预生成] 第一节故事LLM生成完成: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, text长度=225
+2025-09-27 20:44:42 | INFO     | api.story:_background_generate_with_pregeneration:81 - [预生成] 创建会话成功: session_id=1
+2025-09-27 20:44:42 | INFO     | api.story:_background_generate_with_pregeneration:85 - [预生成] 创建第一个节点成功: node_id=1
+2025-09-27 20:44:42 | INFO     | api.story:_background_generate_with_pregeneration:88 - [预生成] 首节点图像已由story_engine处理: node_id=1 image_url=http://127.0.0.1:8000/static/rebirth_gate_placeholder.png
+2025-09-27 20:44:42 | INFO     | api.story:_background_generate_with_pregeneration:101 - [预生成] 已触发speculation预生成: session=1, node=1
+2025-09-27 20:44:42 | INFO     | api.story:_background_generate_with_pregeneration:103 - [预生成] 完整流程成功完成: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, session=1
+2025-09-27 20:44:42 | DEBUG    | api.story:_background_generate_with_pregeneration:115 - [预生成] 数据库会话已安全关闭: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:379 - [Start] 👤 用户 ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 收到新故事请求，愿望: 关羽...
+2025-09-27 20:45:21 | DEBUG    | api.story:start_new_story:382 - [Start] 愿望校验已通过，开始处理故事生成
+2025-09-27 20:45:21 | DEBUG    | api.story:start_new_story:387 - [Start] 生成缓存键: ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:5657745831763631007
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:391 - [Start] 🔍 缓存查询结果: 命中
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:397 - [预生成] 命中缓存，使用预生成的会话和节点: session=1, node=1
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:418 - [Start] ✅ 使用预生成节点: session_id=1, node_id=1
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:474 - [Start] 🎉 新故事生成成功！session_id=1, node_id=1
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:475 - [Start] 📊 响应详情 - 文本长度: 225, 选择数: 3, 图片: http://127.0.0.1:8000/static/rebirth_gate_placeholder.png
+2025-09-27 20:45:21 | INFO     | api.story:start_new_story:476 - [Start] 🖼️ [图片URL调试] 返回给前端的图片URL: http://127.0.0.1:8000/static/rebirth_gate_placeholder.png
+2025-09-27 20:45:21 | ERROR    | backend.main:global_exception_handler:217 - 全局异常: cannot access local variable 'settings' where it is not associated with a value
+2025-09-27 20:46:14 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_f24a85c7e94842d4d5c3ffe25b6107c7.png -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f24a85c7e94842d4d5c3ffe25b6107c7.png exists=False size=0
+2025-09-27 20:46:14 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_f24a85c7e94842d4d5c3ffe25b6107c7.png
+2025-09-27 20:48:14 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-27 20:48:16 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-27 20:48:16 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-27 20:48:16 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-27 20:48:16 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-27 20:48:16 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 20:48:16 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-27 20:48:16 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:17 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:17 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-27 20:48:17 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-27 20:48:17 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-27 20:48:17 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:17 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-27 20:48:17 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-27 20:48:17 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-27 20:48:17 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-27 20:48:17 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 20:48:27 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:28 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-27 20:48:29 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-27 20:48:29 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-27 20:48:29 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-27 20:48:29 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 20:48:29 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-27 20:48:29 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:29 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:29 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-27 20:48:29 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-27 20:48:29 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-27 20:48:30 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 20:48:30 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-27 20:48:30 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-27 20:48:30 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-27 20:48:30 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-27 20:48:30 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
