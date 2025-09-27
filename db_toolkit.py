@@ -506,8 +506,9 @@ def handle_query_menu():
         console.print("4. 查看某个用户的所有游戏会话")
         console.print("5. 查看某个会话的故事线")
         console.print("6. 查看数据库统计信息")
-        console.print("7. 返回主菜单")
-        choice = Prompt.ask("请选择", choices=["1", "2", "3", "4", "5", "6", "7"], default="7")
+        console.print("7. 查看表结构信息")
+        console.print("8. 返回主菜单")
+        choice = Prompt.ask("请选择", choices=["1", "2", "3", "4", "5", "6", "7", "8"], default="8")
 
         if choice == '1':
             show_users()
@@ -522,6 +523,8 @@ def handle_query_menu():
         elif choice == '6':
             show_stats()
         elif choice == '7':
+            show_table_structure()
+        elif choice == '8':
             break
 
 def update_user_nickname():
@@ -839,6 +842,60 @@ def main_menu():
         elif choice == '4':
             console.print("\n[bold blue]👋 感谢使用数据库管理工具，再见！[/bold blue]")
             break
+
+def show_table_structure():
+    """显示数据库表结构"""
+    from sqlalchemy import text
+    from backend.database.base import engine
+    
+    console.print("🔍 [bold cyan]检查数据库表结构...[/bold cyan]")
+    
+    with engine.connect() as conn:
+        # 检查所有表
+        result = conn.execute(text("""
+            SELECT table_name 
+            FROM information_schema.tables 
+            WHERE table_schema = 'public'
+            ORDER BY table_name;
+        """))
+        
+        tables = [row[0] for row in result]
+        console.print(f"📋 [green]数据库中的所有表 ({len(tables)}个):[/green]")
+        for table in tables:
+            console.print(f"  - {table}")
+        
+        # 检查重要表的结构
+        important_tables = ['users', 'wish_moderation_records', 'game_sessions', 'story_nodes']
+        
+        for table_name in important_tables:
+            if table_name in tables:
+                console.print(f"\n✅ [green]{table_name} 表结构:[/green]")
+                
+                # 查看表结构
+                result = conn.execute(text(f"""
+                    SELECT column_name, data_type, is_nullable, column_default
+                    FROM information_schema.columns 
+                    WHERE table_name = '{table_name}' 
+                    ORDER BY ordinal_position;
+                """))
+                
+                structure_table = Table()
+                structure_table.add_column("列名", style="cyan")
+                structure_table.add_column("类型", style="yellow")
+                structure_table.add_column("可空", style="green")
+                structure_table.add_column("默认值", style="dim")
+                
+                for row in result:
+                    nullable = "YES" if row[2] == "YES" else "NO"
+                    default = str(row[3]) if row[3] else ""
+                    structure_table.add_row(row[0], row[1], nullable, default)
+                
+                console.print(structure_table)
+            else:
+                console.print(f"\n❌ [red]{table_name} 表不存在[/red]")
+    
+    console.print("\n✅ [green]表结构检查完成[/green]")
+
 
 if __name__ == "__main__":
     main_menu()
