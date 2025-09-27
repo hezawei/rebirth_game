@@ -9,6 +9,11 @@ export default defineConfig({
 			'/api': {
 				target: 'http://127.0.0.1:8000',
 				changeOrigin: true,
+			},
+			// Proxy static assets served by FastAPI
+			'/static': {
+				target: 'http://127.0.0.1:8000',
+				changeOrigin: true,
 			}
 		}
 	}

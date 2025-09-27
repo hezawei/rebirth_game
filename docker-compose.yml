@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: rebirth-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PGUSER:-rebirth}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-StrongPass!}
+      POSTGRES_DB: ${PGDATABASE:-rebirth}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-rebirth}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: rebirth-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Compose will assemble the DATABASE_URL using the db service hostname
+      DATABASE_URL: postgresql+psycopg2://${PGUSER:-rebirth}:${PGPASSWORD_ENC:-StrongPass%21}@db:5432/${PGDATABASE:-rebirth}
+      ENFORCE_DB_VENDOR: postgresql
+      GUNICORN_WORKERS: ${GUNICORN_WORKERS:-5}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      DOUBAO_API_KEY: ${DOUBAO_API_KEY}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    ports:
+      - "8000:8000"
+    # Command not needed; Dockerfile CMD runs backend.run_server already
+
+volumes:
+  pgdata:

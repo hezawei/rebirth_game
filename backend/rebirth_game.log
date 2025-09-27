@@ -1,0 +1,1212 @@
+2025-08-19 22:25:57 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:25:57 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:25:57 | WARNING  | core.image_service:_load_image_library:22 - 预置图片目录不存在: assets/images，将使用空图库
+2025-08-19 22:25:57 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:25:57 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:25:57 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:25:57 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:25:57 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:25:57 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:25:57 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:25:57 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:29:40 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 魔法学院学生
+2025-08-19 22:29:40 | INFO     | core.story_engine:start_story:44 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-08-19 22:29:48 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1149
+2025-08-19 22:29:48 | DEBUG    | core.story_engine:start_story:51 - LLM原始回应: {
+  "text": "石墙上的月光淌成银河，林晚猛地坐起身，胸口剧烈起伏。鼻尖萦绕着旧木床特有的松脂香，窗外魔法藤蔓正发出细碎的荧光，像极了入学第一天夜里的模样。她颤抖着摸向床头——那本边缘泛黄的《新生手册》静静躺着，扉页上的日期刺痛了她的眼：9月1日。明天，就是分院仪式。前世的她攥着颤抖的手，在分院帽下听见“赫奇帕奇”三个字时，连呼吸都带着悔意。而现在，她重生了。礼堂的钟声隐约传来，带着不容错辨的催促，她必须在明天日出前，找到改变命运的方法。",
+  "choices": ["去图书馆查分院仪式秘诀", "找学姐打听院长偏好", "现在就去礼堂占前排位置"]
+}
+2025-08-19 22:29:48 | DEBUG    | core.image_service:get_image_for_story:83 - 开始为故事获取图片，故事文本长度: 213
+2025-08-19 22:29:48 | INFO     | core.image_service:find_image_in_library:39 - 正在从预置图库中查找图片...
+2025-08-19 22:29:48 | ERROR    | core.image_service:find_image_in_library:42 - 图片库为空，无法提供图片！
+2025-08-19 22:29:48 | DEBUG    | core.image_service:get_image_for_story:87 - 图库查找结果: /static/error_placeholder.png
+2025-08-19 22:29:48 | INFO     | core.story_engine:start_story:59 - 成功生成开篇故事，图片为: /static/error_placeholder.png
+2025-08-19 22:29:48 | ERROR    | main:global_exception_handler:71 - 全局异常: 2 validation errors for StorySegment
+session_id
+  Field required [type=missing, input_value={'text': '石墙上的月...生', 'type': 'start'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+node_id
+  Field required [type=missing, input_value={'text': '石墙上的月...生', 'type': 'start'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+2025-08-19 22:31:45 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:31:46 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:31:46 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:31:46 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:31:46 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:31:47 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:31:47 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:31:47 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:31:47 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:31:47 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:31:47 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:31:47 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:32:10 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:32:12 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:32:12 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:32:12 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:32:12 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:32:12 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:32:12 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:32:12 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:32:12 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:32:12 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:32:12 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:32:12 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:32:36 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:32:38 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:32:38 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:32:38 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:32:38 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:32:38 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:32:38 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:32:38 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:32:38 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:32:38 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:32:38 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:32:38 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:32:57 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:32:59 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:32:59 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:32:59 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:32:59 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:32:59 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:32:59 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:32:59 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:32:59 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:32:59 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:32:59 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:32:59 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:33:22 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:33:22 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:33:22 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:33:22 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:33:22 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:33:22 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:33:22 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:33:22 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:33:22 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:33:22 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:33:22 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:34:32 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 魔法学院学生
+2025-08-19 22:34:32 | INFO     | core.story_engine:start_story:44 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-08-19 22:34:42 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1140
+2025-08-19 22:34:42 | DEBUG    | core.story_engine:start_story:51 - LLM原始回应: {
+  "text": "清晨的阳光斜斜切进霍格沃茨图书馆的彩色玻璃窗，在古老的橡木书架上投下流动的光斑。你趴在冰凉的石地上，指尖触到一本烫金封面的《魔法史纲要》，书页边缘还沾着你记忆里没有的、带着松针香的泥土。眩晕感渐渐退去，破碎的画面涌入脑海——尖顶城堡、会动的画像、黑袍教授，还有你自己穿着不合身校服的样子。'糟了！'你猛地坐起，走廊尽头传来'笃笃'的拐杖声，夹杂着教授严厉的呵斥：'最后警告！古代魔文课迟到者，扣除本学期所有学分！'你慌忙起身，怀里的书硌得肋骨生疼，而那扇通往教室的门，此刻正虚掩着，里面传来羽毛笔划过羊皮纸的沙沙声。",
+  "choices": ["A. 冲去古代魔文教室", "B. 溜进禁书区找记忆", "C. 找室友莉莉帮忙"]
+}
+2025-08-19 22:34:42 | DEBUG    | core.image_service:get_image_for_story:83 - 开始为故事获取图片，故事文本长度: 258
+2025-08-19 22:34:42 | INFO     | core.image_service:find_image_in_library:39 - 正在从预置图库中查找图片...
+2025-08-19 22:34:42 | INFO     | core.image_service:find_image_in_library:62 - 根据关键字 '清晨的阳光斜斜切进霍格沃茨图书馆的彩色玻...' 匹配到图片: fantasy_castle.jpg
+2025-08-19 22:34:42 | DEBUG    | core.image_service:get_image_for_story:87 - 图库查找结果: /static/fantasy_castle.jpg
+2025-08-19 22:34:42 | INFO     | core.story_engine:start_story:59 - 成功生成开篇故事，图片为: /static/fantasy_castle.jpg
+2025-08-19 22:34:42 | ERROR    | main:global_exception_handler:71 - 全局异常: 2 validation errors for StorySegment
+session_id
+  Field required [type=missing, input_value={'text': "清晨的阳光...生', 'type': 'start'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+node_id
+  Field required [type=missing, input_value={'text': "清晨的阳光...生', 'type': 'start'}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+2025-08-19 22:36:52 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:36:54 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:36:54 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:36:54 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:36:54 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:36:54 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:36:54 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:36:54 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:36:54 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:36:54 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:36:54 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:36:54 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:37:22 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:37:23 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:37:23 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:37:23 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:37:34 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:37:34 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:37:34 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:37:45 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:37:45 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:37:45 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:37:55 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:37:55 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:37:55 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:37:55 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:37:55 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:37:55 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:37:55 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:37:55 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:37:55 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:37:55 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:37:55 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:08 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:38:09 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:09 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:09 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:38:09 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:38:09 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:38:09 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:38:09 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:38:09 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:38:09 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:38:09 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:09 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:21 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:38:23 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:23 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:23 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:38:23 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:38:36 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:36 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:36 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:38:36 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:38:36 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:38:36 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:38:36 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:38:36 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:38:36 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:38:36 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:36 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:57 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:38:59 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:59 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:38:59 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:38:59 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:38:59 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:38:59 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:38:59 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:38:59 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:38:59 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:38:59 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:38:59 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:39:14 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:39:16 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:39:16 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:39:16 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:39:16 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:39:16 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:39:16 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:39:16 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:39:16 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:39:16 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:39:16 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:39:16 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:39:42 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:39:42 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:39:42 | INFO     | core.image_service:_load_image_library:31 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:39:42 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:39:42 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:39:42 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:39:42 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:39:42 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:39:42 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:39:42 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:39:42 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:49:53 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:49:55 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:49:55 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:49:55 | INFO     | core.image_service:_load_image_library:36 - 成功从 '../assets/images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:49:55 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:49:55 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:49:55 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:49:55 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:49:55 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:49:55 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:49:55 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:49:55 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:50:22 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 22:50:23 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:50:23 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:50:23 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:50:23 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:50:23 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:50:23 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:50:23 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:50:23 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:50:23 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:50:23 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:50:23 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:51:50 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:51:50 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:51:50 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 22:51:50 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 22:51:51 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 22:51:51 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 22:51:51 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 22:51:51 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 22:51:51 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 22:51:51 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 22:51:51 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 22:52:38 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 魔法学院学生
+2025-08-19 22:52:38 | INFO     | core.story_engine:start_story:44 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-08-19 22:52:44 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 939
+2025-08-19 22:52:44 | DEBUG    | core.story_engine:start_story:51 - LLM原始回应: {
+  "text": "月光从彩色玻璃窗漏进来，在石墙上投下斑斓的光斑，空气中飘着艾草和龙涎香的气息。你猛地睁开眼，头痛欲裂，眼前的景象却像被打碎的镜子——熟悉的四柱床，墙上挂着的分院旗，还有床头柜上那本《魔法史》，扉页上的日期赫然是三年前的9月15日。你重生了？下一节课就是米勒娃教授的古代如尼文课，而昨天的实践考核成绩还没出来，据说这次考核失败的人会被调到基础班，那你好不容易争取到的“元素亲和者”名额……不行，必须阻止这一切！",
+  "choices": ["冲去公告栏查成绩", "去图书馆背如尼文", "找赫敏帮忙划重点"]
+}
+2025-08-19 22:52:44 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 204
+2025-08-19 22:52:44 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 22:52:44 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '月光从彩色玻璃窗漏进来，在石墙上投下斑斓...' 匹配到图片: magic_forest.jpg
+2025-08-19 22:52:44 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 22:52:44 | INFO     | core.story_engine:start_story:59 - 成功生成开篇故事，图片为: /static/magic_forest.jpg
+2025-08-19 22:52:44 | INFO     | core.story_engine:start_story:75 - 新故事生成成功
+2025-08-19 22:52:44 | INFO     | api.story:start_new_story:65 - 新故事生成成功
+2025-08-19 22:54:01 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 冲去公告栏查成绩
+2025-08-19 22:54:01 | INFO     | core.story_engine:continue_story:80 - 继续故事，用户选择: 冲去公告栏查成绩
+2025-08-19 22:54:14 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1879
+2025-08-19 22:54:14 | DEBUG    | core.story_engine:continue_story:87 - LLM原始回应: {
+  "text": "你几乎是连滚带爬冲出公共休息室，走廊里的学生被你带起的风掀动了书页。“速速前进！”你在心里默念，脚步快得像踩在弹簧上，连平时总慢悠悠的费尔奇都被你惊得躲到了墙角。公告栏前已经围了不少人，羊皮纸上密密麻麻的名字在阳光下泛着冷光。你挤进去，目光急切地扫过——“林恩·沃克”，找到了！成绩那一栏赫然写着“优秀”，旁边还画了个小小的星星。可当你下移视线，却在“失败”名单里看到了一个熟悉的名字：“西奥多·诺特”。记忆里他明明通过了考核……你猛地抬头，正撞见麦格教授从走廊另一头走来，她的目光落在你身上，带着一丝探究。",
+  "choices": ["假装没看见麦格教授", "上前询问诺特情况", "立刻去古代如尼文教室"]
+}
+2025-08-19 22:54:14 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 254
+2025-08-19 22:54:14 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 22:54:14 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: magic_forest.jpg
+2025-08-19 22:54:14 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 22:54:14 | INFO     | core.story_engine:continue_story:111 - 故事继续生成成功
+2025-08-19 22:54:14 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 22:58:49 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 上前询问诺特情况
+2025-08-19 22:58:49 | INFO     | core.story_engine:continue_story:80 - 继续故事，用户选择: 上前询问诺特情况
+2025-08-19 22:58:57 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1535
+2025-08-19 22:58:57 | DEBUG    | core.story_engine:continue_story:87 - LLM原始回应: {
+  "text": "你穿过人群，在走廊尽头的石墙阴影里找到了他。西奥多背对着你，指尖无意识摩挲着魔杖尾端，月光从彩绘玻璃斜切进来，在他轮廓分明的侧脸上投下细碎的光斑。“诺特？”你放轻脚步走近，他猛地转身，灰蓝色的眼睛里闪过一丝慌乱，随即又沉了下去。“成绩……”你话没说完，他就别开脸，声音低哑：“埃弗里的错。”你愣住，记忆里他明明是小组里最冷静的那个。“他用了钻心咒，”西奥多忽然攥紧拳头，指节泛白，“我想阻止，结果被教授看到我碰了他的魔杖……”你看着他紧抿的唇，忽然想起公告栏上埃弗里的名字也在失败名单里，只是被划掉又重写了一遍。",
+  "choices": ["帮西奥多找证据", "向教授申诉", "自己重新考核"]
+}
+2025-08-19 22:58:57 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 256
+2025-08-19 22:58:57 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 22:58:57 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: cyberpunk_city.jpg
+2025-08-19 22:58:57 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/cyberpunk_city.jpg
+2025-08-19 22:58:57 | INFO     | core.story_engine:continue_story:111 - 故事继续生成成功
+2025-08-19 22:58:57 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 22:59:51 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 向教授申诉
+2025-08-19 22:59:51 | INFO     | core.story_engine:continue_story:80 - 继续故事，用户选择: 向教授申诉
+2025-08-19 22:59:58 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1478
+2025-08-19 22:59:58 | DEBUG    | core.story_engine:continue_story:87 - LLM原始回应: {
+  "text": "橡木办公室门被你敲得砰砰响，麦格教授推了推眼镜：“林恩·沃克？古代如尼文课的优秀新生？”你攥紧拳头呈上记忆中埃弗里重写的名单，“教授，西奥多是被陷害的！埃弗里在考核时偷偷用了钻心咒，西奥多碰他的魔杖是想阻止！”羊皮纸文件哗啦啦翻动，麦格的目光扫过你颤抖的手，忽然指向窗外：“跟我来。”走廊尽头的罚抄室里，埃弗里正对着墙壁念念有词，魔杖尖泛着诡异的绿光——那是他在练习非法咒术时留下的痕迹。“看来我们需要更详细的证词。”麦格的声音冷冽如冰，“你，去叫西奥多来见我，顺便……留意埃弗里的动向。”",
+  "choices": ["立刻去找西奥多", "监视埃弗里行动", "说服同学作证"]
+}
+2025-08-19 22:59:58 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 245
+2025-08-19 22:59:58 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 22:59:58 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: rebirth_gate_placeholder.png
+2025-08-19 22:59:58 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/rebirth_gate_placeholder.png
+2025-08-19 22:59:58 | INFO     | core.story_engine:continue_story:111 - 故事继续生成成功
+2025-08-19 22:59:58 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:38:18 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 23:38:18 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 23:38:18 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 23:38:18 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 23:38:18 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 23:38:18 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 23:38:18 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 23:38:18 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 23:38:18 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 23:38:18 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 23:38:18 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 23:39:37 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-19 23:39:54 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-19 23:39:54 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 23:39:54 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-19 23:39:54 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-19 23:39:54 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-19 23:39:54 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-19 23:39:54 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-19 23:39:54 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-19 23:39:54 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-19 23:39:54 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-19 23:39:54 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-19 23:40:03 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 魔法学院学生
+2025-08-19 23:40:03 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-08-19 23:40:10 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1037
+2025-08-19 23:40:10 | DEBUG    | core.story_engine:start_story:57 - LLM原始回应: {
+  "text": "晨雾裹着松针香漫进塔楼，你在吱呀作响的木床上惊醒。指尖触到胸口，那道被黑魔法撕裂的伤疤竟光滑如初，记忆如碎玻璃扎进脑海——三个月前的草药课上，你把曼德拉草念成尖叫咒，整间教室炸开绿色汁液，被院长罚抄《魔法法典》一百遍，还成了全年级的笑柄。讲台上，老教授正用银杖搅动坩埚，里面翻滚着幽蓝的火焰防护剂，下一个就是你。前世你手抖着加错了火蜥蜴尾，药水炸得天花板淌水，这次，你该怎么办？",
+  "choices": ["速查防护剂正确配方", "假装眩晕提前离场", "向邻座递求助眼神"]
+}
+2025-08-19 23:40:10 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 189
+2025-08-19 23:40:10 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:40:10 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '晨雾裹着松针香漫进塔楼，你在吱呀作响的木...' 匹配到图片: magic_forest.jpg
+2025-08-19 23:40:10 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 23:40:10 | INFO     | core.story_engine:start_story:65 - 成功生成开篇故事，图片为: /static/magic_forest.jpg
+2025-08-19 23:40:10 | INFO     | core.story_engine:start_story:81 - 新故事生成成功
+2025-08-19 23:40:10 | INFO     | api.story:start_new_story:65 - 新故事生成成功
+2025-08-19 23:40:33 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 假装眩晕提前离场
+2025-08-19 23:40:33 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 假装眩晕提前离场
+2025-08-19 23:40:42 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1148
+2025-08-19 23:40:42 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你猛地捂住额头，眼前金星乱冒似的晃了晃，顺势软倒在木桌上，发出一声闷哼。“她晕倒了！”前排的同学惊呼，老教授银杖轻点，一道防护咒将你圈住，“快送医务室。”两个男生手忙脚乱地架起你，你闭着眼，嘴角却悄悄勾起——计划成功。穿过走廊时，晨雾未散，阳光斜斜地切过石墙，你眼角余光瞥见楼梯转角站着个黑袍人，兜帽压得很低，手指正对着你胸口的位置。突然，那道“愈合”的伤疤像被烙铁烫过，猛地发烫！黑袍人似乎察觉到什么，身影一闪消失在阴影里。被送到医务室时，你假装昏迷，却听见护士在低声议论：“这孩子怎么总晕倒？上次草药课也是……”你悄悄睁眼，看见床头柜上不知何时多了片干枯的迷迭香，花瓣上还沾着片闪着微光的鳞片，像极了黑魔法书里记载的“记忆碎片”。",
+  "choices": ["趁护士离开，研究迷迭香鳞片", "假装醒来，询问护士关于鳞片的事", "立刻离开医务室，去图书馆查记忆碎片"]
+}
+2025-08-19 23:40:42 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 317
+2025-08-19 23:40:42 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:40:42 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '你猛地捂住额头，眼前金星乱冒似的晃了晃，...' 匹配到图片: magic_forest.jpg
+2025-08-19 23:40:42 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 23:40:42 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:40:42 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:40:45 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 假装醒来，询问护士关于鳞片的事
+2025-08-19 23:40:45 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 假装醒来，询问护士关于鳞片的事
+2025-08-19 23:40:53 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1491
+2025-08-19 23:40:53 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "医务室的消毒水味混着迷迭香的清苦，你睁开眼时，护士正背对着你整理药品柜。你清了清嗓子，声音带着刚醒的沙哑：“护士……我怎么会在这里？”她转过身，手里的镊子还夹着片干花瓣，“你昨天在草药课晕倒了呀，老教授让送你过来休息。”你不动声色地瞥向床头柜，那片沾着鳞片的迷迭香还在，鳞片在阳光下泛着细碎的银辉。“对了，”你状似随意地问，“我床头柜上的花……是你放的吗？”护士的笔尖在病历本上顿了顿，眼神掠过鳞片时闪过一丝不易察觉的紧张：“不知道呢，早上打扫时就有了。最近总有些奇怪的东西出现在医务室，上次还有个学生捡到了根黑色羽毛。”你心里一紧——黑羽毛？你想起黑袍人消失前的阴影。“是……有什么特别的吗？”护士摇摇头，转身去拿体温计：“不清楚，大概是哪个学生的恶作剧吧。不过昨天下午，有个戴银戒指的男生来取治疗失眠的魔药，手指上就有类似鳞片的纹身呢。”你指尖微颤，那鳞片的纹路，竟和记忆里黑袍人兜帽下若隐若现的袖口刺绣一模一样。",
+  "choices": ["立刻去魔药课教室找那个戴银戒指的男生", "假装无事回宿舍，暗中调查银戒指男生的信息", "现在就去院长办公室，报告黑袍人可能出现在霍格沃茨"]
+}
+2025-08-19 23:40:53 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 409
+2025-08-19 23:40:53 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:40:53 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: fantasy_castle.jpg
+2025-08-19 23:40:53 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/fantasy_castle.jpg
+2025-08-19 23:40:53 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:40:53 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:40:56 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 假装无事回宿舍，暗中调查银戒指男生的信息
+2025-08-19 23:40:56 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 假装无事回宿舍，暗中调查银戒指男生的信息
+2025-08-19 23:41:03 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1767
+2025-08-19 23:41:03 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你指尖攥紧校服口袋里的迷迭香鳞片，转身时护士正低头记录，脚步刻意放轻。回宿舍的石板路被晨露浸得滑腻，你数着台阶上的苔藓，直到推开宿舍门——木床板在月光下泛着冷白，书架第三层的《古代魔药配方考》被人动过，书页间夹着张泛黄的便签，上面用银尖笔写着：“月眠蛇鳞，图书馆禁书区，第三排第七格。”你猛地想起护士说的“治疗失眠的魔药”，那鳞片定是制作时的关键材料。突然，窗外传来衣料摩擦的轻响，你贴在门后屏息，看见对面塔楼的阴影里，一个戴银戒指的男生正用魔杖划开空气，指尖的鳞片纹身竟在月光下微微发光。",
+  "choices": ["A. 溜去图书馆禁书区找线索", "B. 回医务室找护士问更多细节", "C. 立刻去教授办公室举报银戒指男生"]
+}
+2025-08-19 23:41:03 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 245
+2025-08-19 23:41:03 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:41:03 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: cyberpunk_city.jpg
+2025-08-19 23:41:03 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/cyberpunk_city.jpg
+2025-08-19 23:41:03 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:41:03 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:41:06 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: B. 回医务室找护士问更多细节
+2025-08-19 23:41:06 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: B. 回医务室找护士问更多细节
+2025-08-19 23:41:13 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1980
+2025-08-19 23:41:13 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "医务室的百叶窗漏进一缕斜光，你推开木门时，护士正对着药柜后的暗格喃喃自语。“……那鳞片摸起来像活物，还会发烫……”她抬头看见你，镊子“当啷”掉在托盘上，慌忙用围裙擦手：“你怎么回来了？”你盯着她颤抖的指尖——那枚银戒指上，竟也刻着和鳞片一样的纹路！“护士，你见过戴银戒指的男生，对吗？”她猛地别过脸，药瓶碰撞声在寂静里格外刺耳。“我……我什么都不知道！”突然，暗格“咔嗒”弹开，露出本烫金封皮的书，扉页写着《禁术笔记》。护士扑过去想合上，你却瞥见内页插图：一个黑袍人正用蛇鳞魔药注入少年眉心，旁边标注着“月眠蛇鳞·记忆移植”。“他是来偷……”护士的话被窗外的尖叫打断——走廊里，那个戴银戒指的男生正掐着老教授的脖子，魔杖尖闪着幽蓝的光。",
+  "choices": ["冲出去阻止银戒指男生", "翻开《禁术笔记》寻找破解方法", "拉响医务室的警报铃"]
+}
+2025-08-19 23:41:13 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 318
+2025-08-19 23:41:13 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:41:13 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: space_station.jpg
+2025-08-19 23:41:13 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/space_station.jpg
+2025-08-19 23:41:13 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:41:13 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:41:42 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 翻开《禁术笔记》寻找破解方法
+2025-08-19 23:41:42 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 翻开《禁术笔记》寻找破解方法
+2025-08-19 23:41:47 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 2000
+2025-08-19 23:41:47 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "指尖触到烫金封皮的瞬间，笔记突然发出微弱的银辉。你翻开泛黄的内页，‘记忆移植’四个字下画着红线：需以晨露为引，念诵‘遗忘之河，洗去昨日’，方可逆转咒术。可医务室的晨露？你猛地抬头，护士正被男生用魔杖抵着后背，银戒指上的鳞片纹身正泛着红光。‘找到破解方法了？’男生缓缓转身，兜帽滑落，露出张苍白却熟悉的脸——竟是你同寝室的亚瑟！他冷笑一声，魔杖直指你的胸口，‘可惜，你已经是我记忆容器的最后一块拼图了。’晨露在窗台上闪着微光，而你的手正悬在《禁术笔记》的‘遗忘咒’页面上。",
+  "choices": ["用晨露和遗忘咒对抗亚瑟", "躲进药柜暗格暂避锋芒", "冲出去抢夺亚瑟的魔杖"]
+}
+2025-08-19 23:41:47 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 235
+2025-08-19 23:41:47 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:41:47 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: magic_forest.jpg
+2025-08-19 23:41:47 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 23:41:47 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:41:47 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:41:50 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 躲进药柜暗格暂避锋芒
+2025-08-19 23:41:50 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 躲进药柜暗格暂避锋芒
+2025-08-19 23:41:57 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 2499
+2025-08-19 23:41:57 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "药柜暗格的门在身后‘咔嗒’合上，你跌坐在堆叠的羊皮纸和空瓶中，干燥的迷迭香粉末簌簌落在肩头。暗格里比想象中宽敞些，墙壁上嵌着块半透明的水晶，正散发着微弱的暖光。你摸索着碰了碰水晶，它突然亮起柔和的蓝雾，将你的影子投在石墙上——那影子里竟浮现出一行行发光的字迹：‘月眠蛇鳞需以真心唤醒，若宿主心怀善念，鳞片自会反噬其主’。外面传来亚瑟的脚步声，他的银戒指在月光下泛着冷光：‘她肯定跑不远，搜遍整个医务室！’护士的声音带着哭腔：‘可暗格……是老院长留下的，我们不该碰的……’你突然想起《禁术笔记》里的话，心脏狂跳着握紧水晶，蓝雾开始在你掌心凝聚成小小的光球。",
+  "choices": ["用蓝雾光球触碰水晶，触发‘善意反噬’咒语", "屏住呼吸，从暗格底部的通风口爬出去", "悄悄打开暗格门缝，观察外面的动静"]
+}
+2025-08-19 23:41:57 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 277
+2025-08-19 23:41:57 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:41:57 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: cyberpunk_city.jpg
+2025-08-19 23:41:57 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/cyberpunk_city.jpg
+2025-08-19 23:41:57 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:41:57 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:42:00 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 屏住呼吸，从暗格底部的通风口爬出去
+2025-08-19 23:42:00 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 屏住呼吸，从暗格底部的通风口爬出去
+2025-08-19 23:42:09 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 2886
+2025-08-19 23:42:09 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "暗格底部的铁栅栏被锈蚀得只剩半片，露出拳头大的通风口，里面积着厚厚的灰尘，还飘着几缕蛛网。你蜷起身子，手指抠住栅栏边缘，用力一扯，半片铁条‘哐当’砸在地上。通风管里的霉味混着旧书页的气息扑面而来，你猫着腰往里钻，衣角勾住蛛网，扬起的灰尘呛得你直咳嗽。不知爬了多久，通风口外传来轻微的脚步声。你扒着边缘探头，发现自己正趴在图书馆三楼的储藏室里，窗外是漆黑的夜空，月光从高窗斜斜照进来，落在书架顶层的《预言家日报》旧刊上。储藏室的门虚掩着，你刚落地就听见里面传来翻书声，一个熟悉的声音自语：‘月眠蛇鳞……原来真的在她身上……’你瞥见角落的旧木箱，标签上‘1985级’的字迹模糊，里面露出半张泛黄的照片——照片上的少年和亚瑟长得一模一样，胸口却纹着和你伤疤一样的蛇鳞。突然，门被推开，灰袍老者举着魔杖走进来，月光照在他脸上，你认出他是草药学教授！他手里的羊皮纸，正是《禁术笔记》里的‘记忆移植仪式’步骤……",
+  "choices": ["A. 躲进木箱后偷听教授的话", "B. 悄悄溜出储藏室去教授办公室找解药线索", "C. 直接冲出储藏室质问教授"]
+}
+2025-08-19 23:42:09 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 400
+2025-08-19 23:42:09 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:42:09 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: rebirth_gate_placeholder.png
+2025-08-19 23:42:09 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/rebirth_gate_placeholder.png
+2025-08-19 23:42:09 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:42:09 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:42:12 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: B. 悄悄溜出储藏室去教授办公室找解药线索
+2025-08-19 23:42:12 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: B. 悄悄溜出储藏室去教授办公室找解药线索
+2025-08-19 23:42:20 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 3225
+2025-08-19 23:42:20 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你屏住呼吸溜出储藏室，走廊的月光被石像鬼雕像挡在角落，只有应急灯在石墙上投下晃动的光斑。教授办公室的橡木门锁着，但门底的缝隙透出微弱的蓝光——里面一定有东西。你从口袋摸出偷藏的‘开锁咒’卷轴，指尖刚触到门把，就听见走廊尽头传来亚瑟的脚步声，他的银戒指在阴影里泛着冷光。你迅速闪身躲进旁边的书架阴影，看着他推开教授办公室的门，里面飘出焦糊的魔药味。等他离开，你用魔杖划开‘开锁咒’，门‘咔嗒’弹开。桌上摊着《禁术笔记》的副本，旁边的水晶瓶里盛着幽蓝液体，标签写着‘月眠蛇鳞解药·半成品’，瓶底沉着片闪着银光的鳞片。突然，教授的声音从身后传来：‘你以为能找到这里？’你猛地转身，魔杖直指解药瓶，却见教授的银戒指上鳞片纹身突然亮起红光——他才是真正的幕后黑手！亚瑟站在门口，脸色惨白：‘父亲，你答应过我会治好母亲的……’教授冷笑：‘她的记忆，本就该属于更有价值的人。’水晶瓶突然‘嘭’地炸裂，幽蓝液体溅到你手腕上，泛起蛇鳞般的红斑，像极了你胸口的伤疤。",
+  "choices": ["A. 念诵《禁术笔记》里的‘真心唤醒咒’", "B. 用魔杖击碎书架上的魔药材料", "C. 趁他们争执时抢走解药瓶"]
+}
+2025-08-19 23:42:20 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 423
+2025-08-19 23:42:20 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:42:20 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: space_station.jpg
+2025-08-19 23:42:20 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/space_station.jpg
+2025-08-19 23:42:20 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:42:20 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:42:24 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: B. 用魔杖击碎书架上的魔药材料
+2025-08-19 23:42:24 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: B. 用魔杖击碎书架上的魔药材料
+2025-08-19 23:42:31 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 3236
+2025-08-19 23:42:31 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "魔杖顶端迸出银芒，你狠狠砸向右侧的玻璃药柜。墨绿色液体混着干枯的独角兽角粉泼洒而出，在空气中凝成毒雾。教授的袍角被染成墨绿，他怒吼着转身，银戒指上的鳞片纹身突然亮起红光，竟开始融化！亚瑟突然挡在教授身前，银戒指泛着寒光：“别碰我父亲！”你瞥见药柜底层压着张羊皮纸，上面用鲜血写着：“记忆移植需以活人为引，否则反噬施术者”。身后传来急促的脚步声，是巡逻的费尔奇管理员，他的哨声在走廊里回荡。",
+  "choices": ["A. 扑向羊皮纸，念诵“遗忘咒”逆转仪式", "B. 抓起地上的曼德拉草粉末撒向教授", "C. 从窗户翻出图书馆，暂时逃脱"]
+}
+2025-08-19 23:42:31 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 194
+2025-08-19 23:42:31 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:42:31 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: space_station.jpg
+2025-08-19 23:42:31 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/space_station.jpg
+2025-08-19 23:42:31 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:42:31 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:49:37 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: B. 抓起地上的曼德拉草粉末撒向教授
+2025-08-19 23:49:37 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: B. 抓起地上的曼德拉草粉末撒向教授
+2025-08-19 23:49:45 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 3536
+2025-08-19 23:49:45 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你弯腰抓起那袋从药柜里滚落的曼德拉草粉末，指缝间还沾着干枯的根须。教授正举着魔杖要刺向亚瑟，你猛地将粉末朝他脸上扬去！墨绿色的粉末像烟雾般炸开，教授的尖叫瞬间撕裂走廊——他的皮肤以肉眼可见的速度泛起水泡，银戒指上的鳞片纹身“滋滋”冒烟，竟开始像融化的蜡一样滴落。亚瑟趁机推开教授，却见他踉跄着撞翻了水晶瓶，幽蓝的解药液体在石地上漫延，很快就浸湿了你的脚踝。“不！”亚瑟嘶吼着扑过去，却被苏醒的教授用残余的魔法弹开，撞在书架上。你看着地上的解药正在蒸发，费尔奇的脚步声从楼梯口传来，而教授的袍角正缓缓缠向亚瑟的手腕……",
+  "choices": ["用魔杖点燃解药残留的液体制造烟雾逃离", "冲过去抱住亚瑟阻止教授的攻击", "大喊“记忆移植是非法的！”引开费尔奇"]
+}
+2025-08-19 23:49:45 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 258
+2025-08-19 23:49:45 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:49:45 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '你弯腰抓起那袋从药柜里滚落的曼德拉草粉末...' 匹配到图片: magic_forest.jpg
+2025-08-19 23:49:45 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 23:49:45 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:49:45 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:49:50 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 冲过去抱住亚瑟阻止教授的攻击
+2025-08-19 23:49:50 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 冲过去抱住亚瑟阻止教授的攻击
+2025-08-19 23:49:56 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 3587
+2025-08-19 23:49:56 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你扑过去时，袍角擦过亚瑟的手腕，他银戒指上的鳞片纹身突然亮起，竟与你胸口的伤疤产生了共鸣。教授的魔杖尖迸出幽蓝火花，却在触到你后背的瞬间猛地顿住——你后颈的吊坠（晨雾中捡到的蛇鳞项链）开始发烫，记忆碎片如潮水涌来：原来教授才是当年偷走月眠蛇鳞的黑巫师，而亚瑟的母亲正是被他移植了记忆，如今亚瑟想夺回母亲的记忆，却成了他的棋子。“你的吊坠……”亚瑟声音颤抖，突然抓住你的手按在他的银戒指上，“这是母亲的遗物，能克制他的黑魔法！”话音未落，费尔奇的哨声已在走廊尽头炸开，教授的袍角正化作无数黑蛇扑来。",
+  "choices": ["用吊坠触碰黑蛇群", "拉着亚瑟躲进教授办公室密道", "念诵《禁术笔记》里的遗忘咒"]
+}
+2025-08-19 23:49:56 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 248
+2025-08-19 23:49:56 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:49:56 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '你扑过去时，袍角擦过亚瑟的手腕，他银戒指...' 匹配到图片: magic_forest.jpg
+2025-08-19 23:49:56 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-19 23:49:56 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:49:56 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:51:04 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: 拉着亚瑟躲进教授办公室密道
+2025-08-19 23:51:04 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 拉着亚瑟躲进教授办公室密道
+2025-08-19 23:51:12 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 3991
+2025-08-19 23:51:12 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你拽着亚瑟跌跌撞撞冲进密道，石门在身后“轰隆”合拢时，你才发现这里比想象中更幽深——脚下的石阶黏腻湿滑，墙壁上的壁画渗出幽蓝磷光，画中穿黑袍的少年（竟是年少的亚瑟）正将一片闪着银光的鳞片按在女子眉心，女子的眼睛里映着“记忆移植”的符文。“这是……母亲的记忆？”亚瑟的声音发颤，突然脚下一滑，你们摔进一个更低的地穴。这里堆着半腐的木箱，箱中露出泛黄的日记，扉页写着：“月眠蛇鳞能缝合破碎的灵魂，可移植的记忆，终究是偷来的光。”突然，头顶传来碎石滚落的脆响，教授的魔杖尖已在密道入口亮起幽蓝火花，而前方岔路中，左边飘着微弱的草药香，右边传来锁链拖地的“哐当”声。",
+  "choices": ["A. 冲进草药香的方向", "B. 走向锁链声的地穴", "C. 躲进木箱后的暗格"]
+}
+2025-08-19 23:51:12 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 279
+2025-08-19 23:51:12 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:51:12 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: rebirth_gate_placeholder.png
+2025-08-19 23:51:12 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/rebirth_gate_placeholder.png
+2025-08-19 23:51:12 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:51:12 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:51:32 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: B. 走向锁链声的地穴
+2025-08-19 23:51:32 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: B. 走向锁链声的地穴
+2025-08-19 23:51:41 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 4140
+2025-08-19 23:51:41 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "潮湿的石壁渗出黏腻的水珠，锁链拖过碎石的“哗啦”声越来越近。你们扶着岩壁往下走，越靠近深处，空气越冷，连火把的光芒都泛起蓝灰色。地穴尽头豁然开阔，一个佝偻的身影蜷缩在最深处，黑袍上绣着半片银鳞——和你胸口的伤疤一模一样！他脚边的锁链缠绕着发光的蛇鳞，每寸鳞片都在微微颤动，像活物般蠕动。“母亲……”亚瑟颤抖着伸出手，却被锁链猛地抽回，溅起的磷火在他手背上烫出焦痕。“找到‘缝合点’了？”教授的声音从头顶传来，他竟顺着岩壁上的藤蔓爬了下来，魔杖尖直指蜷缩的身影，“把蛇鳞交出来，我可以让你母亲的记忆完整归位。”蜷缩的身影突然抬起头，露出一张和你母亲日记里画像重合的脸，只是双眼空洞无物，唯有眉心一点银鳞在发光。",
+  "choices": ["用吊坠触碰蜷缩者眉心的银鳞", "趁教授施法时斩断缠绕的锁链", "用曼德拉草粉末制造混乱"]
+}
+2025-08-19 23:51:41 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 304
+2025-08-19 23:51:41 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:51:41 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: fantasy_castle.jpg
+2025-08-19 23:51:41 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/fantasy_castle.jpg
+2025-08-19 23:51:41 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:51:41 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:52:49 | INFO     | api.story:retry_from_node:137 - 收到时空回溯请求，目标节点: 15
+2025-08-19 23:52:49 | INFO     | database.crud:prune_story_from_node:69 - 正在从节点 15 开始进行时空回溯... 将返回到父节点 14
+2025-08-19 23:52:49 | INFO     | database.crud:prune_story_from_node:79 - 节点 15 及其所有后代节点 [16, 17, 18] 将被删除。
+2025-08-19 23:52:49 | INFO     | database.crud:prune_story_from_node:88 - 已成功完成回溯，当前故事线的终点为节点 14。
+2025-08-19 23:55:09 | INFO     | api.story:continue_existing_story:81 - 收到故事继续请求，选择: B. 抓起地上的曼德拉草粉末撒向教授
+2025-08-19 23:55:09 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: B. 抓起地上的曼德拉草粉末撒向教授
+2025-08-19 23:55:15 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 3456
+2025-08-19 23:55:15 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你弯腰抓起地上凝结成块的曼德拉草粉末，粉末在月光下泛着诡异的灰绿色。教授正被银戒指灼烧得痛苦嘶吼，亚瑟的魔杖‘哐当’落地。你猛地将粉末朝他脸甩去——‘尖叫咒’！教授的喉咙里炸开刺耳的尖啸，银戒指上的鳞片纹身像被沸水烫过般滋滋融化，他踉跄着撞翻药柜，水晶瓶滚落一地，解药瓶在你脚边发出微弱的嗡鸣。‘抓住她！’亚瑟嘶吼着扑来，你却趁机捡起解药瓶，转身撞开窗户。夜风灌进衣领，楼下传来费尔奇的哨声，而你手里的解药瓶正发烫，瓶底的蛇鳞竟开始发光……",
+  "choices": ["查看解药瓶的发光变化", "冲向图书馆外的禁林", "回头攻击亚瑟拖延时间"]
+}
+2025-08-19 23:55:15 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 220
+2025-08-19 23:55:15 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-19 23:55:15 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: cyberpunk_city.jpg
+2025-08-19 23:55:15 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/cyberpunk_city.jpg
+2025-08-19 23:55:15 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-19 23:55:15 | INFO     | api.story:continue_existing_story:120 - 故事继续生成成功
+2025-08-19 23:55:44 | INFO     | api.story:retry_from_node:137 - 收到时空回溯请求，目标节点: 12
+2025-08-19 23:55:44 | INFO     | database.crud:prune_story_from_node:69 - 正在从节点 12 开始进行时空回溯... 将返回到父节点 11
+2025-08-19 23:55:44 | INFO     | database.crud:prune_story_from_node:79 - 节点 12 及其所有后代节点 [13, 14, 15] 将被删除。
+2025-08-19 23:55:44 | INFO     | database.crud:prune_story_from_node:88 - 已成功完成回溯，当前故事线的终点为节点 11。
+2025-08-19 23:56:14 | INFO     | api.story:retry_from_node:137 - 收到时空回溯请求，目标节点: 13
+2025-08-19 23:56:14 | ERROR    | database.crud:prune_story_from_node:61 - 尝试回溯时找不到节点: 13
+2025-08-19 23:56:14 | ERROR    | api.story:retry_from_node:154 - 时空回溯失败: 节点 (id=13) 不存在
+2025-08-20 00:03:27 | INFO     | api.story:retry_from_node:137 - 收到时空回溯请求，目标节点: 11
+2025-08-20 00:03:27 | INFO     | database.crud:prune_story_from_node:69 - 正在从节点 11 开始进行时空回溯... 将返回到父节点 10
+2025-08-20 00:03:27 | INFO     | database.crud:prune_story_from_node:79 - 节点 11 及其所有后代节点 [] 将被删除。
+2025-08-20 00:03:27 | INFO     | database.crud:prune_story_from_node:88 - 已成功完成回溯，当前故事线的终点为节点 10。
+2025-08-20 00:04:26 | INFO     | api.story:retry_from_node:137 - 收到时空回溯请求，目标节点: 7
+2025-08-20 00:04:26 | INFO     | database.crud:prune_story_from_node:69 - 正在从节点 7 开始进行时空回溯... 将返回到父节点 6
+2025-08-20 00:04:26 | INFO     | database.crud:prune_story_from_node:79 - 节点 7 及其所有后代节点 [8, 9, 10] 将被删除。
+2025-08-20 00:04:26 | INFO     | database.crud:prune_story_from_node:88 - 已成功完成回溯，当前故事线的终点为节点 6。
+2025-08-20 00:09:35 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:09:37 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:09:37 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:09:37 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:09:37 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:09:37 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:09:37 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:09:37 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:09:37 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:09:37 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:09:37 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:09:37 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:09:48 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:09:50 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:09:50 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:09:50 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:09:50 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:09:50 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:09:50 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:09:50 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:09:50 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:09:50 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:09:50 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:09:50 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:10:25 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:10:26 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:10:26 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:10:26 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:10:26 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:10:26 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:10:26 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:10:27 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:10:27 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:10:27 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:10:27 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:10:27 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:11:54 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:11:56 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:11:56 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:11:56 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:11:56 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:11:56 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:11:56 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:11:56 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:11:56 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:11:56 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:11:56 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:11:56 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:12:11 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:12:12 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:12:12 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:12:12 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:12:12 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:12:12 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:12:12 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:12:12 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:12:12 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:12:12 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:12:12 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:12:12 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:12:39 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:12:39 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:12:39 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:12:39 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:12:39 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:12:39 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:12:39 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:12:39 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:12:39 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:12:39 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:12:39 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:13:45 | INFO     | api.story:get_session_nodes_list:197 - 获取会话节点列表: 2
+2025-08-20 00:13:45 | ERROR    | main:global_exception_handler:71 - 全局异常: module 'database.crud' has no attribute 'get_session_by_id'
+2025-08-20 00:14:38 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:14:38 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:14:39 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:14:39 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:14:39 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:14:39 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:14:39 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:14:39 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:14:39 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:14:39 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:14:39 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:14:39 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:14:39 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:14:39 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:14:39 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:14:39 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:14:39 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:14:40 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:14:40 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:14:40 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:14:40 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:14:40 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:14:40 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:14:40 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:14:56 | INFO     | api.story:get_session_nodes_list:197 - 获取会话节点列表: 2
+2025-08-20 00:32:10 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:32:10 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:32:11 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:11 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:11 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:11 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:11 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:32:11 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:32:11 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:32:11 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:32:11 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:32:11 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:32:11 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:32:11 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:32:11 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:32:11 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:32:11 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:32:11 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:32:11 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:32:11 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:32:11 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:11 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:11 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:11 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:28 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:32:28 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:32:29 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:29 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:29 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:32:29 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:32:29 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:32:29 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:32:29 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:32:29 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:32:29 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:32:29 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:29 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:29 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:29 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:29 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:32:29 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:32:29 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:32:29 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:32:29 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:32:29 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:32:29 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:32:29 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:29 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:46 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:32:46 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:32:48 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:48 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:48 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:32:48 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:32:48 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:32:48 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:32:48 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:32:48 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:32:48 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:32:48 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:48 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:48 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:48 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:32:48 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:32:48 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:32:48 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:32:48 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:32:48 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:32:48 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:32:48 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:32:48 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:32:48 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:03 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:33:03 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:33:05 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:05 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:05 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:33:05 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:33:05 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:05 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:05 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:33:05 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:33:05 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:33:05 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:33:05 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:33:05 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:33:05 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:33:05 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:05 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:05 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:33:05 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:33:05 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:33:05 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:33:05 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:33:05 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:05 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:20 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:33:20 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 00:33:21 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:21 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:21 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:33:21 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:33:21 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:33:21 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:33:21 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:33:21 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:33:21 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:33:21 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:21 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:21 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:21 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:33:21 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 00:33:21 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 00:33:21 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 00:33:21 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 00:33:21 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 00:33:21 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 00:33:21 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 00:33:21 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 00:33:21 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 00:38:20 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 6
+2025-08-20 00:38:20 | INFO     | database.crud:prune_story_from_node:99 - 正在从节点 6 开始进行时空回溯... 将返回到父节点 5
+2025-08-20 00:38:20 | INFO     | database.crud:prune_story_from_node:109 - 节点 6 及其所有后代节点 [] 将被删除。
+2025-08-20 00:38:20 | INFO     | database.crud:prune_story_from_node:118 - 已成功完成回溯，当前故事线的终点为节点 5。
+2025-08-20 00:38:35 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 假装眩晕提前离场
+2025-08-20 00:38:35 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 假装眩晕提前离场
+2025-08-20 00:38:43 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1289
+2025-08-20 00:38:43 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你指尖猛地掐住人中，喉咙里挤出一声短促的闷哼，身体便软软地向后倒去。前排的赫敏眼疾手快扶住你，银杖在教授眼前划出一道警告的光痕：“西弗勒斯，她好像晕过去了！”斯内普的绿眸扫过你苍白的脸，冷哼一声挥手：“扶她去医务室，罚抄的事改日再说。”赫敏半扶半搀着你穿过走廊，晨雾从彩绘玻璃窗渗进来，在石板地上洇出蜿蜒的水痕。刚到医务室门口，你借口“去下洗手间”，趁她转身和护士说话，像受惊的兔子般拐进侧巷——那里藏着你偷偷画的地图，通往被废弃的禁书区。橡木书架在阴暗中沉默如巨兽，你摸到第三排《魔法生物图鉴》后松动的木板，用力一推，暗格露出微光。里面躺着一本烫金书脊的旧书，扉页上是你前世的字迹：“尖叫咒的正确发音是‘Mandrake，awaken not the dead’，而非‘Mandrake，wake the dead’……”突然，身后传来布料摩擦的轻响，有人正站在暗格外。",
+  "choices": ["快速合上旧书塞进长袍，转身假装找书", "不动声色地将书藏进袖中，抬头直视来人", "压低声音问：“是你吗，前世的自己？”"]
+}
+2025-08-20 00:38:43 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 386
+2025-08-20 00:38:43 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 00:38:43 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '你指尖猛地掐住人中，喉咙里挤出一声短促的...' 匹配到图片: magic_forest.jpg
+2025-08-20 00:38:43 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 00:38:43 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 00:38:43 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 00:38:48 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 不动声色地将书藏进袖中，抬头直视来人
+2025-08-20 00:38:48 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 不动声色地将书藏进袖中，抬头直视来人
+2025-08-20 00:38:54 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1370
+2025-08-20 00:38:54 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "月光从破窗斜切进来，在他黑袍下摆投下鹰钩鼻般的阴影。斯内普的银杖在掌心转了个圈，杖头宝石泛着冷光：“你在找什么，波特？”他的声音像浸了冰的碎玻璃。你攥紧袖中发烫的书脊，指节泛白——那本书的扉页上，“波特”两个字被划得面目全非。“只是……随便看看。”喉结滚动着，你听见自己的声音在发抖。他突然俯身，黑袍扫过你的脸颊，带着龙涎香与樟脑的混合气味。“随便看看？”他冷笑，银杖挑起你的下巴，“那你袖中藏着的，是我二十年前在霍格沃茨图书馆遗失的《古代如尼文详解》？”",
+  "choices": ["颤抖着承认自己是偶然发现的", "反问他为何会出现在废弃禁书区", "谎称是为了研究黑魔法才潜入"]
+}
+2025-08-20 00:38:54 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 228
+2025-08-20 00:38:54 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 00:38:54 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: cyberpunk_city.jpg
+2025-08-20 00:38:54 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/cyberpunk_city.jpg
+2025-08-20 00:38:54 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 00:38:54 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 00:39:40 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 6
+2025-08-20 00:39:40 | INFO     | database.crud:prune_story_from_node:99 - 正在从节点 6 开始进行时空回溯... 将返回到父节点 5
+2025-08-20 00:39:40 | INFO     | database.crud:prune_story_from_node:109 - 节点 6 及其所有后代节点 [7] 将被删除。
+2025-08-20 00:39:40 | INFO     | database.crud:prune_story_from_node:118 - 已成功完成回溯，当前故事线的终点为节点 5。
+2025-08-20 00:43:59 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 向邻座递求助眼神
+2025-08-20 00:43:59 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 向邻座递求助眼神
+2025-08-20 00:44:06 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1275
+2025-08-20 00:44:06 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "晨雾裹着松针香漫进塔楼，你在吱呀作响的木床上惊醒。指尖触到胸口，那道被黑魔法撕裂的伤疤竟光滑如初，记忆如碎玻璃扎进脑海——三个月前的草药课上，你把曼德拉草念成尖叫咒，整间教室炸开绿色汁液，被院长罚抄《魔法法典》一百遍，还成了全年级的笑柄。讲台上，老教授正用银杖搅动坩埚，里面翻滚着幽蓝的火焰防护剂，下一个就是你。你攥紧坩埚钳，喉结动了动，悄悄转头看向邻座——莉莉的发梢沾着片蒲公英绒毛，她正低头用羽毛笔在羊皮纸上画着什么，笔尖划过纸面时带起细碎的沙沙声。你朝她递去求助的眼神，她睫毛颤了颤，忽然抬起头，指尖在桌面飞快画了个“三”字，又指向坩埚里的火焰，最后轻轻点了点头。你心头一松，原来她记得上周课后你请教过她防护剂的配比，此刻正用最安静的方式提醒你：三滴火蜥蜴尾，在火焰最稳定时加入。当坩埚里的幽蓝火苗恰好舔舐到银杖的光晕时，你屏住呼吸滴入药剂，没有嘶嘶的爆鸣声，只有一缕淡金色的雾气袅袅升起，带着清冽的草药香。老教授的银杖顿了顿，目光扫过你的坩埚，嘴角几不可察地弯了一下。",
+  "choices": ["课后找莉莉道谢并问她是否知道防护剂的其他用法", "注意到教授对你的关注，担心被进一步提问", "下课后去图书馆查阅关于火蜥蜴尾的更多资料"]
+}
+2025-08-20 00:44:06 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 438
+2025-08-20 00:44:06 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 00:44:06 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '晨雾裹着松针香漫进塔楼，你在吱呀作响的木...' 匹配到图片: magic_forest.jpg
+2025-08-20 00:44:06 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 00:44:06 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 00:44:06 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 00:44:11 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 下课后去图书馆查阅关于火蜥蜴尾的更多资料
+2025-08-20 00:44:11 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 下课后去图书馆查阅关于火蜥蜴尾的更多资料
+2025-08-20 00:44:19 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1765
+2025-08-20 00:44:19 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "下课后，你抱着《千种神奇药剂原料》和《魔法植物图鉴》走向图书馆深处。橡木书架高耸如林，阳光透过彩绘玻璃在地板上投下斑斓光斑，空气中飘着旧纸张与干燥花香的混合气息。你在“神奇动物”区域的第三排书架找到目标，指尖拂过烫金书名，翻开时书页发出轻微的“咔嗒”声。火蜥蜴尾的条目下画着细密的笔记：普通火蜥蜴尾仅能催化基础防护剂，而“焰心火蜥蜴尾”——一种带有金色螺旋纹路的珍稀品种，需在满月夜采集其尾尖，才能让防护剂产生灵视效果，甚至抵御低级黑魔法。正当你皱眉思索“焰心”从何而来时，身后传来熟悉的羽毛笔敲击桌面声。莉莉抱着本厚重的《禁书区植物志》站在过道，发梢沾着片银杏叶，她朝你扬了扬下巴，示意你跟她来。两人溜到图书馆最角落的禁书区入口，她从怀里掏出张泛黄的羊皮纸，上面用银粉画着禁林边缘的简易地图，标注着“满月夜焰心火蜥蜴尾栖息地”。月光从高窗漏进来，在地图上镀了层冷辉，你忽然想起教授上周说的“下周魔药课要加入实战防御考核”，心跳漏了一拍——看来，今晚的禁林之行，或许比想象中更重要。",
+  "choices": ["今晚潜入禁林寻找焰心火蜥蜴尾", "先向教授请教焰心火蜥蜴尾的具体位置", "在图书馆继续查找更多关于焰心火蜥蜴尾的笔记"]
+}
+2025-08-20 00:44:19 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 441
+2025-08-20 00:44:19 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 00:44:19 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '下课后，你抱着《千种神奇药剂原料》和《魔...' 匹配到图片: magic_forest.jpg
+2025-08-20 00:44:19 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 00:44:19 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 00:44:19 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 00:45:01 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 6
+2025-08-20 00:45:01 | INFO     | database.crud:prune_story_from_node:99 - 正在从节点 6 开始进行时空回溯... 将返回到父节点 5
+2025-08-20 00:45:01 | INFO     | database.crud:prune_story_from_node:109 - 节点 6 及其所有后代节点 [7] 将被删除。
+2025-08-20 00:45:01 | INFO     | database.crud:prune_story_from_node:118 - 已成功完成回溯，当前故事线的终点为节点 5。
+2025-08-20 00:56:49 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 魔法学院学生
+2025-08-20 00:56:49 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-08-20 00:56:56 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1023
+2025-08-20 00:56:56 | DEBUG    | core.story_engine:start_story:57 - LLM原始回应: {
+  "text": "清晨的晨曦透过星陨学院的彩绘玻璃窗，在石砖地上织出流动的光斑。你猛地坐起身，胸口的旧伤疤传来熟悉的刺痛——那是前世被黑暗魔法灼烧的印记。对面床铺的艾拉正对着魔镜梳理银发，镜中映出你苍白的脸，和记忆里那个在毕业大典上被当众剥夺魔杖的自己重叠。今天是新生分院仪式，礼堂里已经传来了低年级学生压抑的兴奋声。你摸了摸枕头下那本泛黄的《基础魔咒注解》，指尖触到夹层里一张烧焦的羊皮纸——那是前世你被诬陷为黑巫师时，唯一没能销毁的证据。这一次，你必须在分院帽念出学院名称前，想清楚该如何改写命运。",
+  "choices": ["选光明系学院", "找预言课教授求助", "假装普通新生"]
+}
+2025-08-20 00:56:56 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 242
+2025-08-20 00:56:56 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 00:56:56 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '清晨的晨曦透过星陨学院的彩绘玻璃窗，在石...' 匹配到图片: magic_forest.jpg
+2025-08-20 00:56:56 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 00:56:56 | INFO     | core.story_engine:start_story:65 - 成功生成开篇故事，图片为: /static/magic_forest.jpg
+2025-08-20 00:56:56 | INFO     | core.story_engine:start_story:81 - 新故事生成成功
+2025-08-20 00:56:56 | INFO     | api.story:start_new_story:73 - 新故事生成成功
+2025-08-20 00:57:08 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 找预言课教授求助
+2025-08-20 00:57:08 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 找预言课教授求助
+2025-08-20 00:57:15 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1194
+2025-08-20 00:57:15 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你攥紧烧焦的羊皮纸，在晨雾未散时溜进了预言课教授的塔楼办公室。壁炉里的星尘木噼啪作响，水晶球在暮色中流转着幽蓝微光，墙上的十二宫图正缓缓旋转。西弗勒斯·奥瑞利安教授背对着你整理星盘，银发垂落肩头，声音像浸过晨露的黑曜石：“又在找什么？”你颤抖着展开羊皮纸，焦痕在他瞳孔里投下细碎的阴影。教授指尖抚过焦痕，突然轻笑一声：“这是‘命运丝线’的残片，只有真正的预言家能看见它的纹路。分院帽会读取你的灵魂碎片，你若不敢直视过去，它便会将你困在‘遗忘之渊’。”晨钟敲响时，他将一枚刻着星轨的银戒塞进你掌心：“去吧，分院帽问你‘想成为什么’时，把这枚戒指的温度告诉它。”你攥着戒指冲进礼堂，前排新生的窃窃私语声像潮水般涌来。",
+  "choices": ["将戒指温度描述为“对抗黑暗的决心”", "谎称戒指是“保护朋友的承诺”", "沉默，任由分院帽自主选择"]
+}
+2025-08-20 00:57:15 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 306
+2025-08-20 00:57:15 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 00:57:15 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: fantasy_castle.jpg
+2025-08-20 00:57:15 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/fantasy_castle.jpg
+2025-08-20 00:57:15 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 00:57:15 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 00:59:51 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 7
+2025-08-20 00:59:51 | INFO     | database.crud:prune_story_from_node:99 - 正在从节点 7 开始进行时空回溯... 将返回到父节点 6
+2025-08-20 00:59:51 | INFO     | database.crud:prune_story_from_node:109 - 节点 7 及其所有后代节点 [] 将被删除。
+2025-08-20 00:59:51 | INFO     | database.crud:prune_story_from_node:118 - 已成功完成回溯，当前故事线的终点为节点 6。
+2025-08-20 21:37:31 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 21:37:31 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 21:37:31 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 21:37:31 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 21:37:31 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 21:37:31 | INFO     | database.base:init_db:27 - 正在初始化数据库...
+2025-08-20 21:37:31 | INFO     | database.base:init_db:29 - 数据库初始化成功，所有表已创建。
+2025-08-20 21:37:31 | INFO     | main:startup_event:83 - 重生之我是……API服务启动
+2025-08-20 21:37:31 | INFO     | main:startup_event:84 - 调试模式: True
+2025-08-20 21:37:31 | INFO     | main:startup_event:89 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 21:37:31 | INFO     | main:startup_event:90 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 21:42:28 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 6
+2025-08-20 21:42:28 | INFO     | database.crud:prune_story_after_node:95 - 正在从节点 6 之后进行时空回溯...
+2025-08-20 21:42:28 | INFO     | database.crud:prune_story_after_node:113 - 节点 6 没有后代，无需删除。
+2025-08-20 21:42:28 | INFO     | database.crud:prune_story_after_node:120 - 已成功完成回溯，当前故事线的终点为节点 6。
+2025-08-20 21:42:33 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 找预言课教授求助
+2025-08-20 21:42:33 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 找预言课教授求助
+2025-08-20 21:42:47 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1292
+2025-08-20 21:42:47 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你攥紧《基础魔咒注解》，快步穿过晨雾弥漫的禁林边缘。预言课教室在天文塔顶，特里劳妮教授的长袍总像被风吹得发冷，此刻她正背对着你站在星象仪旁，银灰色的发丝垂在颤抖的指尖。\n\n“教授？”你轻声唤道。她猛地转身，浑浊的眼睛在镜片后睁大，枯瘦的手指抓住你的手腕：“哦——是你，带着‘破碎水晶’气息的孩子……”她突然压低声音，“别让分院帽碰你的额头，它会看见你前世的灰烬。午夜前，去图书馆禁书区第三排书架，那里有本《星象异动录》，翻到第17页——那是你唯一的生路。”\n\n她颤抖着从袖中摸出个小玻璃瓶，里面盛着细碎的紫色水晶：“这是预言的碎片，能帮你挡住阴影。但记住，有人已经在找你了。”话音未落，她突然瘫坐在椅子上，喃喃念着“好冷……又要开始了”，仿佛刚才的清醒只是幻觉。你握紧瓶子，冰凉的触感让你想起前世被囚禁时，唯一能取暖的只有那本烧焦的羊皮纸。",
+  "choices": ["立刻去图书馆禁书区找《星象异动录》", "先回宿舍藏好水晶碎片再去礼堂", "在分院仪式前找艾拉问清楚分院帽的秘密"]
+}
+2025-08-20 21:42:47 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 370
+2025-08-20 21:42:47 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 21:42:47 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: cyberpunk_city.jpg
+2025-08-20 21:42:47 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/cyberpunk_city.jpg
+2025-08-20 21:42:47 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 21:42:47 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 21:42:52 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 先回宿舍藏好水晶碎片再去礼堂
+2025-08-20 21:42:52 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 先回宿舍藏好水晶碎片再去礼堂
+2025-08-20 21:43:00 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1548
+2025-08-20 21:43:00 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你攥紧紫色水晶瓶，快步穿过走廊。晨雾还没散尽，走廊里飘着消毒水和旧书的味道，艾拉正对着魔镜梳理银发，镜中映出你苍白的脸。“你脸色好差。”她突然回头，银眸里闪过一丝疑惑，“刚才去了哪里？”你心脏一紧，将瓶子塞进袖袋：“去……去领新生手册了。”艾拉没再追问，只是指尖无意识摩挲着镜中自己的魔杖——那是她父亲留下的遗物，据说藏着古老的守护咒。回到宿舍，你反锁房门，从床板下摸出暗格。去年你偷偷挖的这个小空间，此刻正躺着偷来的魔法生物图鉴和半块没吃完的蜂蜜公爵巧克力。将水晶瓶塞进图鉴夹层，你用魔咒在暗格周围设了层只有自己能感知的“风之屏障”，这才松了口气。刚走出宿舍，却见走廊尽头站着个黑袍人，兜帽压得很低，露出的手指上戴着枚刻着蛇形纹章的戒指——是塞德里克·格林！前世他就是用这枚戒指，伪造了你施展黑魔法的证据。他似乎察觉到你的目光，嘴角勾起冷笑。你握紧口袋里的《基础魔咒注解》，转身冲向礼堂，却在拐角处被他拦住：“新来的？帮我拿下这个。”他递来一个沉甸甸的黑色皮箱，箱子缝隙里隐约有红光闪烁。",
+  "choices": ["接过皮箱，趁机溜进礼堂", "用风刃咒劈开箱子，暴露实力", "假装害怕，向巡逻的费尔奇投诉"]
+}
+2025-08-20 21:43:00 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 445
+2025-08-20 21:43:00 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 21:43:00 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '你攥紧紫色水晶瓶，快步穿过走廊。晨雾还没...' 匹配到图片: magic_forest.jpg
+2025-08-20 21:43:00 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 21:43:00 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 21:43:00 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 21:43:09 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 7
+2025-08-20 21:43:09 | INFO     | database.crud:prune_story_after_node:95 - 正在从节点 7 之后进行时空回溯...
+2025-08-20 21:43:09 | INFO     | database.crud:prune_story_after_node:106 - 节点 7 的所有后代节点 [8] 将被删除。
+2025-08-20 21:43:09 | INFO     | database.crud:prune_story_after_node:120 - 已成功完成回溯，当前故事线的终点为节点 7。
+2025-08-20 21:43:19 | INFO     | api.story:continue_existing_story:89 - 收到故事继续请求，选择: 先回宿舍藏好水晶碎片再去礼堂
+2025-08-20 21:43:19 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 先回宿舍藏好水晶碎片再去礼堂
+2025-08-20 21:43:32 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1778
+2025-08-20 21:43:32 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "你握紧玻璃瓶，指尖因用力而泛白，快步穿过走廊。晨雾还未散尽，走廊壁灯的光晕在地面拖出长长的影子，像蛰伏的蛇。艾拉正坐在梳妆台前擦拭魔杖，银发在晨光里泛着冷光：“你去哪了？脸色这么差。”她的目光扫过你紧握的手，你慌忙将瓶子塞进衣袋，含糊道：“去了趟禁林边缘，找草药。”她没再追问，只是低头用丝布擦拭着杖尖的宝石，宝石突然闪过一丝幽蓝——那是你前世被黑魔法反噬时，魔杖断裂的颜色。\n\n回到宿舍，你反锁房门，从床板下抽出暗格。那是你用变形咒加固过的，前世藏秘密的地方。将水晶碎片放入暗格，你用《魔咒注解》盖住，又施了个“无声无息”咒。转身时，窗外突然闪过一道黑影，你猛地捂住嘴——是塞德里克，学生会副主席，前世曾第一个站出来指证你使用黑魔法的人。\n\n礼堂的钟声响起时，你混在新生中走进大厅。分院帽被院长麦格教授高高举起，你攥紧口袋里的暗格钥匙，心脏在胸腔里擂鼓。突然，塞德里克从你身边走过，低声说：“我知道你有秘密，跟我来洗手间，我帮你。”他的眼神锐利如鹰，身后跟着两个手持魔杖的高年级学生，正是前世诬陷你的那两个人。",
+  "choices": ["跟着塞德里克去洗手间，或许他是真心想帮你", "拒绝塞德里克，独自面对那两个人，用水晶碎片反击", "假装没听见，加快脚步去分院帽下，赌分院帽不会发现你的秘密"]
+}
+2025-08-20 21:43:32 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 456
+2025-08-20 21:43:32 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 21:43:32 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '你握紧玻璃瓶，指尖因用力而泛白，快步穿过...' 匹配到图片: magic_forest.jpg
+2025-08-20 21:43:32 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 21:43:32 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-20 21:43:32 | INFO     | api.story:continue_existing_story:135 - 故事继续生成成功
+2025-08-20 21:43:37 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 7
+2025-08-20 21:43:37 | INFO     | database.crud:prune_story_after_node:95 - 正在从节点 7 之后进行时空回溯...
+2025-08-20 21:43:37 | INFO     | database.crud:prune_story_after_node:106 - 节点 7 的所有后代节点 [8] 将被删除。
+2025-08-20 21:43:37 | INFO     | database.crud:prune_story_after_node:120 - 已成功完成回溯，当前故事线的终点为节点 7。
+2025-08-20 21:46:16 | INFO     | api.story:retry_from_node:152 - 收到时空回溯请求，目标节点: 7
+2025-08-20 21:46:16 | INFO     | database.crud:prune_story_after_node:95 - 正在从节点 7 之后进行时空回溯...
+2025-08-20 21:46:16 | INFO     | database.crud:prune_story_after_node:113 - 节点 7 没有后代，无需删除。
+2025-08-20 21:46:16 | INFO     | database.crud:prune_story_after_node:120 - 已成功完成回溯，当前故事线的终点为节点 7。
+2025-08-20 23:01:55 | INFO     | main:shutdown_event:96 - 重生之我是……API服务关闭
+2025-08-20 23:01:57 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:01:57 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:01:57 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:01:57 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:03:05 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:03:05 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:03:05 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:03:05 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:03:18 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:03:18 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:03:18 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:03:18 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:03:33 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:03:33 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:03:33 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:03:33 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:03:51 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:03:51 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:03:51 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:03:51 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:04:08 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:04:08 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:04:08 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:04:08 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:04:23 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:04:23 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:04:23 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:04:23 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:05:24 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:05:24 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:05:24 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:05:24 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:06:00 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:06:00 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:06:00 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:06:00 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:06:28 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:06:28 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:06:28 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:06:28 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:07:16 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:07:16 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:07:16 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:07:16 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:08:53 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:08:53 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:08:53 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:08:53 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:08:53 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 23:08:53 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-08-20 23:08:53 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-08-20 23:08:53 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-08-20 23:08:53 | INFO     | main:startup_event:85 - 调试模式: True
+2025-08-20 23:08:53 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:08:53 | INFO     | main:startup_event:91 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:26:01 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-08-20 23:26:03 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:26:03 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:26:03 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:26:03 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:26:03 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 23:26:03 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-08-20 23:26:03 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-08-20 23:26:03 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-08-20 23:26:03 | INFO     | main:startup_event:85 - 调试模式: True
+2025-08-20 23:26:03 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:26:03 | INFO     | main:startup_event:91 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:44:05 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-08-20 23:44:06 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:44:06 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:44:06 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:44:06 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:44:06 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 23:44:06 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-08-20 23:44:06 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-08-20 23:44:06 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-08-20 23:44:06 | INFO     | main:startup_event:85 - 调试模式: True
+2025-08-20 23:44:06 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:44:06 | INFO     | main:startup_event:91 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:44:36 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-08-20 23:44:38 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:44:38 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:44:38 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:44:38 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:44:38 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 23:44:38 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-08-20 23:44:38 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-08-20 23:44:38 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-08-20 23:44:38 | INFO     | main:startup_event:85 - 调试模式: True
+2025-08-20 23:44:38 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:44:38 | INFO     | main:startup_event:91 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:45:09 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:45:09 | INFO     | core.llm_clients:__init__:37 - API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:45:09 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-08-20 23:45:09 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-08-20 23:45:10 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-08-20 23:45:10 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-08-20 23:45:10 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-08-20 23:45:10 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-08-20 23:45:10 | INFO     | main:startup_event:85 - 调试模式: True
+2025-08-20 23:45:10 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1-6-flash-250715
+2025-08-20 23:45:10 | INFO     | main:startup_event:91 - 模型API地址: https://ark.cn-beijing.volces.com/api/v3
+2025-08-20 23:53:03 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 我想成为一个魔法师！
+2025-08-20 23:53:03 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '我想成为一个魔法师！'
+2025-08-20 23:53:12 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1025
+2025-08-20 23:53:12 | DEBUG    | core.story_engine:start_story:57 - LLM原始回应: {
+  "text": "石墙上爬满暗纹，像凝固的闪电。你躺在铺着苔藓的木床上，头痛欲裂，指尖却触到冰凉的金属——是根缠着银线的魔杖，杖头嵌着颗黯淡的蓝宝石。桌角水晶球悬着半透明星图，羊皮纸卷里的金色符文在烛光里眨眼睛。突然，门轴发出“吱呀”的摩擦声，沉重的脚步声正从走廊尽头传来，越来越近。你必须在三秒内选一个动作，否则……",
+  "choices": ["拿起魔杖指向门口", "翻开咒语书念出声", "猛地推开那扇门冲出去"]
+}
+2025-08-20 23:53:12 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 150
+2025-08-20 23:53:12 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-20 23:53:12 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: magic_forest.jpg
+2025-08-20 23:53:12 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-20 23:53:12 | INFO     | core.story_engine:start_story:65 - 成功生成开篇故事，图片为: /static/magic_forest.jpg
+2025-08-20 23:53:12 | INFO     | core.story_engine:start_story:81 - 新故事生成成功
+2025-08-20 23:53:12 | INFO     | api.story:start_new_story:75 - 新故事生成成功
+2025-08-21 00:18:14 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 成为一个亿万富翁
+2025-08-21 00:18:14 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '成为一个亿万富翁'
+2025-08-21 00:18:30 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1599
+2025-08-21 00:18:30 | DEBUG    | core.story_engine:start_story:57 - LLM原始回应: {
+  "text": "潮湿的霉味混着泡面汤的酸气，阿哲盯着手机屏幕上“余额0.75元”的短信，窗外的雨丝斜斜打在玻璃上，像极了他此刻的人生——30岁，被裁员，欠着网贷，连下个月房租都没着落。新闻推送跳出来：“比特币单日暴涨20%，突破100美元”，他嗤笑一声，正要划掉，眼前猛地炸开一片白光。再次睁眼时，老旧的吊扇在头顶吱呀转着，墙上“2013届毕业快乐”的海报还崭新，手机屏幕亮着：2013年6月20日，下午2:58。口袋里的300块生活费沉甸甸的，桌上的日程本写着：“下午3点，互联网创业大赛校招面试”。阿哲猛地坐起，心脏狂跳——他记得这个下午，记得面试官最后问的问题，更记得今晚10点，那个即将上线的比特币交易平台会让“中本聪”的密码数字变成他这辈子都不敢想的数字。300块，是去参加那个可能决定他平庸一生的面试，还是……抓住那个只存在于记忆碎片里的机会？",
+  "choices": ["去面试拿稳定工作", "凑钱买比特币", "找室友借钱囤币"]
+}
+2025-08-21 00:18:30 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 370
+2025-08-21 00:18:30 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-21 00:18:30 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: space_station.jpg
+2025-08-21 00:18:30 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/space_station.jpg
+2025-08-21 00:18:30 | INFO     | core.story_engine:start_story:65 - 成功生成开篇故事，图片为: /static/space_station.jpg
+2025-08-21 00:18:30 | INFO     | core.story_engine:start_story:81 - 新故事生成成功
+2025-08-21 00:18:30 | INFO     | api.story:start_new_story:75 - 新故事生成成功
+2025-08-21 00:22:13 | INFO     | api.story:start_new_story:31 - 收到新故事请求，愿望: 我想成为一个亿万富翁
+2025-08-21 00:22:13 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '我想成为一个亿万富翁'
+2025-08-21 00:22:20 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 949
+2025-08-21 00:22:20 | DEBUG    | core.story_engine:start_story:57 - LLM原始回应: {
+  "text": "霉味的旧书堆旁，手机屏幕亮着凌晨三点的光。林默头痛欲裂中睁眼，映入眼帘的是泛黄的《五年高考三年模拟》，封面上还贴着2013年的校徽。他猛地坐起，发现自己躺在十年前的出租屋单人床上，墙上日历赫然显示——2013年6月25日。昨天刚查完成绩，他以全市理科状元的分数，正对着志愿填报指南发呆。前世的他，因迷信“稳定至上”选了计算机，毕业后进大厂996，35岁被裁员，最后在出租屋酗酒猝死。而现在，他指尖抚过指南上“金融”“计算机”“人工智能”的字眼，脑海里闪过未来十年所有风口：比特币、短视频、新能源……手机突然震动，是班主任发来的消息：“小默，志愿填得怎么样？我推荐你去读金融，以后好就业。”他盯着屏幕，心脏狂跳——这是命运给的第一个机会，选对了，亿万富翁的路就从这里开始。",
+  "choices": ["选金融专业赌未来", "找首富同桌搭人脉", "买第一支妖股"]
+}
+2025-08-21 00:22:20 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 335
+2025-08-21 00:22:20 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-21 00:22:20 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: magic_forest.jpg
+2025-08-21 00:22:20 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-21 00:22:20 | INFO     | core.story_engine:start_story:65 - 成功生成开篇故事，图片为: /static/magic_forest.jpg
+2025-08-21 00:22:20 | INFO     | core.story_engine:start_story:81 - 新故事生成成功
+2025-08-21 00:22:20 | INFO     | api.story:start_new_story:75 - 新故事生成成功
+2025-08-21 00:22:26 | INFO     | api.story:continue_existing_story:91 - 收到故事继续请求，选择: 找首富同桌搭人脉
+2025-08-21 00:22:26 | INFO     | core.story_engine:continue_story:86 - 继续故事，用户选择: 找首富同桌搭人脉
+2025-08-21 00:22:37 | INFO     | core.llm_clients:generate:61 - 模型生成成功 - 模型: doubao-seed-1-6-flash-250715, tokens使用: 1722
+2025-08-21 00:22:37 | DEBUG    | core.story_engine:continue_story:93 - LLM原始回应: {
+  "text": "六月的风带着栀子花的甜香溜进教室，林默攥着志愿指南的手指泛白，桌角的《五年高考三年模拟》被阳光晒得卷了边。他侧过头，看见同桌江译正望着窗外，白衬衫领口微敞，露出一截清瘦的脖颈。前世他只知道江译家境优渥，后来成了地产界的隐形巨头，此刻却像个普通少年。林默深吸一口气，用笔戳了戳江译的胳膊：“喂，你志愿填的是本地财经？”江译转过头，眼神清亮：“嗯，怎么了？”“我看你对金融感兴趣，”林默压低声音，“要不要考虑去北方读？听说那边有个政策，大学生创业能拿百万补贴，还能优先拿地。”江译挑眉，放下手中的篮球杂志：“哦？你怎么知道？我爸最近正琢磨着让我接手建材生意。”林默心脏狂跳——这是他的机会！他故意含糊道：“我……我暑假跟一个做投资的叔叔聊过，他说未来五年北方会有大动作，尤其是新能源和物流……”江译的眼睛骤然亮了，他凑近林默，声音压得更低：“你叔叔做什么投资的？我爸最近正愁没方向。”林默知道不能暴露重生，忙打哈哈：“就是个普通商人，不过他说你爸的建材生意要是能搭上互联网，说不定能翻十倍。”江译沉默片刻，忽然笑了：“行啊，那你帮我分析分析？不过先说好，你数学太差，我得让你补到120分，不然这忙我可不帮。”林默心里乐开了花，连忙点头：“没问题！”",
+  "choices": ["立刻翻开数学练习册，从基础题开始给江译讲解，趁机打探他爸爸的生意细节", "答应补数学，但提出先帮江译分析一个他看好的小项目（比如他关注的短视频APP），再谈补习条件", "先答应补习，然后主动说想参与江译家的建材生意转型，提出用未来趋势说服他父亲"]
+}
+2025-08-21 00:22:37 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 522
+2025-08-21 00:22:37 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-08-21 00:22:37 | INFO     | core.image_service:find_image_in_library:72 - 未匹配到关键字，随机选择了图片: magic_forest.jpg
+2025-08-21 00:22:37 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-08-21 00:22:37 | INFO     | core.story_engine:continue_story:117 - 故事继续生成成功
+2025-08-21 00:22:37 | INFO     | api.story:continue_existing_story:137 - 故事继续生成成功
+2025-08-21 00:22:44 | INFO     | api.story:retry_from_node:154 - 收到时空回溯请求，目标节点: 11
+2025-08-21 00:22:44 | INFO     | database.crud:prune_story_after_node:97 - 正在从节点 11 之后进行时空回溯...
+2025-08-21 00:22:44 | INFO     | database.crud:prune_story_after_node:115 - 节点 11 没有后代，无需删除。
+2025-08-21 00:22:44 | INFO     | database.crud:prune_story_after_node:122 - 已成功完成回溯，当前故事线的终点为节点 11。
+2025-08-21 00:22:51 | INFO     | api.story:retry_from_node:154 - 收到时空回溯请求，目标节点: 10
+2025-08-21 00:22:51 | INFO     | database.crud:prune_story_after_node:97 - 正在从节点 10 之后进行时空回溯...
+2025-08-21 00:22:51 | INFO     | database.crud:prune_story_after_node:108 - 节点 10 的所有后代节点 [11] 将被删除。
+2025-08-21 00:22:51 | INFO     | database.crud:prune_story_after_node:122 - 已成功完成回溯，当前故事线的终点为节点 10。
+2025-09-14 22:40:54 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 22:40:54 | INFO     | core.llm_clients:__init__:37 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:40:54 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 22:40:54 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 22:40:54 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 22:40:54 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 22:40:56 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 22:40:56 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 22:40:56 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 22:40:56 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 22:40:56 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:46:04 | INFO     | api.story:start_new_story:38 - 用户 1234567890 收到新故事请求，愿望: 魔法学院学生
+2025-09-14 22:46:04 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-09-14 22:46:04 | ERROR    | main:global_exception_handler:72 - 全局异常: 'NoneType' object is not subscriptable
+2025-09-14 22:47:21 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 22:49:10 | INFO     | core.llm_clients:__init__:36 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 22:49:10 | INFO     | core.llm_clients:__init__:37 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:49:10 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 22:49:10 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 22:49:10 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 22:49:10 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 22:49:11 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 22:49:11 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 22:49:11 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 22:49:11 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 22:49:11 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:49:45 | INFO     | api.story:start_new_story:38 - 用户 1234567890 收到新故事请求，愿望: 魔法学院学生
+2025-09-14 22:49:45 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-09-14 22:49:45 | ERROR    | main:global_exception_handler:72 - 全局异常: 'NoneType' object is not subscriptable
+2025-09-14 22:52:16 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 22:52:18 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 22:52:18 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:52:18 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 22:52:18 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 22:52:18 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 22:52:18 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 22:52:19 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 22:52:19 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 22:52:19 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 22:52:19 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 22:52:19 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:58:36 | INFO     | api.story:start_new_story:38 - 用户 1234567890 收到新故事请求，愿望: 魔法学院学生
+2025-09-14 22:58:36 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-09-14 22:58:36 | ERROR    | main:global_exception_handler:72 - 全局异常: 'NoneType' object is not subscriptable
+2025-09-14 22:59:38 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 22:59:39 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 22:59:39 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 22:59:39 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 22:59:39 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 22:59:40 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 22:59:40 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 22:59:41 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 22:59:41 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 22:59:41 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 22:59:41 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 22:59:41 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:00:06 | INFO     | api.story:start_new_story:38 - 用户 1234567890 收到新故事请求，愿望: 魔法学院学生
+2025-09-14 23:00:06 | INFO     | core.story_engine:start_story:50 - 收到新的故事开始请求，愿望是: '魔法学院学生'
+2025-09-14 23:00:13 | INFO     | core.llm_clients:generate:60 - API response: {"id":"021757862006928944cb308057f308d5a502015d647ecfa5abd39","choices":[{"finish_reason":"stop","index":0,"logprobs":null,"message":{"content":"{\n  \"text\": \"古老的橡木书架高耸到穹顶，空气中浮动着金粉般的魔法微光，壁炉里的火焰舔舐着原木，发出噼啪的轻响。林薇猛地睁开眼，指尖还残留着前世从扫帚上摔落时擦破皮肤的刺痛感。她低头看向自己的校服裙摆——那是星辰学院新生的靛蓝长袍，袖口绣着银线的星星。三天后，就是分院仪式后最重要的第一次飞行课。前世她因为紧张，念错了“悬浮咒”的口诀，扫帚像断了线的风筝栽进禁林，差点被巡逻的独角兽顶伤。此刻窗外传来晨雾中钟楼的鸣响，她攥紧了口袋里那张被汗水浸湿的飞行课表，心脏在胸腔里擂鼓般跳动。\",\n  \"choices\": [\"去飞行训练场练习\", \"找教授请教悬浮咒\", \"先去禁林找独角兽道歉\"]\n}","refusal":null,"role":"assistant","audio":null,"function_call":null,"tool_calls":null,"reasoning_content":"\n用户希望我写一个关于“魔法学院学生”的重生冒险故事，需要包含场景描述、主角状态、即将面临的处境，文字生动有画面感，200-300字，结尾有2-3个行动选项，每个选项不超过15字，还要有紧张感和期待感。\n\n首先，开头场景设定在魔法学院，主角重生，可能刚经历了失败或危险。比如，主角在图书馆，周围有魔法书，突然意识到自己重生了，即将面临一个关键事件，比如分院仪式后的第一次魔法课，或者某个重要的考试。\n\n主角状态：可以设定为一个刚入学不久的学生，可能之前因为紧张或能力不足失败了，现在重生回来，带着前世的记忆，既紧张又有希望。\n\n即将面临的处境：比如，下节课是飞行课，前世她从扫帚上摔下来，差点被开除，这次她想利用重生的机会成功，或者有一个隐藏的魔法任务需要完成。\n\n场景描述：要生动，比如“古老的橡木书架高耸到穹顶，空气中浮动着金粉般的魔法微光，壁炉里的火焰舔舐着原木，发出噼啪的轻响。”这样有画面感。\n\n主角状态：“林薇猛地睁开眼，指尖还残留着前世从扫帚上摔落时擦破皮肤的刺痛感。她低头看向自己的校服裙摆——那是星辰学院新生的靛蓝长袍，袖口绣着银线的星星。”\n\n即将面临的处境：“三天后，就是分院仪式后最重要的第一次飞行课。前世她因为紧张，念错了‘悬浮咒’的口诀，扫帚像断了线的风筝栽进禁林，差点被巡逻的独角兽顶伤。”\n\n结尾需要行动选项，要简洁，15字以内，有紧张感。比如：\n\nA. 去飞行训练场练习\nB. 找教授请教悬浮咒\nC. 先去禁林找独角兽道歉\n\n这样既符合要求，又有紧张感，让用户选择接下来做什么。\n\n现在整合起来，注意字数控制在200-300字，文字生动。"}}],"created":1757862013,"model":"doubao-seed-1-6-flash-250715","object":"chat.completion","service_tier":"default","system_fingerprint":null,"usage":{"completion_tokens":668,"prompt_tokens":251,"total_tokens":919,"completion_tokens_details":{"accepted_prediction_tokens":null,"audio_tokens":null,"reasoning_tokens":463,"rejected_prediction_tokens":null},"prompt_tokens_details":{"audio_tokens":null,"cached_tokens":0}}}
+2025-09-14 23:00:13 | INFO     | core.llm_clients:generate:69 - 模型生成成功 - 模型: doubao-seed-1.6-flash, tokens使用: 919
+2025-09-14 23:00:13 | DEBUG    | core.story_engine:start_story:57 - LLM原始回应: {
+  "text": "古老的橡木书架高耸到穹顶，空气中浮动着金粉般的魔法微光，壁炉里的火焰舔舐着原木，发出噼啪的轻响。林薇猛地睁开眼，指尖还残留着前世从扫帚上摔落时擦破皮肤的刺痛感。她低头看向自己的校服裙摆——那是星辰学院新生的靛蓝长袍，袖口绣着银线的星星。三天后，就是分院仪式后最重要的第一次飞行课。前世她因为紧张，念错了“悬浮咒”的口诀，扫帚像断了线的风筝栽进禁林，差点被巡逻的独角兽顶伤。此刻窗外传来晨雾中钟楼的鸣响，她攥紧了口袋里那张被汗水浸湿的飞行课表，心脏在胸腔里擂鼓般跳动。",
+  "choices": ["去飞行训练场练习", "找教授请教悬浮咒", "先去禁林找独角兽道歉"]
+}
+2025-09-14 23:00:13 | DEBUG    | core.image_service:get_image_for_story:89 - 开始为故事获取图片，故事文本长度: 233
+2025-09-14 23:00:13 | INFO     | core.image_service:find_image_in_library:45 - 正在从预置图库中查找图片...
+2025-09-14 23:00:13 | INFO     | core.image_service:find_image_in_library:68 - 根据关键字 '古老的橡木书架高耸到穹顶，空气中浮动着金...' 匹配到图片: magic_forest.jpg
+2025-09-14 23:00:13 | DEBUG    | core.image_service:get_image_for_story:93 - 图库查找结果: /static/magic_forest.jpg
+2025-09-14 23:00:13 | INFO     | core.story_engine:start_story:65 - 成功生成开篇故事，图片为: /static/magic_forest.jpg
+2025-09-14 23:00:13 | INFO     | core.story_engine:start_story:81 - 新故事生成成功
+2025-09-14 23:00:13 | ERROR    | main:global_exception_handler:72 - 全局异常: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type uuid: "1234567890"
+LINE 1: INSERT INTO game_sessions (user_id, wish) VALUES ('123456789...
+                                                          ^
+
+[SQL: INSERT INTO game_sessions (user_id, wish) VALUES (%(user_id)s::UUID, %(wish)s) RETURNING game_sessions.id, game_sessions.created_at]
+[parameters: {'user_id': '1234567890', 'wish': '魔法学院学生'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-09-14 23:13:37 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 23:13:39 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 23:13:39 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:13:39 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 23:13:39 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 23:13:40 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 23:13:40 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 23:13:41 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 23:13:41 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 23:13:41 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 23:13:41 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 23:13:41 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:17:29 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 23:23:16 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 23:23:16 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:23:16 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 23:23:16 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 23:23:16 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 23:23:16 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 23:23:17 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 23:23:17 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 23:23:17 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 23:23:17 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 23:23:17 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:32:26 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 23:32:28 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 23:32:28 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:32:28 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 23:32:28 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 23:32:28 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 23:32:28 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 23:32:30 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 23:32:30 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 23:32:30 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 23:32:30 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 23:32:30 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:35:56 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 23:35:58 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 23:35:58 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:35:58 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 23:35:58 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 23:35:58 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 23:35:58 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 23:35:59 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 23:35:59 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 23:35:59 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 23:35:59 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 23:35:59 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:39:40 | INFO     | main:shutdown_event:97 - 重生之我是……API服务关闭
+2025-09-14 23:41:48 | INFO     | core.llm_clients:__init__:38 - LLM客户端初始化成功 - 模型: doubao-seed-1.6-flash
+2025-09-14 23:41:48 | INFO     | core.llm_clients:__init__:39 - API地址: https://ai-hub.xiaopeng.com/api/v1
+2025-09-14 23:41:48 | INFO     | core.image_service:_load_image_library:37 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-14 23:41:48 | INFO     | core.story_engine:__init__:20 - 故事引擎初始化完成
+2025-09-14 23:41:48 | INFO     | main:<module>:49 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-14 23:41:48 | INFO     | database.base:init_db:35 - 正在初始化数据库...
+2025-09-14 23:41:49 | INFO     | database.base:init_db:37 - 数据库初始化成功，所有表已创建。
+2025-09-14 23:41:49 | INFO     | main:startup_event:84 - 重生之我是……API服务启动
+2025-09-14 23:41:49 | INFO     | main:startup_event:85 - 调试模式: True
+2025-09-14 23:41:49 | INFO     | main:startup_event:90 - 当前使用模型: doubao-seed-1.6-flash
+2025-09-14 23:41:49 | INFO     | main:startup_event:91 - 模型API地址: https://ai-hub.xiaopeng.com/api/v1

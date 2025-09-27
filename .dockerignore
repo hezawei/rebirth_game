@@ -1,11 +1,11 @@
 # Git
 .git
-.gitignore
+.gitignore*
 
 # Docker
 .dockerignore
-Dockerfile
-docker-compose.yml
+Dockerfile*
+docker-compose*.yml
 
 # Python
 __pycache__/
@@ -15,11 +15,56 @@ __pycache__/
 .Python
 env/
 venv/
+.env*
 
 # IDE / Editor
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # Local data
 *.db
 *.log
+*.bak
+
+# Documentation
+*.md
+docs/
+
+# Deployment scripts
+deploy*.sh
+setup*.sh
+check*.sh
+
+# Frontend development (for backend-only builds)
+frontend-web/node_modules/
+frontend-web/.svelte-kit/
+frontend-web/build/
+
+# Temporary files
+tmp/
+temp/
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs and data
+logs/
+assets/generated_images/*
+!assets/generated_images/.gitkeep
+
+# Legacy deployment files
+deployment/legacy/
+
+deployment/legacy/
+
+deployment/legacy/

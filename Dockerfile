@@ -1,34 +1,50 @@
-# 使用官方的 Python 3.11 slim 镜像
+# 优化的生产环境 Dockerfile
 FROM python:3.11-slim
 
-# 设置环境变量，防止 Python 写入 .pyc 文件
-ENV PYTHONDONTWRITEBYTECODE 1
-# 确保 Python 输出是无缓冲的，便于日志查看
-ENV PYTHONUNBUFFERED 1
+# 设置环境变量
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# 安装系统依赖
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libpq-dev \
+    gcc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录
 WORKDIR /app
 
-# 安装系统依赖 (如果你的项目确实使用PostgreSQL，则保留此行)
-# 如果不使用，可以注释掉以减小镜像体积
-RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+# 复制并安装Python依赖（利用Docker缓存层）
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 更新 pip
-RUN pip install --no-cache-dir --upgrade pip
+# 复制项目代码
+COPY backend/ ./backend/
+COPY config/ ./config/
+COPY alembic/ ./alembic/
+COPY alembic.ini ./
 
-# 复制依赖文件并安装
-# 使用阿里云镜像加速
-COPY ./requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+# 创建必要的目录
+RUN mkdir -p assets/generated_images assets/images logs && \
+    chmod -R 755 assets logs
 
-# 复制你的所有项目代码到容器中
-COPY . /app/
+# 创建非root用户（安全最佳实践）
+RUN useradd --create-home --shell /bin/bash appuser && \
+    chown -R appuser:appuser /app
+USER appuser
 
-# 暴露容器的端口 (Gunicorn 将在这个端口上运行)
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# 暴露端口
 EXPOSE 8000
 
-# 最终运行命令：使用 Gunicorn 启动 Uvicorn workers
-# -w 3: 启动 3 个工作进程 (可以根据你的服务器CPU核心数调整)
-# -k uvicorn.workers.UvicornWorker: 指定使用 uvicorn 作为工作进程类
-# backend.main:app: 你的应用入口
-CMD ["gunicorn", "-w", "3", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "backend.main:app"]
+# 启动命令
+CMD ["python", "-m", "backend.run_server"]

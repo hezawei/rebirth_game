@@ -2,18 +2,11 @@
 
 const BACKEND_URL = '/api';
 
-// Function to get the token from localStorage
-function getToken(): string | null {
-    if (typeof window !== 'undefined') {
-        return localStorage.getItem('access_token');
-    }
-    return null;
-}
+// Single auth scheme: HttpOnly cookie set by backend. No in-memory token.
 
 // Main API request function
 async function request(endpoint: string, options: RequestInit = {}) {
     const url = `${BACKEND_URL}${endpoint}`;
-    const token = getToken();
 
     // Default headers with explicit type
     const headers: Record<string, string> = {
@@ -21,10 +14,7 @@ async function request(endpoint: string, options: RequestInit = {}) {
         ...options.headers as Record<string, string>,
     };
 
-    // Add Authorization header if token exists
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    }
+    // Cookies will be automatically sent for same-origin requests
 
     const config: RequestInit = {
         ...options,
@@ -32,19 +22,30 @@ async function request(endpoint: string, options: RequestInit = {}) {
     };
 
     try {
+        console.log('[api] request start', { url, method: (options.method || 'GET') });
         const response = await fetch(url, config);
+        if (response.status === 401) {
+            // Token invalid or logged in elsewhere: clear local token locally and error out
+            const errorData = await response.json().catch(() => ({ detail: '登录状态已失效，请重新登录' }));
+            console.warn('[api] 401 unauthorized', { url, errorData });
+            throw new Error(errorData.detail || '登录状态已失效，请重新登录');
+        }
         if (!response.ok) {
             // Try to parse error message from backend
             const errorData = await response.json().catch(() => ({ detail: response.statusText }));
+            console.warn('[api] non-OK response', { url, status: response.status, errorData });
             throw new Error(errorData.detail || 'An unknown error occurred');
         }
         // If response is OK but has no content
         if (response.status === 204) {
+            console.log('[api] 204 no content', { url });
             return null;
         }
-        return await response.json();
+        const data = await response.json();
+        console.log('[api] response ok', { url, status: response.status, data });
+        return data;
     } catch (error) {
-        console.error('API Service Error:', error);
+        console.error('[api] error', { url, error });
         throw error;
     }
 }
@@ -80,6 +81,11 @@ export const api = {
         return request('/users/me');
     },
 
+    // POST /auth/logout
+    logout: () => {
+        return request('/auth/logout', { method: 'POST' });
+    },
+
     // PUT /users/me
     updateProfile: (profileData: { nickname?: string; age?: number; identity?: string }) => {
         return request('/users/me', {
@@ -98,11 +104,63 @@ export const api = {
         });
     },
 
+    // POST /story/check_wish
+    checkWish: (wish: string) => {
+        return request('/story/check_wish', {
+            method: 'POST',
+            body: JSON.stringify({ wish }),
+        });
+    },
+
+    // POST /story/prepare_start
+    prepareStart: (wish: string) => {
+        return request('/story/prepare_start', {
+            method: 'POST',
+            body: JSON.stringify({ wish }),
+        });
+    },
+
     // POST /story/continue
     continueStory: (sessionId: number, nodeId: number, choice: string) => {
         return request('/story/continue', {
             method: 'POST',
             body: JSON.stringify({ session_id: sessionId, node_id: nodeId, choice }),
+        });
+    },
+
+    // --- Story Saves ---
+
+    // POST /story/saves
+    createSave: (sessionId: number, nodeId: number, title: string) => {
+        return request('/story/saves', {
+            method: 'POST',
+            body: JSON.stringify({ session_id: sessionId, node_id: nodeId, title }),
+        });
+    },
+
+    // GET /story/saves
+    listSaves: (status?: string) => {
+        const query = status ? `?status_filter=${encodeURIComponent(status)}` : '';
+        return request(`/story/saves${query}`);
+    },
+
+    // GET /story/saves/{id}
+    getSaveDetail: (saveId: number) => {
+        return request(`/story/saves/${saveId}`);
+    },
+
+    // PATCH /story/saves/{id}
+    updateSave: (saveId: number, payload: { title?: string; status?: string }) => {
+        return request(`/story/saves/${saveId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(payload),
+        });
+    },
+
+    // DELETE /story/saves/{id}
+    deleteSave: (saveId: number) => {
+        return request(`/story/saves/${saveId}`, {
+            method: 'DELETE',
         });
     },
 
@@ -123,6 +181,11 @@ export const api = {
         return request(`/story/sessions/${sessionId}/latest`);
     },
 
+    // GET /story/latest (latest across all sessions for current user)
+    getUserLatestNode: () => {
+        return request('/story/latest');
+    },
+
     // POST /story/retry
     retryFromNode: (nodeId: number) => {
         return request('/story/retry', {
@@ -132,16 +195,4 @@ export const api = {
     },
 };
 
-// --- Token Management ---
-
-export function setToken(token: string): void {
-    if (typeof window !== 'undefined') {
-        localStorage.setItem('access_token', token);
-    }
-}
-
-export function removeToken(): void {
-    if (typeof window !== 'undefined') {
-        localStorage.removeItem('access_token');
-    }
-}
+// No token management on the client. Auth is fully handled by HttpOnly cookie.

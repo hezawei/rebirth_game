@@ -28,6 +28,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = settings.access_token_expire_minutes
 class TokenData(BaseModel):
     """Token中存储的数据模型"""
     sub: Optional[str] = None
+    ver: Optional[int] = None  # 单点登录的token版本号
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     """
@@ -46,17 +47,18 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def decode_access_token(token: str) -> Optional[str]:
+def decode_access_token(token: str) -> Optional[TokenData]:
     """
     解码并验证JWT
     :param token: JWT字符串
-    :return: token的主题 (subject), 通常是用户邮箱。如果验证失败则返回None。
+    :return: TokenData，包含主题sub与版本ver；验证失败返回None。
     """
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        subject: str = payload.get("sub")
+        subject: Optional[str] = payload.get("sub")
+        version = payload.get("ver")
         if subject is None:
             return None
-        return subject
+        return TokenData(sub=subject, ver=version)
     except JWTError:
         return None

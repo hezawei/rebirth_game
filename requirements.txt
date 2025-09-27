@@ -16,6 +16,11 @@ alembic
 psycopg2-binary
 
 # --- 认证依赖 ---
-passlib[bcrypt]
-python-jose
+# Pin versions to avoid bcrypt 4.x incompatibility with passlib <1.7.5
+passlib[bcrypt]>=1.7.4
+bcrypt<4.0.0
+python-jose[cryptography]>=3.3.0
 python-multipart
+psycopg2-binary
+rich
+volcengine-python-sdk[ark]

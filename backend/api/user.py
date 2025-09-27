@@ -1,6 +1,6 @@
 # backend/api/user.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends, HTTPException, status, Request, Response
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import Optional
 
@@ -9,6 +9,7 @@ from backend.database.base import get_db
 from backend.schemas import user as user_schema
 from backend.core import security
 from config.logging_config import LOGGER
+from config.settings import settings
 
 # --- 认证相关的路由器 ---
 auth_router = APIRouter(prefix="/auth", tags=["authentication"])
@@ -16,30 +17,40 @@ auth_router = APIRouter(prefix="/auth", tags=["authentication"])
 # --- 用户资料相关的路由器 ---
 profile_router = APIRouter(prefix="/users", tags=["profiles"])
 
-# OAuth2PasswordBearer 用于从请求头中提取Token
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
+def _pick_token_from_request(request: Request) -> str:
+    """
+    Single auth path: HttpOnly cookie 'access_token'.
+    Raise 401 if missing.
+    """
+    cookie_token = request.cookies.get("access_token")
+    if cookie_token:
+        return cookie_token
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="无法验证凭证",
+    )
 
 # --- 安全依赖 ---
 async def get_current_user(
-    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+    request: Request, db: Session = Depends(get_db)
 ) -> models.User:
     """
     解码Token，验证用户，并返回用户模型实例
     这是一个可重用的依赖，用于保护需要认证的接口
     """
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="无法验证凭证",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+    credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="无法验证凭证")
     
-    email = security.decode_access_token(token)
-    if email is None:
+    token = _pick_token_from_request(request)
+    token_data = security.decode_access_token(token)
+    if token_data is None or not token_data.sub:
         raise credentials_exception
     
-    user = crud.get_user_by_email(db, email=email)
+    user = crud.get_user_by_email(db, email=token_data.sub)
     if user is None:
         raise credentials_exception
+    # 校验token版本，若不一致说明该账号已在其他地方登录，当前token失效
+    if token_data.ver is None or user.token_version is None or int(token_data.ver) != int(user.token_version):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="登录状态已失效：你的账号在其他位置登录，当前会话已登出")
     return user
 
 # --- 认证接口 ---
@@ -58,6 +69,7 @@ async def register_user(user: user_schema.UserCreate, db: Session = Depends(get_
 
 @auth_router.post("/token", response_model=user_schema.Token)
 async def login_for_access_token(
+    response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
 ):
     """
@@ -71,8 +83,50 @@ async def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    access_token = security.create_access_token(data={"sub": user.email})
+    # 单点登录：登录成功即自增 token_version，使旧token全部失效
+    try:
+        current_ver = int(getattr(user, 'token_version', 0) or 0)
+    except Exception:
+        current_ver = 0
+    user.token_version = current_ver + 1
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    # 在token中加入版本号
+    access_token = security.create_access_token(data={"sub": user.email, "ver": int(user.token_version)})
+    # Set HttpOnly cookie for SSR guards and multi-tab consistency
+    secure_flag = not bool(getattr(settings, "debug", False))
+    response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=True,
+        samesite="lax",
+        secure=secure_flag,
+        path="/",
+        max_age=getattr(settings, "access_token_expire_minutes", 60) * 60,
+    )
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@auth_router.post("/logout", status_code=204)
+async def logout_current_user(
+    response: Response,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """服务端登出：通过自增 token_version 使所有现有 token 立即失效。"""
+    try:
+        current_ver = int(getattr(current_user, 'token_version', 0) or 0)
+    except Exception:
+        current_ver = 0
+    current_user.token_version = current_ver + 1
+    db.add(current_user)
+    db.commit()
+    # Clear HttpOnly cookie
+    response.delete_cookie("access_token", path="/")
+    LOGGER.info(f"用户 {current_user.email} 已登出，token_version -> {current_user.token_version}")
+    return
 
 # --- 用户资料接口 (现在受到保护) ---
 
@@ -89,7 +143,8 @@ async def read_users_me(current_user: models.User = Depends(get_current_user)):
         age=current_user.age,
         identity=current_user.identity,
         photo_url=current_user.photo_url,
-        created_at=current_user.created_at
+        created_at=current_user.created_at,
+        roles=["user"]
     )
 
 @profile_router.put("/me", response_model=user_schema.UserProfile)

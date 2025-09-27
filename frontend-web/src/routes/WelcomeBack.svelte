@@ -1,29 +1,48 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { lastSessionStore } from '../lib/stores';
+  import { goto } from '$app/navigation';
+  import { lastSessionStore, lastSessionOwnerStore, userStore } from '../lib/stores';
   import { api } from '../lib/apiService';
   import { gameStateStore } from '../lib/stores';
 
   const dispatch = createEventDispatcher();
 
   let loading = false;
+  let error: string = '';
 
   async function continueLastGame() {
-    const sessionId = $lastSessionStore;
-    if (!sessionId) return;
-
     loading = true;
     try {
-      // This API endpoint might need to be created.
-      // It should fetch the latest node of a given session.
+      const sessionId = $lastSessionStore;
+      console.log('[WelcomeBack] continueLastGame clicked, lastSessionId(from store)=', sessionId);
+      // 严格按“上次最近一次”的会话继续，不再使用全局最深
+      if (!sessionId) {
+        throw new Error('无可用的历史进度');
+      }
       const lastState = await api.getLatestStoryNode(sessionId);
+      console.log('[WelcomeBack] latest node fetched:', lastState);
       gameStateStore.set(lastState);
-      // The parent component (+page.svelte) will react to gameStateStore changing
-      // and will render the Game component.
+      console.log('[WelcomeBack] gameStateStore set.');
+      // 同步 last session 归属，避免之后再提示不属于当前用户
+      try {
+        lastSessionStore.set(lastState.session_id);
+        lastSessionOwnerStore.set($userStore?.id ?? null);
+      } catch {}
+      // 额外：向父组件显式派发一个 continue 事件，传递状态
+      dispatch('continue', lastState);
+      console.log('[WelcomeBack] dispatched continue event with state.');
+      // 父组件 (+page.svelte) 会通过 gameStateStore 的变化来切换渲染
+      // 无需强制 goto 触发重渲染
     } catch (error) {
       console.error("Failed to continue last game:", error);
-      // If it fails, maybe the session is invalid, so we start a new game.
-      startNewGame();
+      const msg = (error as any)?.message || '';
+      if (msg.includes('登录状态已失效')) {
+        // prompt user and redirect to login
+        error = msg;
+      } else {
+        // 其他错误：提示用户明确问题，不自动新开以避免误操作
+        error = msg || '无法继续上次进度，请前往编年史查看历史记录';
+      }
     } finally {
       loading = false;
     }
@@ -33,6 +52,15 @@
     lastSessionStore.set(null);
     // Dispatch an event to tell the parent to proceed to the intro animation
     dispatch('newgame');
+  }
+
+  function acknowledgeError() {
+    if (error && error.includes('登录状态已失效')) {
+      userStore.logout();
+      error = '';
+      return;
+    }
+    error = '';
   }
 </script>
 

@@ -1,12 +1,16 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { userStore } from '../lib/stores';
 
-  let email = '';
-  let password = '';
   let isLogin = true;
   let loading = false;
   let error = '';
   let successMessage = '';
+  let emailInput: HTMLInputElement;
+  let passwordInput: HTMLInputElement;
+  let mounted = false;
+
+  onMount(() => { mounted = true; });
 
   async function handleAuth() {
     loading = true;
@@ -14,14 +18,16 @@
     successMessage = '';
 
     try {
+      const emailVal = (emailInput?.value || '').trim();
+      const passwordVal = passwordInput?.value || '';
       if (isLogin) {
         // --- Login Logic ---
-        await userStore.login(email, password);
+        await userStore.login(emailVal, passwordVal);
         // The userStore will update, and the main +page.svelte will reactively
         // switch to the Game component. No need to dispatch events.
       } else {
         // --- Registration Logic ---
-        await userStore.register(email, password);
+        await userStore.register(emailVal, passwordVal);
         successMessage = '注册成功！请使用您的新账户登录。';
         // Switch to login view after successful registration
         isLogin = true;
@@ -35,6 +41,7 @@
 </script>
 
 <div class="auth-container">
+  {#if mounted}
   <div class="auth-card">
     <h2>{isLogin ? '登录' : '注册'}</h2>
 
@@ -51,7 +58,9 @@
         <input
           id="email"
           type="email"
-          bind:value={email}
+          name="username"
+          autocomplete="username"
+          bind:this={emailInput}
           required
           disabled={loading}
         />
@@ -62,7 +71,9 @@
         <input
           id="password"
           type="password"
-          bind:value={password}
+          name="password"
+          autocomplete="current-password"
+          bind:this={passwordInput}
           required
           disabled={loading}
         />
@@ -80,6 +91,7 @@
       </button>
     </p>
   </div>
+  {/if}
 </div>
 
 <style>

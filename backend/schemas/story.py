@@ -1,6 +1,22 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Literal
 from datetime import datetime
+
+
+class ChoiceOption(BaseModel):
+    """故事分支选项及其影响描述"""
+
+    option: str = Field(..., description="选项文本，控制在15字以内")
+    summary: str = Field(..., description="该选择会带来的即时剧情走向概述")
+    success_rate_delta: Optional[int] = Field(
+        default=None, ge=-100, le=100, description="对主线成功率的增减值，可为负。设为None以隐藏数值。"
+    )
+    risk_level: Optional[str] = Field(
+        default=None, description="风险等级：low / medium / high"
+    )
+    tags: Optional[List[str]] = Field(
+        default=None, description="与该选择相关的主题标签"
+    )
 
 
 class StoryStartRequest(BaseModel):
@@ -18,11 +34,17 @@ class StoryContinueRequest(BaseModel):
 class RawStoryData(BaseModel):
     """原始故事数据（从story_engine返回）"""
     text: str = Field(..., description="AI生成的故事文本")
-    choices: List[str] = Field(..., description="AI生成的2-3个选项")
+    choices: List[ChoiceOption] = Field(..., description="AI生成的2-3个选项")
     image_url: str = Field(..., description="场景图片的URL路径")
+    success_rate: Optional[int] = Field(
+        default=None,
+        ge=0,
+        le=100,
+        description="主线任务成功率（0-100），由AI生成"
+    )
     metadata: Optional[Dict[str, Any]] = Field(
         default=None,
-        description="额外的元数据，如生成时间、模型信息等"
+        description="额外的元数据，如生成时间、模型信息、分支信息等"
     )
 
 class StorySegment(BaseModel):
@@ -30,8 +52,14 @@ class StorySegment(BaseModel):
     session_id: int = Field(..., description="游戏会话ID")
     node_id: int = Field(..., description="此片段对应的节点ID")
     text: str = Field(..., description="AI生成的故事文本")
-    choices: List[str] = Field(..., description="AI生成的2-3个选项")
+    choices: List[ChoiceOption] = Field(..., description="AI生成的2-3个选项")
     image_url: str = Field(..., description="场景图片的URL路径")
+    success_rate: Optional[int] = Field(
+        default=None,
+        ge=0,
+        le=100,
+        description="主线任务成功率（0-100）"
+    )
     metadata: Optional[Dict[str, Any]] = Field(
         default=None,
         description="额外的元数据，如生成时间、模型信息等"
@@ -48,6 +76,80 @@ class ErrorResponse(BaseModel):
     error: str = Field(..., description="错误信息")
     detail: Optional[str] = Field(None, description="详细错误信息")
     code: Optional[str] = Field(None, description="错误代码")
+
+
+# --- 新增：愿望敏感词校验与二阶段启动 ---
+
+class WishCheckRequest(BaseModel):
+    """敏感词校验请求"""
+    wish: str = Field(..., description="用户的重生愿望")
+
+
+class WishCheckResponse(BaseModel):
+    """敏感词校验结果"""
+    ok: bool = Field(..., description="是否通过校验")
+    reason: Optional[str] = Field(None, description="不通过的原因")
+    category: Optional[str] = Field(None, description="触发的敏感分类")
+
+
+class PrepareStartRequest(BaseModel):
+    """关卡元信息准备请求（不创建会话）"""
+    wish: str = Field(..., description="用户的重生愿望")
+
+
+class PrepareStartResponse(BaseModel):
+    """关卡元信息响应"""
+    level_title: str = Field(..., description="关卡标题")
+    background: str = Field(..., description="关卡背景设定")
+    main_quest: str = Field(..., description="主线任务")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="额外元信息")
+
+
+# --- 存档相关模型 ---
+
+
+class StorySaveCreate(BaseModel):
+    session_id: int = Field(..., description="会话ID")
+    node_id: int = Field(..., description="要存档的节点ID")
+    title: str = Field(..., min_length=1, max_length=100, description="存档标题")
+
+
+class StorySaveUpdate(BaseModel):
+    title: Optional[str] = Field(None, min_length=1, max_length=100, description="新的存档标题")
+    status: Optional[Literal["active", "completed", "failed"]] = Field(
+        None, description="新的存档状态"
+    )
+
+
+class StorySaveSummary(BaseModel):
+    id: int
+    session_id: int
+    node_id: int
+    title: str
+    status: str
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class StorySaveDetail(StorySaveSummary):
+    node: StorySegment
+
+
+# --- 愿望审核记录 ---
+
+
+class WishModerationRecordResponse(BaseModel):
+    id: int
+    wish_text: str
+    status: str
+    reason: Optional[str] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
 
 
 # --- 重生编年史 (Chronicle) 相关模型 ---
@@ -67,7 +169,7 @@ class StoryNodeDetail(BaseModel):
     story_text: str
     image_url: str
     user_choice: Optional[str] = None
-    choices: List[str] # 存储的是JSON字符串，需要解析
+    choices: List[ChoiceOption]
     chapter_number: int # 假设元数据中有章节号
 
     class Config:

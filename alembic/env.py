@@ -25,14 +25,16 @@ sys.path.insert(0, dirname(dirname(abspath(__file__))))
 from backend.database.base import Base
 # 导入所有模型，确保它们被 Base.metadata 注册
 from backend.database import models
-# 【新增】直接从应用配置中导入settings
 from config.settings import settings
 
 target_metadata = Base.metadata
 
-# 【核心修正】从settings中获取数据库URL，并提供明确的fallback
-# 这确保了即使没有.env文件，alembic也能找到正确的SQLite数据库
-DATABASE_URL = settings.database_url or "sqlite:///rebirth_game.db"
+# 要求提供 PostgreSQL 的 DATABASE_URL，不再提供 SQLite 回退
+if not settings.database_url:
+    raise RuntimeError("DATABASE_URL must be set for PostgreSQL migrations")
+DATABASE_URL = settings.database_url
+if not DATABASE_URL.lower().startswith("postgresql"):
+    raise RuntimeError(f"Only PostgreSQL is supported by this migration config. Got: {DATABASE_URL}")
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -52,9 +54,8 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    # url = config.get_main_option("sqlalchemy.url") # 不再从ini文件读取
     context.configure(
-        url=DATABASE_URL, # 【修改】使用我们从settings加载的URL
+        url=DATABASE_URL,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
@@ -71,7 +72,6 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    # 【修改】创建一个包含数据库URL的配置字典
     configuration = config.get_section(config.config_ini_section, {})
     configuration["sqlalchemy.url"] = DATABASE_URL
     connectable = engine_from_config(

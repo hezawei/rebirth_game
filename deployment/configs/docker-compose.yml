@@ -1,0 +1,102 @@
+version: "3.8"
+
+services:
+  # PostgreSQL 数据库
+  db:
+    image: postgres:16-alpine
+    container_name: rebirth-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PGUSER:-rebirth}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-StrongPass!}
+      POSTGRES_DB: ${PGDATABASE:-rebirth}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-rebirth} -d ${PGDATABASE:-rebirth}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - rebirth-network
+
+  # 应用服务
+  app:
+    build:
+      context: ../../
+      dockerfile: deployment/configs/Dockerfile
+    container_name: rebirth-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # 数据库连接
+      DATABASE_URL: postgresql+psycopg2://${PGUSER:-rebirth}:${PGPASSWORD_ENC:-StrongPass%21}@db:5432/${PGDATABASE:-rebirth}
+      ENFORCE_DB_VENDOR: postgresql
+      
+      # 服务器配置
+      GUNICORN_WORKERS: ${GUNICORN_WORKERS:-4}
+      
+      # API Keys
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      DOUBAO_API_KEY: ${DOUBAO_API_KEY:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      
+      # 应用配置
+      APP_ENV: production
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    volumes:
+      # 持久化生成的图片和日志
+      - app-assets:/app/assets/generated_images
+      - app-logs:/app/logs
+      # 将项目根目录的assets目录挂载到容器
+      - ../../assets/images:/app/assets/images:ro
+    networks:
+      - rebirth-network
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: "${CPU_LIMIT:-2.0}"
+          memory: "${MEMORY_LIMIT:-2G}"
+        reservations:
+          memory: "${MEMORY_RESERVE:-512M}"
+
+  # Nginx 反向代理（可选，用于生产环境）
+  nginx:
+    image: nginx:alpine
+    container_name: rebirth-nginx
+    restart: unless-stopped
+    ports:
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../../ssl-certs:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - rebirth-network
+    profiles:
+      - with-nginx
+
+volumes:
+  pgdata:
+    driver: local
+  app-assets:
+    driver: local  
+  app-logs:
+    driver: local
+
+networks:
+  rebirth-network:
+    driver: bridge

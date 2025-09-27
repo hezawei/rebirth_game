@@ -1,27 +1,32 @@
 # backend/database/crud.py
+from datetime import datetime
+from typing import List, Optional
+
+from sqlalchemy import func
 from sqlalchemy.orm import Session
-from sqlalchemy.orm import Session
-from . import models
-from backend.schemas import user as user_schema
+
 from backend.core import security
-from schemas.story import RawStoryData
+from backend.schemas import user as user_schema
 from config.logging_config import LOGGER  # 导入日志
-from typing import Optional, List
-import uuid
+from schemas.story import RawStoryData
+
+from . import models
 
 # ===== 认证相关的 CRUD 函数 =====
 
 def get_user_by_email(db: Session, email: str) -> Optional[models.User]:
-    """根据邮箱地址获取用户"""
-    return db.query(models.User).filter(models.User.email == email).first()
+    """根据邮箱地址获取用户（不区分大小写，忽略空白）"""
+    normalized = (email or '').strip().lower()
+    return db.query(models.User).filter(func.lower(models.User.email) == normalized).first()
 
 def create_user(db: Session, user: user_schema.UserCreate) -> models.User:
     """创建新用户，包含密码哈希"""
     hashed_password = security.get_password_hash(user.password)
+    normalized_email = user.email.strip().lower()
     # 使用 email 的一部分作为默认 nickname
-    default_nickname = user.email.split('@')[0]
+    default_nickname = normalized_email.split('@')[0]
     db_user = models.User(
-        email=user.email, 
+        email=normalized_email, 
         hashed_password=hashed_password,
         nickname=default_nickname
     )
@@ -40,7 +45,18 @@ def create_game_session(db: Session, wish: str, user_id: str) -> models.GameSess
     db.refresh(db_session)
     return db_session
 
-def create_story_node(db: Session, session_id: int, segment: RawStoryData, parent_id: int = None, user_choice: str = None) -> models.StoryNode:
+def create_story_node(
+    db: Session,
+    session_id: int,
+    segment: RawStoryData,
+    parent_id: int = None,
+    user_choice: str = None,
+    commit: bool = True,
+    *,
+    is_speculative: bool = False,
+    speculative_depth: int | None = None,
+    speculative_expires_at = None,
+) -> models.StoryNode:
     # 【新增逻辑】验证父节点
     if parent_id:
         parent_node = db.query(models.StoryNode).filter(
@@ -57,12 +73,22 @@ def create_story_node(db: Session, session_id: int, segment: RawStoryData, paren
         parent_id=parent_id,
         story_text=segment.text,
         image_url=segment.image_url,
-        user_choice=user_choice
+        user_choice=user_choice,
+        success_rate=segment.success_rate,
+        is_speculative=is_speculative,
+        speculative_depth=speculative_depth,
+        speculative_expires_at=speculative_expires_at,
     )
     db_node.set_choices(segment.choices)
+    db_node.set_metadata(segment.metadata or {})
     db.add(db_node)
-    db.commit()
-    db.refresh(db_node)
+    if commit:
+        db.commit()
+        db.refresh(db_node)
+    else:
+        # 在调用方的事务里，仅刷新以便拿到自增ID；如违反唯一约束，将在flush时抛出IntegrityError
+        db.flush()
+        db.refresh(db_node)
     return db_node
 
 def get_session_by_id(db: Session, session_id: int) -> models.GameSession:
@@ -70,15 +96,104 @@ def get_session_by_id(db: Session, session_id: int) -> models.GameSession:
     return db.query(models.GameSession).filter(models.GameSession.id == session_id).first()
 
 def get_session_history(db: Session, session_id: int) -> List[models.StoryNode]:
-    return db.query(models.StoryNode).filter(models.StoryNode.session_id == session_id).order_by(models.StoryNode.created_at).all()
+    """获取指定会话的所有非预生成节点，按ID升序保证稳定顺序"""
+    return (
+        db.query(models.StoryNode)
+        .filter(
+            models.StoryNode.session_id == session_id,
+            models.StoryNode.is_speculative.is_(False)
+        )
+        .order_by(models.StoryNode.id.asc())
+        .all()
+    )
 
 def get_node_by_id(db: Session, node_id: int) -> models.StoryNode:
     """根据ID获取单个故事节点"""
     return db.query(models.StoryNode).filter(models.StoryNode.id == node_id).first()
 
+def lock_node_for_update(db: Session, node_id: int) -> Optional[models.StoryNode]:
+    """在支持的数据库上对节点加行级锁以避免并发写入竞争（PostgreSQL）。"""
+    bind = db.get_bind()
+    dialect = getattr(bind, "dialect", None)
+    q = db.query(models.StoryNode).filter(models.StoryNode.id == node_id)
+    if dialect and getattr(dialect, "name", "").lower() == "postgresql":
+        q = q.with_for_update()
+    return q.first()
+
+def get_child_by_parent_and_choice(db: Session, session_id: int, parent_id: int, user_choice: str) -> Optional[models.StoryNode]:
+    """获取同一父节点下，用户相同选择所产生的最新子节点（用于幂等/并发防抖）"""
+    return (
+        db.query(models.StoryNode)
+        .filter(
+            models.StoryNode.session_id == session_id,
+            models.StoryNode.parent_id == parent_id,
+            models.StoryNode.user_choice == user_choice,
+        )
+        .order_by(models.StoryNode.id.desc())
+        .first()
+    )
+
+
+def get_children_for_parent(db: Session, parent_id: int, *, include_speculative: bool = True) -> List[models.StoryNode]:
+    query = db.query(models.StoryNode).filter(models.StoryNode.parent_id == parent_id)
+    if not include_speculative:
+        query = query.filter(models.StoryNode.is_speculative.is_(False))
+    return query.order_by(models.StoryNode.id.asc()).all()
+
+
+def cleanup_expired_speculative_children(db: Session, parent_id: int) -> int:
+    now = datetime.utcnow()
+    q = (
+        db.query(models.StoryNode)
+        .filter(models.StoryNode.parent_id == parent_id)
+        .filter(models.StoryNode.is_speculative.is_(True))
+        .filter(models.StoryNode.speculative_expires_at.isnot(None))
+        .filter(models.StoryNode.speculative_expires_at < now)
+    )
+    removed = q.delete(synchronize_session=False)
+    if removed:
+        db.commit()
+    return removed
+
+
+def finalize_speculative_node(db: Session, node: models.StoryNode, *, commit: bool = True) -> models.StoryNode:
+    if not node.is_speculative:
+        return node
+    node.is_speculative = False
+    node.speculative_depth = None
+    node.speculative_expires_at = None
+    if commit:
+        db.commit()
+        db.refresh(node)
+    else:
+        db.flush()
+        db.refresh(node)
+    return node
+
+
+def update_story_node_from_segment(
+    db: Session,
+    node: models.StoryNode,
+    segment: RawStoryData,
+    *,
+    commit: bool = True,
+) -> models.StoryNode:
+    node.story_text = segment.text
+    node.image_url = segment.image_url
+    node.success_rate = segment.success_rate
+    node.set_choices(segment.choices)
+    node.set_metadata(segment.metadata or {})
+    if commit:
+        db.commit()
+        db.refresh(node)
+    else:
+        db.flush()
+        db.refresh(node)
+    return node
+
 def calculate_chapter_number(db: Session, session_id: int, node_id: int) -> int:
     """
-    计算指定节点在其故事中的章节号
+    计算指定节点在其故事中的章节号，基于从根节点到当前节点的路径深度
 
     Args:
         db: 数据库会话
@@ -88,19 +203,30 @@ def calculate_chapter_number(db: Session, session_id: int, node_id: int) -> int:
     Returns:
         int: 章节号（从1开始）
     """
-    # 获取该会话的所有节点，按创建时间排序
-    nodes = db.query(models.StoryNode).filter(
-        models.StoryNode.session_id == session_id
-    ).order_by(models.StoryNode.created_at).all()
-
-    # 找到目标节点在列表中的位置
-    for i, node in enumerate(nodes):
-        if node.id == node_id:
-            return i + 1  # 章节号从1开始
-
-    # 如果没找到，返回1（默认值）
-    LOGGER.warning(f"无法找到节点 {node_id} 在会话 {session_id} 中的位置，返回默认章节号1")
-    return 1
+    # 获取目标节点
+    target_node = get_node_by_id(db, node_id)
+    if not target_node or target_node.session_id != session_id:
+        LOGGER.warning(f"节点 {node_id} 不存在或不属于会话 {session_id}")
+        return 1
+    
+    # 从目标节点向上追溯到根节点，计算深度
+    depth = 1
+    current = target_node
+    visited = set()
+    
+    while current.parent_id is not None:
+        if current.id in visited:
+            LOGGER.warning(f"检测到循环引用，节点 {current.id}")
+            break
+        visited.add(current.id)
+        
+        parent = get_node_by_id(db, current.parent_id)
+        if not parent:
+            break
+        current = parent
+        depth += 1
+    
+    return depth
 
 def get_latest_node_by_session(db: Session, session_id: int, user_id: str) -> Optional[models.StoryNode]:
     """获取指定会话的最新节点，并验证所有权"""
@@ -112,9 +238,45 @@ def get_latest_node_by_session(db: Session, session_id: int, user_id: str) -> Op
     if not session:
         return None # Session doesn't exist or doesn't belong to the user
 
-    return db.query(models.StoryNode).filter(
-        models.StoryNode.session_id == session_id
-    ).order_by(models.StoryNode.created_at.desc()).first()
+    return (
+        db.query(models.StoryNode)
+        .filter(models.StoryNode.session_id == session_id)
+        .order_by(models.StoryNode.id.desc())
+        .first()
+    )
+
+def get_latest_node_for_user(db: Session, user_id: str) -> Optional[models.StoryNode]:
+    """获取某个用户所有会话中的最新节点（按节点ID倒序作为时间的代理）"""
+    return (
+        db.query(models.StoryNode)
+        .join(models.GameSession, models.StoryNode.session_id == models.GameSession.id)
+        .filter(models.GameSession.user_id == user_id)
+        .order_by(models.StoryNode.id.desc())
+        .first()
+    )
+
+def get_deepest_node_for_user(db: Session, user_id: str) -> Optional[models.StoryNode]:
+    """获取某个用户在所有会话中推进最深（章节数最多）的那个会话的最新节点。"""
+    # 统计每个会话的节点数量，选择最多的那个会话
+    sub = (
+        db.query(models.StoryNode.session_id, func.count(models.StoryNode.id).label('cnt'))
+        .join(models.GameSession, models.StoryNode.session_id == models.GameSession.id)
+        .filter(models.GameSession.user_id == user_id)
+        .group_by(models.StoryNode.session_id)
+        .order_by(func.count(models.StoryNode.id).desc())
+        .first()
+    )
+    if not sub:
+        return None
+    session_id = sub[0]
+
+    # 返回该会话中的最新节点
+    return (
+        db.query(models.StoryNode)
+        .filter(models.StoryNode.session_id == session_id)
+        .order_by(models.StoryNode.id.desc())
+        .first()
+    )
 
 # 【核心修改】重命名并重写此函数
 def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
@@ -129,7 +291,8 @@ def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
     Returns:
         target_node: 目标节点本身，其后代已被清除。
     """
-    target_node = get_node_by_id(db, node_id)
+    # 在支持的数据库上锁定目标节点，避免与并发的子节点创建竞争
+    target_node = lock_node_for_update(db, node_id) or get_node_by_id(db, node_id)
 
     if not target_node:
         LOGGER.error(f"尝试回溯时找不到目标节点: {node_id}")
@@ -137,21 +300,18 @@ def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
 
     LOGGER.info(f"正在从节点 {target_node.id} 之后进行时空回溯...")
 
-    # 查找并记录所有需要删除的后代节点ID
+    # 查找并记录所有需要删除的后代节点ID（广度优先）
     descendant_ids = []
     nodes_to_visit = list(target_node.children)
     while nodes_to_visit:
         current_node = nodes_to_visit.pop()
         descendant_ids.append(current_node.id)
-        nodes_to_visit.extend(current_node.children)
+        nodes_to_visit.extend(list(current_node.children))
 
     if descendant_ids:
         LOGGER.info(f"节点 {target_node.id} 的所有后代节点 {descendant_ids} 将被删除。")
-        # 批量删除所有后代节点
-        # 注意：由于 cascade 设置，理论上直接清空 children 也可以，但为了日志清晰和逻辑明确，我们先查找再删除。
-        # 这里我们直接删除 target_node 的直接子节点，级联删除会处理孙子节点。
-        for child in list(target_node.children):
-            db.delete(child)
+        # 统一使用批量删除，避免深层级残留
+        db.query(models.StoryNode).filter(models.StoryNode.id.in_(descendant_ids)).delete(synchronize_session=False)
     else:
         LOGGER.info(f"节点 {target_node.id} 没有后代，无需删除。")
 
@@ -162,6 +322,93 @@ def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
 
     LOGGER.info(f"已成功完成回溯，当前故事线的终点为节点 {target_node.id}。")
     return target_node
+
+
+# ===== 存档相关 CRUD =====
+
+
+def create_story_save(db: Session, session_id: int, node_id: int, title: str, status: str = "active") -> models.StorySave:
+    save = models.StorySave(session_id=session_id, node_id=node_id, title=title.strip(), status=status)
+    db.add(save)
+    db.commit()
+    db.refresh(save)
+    return save
+
+
+def update_story_save(
+    db: Session,
+    save_id: int,
+    *,
+    title: Optional[str] = None,
+    status: Optional[str] = None,
+) -> Optional[models.StorySave]:
+    save = db.query(models.StorySave).filter(models.StorySave.id == save_id).first()
+    if not save:
+        return None
+
+    changed = False
+    if title is not None and title.strip() and title.strip() != save.title:
+        save.title = title.strip()
+        changed = True
+    if status is not None and status != save.status:
+        save.status = status
+        changed = True
+
+    if changed:
+        db.commit()
+        db.refresh(save)
+    return save
+
+
+def get_story_save(db: Session, save_id: int, user_id: str) -> Optional[models.StorySave]:
+    return (
+        db.query(models.StorySave)
+        .join(models.GameSession)
+        .filter(models.StorySave.id == save_id, models.GameSession.user_id == user_id)
+        .first()
+    )
+
+
+def list_story_saves(db: Session, user_id: str, status: str | None = None) -> List[models.StorySave]:
+    query = (
+        db.query(models.StorySave)
+        .join(models.GameSession)
+        .filter(models.GameSession.user_id == user_id)
+        .order_by(models.StorySave.updated_at.desc())
+    )
+    if status:
+        query = query.filter(models.StorySave.status == status)
+    return query.all()
+
+
+def delete_story_save(db: Session, save_id: int, user_id: str) -> bool:
+    save = get_story_save(db, save_id, user_id)
+    if not save:
+        return False
+    db.delete(save)
+    db.commit()
+    return True
+
+
+# ===== 愿望审核记录 =====
+
+
+def log_wish_moderation(db: Session, user_id: Optional[str], wish_text: str, status: str, reason: Optional[str] = None) -> models.WishModerationRecord:
+    record = models.WishModerationRecord(user_id=user_id, wish_text=wish_text, status=status, reason=reason)
+    db.add(record)
+    db.commit()
+    db.refresh(record)
+    return record
+
+
+def list_wish_moderation_records(db: Session, user_id: str, limit: int = 50) -> List[models.WishModerationRecord]:
+    return (
+        db.query(models.WishModerationRecord)
+        .filter(models.WishModerationRecord.user_id == user_id)
+        .order_by(models.WishModerationRecord.created_at.desc())
+        .limit(limit)
+        .all()
+    )
 
 # ===== 用户资料相关的 CRUD 函数 =====
 

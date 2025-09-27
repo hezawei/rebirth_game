@@ -4,23 +4,40 @@
   import ProfileForm from './ProfileForm.svelte';
   import IntroAnimation from './IntroAnimation.svelte';
   import WelcomeBack from './WelcomeBack.svelte';
-  import { userStore, gameStateStore, lastSessionStore } from '../lib/stores';
-  import { get } from 'svelte/store';
+  import { userStore, gameStateStore, lastSessionStore, lastSessionOwnerStore } from '../lib/stores';
+  
 
   let introComplete = false;
   let initialWish = ''; // To store the wish from the animation
+  let initialLevelMeta: any = null;
   let forceNewGame = false; // Flag from WelcomeBack component
+  let restoredGameState: any = null; // 本地持有一次性状态，避免受 store 清空影响
 
-  // Consume the one-time state from chronicle/retry before rendering.
-  let restoredGameState = get(gameStateStore);
-  if (restoredGameState) {
-    // Clear the store immediately so it's not used again on refresh.
-    gameStateStore.set(null);
+  // 改为响应式使用 $gameStateStore，让 WelcomeBack 设置的状态能驱动渲染切换
+  $: if ($gameStateStore && !restoredGameState) {
+    console.debug('[+page] detected gameStateStore update, capturing into local state');
+    restoredGameState = $gameStateStore;
+    try { gameStateStore.set(null); } catch {}
   }
+
+  // 观察关键状态用于调试分支切换
+  $: console.debug('[+page] state snapshot', {
+    hasUser: !!$userStore,
+    hasNickname: !!($userStore && $userStore.nickname),
+    lastSessionId: $lastSessionStore,
+    lastSessionOwner: $lastSessionOwnerStore,
+    currentUserId: $userStore?.id,
+    forceNewGame,
+    introComplete,
+    restoredGameStatePresent: !!restoredGameState,
+  });
 
   function handleIntroComplete(event: CustomEvent) {
     initialWish = event.detail.wish;
+    initialLevelMeta = event.detail.level || null;
     introComplete = true;
+    // Intro 完成即视为用户明确开始新游戏，防止随后再弹出“欢迎回来”
+    forceNewGame = true;
   }
 
   // Subscribe to userStore to reset state on logout
@@ -29,7 +46,7 @@
       introComplete = false;
       initialWish = '';
       forceNewGame = false; // Also reset this flag
-      restoredGameState = null; // Clear restored state on logout
+      restoredGameState = null; // 清理本地状态
     }
   });
 
@@ -37,19 +54,22 @@
 
 <main>
   {#if restoredGameState}
-    <!-- Priority 1: Restoring from chronicle, passing state as a prop -->
+    <!-- Priority 1: Restoring from WelcomeBack/chronicle via local captured state -->
     <Game session={$userStore} initialState={restoredGameState} />
   {:else if $userStore}
     {#if $userStore.nickname}
-      {#if $lastSessionStore && !forceNewGame}
-        <!-- Priority 2: User has a last session and hasn't chosen to start a new one -->
-        <WelcomeBack on:newgame={() => forceNewGame = true} />
-      {:else if !introComplete}
-        <!-- Priority 3: No last session, or user chose new game -> play intro -->
+      {#if !introComplete}
+        <!-- Priority: 登录后始终先播放第一段开场动画（不可跳过） -->
         <IntroAnimation on:complete={handleIntroComplete} />
+      {:else if $lastSessionStore && $lastSessionOwnerStore === $userStore.id && !forceNewGame}
+        <!-- Intro 完成后如仍需“欢迎回来”，此分支理论上不会触发（forceNewGame 在 Intro 完成时被置为 true） -->
+        <WelcomeBack 
+          on:newgame={() => { console.debug('[+page] newgame event received'); forceNewGame = true; }}
+          on:continue={(e) => { console.debug('[+page] continue event received', e.detail); restoredGameState = e.detail; }}
+        />
       {:else}
-        <!-- Priority 4: Intro is complete, play the game -->
-        <Game session={$userStore} wish={initialWish} />
+        <!-- Intro 完成，开始游戏（新局或从外部指定的 wish） -->
+        <Game session={$userStore} wish={initialWish} initialLevel={initialLevelMeta} />
       {/if}
     {:else}
       <!-- If user profile is NOT complete, show the profile form -->

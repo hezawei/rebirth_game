@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onMount, tick } from 'svelte';
   import { userStore } from '$lib/stores';
+  import { api } from '$lib/apiService';
   import { fade } from 'svelte/transition';
 
   const dispatch = createEventDispatcher();
@@ -11,6 +12,12 @@
   let showSkipButton = false;
   let wish = ''; // 用于绑定输入框
   let showNarrator = false; // 控制字幕显示
+  let wishChecking = false; // 愿望校验中
+  let wishError: string = '';
+  let wishBoxEl: HTMLDivElement;
+  let narratorEl: HTMLParagraphElement;
+  let wishVisible = false
+  let preparedLevel: any = null
 
   $: user = $userStore;
 
@@ -25,18 +32,17 @@
   });
 
   async function handleStartJourney() {
+    preparedLevel = null;
+    wishError = '';
     currentStep = 1;
     showNarrator = true; // 字幕出现
     // Wait for Svelte to update the DOM and render the video element
     await tick(); 
     try {
       await videoPlayer.play(); // This is now user-initiated, so sound will work
-      
-      // 5秒后，跳过按钮出现，同时字幕消失
-      setTimeout(() => {
-        showSkipButton = true;
-        showNarrator = false;
-      }, 5000);
+      // 1秒后允许跳过第一段；同时在5秒后隐藏字幕
+      setTimeout(() => { showSkipButton = true; }, 1000);
+      setTimeout(() => { showNarrator = false; }, 5000);
     } catch (err) {
       console.error("Video play failed:", err);
       // If play fails, skip the animation
@@ -48,23 +54,51 @@
     if (currentStep === 1) {
       currentStep = 2;
       showSkipButton = false; // Hide skip button for the next phase
+      wishVisible = false;
+      // defer visibility until layout is stable to avoid flicker
+      measurePositions('enter step 2');
+      requestAnimationFrame(() => {
+        console.debug('[Intro] showing wish box after RAF');
+        wishVisible = true;
+      });
     } else if (currentStep === 3) {
       // 【BUG修复】确保动画正常结束后，也能把wish传递出去
       const finalWish = wish.trim() || '一个随机的冒险者';
-      dispatch('complete', { wish: finalWish });
+      dispatch('complete', { wish: finalWish, level: preparedLevel });
     }
   }
 
-  function handleWishSubmit() {
-    if (!wish.trim()) return; // 简单的验证
+  async function handleWishSubmit() {
+    const trimmed = wish.trim();
+    if (!trimmed || wishChecking) return;
+
+    wishError = '';
+    preparedLevel = null;
+    wishChecking = true;
+
+    let prep: any = null;
+    try {
+      prep = await api.prepareStart(trimmed);
+    } catch (err: any) {
+      wishError = err?.message || '关卡生成失败，请换一个愿望试试';
+    } finally {
+      wishChecking = false;
+    }
+
+    if (!prep) {
+      return;
+    }
+
+    preparedLevel = prep;
+    const nickname = user?.nickname || '旅人';
+    text3 = `很好，${nickname}，你的首个使命是「${prep.main_quest}」，准备迎接命运的召唤吧！`;
 
     currentStep = 3;
     videoSrc = '/穿越动画.mp4';
-    // Use a timeout to allow the video src to change before playing
     setTimeout(async () => {
       try {
         await videoPlayer.play();
-        setTimeout(() => { showSkipButton = true; }, 5000);
+        setTimeout(() => { showSkipButton = true; }, 1000);
       } catch (err) {
         console.error("Outro video play failed:", err);
         dispatch('complete', { wish });
@@ -74,16 +108,49 @@
 
   function skipIntro() {
     videoPlayer.pause();
+    // 第一段：跳过后直接进入愿望输入阶段
     if (currentStep === 1) {
-      // If skipping the first video, go to the wish input screen
       currentStep = 2;
       showSkipButton = false;
-    } else if (currentStep === 3) {
-      // If skipping the second video, complete the intro
+      showNarrator = false;
+      wishVisible = false;
+      measurePositions('skip to step 2');
+      requestAnimationFrame(() => {
+        console.debug('[Intro] showing wish box after RAF (skip)');
+        wishVisible = true;
+      });
+      return;
+    }
+    // 第三段（穿越动画）：跳过后完成并将愿望传递给父组件
+    if (currentStep === 3) {
       const finalWish = wish.trim() || '一个随机的冒险者';
-      dispatch('complete', { wish: finalWish });
+      dispatch('complete', { wish: finalWish, level: preparedLevel });
     }
   }
+
+  function logRect(label: string, el?: Element | null) {
+    try {
+      if (!el) return console.debug(`[Intro][rect] ${label}: <null>`);
+      const r = (el as HTMLElement).getBoundingClientRect();
+      console.debug(`[Intro][rect] ${label}:`, { x: r.x, y: r.y, left: r.left, top: r.top, width: r.width, height: r.height });
+    } catch (e) {
+      console.debug(`[Intro][rect] ${label}: error`, e);
+    }
+  }
+
+  async function measurePositions(tag: string) {
+    await tick();
+    requestAnimationFrame(() => {
+      console.debug(`[Intro][measure RAF] ${tag}`);
+      logRect('video', videoPlayer);
+      logRect('narrator', narratorEl);
+      logRect('wishBox', wishBoxEl);
+    });
+  }
+
+  $: if (currentStep === 1) { measurePositions('step=1'); }
+  $: if (currentStep === 2) { measurePositions('step=2'); }
+  $: if (currentStep === 3) { measurePositions('step=3'); }
 </script>
 
 <div class="animation-container">
@@ -104,17 +171,18 @@
     ></video>
   {/if}
 
-  {#if showSkipButton}
+  {#if showSkipButton && (currentStep === 1 || currentStep === 3)}
     <button class="skip-button" on:click={skipIntro} in:fade>跳过 >></button>
   {/if}
 
   <div class="overlay">
     {#if currentStep === 1 && showNarrator}
-      <p class="narrator" transition:fade={{ duration: 1500 }}>{text1}</p>
+      <p class="narrator narrator-pos" bind:this={narratorEl} transition:fade={{ duration: 1500 }}>{text1}</p>
     {/if}
 
     {#if currentStep === 2}
-      <div class="dialog-box wish-box" in:fade={{ duration: 1000 }}>
+      {#if wishVisible}
+      <div class="dialog-box wish-box wish-pos" bind:this={wishBoxEl}>
         <p>{text2}</p>
         <input 
           type="text" 
@@ -125,15 +193,22 @@
         <button 
           on:click={handleWishSubmit} 
           class="wish-submit-button"
-          disabled={!wish.trim()}
+          disabled={!wish.trim() || wishChecking}
         >
-          开启重生之旅
+          {wishChecking ? '正在校验...' : '开启重生之旅'}
         </button>
+        {#if wishError}
+          <div class="wish-error">{wishError}</div>
+        {/if}
+        <div class="links-row">
+          <a href="/chronicle" class="history-link">📜 历史重生记录</a>
+        </div>
       </div>
+      {/if}
     {/if}
 
     {#if currentStep === 3}
-       <p class="narrator" in:fade={{ duration: 1500 }}>{text3}</p>
+       <p class="narrator narrator-pos" in:fade={{ duration: 1500 }}>{text3}</p>
     {/if}
   </div>
 </div>
@@ -212,24 +287,34 @@
   }
 
   .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    /* 垂直居中对齐 */
-    align-items: center;
     padding: 2rem;
     box-sizing: border-box;
     pointer-events: none; /* Allow clicks to pass through overlay */
   }
 
-  .overlay > * {
-    /* 将内容从底部推上20%的位置，更灵活 */
-    margin-top: auto;
-    margin-bottom: 30vh;
+  /* Absolute anchored positions to avoid reflow-based shifts */
+  .narrator-pos {
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    bottom: 30vh;
+    max-width: 90vw;
+    will-change: transform;
+  }
+
+  .wish-pos {
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    bottom: 30vh;
+    width: calc(100% - 4rem);
+    max-width: 600px;
+    will-change: transform;
   }
   
   .dialog-box {
@@ -261,6 +346,7 @@
   .wish-box {
     width: 100%;
     max-width: 600px;
+    margin: 0 auto;
   }
 
   .wish-input {
@@ -292,5 +378,21 @@
   .wish-submit-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  .links-row {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .history-link {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .wish-error {
+    margin-top: 0.5rem;
+    color: #ff6b6b;
+    font-size: 0.95rem;
   }
 </style>

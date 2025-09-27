@@ -5,18 +5,29 @@
 
 from typing import Dict, Any, Optional
 from config.settings import settings
+from abc import ABC, abstractmethod
 
 
-class ModelConfig:
+class ModelConfig(ABC):
     """模型配置基类"""
     
-    def __init__(self):
-        self.api_key: str = ""
-        self.base_url: str = ""
-        self.model_name: str = ""
-        self.max_tokens: int = 1000
-        self.temperature: float = 0.8
-    
+    provider_type: str 
+    api_key: str
+    base_url: str
+    model_name: str
+    completion_params: Dict[str, Any]
+
+    def __init__(self, provider_name: str):
+        config = settings.LLM_PROVIDERS.get(provider_name)
+        if not config:
+            raise ValueError(f"在 settings.LLM_PROVIDERS 中未找到 '{provider_name}' 的配置")
+
+        self.provider_type = config["provider_type"]
+        self.api_key = config.get("api_key", "")
+        self.base_url = config["base_url"]
+        self.model_name = config["model"]
+        self.completion_params = config.get("completion_params", {})
+
     def get_client_params(self) -> Dict[str, Any]:
         """获取客户端初始化参数"""
         return {
@@ -26,67 +37,37 @@ class ModelConfig:
     
     def get_completion_params(self) -> Dict[str, Any]:
         """获取对话完成参数"""
-        return {
-            "model": self.model_name,
-            "max_tokens": self.max_tokens,
-            "temperature": self.temperature
-        }
+        # 返回一个副本以防止外部修改原始配置
+        params = self.completion_params.copy()
+        params['model'] = self.model_name
+        return params
 
 
 class DoubaoConfig(ModelConfig):
     """豆包模型配置"""
-    
     def __init__(self):
-        super().__init__()
-        self.api_key = settings.doubao_api_key
-        self.base_url = settings.doubao_base_url
-        self.model_name = settings.doubao_model
-        self.max_tokens = settings.max_tokens
-        self.temperature = settings.temperature
-    
-    def get_completion_params(self) -> Dict[str, Any]:
-        """豆包特定的完成参数"""
-        params = super().get_completion_params()
-        # 豆包支持JSON模式
-        params["response_format"] = {"type": "json_object"}
-        return params
+        super().__init__("doubao")
+
+
+class SiliconFlowConfig(ModelConfig):
+    """硅基流动模型配置 (OpenAI兼容) - 现用于DashScope"""
+    def __init__(self):
+        super().__init__("dashscope")
 
 
 class OpenAIConfig(ModelConfig):
     """OpenAI模型配置"""
-    
     def __init__(self):
-        super().__init__()
-        self.api_key = settings.openai_api_key
-        self.base_url = "https://api.openai.com/v1"  # OpenAI默认地址
-        self.model_name = settings.default_model
-        self.max_tokens = settings.max_tokens
-        self.temperature = settings.temperature
-    
-    def get_completion_params(self) -> Dict[str, Any]:
-        """OpenAI特定的完成参数"""
-        params = super().get_completion_params()
-        params["response_format"] = {"type": "json_object"}
-        return params
+        super().__init__("openai")
 
 
-class GeminiConfig(ModelConfig):
-    """Gemini模型配置（预留）"""
-    
-    def __init__(self):
-        super().__init__()
-        self.api_key = settings.google_api_key or ""
-        self.base_url = "https://generativelanguage.googleapis.com/v1beta"
-        self.model_name = "gemini-pro"
-        self.max_tokens = settings.max_tokens
-        self.temperature = settings.temperature
 
 
 # 模型配置映射
 MODEL_CONFIGS = {
     "doubao": DoubaoConfig,
     "openai": OpenAIConfig,
-    "gemini": GeminiConfig,
+    "dashscope": SiliconFlowConfig, # 复用OpenAI兼容配置类
 }
 
 
@@ -111,19 +92,19 @@ def get_model_config(model_type: str = "doubao") -> ModelConfig:
 
 
 def get_current_model_config() -> ModelConfig:
-    """
-    获取当前配置的模型
-    根据环境变量自动选择可用的模型
-    """
-    # 优先级：豆包 > OpenAI > Gemini
-    if settings.doubao_api_key and settings.doubao_api_key.strip():
-        return get_model_config("doubao")
-    elif hasattr(settings, 'openai_api_key') and settings.openai_api_key and settings.openai_api_key.strip():
-        return get_model_config("openai")
-    elif settings.google_api_key and settings.google_api_key.strip():
-        return get_model_config("gemini")
-    else:
-        raise ValueError("未配置任何可用的模型API密钥！请在.env文件中配置DOUBAO_API_KEY、OPENAI_API_KEY或GOOGLE_API_KEY")
+    """依据配置选择当前模型。"""
+    provider_name = (settings.llm_provider or "").strip().lower() or "doubao"
+
+    provider_config = settings.LLM_PROVIDERS.get(provider_name)
+    if not provider_config:
+        raise ValueError(f"未知的 llm_provider: '{provider_name}'")
+
+    # 检查 API key 是否存在
+    if not provider_config.get("api_key"):
+        raise ValueError(f"当前配置为 {provider_name}，但未在 settings.LLM_PROVIDERS 中设置 api_key")
+
+    # 直接使用 provider_name 获取配置
+    return get_model_config(provider_name)
 
 
 # 当前使用的模型配置 - 延迟初始化

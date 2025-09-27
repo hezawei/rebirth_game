@@ -34,6 +34,15 @@
       loading = false;
     }
   }
+
+  function acknowledgeError() {
+    if (error && error.includes('登录状态已失效')) {
+      userStore.logout();
+      error = '';
+      return;
+    }
+    error = '';
+  }
 </script>
 
 <div class="profile-form-container">
@@ -49,7 +58,7 @@
       <div class="form-group">
         <label for="age">你在地球OL的等级？(年龄)</label>
         <input id="age" type="number" bind:value={age} placeholder="例如：25" />
-      </div>j
+      </div>
       <div class="form-group">
         <label for="identity">你的前世身份是？</label>
         <input id="identity" type="text" bind:value={identity} placeholder="例如：一位程序员" />
@@ -61,7 +70,10 @@
     </form>
 
     {#if error}
-      <div class="error-box">{error}</div>
+      <div class="error-box">
+        <p>{error}</p>
+        <button class="primary-button" on:click={acknowledgeError}>确定</button>
+      </div>
     {/if}
     {#if success}
       <div class="success-box">{success}</div>
