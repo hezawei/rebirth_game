@@ -8,6 +8,7 @@ import random
 from typing import List, Optional
 from config.logging_config import LOGGER
 from pathlib import Path  # 【<<< 新增这一行导入】
+from config.settings import settings, resolve_public_base_url
 
 # 【新增】定义项目根目录
 # __file__ 是当前文件的路径 -> .parent 是 core/ -> .parent 是 backend/ -> .parent 是 rebirth_game/
@@ -23,8 +24,7 @@ class ImageService:
         self.image_library = self._load_image_library()
         
         # 【新增】初始化后端URL前缀用于静态图片
-        from config.settings import settings
-        self.backend_base_url = f"http://{settings.backend_host}:{settings.backend_port}"
+        self.backend_base_url = resolve_public_base_url()
 
     def _load_image_library(self) -> List[str]:
         """从指定目录载入所有预置图片的路径，排除错误占位符"""
@@ -47,14 +47,16 @@ class ImageService:
         """
         LOGGER.info(f"[ImageLibrary] 从图库随机选择图片，图库大小: {len(self.image_library)}")
 
+        base_url = resolve_public_base_url()
+
         if not self.image_library:
             LOGGER.error("[ImageLibrary] 图片库为空，返回错误占位符")
-            return f"{self.backend_base_url}/static/error_placeholder.png"
+            return f"{base_url}/static/error_placeholder.png"
 
         # 直接随机选择，不做任何关键字匹配
         selected_image = random.choice(self.image_library)
         # 【关键修复】使用完整的后端URL
-        result_url = f"{self.backend_base_url}/static/{selected_image}"
+        result_url = f"{base_url}/static/{selected_image}"
         
         LOGGER.info(f"[ImageLibrary] ✅ 随机选择图片: {selected_image}")
         LOGGER.info(f"[ImageLibrary] 🎯 返回图片URL: {result_url}")
@@ -165,9 +167,6 @@ class ImageService:
         - 如果开关关闭：直接随机本地图片
         """
         LOGGER.info(f"[ImageService] 🎨 开始为故事获取图片，故事文本长度: {len(story_text)}")
-        
-        # 导入settings（延迟导入避免循环依赖）
-        from config.settings import settings
         
         if settings.enable_ai_image_generation:
             # 策略A：AI优先模式

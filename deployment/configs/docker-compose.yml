@@ -43,6 +43,7 @@ services:
       # 应用配置
       APP_ENV: production
       LOG_LEVEL: ${LOG_LEVEL:-info}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://121.43.247.150}
       
       # 注意：API密钥已在 config/settings.py 中配置，无需环境变量
       

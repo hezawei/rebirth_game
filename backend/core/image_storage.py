@@ -10,7 +10,7 @@ from typing import Optional
 from pathlib import Path
 from urllib.parse import urlparse
 from config.logging_config import LOGGER
-from config.settings import settings
+from config.settings import settings, resolve_public_base_url
 
 
 class ImageStorageService:
@@ -20,7 +20,7 @@ class ImageStorageService:
         # 定义存储目录
         self.storage_dir = settings.BASE_DIR / "assets" / "generated_images"
         # 【关键修复】使用完整的后端URL而不是相对路径
-        self.backend_base_url = f"http://{settings.backend_host}:{settings.backend_port}"
+        self.backend_base_url = resolve_public_base_url()
         self.web_path_prefix = f"{self.backend_base_url}/static/generated"
         
         # 确保存储目录存在
@@ -55,7 +55,7 @@ class ImageStorageService:
             
             # 检查文件是否已存在（避免重复下载）
             if local_path.exists():
-                web_url = f"{self.web_path_prefix}/{filename}"
+                web_url = self._normalize_public_url(f"{self.web_path_prefix}/{filename}")
                 LOGGER.info(f"图像已存在，直接返回: {filename}")
                 LOGGER.info(f"[图像访问URL]: {web_url}")
                 return web_url
@@ -87,7 +87,7 @@ class ImageStorageService:
             LOGGER.info(f"✅ 图像下载成功: {filename} (大小: {local_path.stat().st_size} 字节)")
             
             # 返回完整的web访问路径
-            web_url = f"{self.web_path_prefix}/{filename}"
+            web_url = self._normalize_public_url(f"{self.web_path_prefix}/{filename}")
             LOGGER.info(f"[图像访问URL]: {web_url}")
             LOGGER.info(f"[本地文件路径]: {local_path}")
             return web_url
@@ -128,6 +128,17 @@ class ImageStorageService:
             extension = '.png'  # 默认使用PNG
         
         return f"ai_gen_{hash_hex}{extension}"
+
+    def _normalize_public_url(self, url: str) -> str:
+        """如果生成的URL仍指向127.0.0.1/localhost，则替换为对外可访问的域名。"""
+        parsed = urlparse(url)
+        if parsed.hostname in {"127.0.0.1", "localhost"}:
+            path = parsed.path.lstrip('/')
+            return f"{self.backend_base_url}/{path}".rstrip('/')
+        local_base = f"{parsed.scheme}://{settings.backend_host}:{settings.backend_port}"
+        if url.startswith(local_base):
+            return url.replace(local_base, self.backend_base_url, 1)
+        return url
     
     def cleanup_old_images(self, days_old: int = 30) -> int:
         """

@@ -104,6 +104,9 @@ class Settings(BaseSettings):
     backend_host: str = "127.0.0.1"
     backend_port: int = 8000
 
+    # 对外暴露的完整基础 URL（用于拼接静态资源绝对路径），未设置时回退到 backend_host/backend_port
+    public_base_url: Optional[str] = None
+
     # --- ChapterFlow 配置参数 ---
     min_nodes: int = 6
     max_nodes: int = 22
@@ -142,3 +145,11 @@ class Settings(BaseSettings):
 
 # 全局设置实例
 settings = Settings()
+
+
+def resolve_public_base_url() -> str:
+    """返回用于拼接静态资源绝对路径的基础 URL。"""
+    base = settings.public_base_url
+    if base:
+        return base.rstrip('/')
+    return f"http://{settings.backend_host}:{settings.backend_port}".rstrip('/')
