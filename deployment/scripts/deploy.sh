@@ -112,6 +112,45 @@ check_config() {
     success "环境配置检查通过"
 }
 
+# --- 前端构建（可选） ---
+build_frontend() {
+    info "检查前端构建任务..."
+
+    local frontend_dir="$PROJECT_ROOT/frontend-web"
+
+    if [[ ! -d "$frontend_dir" ]]; then
+        warn "未找到前端目录，跳过前端构建"
+        return
+    fi
+
+    if [[ ! -f "$frontend_dir/package.json" ]]; then
+        warn "前端目录缺少 package.json，跳过前端构建"
+        return
+    fi
+
+    if ! command -v npm >/dev/null 2>&1; then
+        warn "未检测到 npm，可选前端构建被跳过"
+        return
+    fi
+
+    info "开始构建前端 (frontend-web)..."
+
+    pushd "$frontend_dir" >/dev/null
+    trap 'popd >/dev/null' RETURN
+
+    if [[ ! -d node_modules ]]; then
+        info "安装前端依赖 (npm install)..."
+        npm install
+    fi
+
+    info "执行 npm run build..."
+    if npm run build; then
+        success "前端构建完成"
+    else
+        warn "前端构建失败，已跳过。请检查前端依赖或构建配置"
+    fi
+}
+
 # --- 智能检查函数 ---
 check_image_needs_rebuild() {
     local service_name="$1"

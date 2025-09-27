@@ -18380,3 +18380,170 @@ Vertex AI 过滤了你的请求内容，无法生成回复，请更换内容后�
 2025-09-27 20:48:30 | INFO     | backend.main:startup_event:239 - 调试模式: True
 2025-09-27 20:48:30 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
 2025-09-27 20:48:30 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 20:49:04 | INFO     | api.story:prepare_start_level:265 - [PrepareStart] 🚀 开始生成故事概要，愿望：关羽...
+2025-09-27 20:49:04 | DEBUG    | api.story:prepare_start_level:267 - [PrepareStart] 构建提示词上下文...
+2025-09-27 20:49:04 | DEBUG    | api.story:prepare_start_level:269 - [PrepareStart] 上下文构建完成，推荐章节数: 9
+2025-09-27 20:49:04 | INFO     | api.story:prepare_start_level:276 - [PrepareStart] 📝 调用LLM生成关卡元信息，提示词长度: 473
+2025-09-27 20:49:05 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:49:05 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 877
+2025-09-27 20:49:05 | INFO     | api.story:prepare_start_level:278 - [PrepareStart] ✅ LLM响应完成，响应长度: 203
+2025-09-27 20:49:05 | INFO     | api.story:prepare_start_level:305 - [PrepareStart] 📊 JSON解析成功，包含字段: ['level_title', 'background', 'main_quest']
+2025-09-27 20:49:05 | DEBUG    | api.story:prepare_start_level:317 - [PrepareStart] 解析结果 - title: 重返赤壁：改写历史, background: 公元208年，赤壁烽火燃尽江东。关羽身陷历史长河，重生于战前夜。昔日盟友曹操与孙权暗中结盟，刘备孤立..., quest: 阻止周瑜密谋火攻，避免赤壁惨败...
+2025-09-27 20:49:05 | INFO     | api.story:_background_generate_with_pregeneration:72 - [预生成] 开始完整故事生成流程: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:49:05 | INFO     | api.story:prepare_start_level:349 - [预生成] 已启动后台完整故事生成线程: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:49:05 | INFO     | api.story:_background_generate_with_pregeneration:75 - [预生成] 调用story_engine.start_story开始: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:49:05 | INFO     | core.story_engine:start_story:386 - 收到新的故事开始请求，愿望是: '关羽'
+2025-09-27 20:49:08 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:49:08 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1346
+2025-09-27 20:49:08 | INFO     | core.story_engine:start_story:402 - [LLM raw][start] 长度=825 预览='{"text": "夜色如墨，荆州城外的江面泛着铁锈般的微光。关羽立于渡口石台，青龙偃月刀横在膝上，目光穿透雾霭，凝视着对岸那座被火光舔舐的营寨——那是曹操亲率精锐布下的埋伏圈，而他，正要孤身闯入。风卷起战袍一角，仿佛历史的呼吸在耳畔低语。他并非为复仇而来，而是为阻止一场注定将改写天下的血战。远处传来马蹄声，似有斥候巡行。若不速行，时机将逝；若冒进，恐成孤魂。他深吸一口气，刀锋轻颤，像在回应某种宿命的召唤。", "choices": [{"option": "披上敌军弃置的铠甲，混入巡逻队中悄然潜行", "summary": "以伪装之名踏入敌阵腹地", "effects": {"delta_'
+2025-09-27 20:49:08 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=825 预览='{"text": "夜色如墨，荆州城外的江面泛着铁锈般的微光。关羽立于渡口石台，青龙偃月刀横在膝上，目光穿透雾霭，凝视着对岸那座被火光舔舐的营寨——那是曹操亲率精锐布下的埋伏圈，而他，正要孤身闯入。风卷起战袍一角，仿佛历史的呼吸在耳畔低语。他并非为复仇而来，而是为阻止一场注定将改写天下的血战。远处传来马蹄声，似有斥候巡'
+2025-09-27 20:49:08 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=825 预览='{"text": "夜色如墨，荆州城外的江面泛着铁锈般的微光。关羽立于渡口石台，青龙偃月刀横在膝上，目光穿透雾霭，凝视着对岸那座被火光舔舐的营寨——那是曹操亲率精锐布下的埋伏圈，而他，正要孤身闯入。风卷起战袍一角，仿佛历史的呼吸在耳畔低语。他并非为复仇而来，而是为阻止一场注定将改写天下的血战。远处传来马蹄声，似有斥候巡'
+2025-09-27 20:49:08 | INFO     | core.image_service:get_image_for_story:167 - [ImageService] 🎨 开始为故事获取图片，故事文本长度: 195
+2025-09-27 20:49:08 | INFO     | core.image_service:get_image_for_story:174 - [ImageService] 🤖 AI图像生成已启用，优先尝试AI生成...
+2025-09-27 20:49:08 | INFO     | core.image_service:generate_image_realtime:68 - [AIImageGen] 🚀 开始即时生成图片，故事文本长度: 195
+2025-09-27 20:49:08 | DEBUG    | core.image_service:generate_image_realtime:72 - [AIImageGen] 导入图像生成客户端和存储服务...
+2025-09-27 20:49:08 | DEBUG    | core.image_service:generate_image_realtime:77 - [AIImageGen] 提取图像提示词...
+2025-09-27 20:49:08 | INFO     | core.image_service:generate_image_realtime:79 - [AIImageGen] 📝 生成的图像提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，荆州城外的江面...
+2025-09-27 20:49:08 | INFO     | core.image_service:generate_image_realtime:82 - [AIImageGen] 🎨 调用AI生成图像中...
+2025-09-27 20:49:08 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，荆州城外的江面...
+2025-09-27 20:49:22 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-27 20:49:22 | INFO     | core.image_service:generate_image_realtime:84 - [AIImageGen] ✅ AI图像生成API调用成功，响应长度: 73
+2025-09-27 20:49:22 | DEBUG    | core.image_service:generate_image_realtime:87 - [AIImageGen] 提取图像URL...
+2025-09-27 20:49:22 | DEBUG    | core.image_service:_extract_image_url:135 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1758977361309_354.png
+2025-09-27 20:49:22 | INFO     | core.image_service:generate_image_realtime:91 - [AIImageGen] 🔗 提取到图像URL: https://cloudflarer2.nananobanana.com/png/1758977361309_354.png
+2025-09-27 20:49:22 | INFO     | core.image_service:generate_image_realtime:94 - [AIImageGen] 💾 开始下载并保存图像到本地...
+2025-09-27 20:49:22 | INFO     | core.image_storage:save_ai_image:50 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1758977361309_354.png
+2025-09-27 20:49:26 | INFO     | core.image_storage:save_ai_image:87 - ✅ 图像下载成功: ai_gen_f85c3b9c60fa256e51985a241cf116e2.png (大小: 940559 字节)
+2025-09-27 20:49:26 | INFO     | core.image_storage:save_ai_image:91 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:26 | INFO     | core.image_storage:save_ai_image:92 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:26 | INFO     | core.image_service:generate_image_realtime:98 - [AIImageGen] ✅ 图像已完全保存并验证可访问: http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:26 | INFO     | core.image_service:get_image_for_story:181 - [ImageService] ✅ AI生成成功: http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:26 | INFO     | core.story_engine:start_story:447 - 新故事生成成功
+2025-09-27 20:49:26 | INFO     | api.story:_background_generate_with_pregeneration:77 - [预生成] 第一节故事LLM生成完成: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, text长度=195
+2025-09-27 20:49:26 | INFO     | api.story:_background_generate_with_pregeneration:81 - [预生成] 创建会话成功: session_id=2
+2025-09-27 20:49:26 | INFO     | api.story:_background_generate_with_pregeneration:85 - [预生成] 创建第一个节点成功: node_id=2
+2025-09-27 20:49:26 | INFO     | api.story:_background_generate_with_pregeneration:88 - [预生成] 首节点图像已由story_engine处理: node_id=2 image_url=http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:26 | INFO     | api.story:_background_generate_with_pregeneration:101 - [预生成] 已触发speculation预生成: session=2, node=2
+2025-09-27 20:49:26 | INFO     | api.story:_background_generate_with_pregeneration:103 - [预生成] 完整流程成功完成: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, session=2
+2025-09-27 20:49:26 | DEBUG    | api.story:_background_generate_with_pregeneration:115 - [预生成] 数据库会话已安全关闭: user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:379 - [Start] 👤 用户 ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 收到新故事请求，愿望: 关羽...
+2025-09-27 20:49:30 | DEBUG    | api.story:start_new_story:382 - [Start] 愿望校验已通过，开始处理故事生成
+2025-09-27 20:49:30 | DEBUG    | api.story:start_new_story:387 - [Start] 生成缓存键: ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:5657745831763631007
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:391 - [Start] 🔍 缓存查询结果: 命中
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:397 - [预生成] 命中缓存，使用预生成的会话和节点: session=2, node=2
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:418 - [Start] ✅ 使用预生成节点: session_id=2, node_id=2
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:474 - [Start] 🎉 新故事生成成功！session_id=2, node_id=2
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:475 - [Start] 📊 响应详情 - 文本长度: 195, 选择数: 3, 图片: http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:476 - [Start] 🖼️ [图片URL调试] 返回给前端的图片URL: http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:484 - [Start] 📁 [图片文件检查] 文件存在: True, 大小: 940559字节, 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:487 - [Start] 🔮 触发动态窗口补齐: session=2, node=2, depth=1
+2025-09-27 20:49:30 | DEBUG    | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=2 node=2 depth=1
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:489 - [Start] ✅ speculation补齐任务已启动
+2025-09-27 20:49:30 | INFO     | api.story:start_new_story:491 - [Start] 🚀 API响应即将返回，图片URL: http://127.0.0.1:8000/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:30 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f85c3b9c60fa256e51985a241cf116e2.png exists=True size=940559
+2025-09-27 20:49:30 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:30 | DEBUG    | core.speculation:_generate_children_pipeline:213 - [Speculation] pipeline generating 3 children for node=2
+2025-09-27 20:49:30 | INFO     | core.speculation:_generate_child_node:240 - [Speculation] 开始生成故事+图像块：parent=2 choice='披上敌军弃置的铠甲，混入巡逻队中悄然潜行'
+2025-09-27 20:49:30 | INFO     | core.speculation:_generate_child_node:240 - [Speculation] 开始生成故事+图像块：parent=2 choice='引弓射断敌方旗杆，借混乱之势纵马冲阵'
+2025-09-27 20:49:30 | INFO     | core.speculation:_generate_child_node:247 - [Speculation] 第1阶段-故事生成开始：parent=2 choice='披上敌军弃置的铠甲，混入巡逻队中悄然潜行'
+2025-09-27 20:49:30 | INFO     | core.speculation:_generate_child_node:240 - [Speculation] 开始生成故事+图像块：parent=2 choice='静坐原地，以长刀敲击石阶，奏出古时军令暗号'
+2025-09-27 20:49:30 | INFO     | core.speculation:_generate_child_node:247 - [Speculation] 第1阶段-故事生成开始：parent=2 choice='引弓射断敌方旗杆，借混乱之势纵马冲阵'
+2025-09-27 20:49:30 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 披上敌军弃置的铠甲，混入巡逻队中悄然潜行
+2025-09-27 20:49:30 | INFO     | core.speculation:_generate_child_node:247 - [Speculation] 第1阶段-故事生成开始：parent=2 choice='静坐原地，以长刀敲击石阶，奏出古时军令暗号'
+2025-09-27 20:49:30 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 引弓射断敌方旗杆，借混乱之势纵马冲阵
+2025-09-27 20:49:30 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 静坐原地，以长刀敲击石阶，奏出古时军令暗号
+2025-09-27 20:49:30 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-27 20:49:34 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:49:34 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1551
+2025-09-27 20:49:34 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=848 预览='{"text": "江雾如纱，裹着铁锈味的风掠过关公肩头。远处敌营火把摇曳，隐约传来更声与马嘶。他凝视着那道被火光勾勒出的寨门——守卫正轮换交接，刀锋在暗处一闪而逝。若此时强闯，必惊动伏兵；若静候，恐错失夜半最深的寂静。他缓缓将青龙偃月刀插入泥地，以刀尖轻点江面，水纹荡开，仿佛在叩问命运。忽然，一只黑鸦从枯枝上振翅飞起，直冲云霄，鸣声凄厉。那是天意的提示？还是警兆？他闭目片刻，再睁眼时，眸中已无犹豫。", "choices": [{"option": "借黑鸦飞起之势，猛然跃向寨墙，以刀尖勾住垛口翻入", "summary": "借自然之象突袭，动作如鹰隼扑食", "effects": {"d'
+2025-09-27 20:49:34 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=848 预览='{"text": "江雾如纱，裹着铁锈味的风掠过关公肩头。远处敌营火把摇曳，隐约传来更声与马嘶。他凝视着那道被火光勾勒出的寨门——守卫正轮换交接，刀锋在暗处一闪而逝。若此时强闯，必惊动伏兵；若静候，恐错失夜半最深的寂静。他缓缓将青龙偃月刀插入泥地，以刀尖轻点江面，水纹荡开，仿佛在叩问命运。忽然，一只黑鸦从枯枝上振翅飞起'
+2025-09-27 20:49:34 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=848 预览='{"text": "江雾如纱，裹着铁锈味的风掠过关公肩头。远处敌营火把摇曳，隐约传来更声与马嘶。他凝视着那道被火光勾勒出的寨门——守卫正轮换交接，刀锋在暗处一闪而逝。若此时强闯，必惊动伏兵；若静候，恐错失夜半最深的寂静。他缓缓将青龙偃月刀插入泥地，以刀尖轻点江面，水纹荡开，仿佛在叩问命运。忽然，一只黑鸦从枯枝上振翅飞起'
+2025-09-27 20:49:34 | INFO     | core.image_service:get_image_for_story:167 - [ImageService] 🎨 开始为故事获取图片，故事文本长度: 192
+2025-09-27 20:49:34 | INFO     | core.image_service:get_image_for_story:174 - [ImageService] 🤖 AI图像生成已启用，优先尝试AI生成...
+2025-09-27 20:49:34 | INFO     | core.image_service:generate_image_realtime:68 - [AIImageGen] 🚀 开始即时生成图片，故事文本长度: 192
+2025-09-27 20:49:34 | DEBUG    | core.image_service:generate_image_realtime:72 - [AIImageGen] 导入图像生成客户端和存储服务...
+2025-09-27 20:49:34 | DEBUG    | core.image_service:generate_image_realtime:77 - [AIImageGen] 提取图像提示词...
+2025-09-27 20:49:34 | INFO     | core.image_service:generate_image_realtime:79 - [AIImageGen] 📝 生成的图像提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 江雾如纱，裹着铁锈味的风...
+2025-09-27 20:49:34 | INFO     | core.image_service:generate_image_realtime:82 - [AIImageGen] 🎨 调用AI生成图像中...
+2025-09-27 20:49:34 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 江雾如纱，裹着铁锈味的风...
+2025-09-27 20:49:34 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:49:34 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1529
+2025-09-27 20:49:34 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=830 预览='{"text": "江风骤紧，芦苇丛中传来窸窣轻响。关羽凝神望去，一队曹军斥候正从浮桥上疾驰而过，马蹄踏碎水影。他悄然将青龙偃月刀斜插于腰后，指尖轻抚刀柄上的血痕——那不是敌人的，而是自己十年前在麦城所受的旧伤。若此时冲出，必被发现；若退守，便再无机会扭转战局。远处火光忽明忽暗，仿佛天命在低语：要么以勇破局，要么以智逆流。他闭目片刻，忽然睁开眼，望向对岸那座被烟熏黑的箭楼，心中已有了决断。", "choices": [{"option": "扯下战袍一角系于长矛顶端，模仿敌军旗号引开巡哨", "summary": "以假乱真，借势掩护行踪", "effects": {"delta_progre'
+2025-09-27 20:49:34 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=830 预览='{"text": "江风骤紧，芦苇丛中传来窸窣轻响。关羽凝神望去，一队曹军斥候正从浮桥上疾驰而过，马蹄踏碎水影。他悄然将青龙偃月刀斜插于腰后，指尖轻抚刀柄上的血痕——那不是敌人的，而是自己十年前在麦城所受的旧伤。若此时冲出，必被发现；若退守，便再无机会扭转战局。远处火光忽明忽暗，仿佛天命在低语：要么以勇破局，要么以智逆'
+2025-09-27 20:49:34 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=830 预览='{"text": "江风骤紧，芦苇丛中传来窸窣轻响。关羽凝神望去，一队曹军斥候正从浮桥上疾驰而过，马蹄踏碎水影。他悄然将青龙偃月刀斜插于腰后，指尖轻抚刀柄上的血痕——那不是敌人的，而是自己十年前在麦城所受的旧伤。若此时冲出，必被发现；若退守，便再无机会扭转战局。远处火光忽明忽暗，仿佛天命在低语：要么以勇破局，要么以智逆'
+2025-09-27 20:49:34 | INFO     | core.image_service:get_image_for_story:167 - [ImageService] 🎨 开始为故事获取图片，故事文本长度: 186
+2025-09-27 20:49:34 | INFO     | core.image_service:get_image_for_story:174 - [ImageService] 🤖 AI图像生成已启用，优先尝试AI生成...
+2025-09-27 20:49:34 | INFO     | core.image_service:generate_image_realtime:68 - [AIImageGen] 🚀 开始即时生成图片，故事文本长度: 186
+2025-09-27 20:49:34 | DEBUG    | core.image_service:generate_image_realtime:72 - [AIImageGen] 导入图像生成客户端和存储服务...
+2025-09-27 20:49:34 | DEBUG    | core.image_service:generate_image_realtime:77 - [AIImageGen] 提取图像提示词...
+2025-09-27 20:49:34 | INFO     | core.image_service:generate_image_realtime:79 - [AIImageGen] 📝 生成的图像提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 江风骤紧，芦苇丛中传来窸...
+2025-09-27 20:49:34 | INFO     | core.image_service:generate_image_realtime:82 - [AIImageGen] 🎨 调用AI生成图像中...
+2025-09-27 20:49:34 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 江风骤紧，芦苇丛中传来窸...
+2025-09-27 20:49:35 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-27 20:49:35 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1543
+2025-09-27 20:49:35 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=857 预览='{"text": "江雾如纱，战马低嘶。关羽凝视着敌营火光中隐约晃动的旗帜，忽闻一阵急促的鼓点自寨内传来——那是调兵令。他猛然意识到，曹操已察觉异动，正欲合围。青龙偃月刀缓缓抬起，刀锋映出他眼中一瞬的寒芒。若此刻不动，便再无机会；若贸然冲入，恐成瓮中之鳖。他深吸一口气，将刀背抵于肩头，仿佛在与千军万马对峙。远处，一名小卒正从暗影中走出，手中提灯微颤，似在巡哨。他必须在对方抬头前决定：是借风而行，还是逆风而上？", "choices": [{"option": "悄然跃上江边枯树，借枝杈掩身俯瞰敌营布防", "summary": "借自然之势窥探全局，伺机而动", "effects": {"de'
+2025-09-27 20:49:35 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=857 预览='{"text": "江雾如纱，战马低嘶。关羽凝视着敌营火光中隐约晃动的旗帜，忽闻一阵急促的鼓点自寨内传来——那是调兵令。他猛然意识到，曹操已察觉异动，正欲合围。青龙偃月刀缓缓抬起，刀锋映出他眼中一瞬的寒芒。若此刻不动，便再无机会；若贸然冲入，恐成瓮中之鳖。他深吸一口气，将刀背抵于肩头，仿佛在与千军万马对峙。远处，一名小'
+2025-09-27 20:49:35 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=857 预览='{"text": "江雾如纱，战马低嘶。关羽凝视着敌营火光中隐约晃动的旗帜，忽闻一阵急促的鼓点自寨内传来——那是调兵令。他猛然意识到，曹操已察觉异动，正欲合围。青龙偃月刀缓缓抬起，刀锋映出他眼中一瞬的寒芒。若此刻不动，便再无机会；若贸然冲入，恐成瓮中之鳖。他深吸一口气，将刀背抵于肩头，仿佛在与千军万马对峙。远处，一名小'
+2025-09-27 20:49:35 | INFO     | core.image_service:get_image_for_story:167 - [ImageService] 🎨 开始为故事获取图片，故事文本长度: 196
+2025-09-27 20:49:35 | INFO     | core.image_service:get_image_for_story:174 - [ImageService] 🤖 AI图像生成已启用，优先尝试AI生成...
+2025-09-27 20:49:35 | INFO     | core.image_service:generate_image_realtime:68 - [AIImageGen] 🚀 开始即时生成图片，故事文本长度: 196
+2025-09-27 20:49:35 | DEBUG    | core.image_service:generate_image_realtime:72 - [AIImageGen] 导入图像生成客户端和存储服务...
+2025-09-27 20:49:35 | DEBUG    | core.image_service:generate_image_realtime:77 - [AIImageGen] 提取图像提示词...
+2025-09-27 20:49:35 | INFO     | core.image_service:generate_image_realtime:79 - [AIImageGen] 📝 生成的图像提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 江雾如纱，战马低嘶。关羽...
+2025-09-27 20:49:35 | INFO     | core.image_service:generate_image_realtime:82 - [AIImageGen] 🎨 调用AI生成图像中...
+2025-09-27 20:49:35 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 江雾如纱，战马低嘶。关羽...
+2025-09-27 20:49:45 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_4b90a16c74b4abc5604d1e74857fdbc1.png -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_4b90a16c74b4abc5604d1e74857fdbc1.png exists=False size=0
+2025-09-27 20:49:45 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_4b90a16c74b4abc5604d1e74857fdbc1.png
+2025-09-27 20:49:47 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 763 (attempt 1/2)
+2025-09-27 20:49:47 | INFO     | core.image_service:generate_image_realtime:84 - [AIImageGen] ✅ AI图像生成API调用成功，响应长度: 129
+2025-09-27 20:49:47 | DEBUG    | core.image_service:generate_image_realtime:87 - [AIImageGen] 提取图像URL...
+2025-09-27 20:49:47 | DEBUG    | core.image_service:_extract_image_url:135 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1758977386557_488.png
+2025-09-27 20:49:47 | INFO     | core.image_service:generate_image_realtime:91 - [AIImageGen] 🔗 提取到图像URL: https://cloudflarer2.nananobanana.com/png/1758977386557_488.png
+2025-09-27 20:49:47 | INFO     | core.image_service:generate_image_realtime:94 - [AIImageGen] 💾 开始下载并保存图像到本地...
+2025-09-27 20:49:47 | INFO     | core.image_storage:save_ai_image:50 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1758977386557_488.png
+2025-09-27 20:49:48 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-27 20:49:48 | INFO     | core.image_service:generate_image_realtime:84 - [AIImageGen] ✅ AI图像生成API调用成功，响应长度: 73
+2025-09-27 20:49:48 | DEBUG    | core.image_service:generate_image_realtime:87 - [AIImageGen] 提取图像URL...
+2025-09-27 20:49:48 | DEBUG    | core.image_service:_extract_image_url:135 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1758977387361_255.png
+2025-09-27 20:49:48 | INFO     | core.image_service:generate_image_realtime:91 - [AIImageGen] 🔗 提取到图像URL: https://cloudflarer2.nananobanana.com/png/1758977387361_255.png
+2025-09-27 20:49:48 | INFO     | core.image_service:generate_image_realtime:94 - [AIImageGen] 💾 开始下载并保存图像到本地...
+2025-09-27 20:49:48 | INFO     | core.image_storage:save_ai_image:50 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1758977387361_255.png
+2025-09-27 20:49:49 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 754 (attempt 1/2)
+2025-09-27 20:49:49 | INFO     | core.image_service:generate_image_realtime:84 - [AIImageGen] ✅ AI图像生成API调用成功，响应长度: 120
+2025-09-27 20:49:49 | DEBUG    | core.image_service:generate_image_realtime:87 - [AIImageGen] 提取图像URL...
+2025-09-27 20:49:49 | DEBUG    | core.image_service:_extract_image_url:135 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1758977388685_371.png
+2025-09-27 20:49:49 | INFO     | core.image_service:generate_image_realtime:91 - [AIImageGen] 🔗 提取到图像URL: https://cloudflarer2.nananobanana.com/png/1758977388685_371.png
+2025-09-27 20:49:49 | INFO     | core.image_service:generate_image_realtime:94 - [AIImageGen] 💾 开始下载并保存图像到本地...
+2025-09-27 20:49:49 | INFO     | core.image_storage:save_ai_image:50 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1758977388685_371.png
+2025-09-27 20:49:49 | INFO     | core.image_storage:save_ai_image:87 - ✅ 图像下载成功: ai_gen_a836658654ac9fd2b87db3ef03a31a11.png (大小: 1090602 字节)
+2025-09-27 20:49:49 | INFO     | core.image_storage:save_ai_image:91 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_a836658654ac9fd2b87db3ef03a31a11.png
+2025-09-27 20:49:49 | INFO     | core.image_storage:save_ai_image:92 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_a836658654ac9fd2b87db3ef03a31a11.png
+2025-09-27 20:49:49 | INFO     | core.image_service:generate_image_realtime:98 - [AIImageGen] ✅ 图像已完全保存并验证可访问: http://127.0.0.1:8000/static/generated/ai_gen_a836658654ac9fd2b87db3ef03a31a11.png
+2025-09-27 20:49:49 | INFO     | core.image_service:get_image_for_story:181 - [ImageService] ✅ AI生成成功: http://127.0.0.1:8000/static/generated/ai_gen_a836658654ac9fd2b87db3ef03a31a11.png
+2025-09-27 20:49:49 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-27 20:49:49 | INFO     | core.speculation:_generate_child_node:256 - [Speculation] 第1阶段-故事生成完成：parent=2 choice='引弓射断敌方旗杆，借混乱之势纵马冲阵' text_length=192
+2025-09-27 20:49:49 | INFO     | core.speculation:_generate_child_node:266 - [Speculation] 第2阶段-创建数据库节点开始：parent=2 choice='引弓射断敌方旗杆，借混乱之势纵马冲阵'
+2025-09-27 20:49:49 | INFO     | core.speculation:_generate_child_node:276 - [Speculation] 第2阶段-数据库节点创建完成：node_id=3 parent=2 choice='引弓射断敌方旗杆，借混乱之势纵马冲阵'
+2025-09-27 20:49:49 | INFO     | core.speculation:_generate_child_node:291 - [Speculation] 第3阶段-节点创建完成，图像已由story_engine处理：node_id=3 image_url=http://127.0.0.1:8000/static/generated/ai_gen_a836658654ac9fd2b87db3ef03a31a11.png
+2025-09-27 20:49:52 | INFO     | core.image_storage:save_ai_image:87 - ✅ 图像下载成功: ai_gen_5913a38ecb35c63221c05eb93837222b.png (大小: 1219461 字节)
+2025-09-27 20:49:52 | INFO     | core.image_storage:save_ai_image:91 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_5913a38ecb35c63221c05eb93837222b.png
+2025-09-27 20:49:52 | INFO     | core.image_storage:save_ai_image:92 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_5913a38ecb35c63221c05eb93837222b.png
+2025-09-27 20:49:52 | INFO     | core.image_service:generate_image_realtime:98 - [AIImageGen] ✅ 图像已完全保存并验证可访问: http://127.0.0.1:8000/static/generated/ai_gen_5913a38ecb35c63221c05eb93837222b.png
+2025-09-27 20:49:52 | INFO     | core.image_service:get_image_for_story:181 - [ImageService] ✅ AI生成成功: http://127.0.0.1:8000/static/generated/ai_gen_5913a38ecb35c63221c05eb93837222b.png
+2025-09-27 20:49:52 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-27 20:49:52 | INFO     | core.speculation:_generate_child_node:256 - [Speculation] 第1阶段-故事生成完成：parent=2 choice='披上敌军弃置的铠甲，混入巡逻队中悄然潜行' text_length=196
+2025-09-27 20:49:52 | INFO     | core.speculation:_generate_child_node:266 - [Speculation] 第2阶段-创建数据库节点开始：parent=2 choice='披上敌军弃置的铠甲，混入巡逻队中悄然潜行'
+2025-09-27 20:49:52 | INFO     | core.speculation:_generate_child_node:276 - [Speculation] 第2阶段-数据库节点创建完成：node_id=4 parent=2 choice='披上敌军弃置的铠甲，混入巡逻队中悄然潜行'
+2025-09-27 20:49:52 | INFO     | core.speculation:_generate_child_node:291 - [Speculation] 第3阶段-节点创建完成，图像已由story_engine处理：node_id=4 image_url=http://127.0.0.1:8000/static/generated/ai_gen_5913a38ecb35c63221c05eb93837222b.png
+2025-09-27 20:49:53 | INFO     | core.image_storage:save_ai_image:87 - ✅ 图像下载成功: ai_gen_6d84c2b13964ca1abe1caf2298b8e63b.png (大小: 1651273 字节)
+2025-09-27 20:49:53 | INFO     | core.image_storage:save_ai_image:91 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_6d84c2b13964ca1abe1caf2298b8e63b.png
+2025-09-27 20:49:53 | INFO     | core.image_storage:save_ai_image:92 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_6d84c2b13964ca1abe1caf2298b8e63b.png
+2025-09-27 20:49:53 | INFO     | core.image_service:generate_image_realtime:98 - [AIImageGen] ✅ 图像已完全保存并验证可访问: http://127.0.0.1:8000/static/generated/ai_gen_6d84c2b13964ca1abe1caf2298b8e63b.png
+2025-09-27 20:49:53 | INFO     | core.image_service:get_image_for_story:181 - [ImageService] ✅ AI生成成功: http://127.0.0.1:8000/static/generated/ai_gen_6d84c2b13964ca1abe1caf2298b8e63b.png
+2025-09-27 20:49:53 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-27 20:49:53 | INFO     | core.speculation:_generate_child_node:256 - [Speculation] 第1阶段-故事生成完成：parent=2 choice='静坐原地，以长刀敲击石阶，奏出古时军令暗号' text_length=186
+2025-09-27 20:49:53 | INFO     | core.speculation:_generate_child_node:266 - [Speculation] 第2阶段-创建数据库节点开始：parent=2 choice='静坐原地，以长刀敲击石阶，奏出古时军令暗号'
+2025-09-27 20:49:53 | INFO     | core.speculation:_generate_child_node:276 - [Speculation] 第2阶段-数据库节点创建完成：node_id=5 parent=2 choice='静坐原地，以长刀敲击石阶，奏出古时军令暗号'
+2025-09-27 20:49:53 | INFO     | core.speculation:_generate_child_node:291 - [Speculation] 第3阶段-节点创建完成，图像已由story_engine处理：node_id=5 image_url=http://127.0.0.1:8000/static/generated/ai_gen_6d84c2b13964ca1abe1caf2298b8e63b.png
+2025-09-27 20:56:11 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_b8328da11d80d8f0b305a04f392414ba.png -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_b8328da11d80d8f0b305a04f392414ba.png exists=False size=0
+2025-09-27 20:56:11 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_b8328da11d80d8f0b305a04f392414ba.png
