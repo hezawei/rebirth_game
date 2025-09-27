@@ -8,6 +8,7 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
 
 
 # revision identifiers, used by Alembic.
@@ -67,12 +68,12 @@ def upgrade() -> None:
     op.create_table(
         "wish_moderation_records",
         sa.Column("id", sa.Integer(), primary_key=True, index=True),
-        sa.Column("user_id", sa.String(length=36), nullable=True, index=True),
+        sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=True, index=True),  # 修复：使用UUID类型
         sa.Column("wish_text", sa.Text(), nullable=False),
         sa.Column("status", sa.String(length=20), nullable=False),
         sa.Column("reason", sa.Text(), nullable=True),
         sa.Column("created_at", sa.DateTime(), server_default=sa.func.now(), nullable=False),
-        sa.ForeignKeyConstraint(["user_id"], ["users.id"], ondelete="SET NULL"),
+        sa.ForeignKeyConstraint(["user_id"], ["users.id"], ondelete="SET NULL"),  # 恢复外键约束
     )
     op.create_index("ix_wish_moderation_records_user_id", "wish_moderation_records", ["user_id"])
 
