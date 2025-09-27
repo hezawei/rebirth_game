@@ -12,20 +12,25 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 RUN echo "deb https://mirrors.aliyun.com/debian/ trixie main" > /etc/apt/sources.list && \
     echo "deb https://mirrors.aliyun.com/debian/ trixie-updates main" >> /etc/apt/sources.list && \
     echo "deb https://mirrors.aliyun.com/debian-security/ trixie-security main" >> /etc/apt/sources.list && \
-    apt-get update && \
+    rm -f /etc/apt/sources.list.d/* && \
+    apt-get update --allow-releaseinfo-change && \
     apt-get install -y --no-install-recommends \
     libpq-dev \
     gcc \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # 设置工作目录
 WORKDIR /app
 
 # 复制并安装Python依赖（利用Docker缓存层）
 COPY requirements.txt .
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
+    pip config set install.trusted-host pypi.tuna.tsinghua.edu.cn && \
+    pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    pip cache purge
 
 # 复制项目代码
 COPY backend/ ./backend/
