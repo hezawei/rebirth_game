@@ -12,6 +12,7 @@ from backend import schemas
 from core.story_engine import story_engine
 from core.history_context import build_prompt_context
 from config.logging_config import LOGGER
+from config.settings import settings
 from database.base import get_db, SessionLocal
 from database import crud, models
 # 导入新的安全依赖
@@ -147,7 +148,6 @@ def _wait_for_node_complete(node, db, max_wait_seconds: int = 60) -> bool:
         # 检查3: 如果是AI生成的图片，检查文件是否真的存在且可访问
         if node.image_url.startswith('/static/generated/'):
             # 这是AI生成的图片，需要验证文件存在性
-            from config.settings import settings
             filename = node.image_url.replace('/static/generated/', '')
             file_path = settings.BASE_DIR / "assets" / "generated_images" / filename
             
@@ -374,8 +374,7 @@ async def start_new_story(
     Returns:
         StorySegment: 包含故事文本、选择选项和图片的响应
     """
-    from config.settings import settings
-    
+
     user_id = current_user.id
     LOGGER.info(f"[Start] 👤 用户 {user_id} 收到新故事请求，愿望: {request.wish[:50]}...")
 
@@ -481,13 +480,15 @@ async def start_new_story(
         local_file_path = settings.BASE_DIR / "assets" / "generated_images" / filename
         file_exists = local_file_path.exists()
         file_size = local_file_path.stat().st_size if file_exists else 0
-        LOGGER.info(f"[Start] 📁 [图片文件检查] 文件存在: {file_exists}, 大小: {file_size}字节, 路径: {local_file_path}")
-    
+        LOGGER.info(
+            f"[Start] 📁 [图片文件检查] 文件存在: {file_exists}, 大小: {file_size}字节, 路径: {local_file_path}"
+        )
+
     # 动态窗口：无论是否命中预生成，都要从“当前节点=第一节”补齐到 max_depth 层
     LOGGER.info(f"[Start] 🔮 触发动态窗口补齐: session={session.id}, node={node.id}, depth={settings.speculation_max_depth}")
     speculation_service.enqueue(session.id, node.id, depth=settings.speculation_max_depth)
     LOGGER.info(f"[Start] ✅ speculation补齐任务已启动")
-    
+
     LOGGER.info(f"[Start] 🚀 API响应即将返回，图片URL: {result.image_url}")
     return result
 
