@@ -18784,3 +18784,29 @@ Vertex AI 过滤了你的请求内容，无法生成回复，请更换内容后�
 2025-09-27 21:24:53 | INFO     | backend.main:startup_event:239 - 调试模式: True
 2025-09-27 21:24:53 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
 2025-09-27 21:24:53 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 21:47:29 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-27 21:47:30 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-27 21:47:31 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-27 21:47:31 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-27 21:47:31 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-27 21:47:31 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-27 21:47:31 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-27 21:47:31 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 21:47:32 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 21:47:32 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-27 21:47:32 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-27 21:47:32 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-27 21:47:32 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-27 21:47:33 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-27 21:47:33 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-27 21:47:33 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-27 21:47:33 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-27 21:47:33 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
