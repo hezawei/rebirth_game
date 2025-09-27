@@ -8,7 +8,7 @@ import sys
 import shutil
 
 # --- 配置 --- #
-# 后端配置
+# 本地开发配置
 BACKEND_PORT = 8000
 BACKEND_COMMAND = "uvicorn backend.main:app --host 0.0.0.0 --port {port} --reload --reload-exclude 'assets/generated_images'"
 
@@ -16,6 +16,10 @@ BACKEND_COMMAND = "uvicorn backend.main:app --host 0.0.0.0 --port {port} --reloa
 FRONTEND_DIR = "frontend-web"
 FRONTEND_PORT = 5173
 FRONTEND_COMMAND = "npm run dev"
+
+# 服务器部署配置
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+COMPOSE_FILE = os.path.join(PROJECT_ROOT, "deployment", "configs", "docker-compose.yml")
 
 # --- 核心功能 --- #
 
@@ -35,6 +39,21 @@ def _is_port_open(host: str, port: int, timeout: float = 0.5) -> bool:
 
 def _docker_available() -> bool:
     return shutil.which("docker") is not None
+
+def _docker_compose_available() -> bool:
+    """检查docker compose命令是否可用"""
+    return shutil.which("docker") is not None and subprocess.run(
+        ["docker", "compose", "version"], 
+        capture_output=True, check=False
+    ).returncode == 0
+
+def _is_server_environment() -> bool:
+    """检测是否为服务器环境（Docker Compose部署）"""
+    return (
+        os.path.exists(COMPOSE_FILE) and
+        _docker_compose_available() and
+        not os.path.exists(FRONTEND_DIR)  # 服务器上通常没有本地前端开发目录
+    )
 
 def _run(cmd: list[str]) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, check=False, capture_output=True, text=True)
@@ -299,8 +318,81 @@ def _run_alembic(args, cwd):
         # 中断启动流程，因为数据库不可用会导致后续失败
         raise
 
+# --- 服务器环境 Docker Compose 管理 ---
+
+def docker_compose_start():
+    """启动Docker Compose服务"""
+    print("--- 启动Docker Compose服务 ---")
+    if not os.path.exists(COMPOSE_FILE):
+        raise RuntimeError(f"Docker Compose配置文件不存在: {COMPOSE_FILE}")
+    
+    cmd = ["docker", "compose", "-f", COMPOSE_FILE, "up", "-d"]
+    print(f"执行命令: {' '.join(cmd)}")
+    result = subprocess.run(cmd, check=True)
+    print("✅ Docker Compose服务启动成功")
+    return result
+
+def docker_compose_stop():
+    """停止Docker Compose服务"""
+    print("--- 停止Docker Compose服务 ---")
+    cmd = ["docker", "compose", "-f", COMPOSE_FILE, "down"]
+    print(f"执行命令: {' '.join(cmd)}")
+    result = subprocess.run(cmd, check=True)
+    print("✅ Docker Compose服务已停止")
+    return result
+
+def docker_compose_restart():
+    """重启Docker Compose服务"""
+    print("--- 重启Docker Compose服务 ---")
+    docker_compose_stop()
+    time.sleep(2)
+    docker_compose_start()
+
+def docker_compose_status():
+    """显示Docker Compose服务状态"""
+    print("--- Docker Compose服务状态 ---")
+    cmd = ["docker", "compose", "-f", COMPOSE_FILE, "ps"]
+    subprocess.run(cmd)
+    
+    # 显示访问信息
+    try:
+        # 尝试获取服务器IP
+        result = subprocess.run(["hostname", "-I"], capture_output=True, text=True, check=False)
+        if result.returncode == 0:
+            server_ip = result.stdout.strip().split()[0]
+            print(f"\n🌐 服务访问地址:")
+            print(f"  主站: http://{server_ip}")
+            print(f"  API文档: http://{server_ip}/docs")
+    except:
+        print(f"\n🌐 服务访问地址:")
+        print(f"  主站: http://localhost")
+        print(f"  API文档: http://localhost/docs")
+
+def docker_compose_logs(service=None):
+    """显示Docker Compose日志"""
+    cmd = ["docker", "compose", "-f", COMPOSE_FILE, "logs", "-f"]
+    if service:
+        cmd.append(service)
+        print(f"--- 显示 {service} 服务日志 ---")
+    else:
+        print("--- 显示所有服务日志 ---")
+    
+    subprocess.run(cmd)
+
+# --- 统一服务管理 ---
+
 def start_services():
-    """启动所有开发服务"""
+    """启动所有服务（自动检测环境）"""
+    if _is_server_environment():
+        print("🔍 检测到服务器环境，使用Docker Compose管理")
+        docker_compose_start()
+        docker_compose_status()
+    else:
+        print("🔍 检测到本地开发环境，启动本地服务")
+        start_local_services()
+
+def start_local_services():
+    """启动本地开发服务"""
     cleanup_ports()
     # 在启动后端前，先确保数据库迁移已应用
     # 0. 确保本机有可用的 PostgreSQL（若未配置，则自动以 Docker 启动一个本地容器）
@@ -312,7 +404,7 @@ def start_services():
     time.sleep(5)
     frontend_process = start_frontend()
     
-    print("--- 所有服务已启动 --- ")
+    print("--- 所有本地服务已启动 --- ")
     print("你可以通过 Ctrl+C 来停止此脚本，但这只会关闭 manage.py。")
     print("后端服务将在后台继续运行。你可以通过再次运行 `python manage.py start` 来清理端口并重启。")
 
@@ -322,22 +414,66 @@ def start_services():
     except KeyboardInterrupt:
         print("\n检测到 Ctrl+C，正在关闭... (注意：这只会关闭此脚本，后台进程可能需要手动清理或通过再次运行脚本来清理)")
 
+def stop_services():
+    """停止所有服务（自动检测环境）"""
+    if _is_server_environment():
+        print("🔍 检测到服务器环境，停止Docker Compose服务")
+        docker_compose_stop()
+    else:
+        print("🔍 检测到本地开发环境，清理本地端口")
+        cleanup_ports()
+
+def restart_services():
+    """重启所有服务（自动检测环境）"""
+    if _is_server_environment():
+        print("🔍 检测到服务器环境，重启Docker Compose服务")
+        docker_compose_restart()
+    else:
+        print("🔍 检测到本地开发环境，重启本地服务")
+        start_local_services()
+
 # --- 主程序入口 --- #
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="AI Rebirth Game 本地开发管理脚本")
+    parser = argparse.ArgumentParser(description="AI Rebirth Game 统一管理脚本 (支持本地开发 + 服务器部署)")
     subparsers = parser.add_subparsers(dest="command", help="可用的命令")
 
-    # 'start' 命令
-    start_parser = subparsers.add_parser("start", help="清理端口并启动本地开发服务器")
+    # 通用命令（自动检测环境）
+    start_parser = subparsers.add_parser("start", help="启动服务（自动检测本地/服务器环境）")
     start_parser.set_defaults(func=start_services)
 
-    # 'cleanup' 命令
-    cleanup_parser = subparsers.add_parser("cleanup", help="仅清理被占用的端口")
+    stop_parser = subparsers.add_parser("stop", help="停止服务（自动检测本地/服务器环境）")
+    stop_parser.set_defaults(func=stop_services)
+
+    restart_parser = subparsers.add_parser("restart", help="重启服务（自动检测本地/服务器环境）")
+    restart_parser.set_defaults(func=restart_services)
+
+    # 本地开发专用命令
+    cleanup_parser = subparsers.add_parser("cleanup", help="[本地] 清理被占用的端口")
     cleanup_parser.set_defaults(func=cleanup_ports)
+
+    # 服务器专用命令
+    status_parser = subparsers.add_parser("status", help="[服务器] 显示Docker Compose服务状态")
+    status_parser.set_defaults(func=docker_compose_status)
+
+    logs_parser = subparsers.add_parser("logs", help="[服务器] 显示服务日志")
+    logs_parser.add_argument("service", nargs="?", help="指定服务名 (app/db/nginx)，不指定则显示所有")
+    logs_parser.set_defaults(func=lambda: docker_compose_logs(getattr(parser.parse_args(), 'service', None)))
 
     args = parser.parse_args()
 
+    # 环境检测提示
+    if _is_server_environment():
+        print("🖥️  当前环境: 服务器 (Docker Compose)")
+    else:
+        print("💻 当前环境: 本地开发")
+    
     if hasattr(args, 'func'):
-        args.func()
+        try:
+            args.func()
+        except KeyboardInterrupt:
+            print("\n操作已取消")
+        except Exception as e:
+            print(f"❌ 执行失败: {e}")
+            sys.exit(1)
     else:
         parser.print_help()
