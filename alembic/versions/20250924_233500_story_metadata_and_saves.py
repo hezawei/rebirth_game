@@ -65,17 +65,27 @@ def upgrade() -> None:
     op.create_index("ix_story_saves_session_id", "story_saves", ["session_id"])
     op.create_index("ix_story_saves_node_id", "story_saves", ["node_id"])
 
-    op.create_table(
-        "wish_moderation_records",
-        sa.Column("id", sa.Integer(), primary_key=True, index=True),
-        sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=True, index=True),  # 修复：使用UUID类型
-        sa.Column("wish_text", sa.Text(), nullable=False),
-        sa.Column("status", sa.String(length=20), nullable=False),
-        sa.Column("reason", sa.Text(), nullable=True),
-        sa.Column("created_at", sa.DateTime(), server_default=sa.func.now(), nullable=False),
-        sa.ForeignKeyConstraint(["user_id"], ["users.id"], ondelete="SET NULL"),  # 恢复外键约束
-    )
-    op.create_index("ix_wish_moderation_records_user_id", "wish_moderation_records", ["user_id"])
+    # 检查表是否已存在，如果不存在才创建
+    from sqlalchemy import inspect
+    conn = op.get_bind()
+    inspector = inspect(conn)
+    
+    if "wish_moderation_records" not in inspector.get_table_names():
+        op.create_table(
+            "wish_moderation_records",
+            sa.Column("id", sa.Integer(), primary_key=True, index=True),
+            sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=True, index=True),  # 修复：使用UUID类型
+            sa.Column("wish_text", sa.Text(), nullable=False),
+            sa.Column("status", sa.String(length=20), nullable=False),
+            sa.Column("reason", sa.Text(), nullable=True),
+            sa.Column("created_at", sa.DateTime(), server_default=sa.func.now(), nullable=False),
+            sa.ForeignKeyConstraint(["user_id"], ["users.id"], ondelete="SET NULL"),  # 恢复外键约束
+        )
+        
+        # 检查索引是否已存在，如果不存在才创建
+        existing_indexes = [idx['name'] for idx in inspector.get_indexes("wish_moderation_records")]
+        if "ix_wish_moderation_records_user_id" not in existing_indexes:
+            op.create_index("ix_wish_moderation_records_user_id", "wish_moderation_records", ["user_id"])
 
     # Drop server defaults now that existing rows have been populated
     op.alter_column("story_nodes", "metadata", server_default=None)

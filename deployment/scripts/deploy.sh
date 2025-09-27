@@ -100,23 +100,62 @@ check_config() {
     success "环境配置检查通过"
 }
 
-# --- 构建和启动函数 ---  
+# --- 智能检查函数 ---
+check_image_needs_rebuild() {
+    local service_name="$1"
+    local dockerfile_path="deployment/configs/Dockerfile"
+    local requirements_path="deployment/configs/requirements-lock.txt"
+    
+    # 检查镜像是否存在
+    if ! docker images --format "table {{.Repository}}\t{{.Tag}}" | grep -q "configs-${service_name}"; then
+        return 0  # 镜像不存在，需要构建
+    fi
+    
+    # 检查关键文件是否有变更
+    local dockerfile_hash=$(git log -1 --format="%H" -- "$dockerfile_path" 2>/dev/null || echo "unknown")
+    local requirements_hash=$(git log -1 --format="%H" -- "$requirements_path" 2>/dev/null || echo "unknown")
+    local code_hash=$(git log -1 --format="%H" -- backend/ config/ 2>/dev/null || echo "unknown")
+    
+    # 检查是否有标记文件记录上次构建的哈希
+    local build_marker="/tmp/.rebirth_last_build_hash"
+    local current_hash="${dockerfile_hash}-${requirements_hash}-${code_hash}"
+    
+    if [[ -f "$build_marker" ]]; then
+        local last_hash=$(cat "$build_marker")
+        if [[ "$current_hash" == "$last_hash" ]]; then
+            return 1  # 无需重建
+        fi
+    fi
+    
+    # 记录当前哈希
+    echo "$current_hash" > "$build_marker"
+    return 0  # 需要重建
+}
+
+# --- 智能构建和启动函数 ---  
 build_and_start() {
-    info "构建并启动服务..."
+    info "智能检查服务状态..."
     cd "$PROJECT_ROOT"
     
     # 停止旧服务
     docker compose -f "$COMPOSE_FILE" down --remove-orphans || warn "停止旧服务时出现警告"
     
-    # 清理未使用的镜像节省空间
-    docker system prune -f || warn "清理Docker缓存时出现警告"
+    # 智能构建检查
+    local needs_rebuild=false
     
-    # 清理无用镜像
-    docker image prune -f
-    
-    # 构建镜像
-    info "正在构建Docker镜像..."
-    docker compose -f "$COMPOSE_FILE" build --no-cache
+    if check_image_needs_rebuild "app"; then
+        info "检测到代码变更，需要重新构建镜像..."
+        needs_rebuild=true
+        
+        # 清理未使用的镜像节省空间
+        docker system prune -f || warn "清理Docker缓存时出现警告"
+        
+        # 构建镜像
+        info "正在构建Docker镜像..."
+        docker compose -f "$COMPOSE_FILE" build --no-cache
+    else
+        success "镜像无变更，跳过构建步骤 ⚡"
+    fi
     
     # 启动服务
     info "正在启动服务..."
@@ -190,15 +229,48 @@ handle_error() {
     exit 1
 }
 
+show_help() {
+    echo "用法: $0 [选项]"
+    echo "选项:"
+    echo "  --force-rebuild    强制重新构建Docker镜像"
+    echo "  --help            显示此帮助信息"
+    echo ""
+    echo "示例:"
+    echo "  $0                 智能部署（推荐）"
+    echo "  $0 --force-rebuild 强制重建部署"
+}
+
 # --- 主函数 ---
 main() {
-    info "开始智能部署 Rebirth Game"
-    info "部署日志: $LOG_FILE"
+    local force_rebuild=false
     
-    # 设置错误处理
-    trap handle_error ERR
+    # 解析命令行参数
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --force-rebuild)
+                force_rebuild=true
+                shift
+                ;;
+            --help)
+                show_help
+                exit 0
+                ;;
+            *)
+                warn "未知选项: $1"
+                show_help
+                exit 1
+                ;;
+        esac
+    done
     
-    # 执行部署步骤
+    if [[ "$force_rebuild" == true ]]; then
+        info "开始强制重建部署..."
+        # 删除构建标记，强制重建
+        rm -f /tmp/.rebirth_last_build_hash
+    else
+        info "开始智能部署..."
+    fi
+    
     check_prerequisites
     update_code
     check_config
@@ -206,7 +278,7 @@ main() {
     post_deploy_verification
     show_deployment_info
     
-    success "✅ 部署成功完成！"
+    success "🎉 Rebirth Game 部署完成！"
 }
 
 # --- 脚本入口 ---
