@@ -8,15 +8,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
-# 使用国内源加速安装系统依赖
+# 使用国内源，仅安装运行时必需包
 RUN echo "deb https://mirrors.aliyun.com/debian/ trixie main" > /etc/apt/sources.list && \
     echo "deb https://mirrors.aliyun.com/debian/ trixie-updates main" >> /etc/apt/sources.list && \
     echo "deb https://mirrors.aliyun.com/debian-security/ trixie-security main" >> /etc/apt/sources.list && \
     rm -f /etc/apt/sources.list.d/* && \
     apt-get update --allow-releaseinfo-change && \
     apt-get install -y --no-install-recommends \
-    libpq-dev \
-    gcc \
+    libpq5 \
     curl \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -24,13 +23,12 @@ RUN echo "deb https://mirrors.aliyun.com/debian/ trixie main" > /etc/apt/sources
 # 设置工作目录
 WORKDIR /app
 
-# 复制并安装Python依赖（利用Docker缓存层）
-COPY requirements.txt .
+# 复制并安装Python依赖（使用锁定版本）
+COPY deployment/configs/requirements-lock.txt ./requirements-lock.txt
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip config set install.trusted-host pypi.tuna.tsinghua.edu.cn && \
     pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    pip cache purge
+    pip install -r requirements-lock.txt
 
 # 复制项目代码
 COPY backend/ ./backend/

@@ -100,13 +100,16 @@ check_config() {
     success "环境配置检查通过"
 }
 
-# --- 构建和启动函数 ---
+# --- 构建和启动函数 ---  
 build_and_start() {
     info "构建并启动服务..."
     cd "$PROJECT_ROOT"
     
     # 停止旧服务
     docker compose -f "$COMPOSE_FILE" down --remove-orphans || warn "停止旧服务时出现警告"
+    
+    # 清理未使用的镜像节省空间
+    docker system prune -f || warn "清理Docker缓存时出现警告"
     
     # 清理无用镜像
     docker image prune -f
