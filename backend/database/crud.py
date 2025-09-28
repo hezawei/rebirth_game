@@ -3,8 +3,8 @@ from datetime import datetime
 from typing import List, Optional
 
 from sqlalchemy import func
-from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
 
 from backend.core import security
 from backend.schemas import user as user_schema
@@ -40,24 +40,46 @@ def create_user(db: Session, user: user_schema.UserCreate) -> models.User:
 
 # ===== 游戏流程相关的 CRUD 函数 =====
 
+def get_session_by_user_and_wish(db: Session, user_id: str, wish: str) -> Optional[models.GameSession]:
+    """获取同一用户、同一愿望下最新的游戏会话。"""
+    return (
+        db.query(models.GameSession)
+        .filter(
+            models.GameSession.user_id == user_id,
+            models.GameSession.wish == wish,
+        )
+        .order_by(models.GameSession.id.desc())
+        .first()
+    )
+
+
+def get_root_node_for_session(db: Session, session_id: int) -> Optional[models.StoryNode]:
+    """获取指定会话的根节点（parent_id 为 NULL 的第一条记录）。"""
+    return (
+        db.query(models.StoryNode)
+        .filter(
+            models.StoryNode.session_id == session_id,
+            models.StoryNode.parent_id.is_(None),
+        )
+        .order_by(models.StoryNode.id.asc())
+        .first()
+    )
+
+
 def create_game_session(db: Session, wish: str, user_id: str) -> models.GameSession:
-    db_session = models.GameSession(wish=wish, user_id=user_id)
-    db.add(db_session)
     try:
+        db_session = models.GameSession(wish=wish, user_id=user_id)
+        db.add(db_session)
         db.commit()
         db.refresh(db_session)
         return db_session
     except IntegrityError:
         db.rollback()
-        existing = (
-            db.query(models.GameSession)
-            .filter(models.GameSession.user_id == user_id, models.GameSession.wish == wish)
-            .order_by(models.GameSession.id.desc())
-            .first()
-        )
+        existing = get_session_by_user_and_wish(db, user_id, wish)
         if existing:
             return existing
         raise
+
 
 def create_story_node(
     db: Session,

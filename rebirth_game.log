@@ -1499,3 +1499,717 @@ Vertex AI 过滤了你的请求内容，无法生成回复，请更换内容后�
 2025-09-28 20:51:55 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
 2025-09-28 20:51:55 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=79 | choice="猛然跃上墙头，以刀尖点地借力翻入内院，引燃火把制造混乱" | text_len=173 | text="风卷残雪，西门铁链轻响。关羽凝视着那道被夜色吞没的暗室石门，门缝间透出一丝幽蓝微光——似非人间之火。守卫换班的钟声将至，三息之后，巡逻队将从南侧绕行。他右手轻抚刀柄，左掌悄然按在冰冷石壁上，仿佛能听见地底传来古老机关的低语。若此刻不动，明日便是千军万马踏破城门；若贸然闯入，恐陷于死局。他闭目片刻，再睁眼时，眼中已无犹豫，唯余决意如刀锋割裂长夜。"
 2025-09-28 20:51:55 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=79 | choice="猛然跃上墙头，以刀尖点地借力翻入内院，引燃火把制造混乱" | node=82 | text_len=173 | image=http://127.0.0.1:8000/static/generated/ai_gen_55952c96e0c103615b8d42bd7977490e.webp
+2025-09-28 21:03:01 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:03:02 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:03:04 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:03:04 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:03:04 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:03:04 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:03:04 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:03:04 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:03:04 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:03:04 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:03:04 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:03:04 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:03:04 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:03:05 | ERROR    | backend.main:_run_alembic_cmd:229 - Alembic migration failed: Command '['D:\\python3.11\\python.exe', '-m', 'alembic', 'upgrade', 'head']' returned non-zero exit status 4294967295.
+2025-09-28 21:03:05 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:03:05 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:03:05 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:03:05 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:03:05 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:03:06 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:03:07 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:03:07 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:03:07 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:03:07 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:03:07 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:03:07 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:03:07 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:03:07 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:03:07 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:03:07 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:03:07 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:03:08 | ERROR    | backend.main:_run_alembic_cmd:229 - Alembic migration failed: Command '['D:\\python3.11\\python.exe', '-m', 'alembic', 'upgrade', 'head']' returned non-zero exit status 4294967295.
+2025-09-28 21:03:08 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:03:08 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:03:08 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:03:08 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:04:19 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:04:30 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass!@127.0.0.1:5432/rebirth
+2025-09-28 21:05:29 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass!@127.0.0.1:5432/rebirth
+2025-09-28 21:05:39 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:13:10 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass!@127.0.0.1:5432/rebirth
+2025-09-28 21:13:24 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:13:25 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:13:26 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:13:26 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:13:26 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:13:26 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:13:26 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:13:26 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:13:26 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:13:26 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:13:26 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:13:26 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:13:26 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:13:26 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:13:26 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:13:26 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:13:26 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:13:26 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:13:45 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:309 - PrepareStart start wish=项羽
+2025-09-28 21:13:45 | DEBUG    | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:311 - prepare context building
+2025-09-28 21:13:45 | DEBUG    | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:313 - prepare context ready recommended_chapters=10
+2025-09-28 21:13:45 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:320 - prepare LLM request prompt_len=513
+2025-09-28 21:13:47 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:13:47 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 916
+2025-09-28 21:13:47 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:322 - prepare LLM done raw_len=193
+2025-09-28 21:13:47 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:349 - prepare json parsed fields=level_title|background|main_quest
+2025-09-28 21:13:47 | DEBUG    | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:361 - prepare data parsed title=重掌西楚 quest=在三日内召集诸侯，确立西楚霸主地位
+2025-09-28 21:13:47 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:108 - pregeneration start
+2025-09-28 21:13:47 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:393 - prepare background thread starteduser=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-28 21:13:47 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:111 - pregeneration story engine start
+2025-09-28 21:13:47 | INFO     | core.story_engine:start_story:386 - 收到新的故事开始请求，愿望是: '项羽'
+2025-09-28 21:13:51 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:13:51 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1483
+2025-09-28 21:13:51 | INFO     | core.story_engine:start_story:402 - [LLM raw][start] 长度=915 预览='{"text": "夜色如墨，楚营外的篝火在风中摇曳，仿佛无数未熄的战魂低语。项羽立于高台，铠甲染霜，目光穿透重重雾霭，直视那座被刘邦军围困的孤城。斥候来报：城中粮草将尽，守将已遣密使求援。他缓缓拔出腰间青铜剑，剑锋映着残月，寒光如冰。‘若救之，则损我兵势；若弃之，则失人心。’他低声自语，指尖划过剑刃，血珠滴落尘土，似为抉择祭奠。远处传来马蹄轻响，一骑疾驰而来，信使跪地呈上一封密函——竟是韩信亲笔，言其欲借道楚境，共击刘邦。项羽瞳孔微缩，一股杀意与野心在胸中翻腾，却也夹杂一丝迟疑。这一步，是破局良机，还是又一场鸿门宴？", "choices": [{"option": "命人暗中接应韩信部，借'
+2025-09-28 21:13:51 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=915 预览='{"text": "夜色如墨，楚营外的篝火在风中摇曳，仿佛无数未熄的战魂低语。项羽立于高台，铠甲染霜，目光穿透重重雾霭，直视那座被刘邦军围困的孤城。斥候来报：城中粮草将尽，守将已遣密使求援。他缓缓拔出腰间青铜剑，剑锋映着残月，寒光如冰。‘若救之，则损我兵势；若弃之，则失人心。’他低声自语，指尖划过剑刃，血珠滴落尘土，似'
+2025-09-28 21:13:51 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=915 预览='{"text": "夜色如墨，楚营外的篝火在风中摇曳，仿佛无数未熄的战魂低语。项羽立于高台，铠甲染霜，目光穿透重重雾霭，直视那座被刘邦军围困的孤城。斥候来报：城中粮草将尽，守将已遣密使求援。他缓缓拔出腰间青铜剑，剑锋映着残月，寒光如冰。‘若救之，则损我兵势；若弃之，则失人心。’他低声自语，指尖划过剑刃，血珠滴落尘土，似'
+2025-09-28 21:13:51 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=252
+2025-09-28 21:13:51 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=252 preview="夜色如墨，楚营外的篝火在风中摇曳，仿佛无数未熄的战魂低语。项羽立于高台，铠甲染霜，目光穿透重重雾霭，直视那座被刘邦军围困的孤城。斥候来报：城中粮草将尽，守将已遣密使求援。他缓缓拔出腰间青铜剑，剑锋映着残月，寒光如冰。‘若救之，则损我兵势；若弃之，则失人心。’他低声自语，指尖划过剑刃，血珠滴落尘土，似为抉择祭奠。远处传来马蹄轻响，一骑疾驰而来，信使跪地呈上一封密函——竟是韩信亲笔，言其欲借道楚境，共…"
+
+2025-09-28 21:13:51 | INFO     | core.image_generation:__init__:24 - 图像生成客户端初始化完成，使用提供商: openai
+2025-09-28 21:13:51 | INFO     | core.image_storage:__init__:34 - 图像存储服务初始化完成，存储目录: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images
+
+2025-09-28 21:13:51 | INFO     | core.image_storage:__init__:35 - 图像web访问前缀: http://127.0.0.1:8000/static/generated
+
+2025-09-28 21:13:51 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，楚营外的篝火在风中摇曳，仿佛无数未熄的战魂低语。项羽立于高台，铠甲染霜，目光穿透重重雾霭，直视那座被刘邦军围困的孤城。斥候来报：城中粮…"
+
+2025-09-28 21:13:51 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，楚营外的篝火在...
+2025-09-28 21:14:10 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:14:10 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:14:10 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759065249787_988.png
+2025-09-28 21:14:10 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759065249787_988.png
+
+2025-09-28 21:14:10 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759065249787_988.png
+
+2025-09-28 21:14:11 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_cb127f0c09eab2715d1dca033bdce771.png (大小: 926574 字节)
+
+2025-09-28 21:14:11 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_cb127f0c09eab2715d1dca033bdce771.webp 大小 48780 字节 (原始 926574 字节, 压缩比 0.05)
+
+2025-09-28 21:14:11 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_cb127f0c09eab2715d1dca033bdce771.png
+
+2025-09-28 21:14:11 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_cb127f0c09eab2715d1dca033bdce771.webp
+
+2025-09-28 21:14:11 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_cb127f0c09eab2715d1dca033bdce771.webp
+
+2025-09-28 21:14:11 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_cb127f0c09eab2715d1dca033bdce771.webp
+
+2025-09-28 21:14:11 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_cb127f0c09eab2715d1dca033bdce771.webp
+2025-09-28 21:14:11 | INFO     | core.story_engine:start_story:447 - 新故事生成成功
+2025-09-28 21:14:11 | INFO     | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:113 - pregeneration story readytext_len=252
+2025-09-28 21:14:11 | ERROR    | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:145 - pregeneration failederror=(psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "uq_game_sessions_user_wish"
+DETAIL:  Key (user_id, wish)=(ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, 项羽) already exists.
+
+[SQL: INSERT INTO game_sessions (user_id, wish) VALUES (%(user_id)s::UUID, %(wish)s) RETURNING game_sessions.id, game_sessions.created_at]
+[parameters: {'user_id': 'ff258ee1-869b-40f7-aae7-d9e1c48ecdf1', 'wish': '项羽'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-28 21:14:11 | DEBUG    | trace=37ec5c6a user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:153 - pregeneration db closed
+2025-09-28 21:14:12 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:432 - start request wish=项羽
+2025-09-28 21:14:12 | DEBUG    | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:435 - start wish validated
+2025-09-28 21:14:12 | DEBUG    | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:439 - start cache keycache_key=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:14:12 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:456 - start cache first hithit=False
+2025-09-28 21:14:12 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=0.0 limit=8
+2025-09-28 21:14:12 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=0.4 limit=8
+2025-09-28 21:14:13 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=0.8 limit=8
+2025-09-28 21:14:13 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=1.2000000000000002 limit=8
+2025-09-28 21:14:14 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=1.6 limit=8
+2025-09-28 21:14:14 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=2.0 limit=8
+2025-09-28 21:14:15 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=2.4 limit=8
+2025-09-28 21:14:15 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=2.8 limit=8
+2025-09-28 21:14:15 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=3.1999999999999997 limit=8
+2025-09-28 21:14:16 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=3.5999999999999996 limit=8
+2025-09-28 21:14:16 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=3.9999999999999996 limit=8
+2025-09-28 21:14:17 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=4.3999999999999995 limit=8
+2025-09-28 21:14:17 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=4.8 limit=8
+2025-09-28 21:14:17 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=5.2 limit=8
+2025-09-28 21:14:18 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=5.6000000000000005 limit=8
+2025-09-28 21:14:18 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=6.000000000000001 limit=8
+2025-09-28 21:14:19 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=6.400000000000001 limit=8
+2025-09-28 21:14:19 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=6.800000000000002 limit=8
+2025-09-28 21:14:19 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.4 elapsed=7.200000000000002 limit=8
+2025-09-28 21:14:20 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:461 - start cache waitwait=0.3999999999999977 elapsed=7.600000000000002 limit=8
+2025-09-28 21:14:20 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:498 - start cache miss -> realtime
+2025-09-28 21:14:20 | INFO     | trace=300b66dd user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:500 - start realtime create session
+2025-09-28 21:14:20 | ERROR    | backend.main:global_exception_handler:217 - 全局异常: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "uq_game_sessions_user_wish"
+DETAIL:  Key (user_id, wish)=(ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, 项羽) already exists.
+
+[SQL: INSERT INTO game_sessions (user_id, wish) VALUES (%(user_id)s::UUID, %(wish)s) RETURNING game_sessions.id, game_sessions.created_at]
+[parameters: {'user_id': UUID('ff258ee1-869b-40f7-aae7-d9e1c48ecdf1'), 'wish': '项羽'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-28 21:31:10 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:31:11 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:31:12 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:31:12 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:31:12 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:31:12 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:31:12 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:31:12 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:31:12 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:31:12 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:31:12 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:31:12 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:31:13 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:31:13 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:31:13 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:31:13 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:31:13 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:31:13 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:33:38 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:33:39 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:33:40 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:33:40 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:33:40 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:33:40 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:33:40 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:33:40 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:33:40 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:33:40 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:33:40 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:33:40 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:33:41 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:33:41 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:33:41 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:33:41 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:33:41 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:33:41 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:33:45 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:33:46 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:33:47 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:33:47 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:33:47 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:33:47 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:33:47 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:33:47 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:33:47 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:33:47 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:33:47 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:33:47 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:33:48 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:33:48 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:33:48 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:33:48 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:33:48 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:33:48 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:34:07 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:34:08 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:34:09 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:34:09 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:34:09 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:34:09 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:34:09 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:34:09 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:09 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:09 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:34:09 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:34:09 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:34:10 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:10 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:34:10 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:34:10 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:34:10 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:34:10 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:34:37 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:38 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:34:38 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:34:38 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:34:38 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:34:38 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:34:38 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:34:38 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:39 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:39 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:34:39 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:34:39 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:34:39 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:34:39 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:34:39 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:34:39 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:34:39 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:34:39 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:34:56 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:309 - PrepareStart start wish=项羽
+2025-09-28 21:34:56 | DEBUG    | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:311 - prepare context building
+2025-09-28 21:34:56 | DEBUG    | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:313 - prepare context ready recommended_chapters=10
+2025-09-28 21:34:56 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:320 - prepare LLM request prompt_len=513
+2025-09-28 21:34:57 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:34:57 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 926
+2025-09-28 21:34:57 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:322 - prepare LLM done raw_len=196
+2025-09-28 21:34:57 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:349 - prepare json parsed fields=level_title|background|main_quest
+2025-09-28 21:34:57 | DEBUG    | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:361 - prepare data parsed title=重临巨鹿，再战天命 quest=率军击溃秦军残部，稳固诸侯归附
+2025-09-28 21:34:57 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:108 - pregeneration start
+2025-09-28 21:34:57 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:393 - prepare background thread starteduser=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-28 21:34:57 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:111 - pregeneration story engine start
+2025-09-28 21:34:57 | INFO     | core.story_engine:start_story:386 - 收到新的故事开始请求，愿望是: '项羽'
+2025-09-28 21:35:00 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:35:00 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1359
+2025-09-28 21:35:00 | INFO     | core.story_engine:start_story:402 - [LLM raw][start] 长度=783 预览='{"text": "夜风卷起楚军大帐的帘角，项羽立于中军帐前，青铜剑穗在风中轻颤。斥候急报：刘邦派密使潜入彭城外围，欲策反陈平旧部。帐内烛火摇曳，映出他眉间深锁的疑云。他握紧剑柄，眼中掠过杀意与权衡——若严惩，恐寒将士之心；若放任，又似纵虎归山。远处传来战马嘶鸣，仿佛预示着一场无声的风暴正在酝酿。", "choices": [{"option": "召来亲信暗中设局，以假情报诱敌自曝", "summary": "以智谋反制阴谋，布下无形之网", "effects": {"delta_progress": 12, "delta_risk": 6, "delta_exposure": 4, "ta'
+2025-09-28 21:35:00 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=783 预览='{"text": "夜风卷起楚军大帐的帘角，项羽立于中军帐前，青铜剑穗在风中轻颤。斥候急报：刘邦派密使潜入彭城外围，欲策反陈平旧部。帐内烛火摇曳，映出他眉间深锁的疑云。他握紧剑柄，眼中掠过杀意与权衡——若严惩，恐寒将士之心；若放任，又似纵虎归山。远处传来战马嘶鸣，仿佛预示着一场无声的风暴正在酝酿。", "choices'
+2025-09-28 21:35:00 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=783 预览='{"text": "夜风卷起楚军大帐的帘角，项羽立于中军帐前，青铜剑穗在风中轻颤。斥候急报：刘邦派密使潜入彭城外围，欲策反陈平旧部。帐内烛火摇曳，映出他眉间深锁的疑云。他握紧剑柄，眼中掠过杀意与权衡——若严惩，恐寒将士之心；若放任，又似纵虎归山。远处传来战马嘶鸣，仿佛预示着一场无声的风暴正在酝酿。", "choices'
+2025-09-28 21:35:00 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=139
+2025-09-28 21:35:00 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=139 preview="夜风卷起楚军大帐的帘角，项羽立于中军帐前，青铜剑穗在风中轻颤。斥候急报：刘邦派密使潜入彭城外围，欲策反陈平旧部。帐内烛火摇曳，映出他眉间深锁的疑云。他握紧剑柄，眼中掠过杀意与权衡——若严惩，恐寒将士之心；若放任，又似纵虎归山。远处传来战马嘶鸣，仿佛预示着一场无声的风暴正在酝酿。"
+
+2025-09-28 21:35:00 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 夜风卷起楚军大帐的帘角，项羽立于中军帐前，青铜剑穗在风中轻颤。斥候急报：刘邦派密使潜入彭城外围，欲策反陈平旧部。帐内烛火摇曳，映出他眉间深锁的疑…"
+
+2025-09-28 21:35:00 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜风卷起楚军大帐的帘角，...
+2025-09-28 21:35:12 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 766 (attempt 1/2)
+2025-09-28 21:35:12 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=132
+
+2025-09-28 21:35:12 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759066512626_616.png
+2025-09-28 21:35:12 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759066512626_616.png
+
+2025-09-28 21:35:12 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759066512626_616.png
+
+2025-09-28 21:35:14 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_f447e6f0cf607244bd979ccad96a3285.png (大小: 1351650 字节)
+
+2025-09-28 21:35:14 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_f447e6f0cf607244bd979ccad96a3285.webp 大小 60408 字节 (原始 1351650 字节, 压缩比 0.04)
+
+2025-09-28 21:35:14 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_f447e6f0cf607244bd979ccad96a3285.png
+
+2025-09-28 21:35:14 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_f447e6f0cf607244bd979ccad96a3285.webp
+
+2025-09-28 21:35:14 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f447e6f0cf607244bd979ccad96a3285.webp
+
+2025-09-28 21:35:14 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_f447e6f0cf607244bd979ccad96a3285.webp
+
+2025-09-28 21:35:14 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_f447e6f0cf607244bd979ccad96a3285.webp
+2025-09-28 21:35:14 | INFO     | core.story_engine:start_story:447 - 新故事生成成功
+2025-09-28 21:35:14 | INFO     | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:113 - pregeneration story readytext_len=139
+2025-09-28 21:35:14 | ERROR    | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:145 - pregeneration failederror=(psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "uq_game_sessions_user_wish"
+DETAIL:  Key (user_id, wish)=(ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, 项羽) already exists.
+
+[SQL: INSERT INTO game_sessions (user_id, wish) VALUES (%(user_id)s::UUID, %(wish)s) RETURNING game_sessions.id, game_sessions.created_at]
+[parameters: {'user_id': 'ff258ee1-869b-40f7-aae7-d9e1c48ecdf1', 'wish': '项羽'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-09-28 21:35:14 | DEBUG    | trace=985ef45f user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:153 - pregeneration db closed
+2025-09-28 21:36:35 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:36:35 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:36:36 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:36:37 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:36:37 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:36:37 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:36:37 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:36:37 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:36:37 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:36:37 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:36:37 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:36:37 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:36:37 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:36:38 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:36:38 | INFO     | backend.main:_run_alembic_cmd:227 - Alembic migration complete.
+2025-09-28 21:36:38 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:36:38 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:36:38 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:36:38 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:37:18 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:324 - PrepareStart start wish=项羽
+2025-09-28 21:37:18 | DEBUG    | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:326 - prepare context building
+2025-09-28 21:37:18 | DEBUG    | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:328 - prepare context ready recommended_chapters=10
+2025-09-28 21:37:18 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:335 - prepare LLM request prompt_len=513
+2025-09-28 21:37:20 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:37:20 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 927
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:337 - prepare LLM done raw_len=207
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:364 - prepare json parsed fields=level_title|background|main_quest
+2025-09-28 21:37:20 | DEBUG    | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:376 - prepare data parsed title=重铸西楚江山 quest=在十日内确立西楚中央权威
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:108 - pregeneration start
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:408 - prepare background thread starteduser=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:113 - pregeneration reuse existing session
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:130 - pregeneration reuse root node
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:150 - pregeneration cache stored
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:155 - pregeneration speculation enqueueddepth=0
+2025-09-28 21:37:20 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:157 - pregeneration done
+2025-09-28 21:37:20 | DEBUG    | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:168 - pregeneration db closed
+2025-09-28 21:37:40 | INFO     | trace=e827a9ae user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:447 - start request wish=项羽
+2025-09-28 21:37:40 | DEBUG    | trace=e827a9ae user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:450 - start wish validated
+2025-09-28 21:37:40 | DEBUG    | trace=e827a9ae user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:454 - start cache keycache_key=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:37:40 | DEBUG    | api.story:_cache_pop:92 - [预生成] 从缓存中取出 key=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:470 - start trace resumed
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:471 - start cache first hithit=True
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:488 - start use pregenerated
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:509 - start use cached nodesession_id=12 node_id=11
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:569 - start donetext_len=169 choice_count=3 image=http://127.0.0.1:8000/static/generated/ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:576 - start image filefile_exists=True size=37534 path=C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:579 - start speculation enqueuedepth=1
+2025-09-28 21:37:40 | DEBUG    | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=speculation | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=12 node=11 depth=1
+2025-09-28 21:37:40 | INFO     | trace=c417d37c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:582 - start response readyimage=http://127.0.0.1:8000/static/generated/ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:37:40 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_feb82d921135ca235cc1263c21b640a2.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_feb82d921135ca235cc1263c21b640a2.webp exists=True size=37534
+2025-09-28 21:37:40 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:37:40 | DEBUG    | core.speculation:_generate_children_pipeline:205 - [Speculation] no new choices to generate for node=11
+2025-09-28 21:37:40 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:37:53 | INFO     | trace=4d12f961 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=continue | api.story:continue_existing_story:610 - continue requestchoice=命亲卫假扮敌军斥候，引诱汉军营地自乱阵脚
+2025-09-28 21:37:53 | INFO     | trace=4d12f961 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=12 task=continue | api.story:continue_existing_story:656 - continue node ready check
+2025-09-28 21:37:53 | INFO     | api.story:_wait_for_node_complete:180 - [NodeComplete] 开始等待节点完全准备：node_id=12
+2025-09-28 21:37:53 | INFO     | api.story:_wait_for_node_complete:233 - [NodeComplete] ✅ 节点完全准备就绪：node_id=12 (等待了 0.0 秒)
+2025-09-28 21:37:53 | INFO     | trace=4d12f961 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=12 task=continue | api.story:continue_existing_story:659 - continue node ready success
+2025-09-28 21:37:53 | INFO     | trace=4d12f961 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=12 task=continue | api.story:continue_existing_story:668 - continue speculation enqueue existingdepth=1
+2025-09-28 21:37:53 | DEBUG    | trace=4d12f961 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=12 task=speculation | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=12 node=12 depth=1
+2025-09-28 21:37:53 | DEBUG    | core.speculation:_generate_children_pipeline:205 - [Speculation] no new choices to generate for node=12
+2025-09-28 21:37:53 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_769911374de8b58b517e4455b0f982d4.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_769911374de8b58b517e4455b0f982d4.webp exists=True size=73272
+2025-09-28 21:37:53 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_769911374de8b58b517e4455b0f982d4.webp
+2025-09-28 21:37:53 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_769911374de8b58b517e4455b0f982d4.webp
+2025-09-28 21:38:09 | INFO     | trace=896eb02c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=12 task=continue | api.story:continue_existing_story:610 - continue requestchoice=当众焚毁密信，宣称援军已至，命全军整备夜袭刘邦大营
+2025-09-28 21:38:09 | INFO     | trace=896eb02c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=17 task=continue | api.story:continue_existing_story:656 - continue node ready check
+2025-09-28 21:38:09 | INFO     | api.story:_wait_for_node_complete:180 - [NodeComplete] 开始等待节点完全准备：node_id=17
+2025-09-28 21:38:09 | INFO     | api.story:_wait_for_node_complete:233 - [NodeComplete] ✅ 节点完全准备就绪：node_id=17 (等待了 0.0 秒)
+2025-09-28 21:38:09 | INFO     | trace=896eb02c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=17 task=continue | api.story:continue_existing_story:659 - continue node ready success
+2025-09-28 21:38:09 | INFO     | trace=896eb02c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=17 task=continue | api.story:continue_existing_story:668 - continue speculation enqueue existingdepth=1
+2025-09-28 21:38:09 | DEBUG    | trace=896eb02c user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=17 task=speculation | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=12 node=17 depth=1
+2025-09-28 21:38:09 | DEBUG    | core.speculation:_generate_children_pipeline:205 - [Speculation] no new choices to generate for node=17
+2025-09-28 21:38:09 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_6455b5200fb852035c9d9b22e2aa509c.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_6455b5200fb852035c9d9b22e2aa509c.webp exists=True size=74364
+2025-09-28 21:38:09 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_6455b5200fb852035c9d9b22e2aa509c.webp
+2025-09-28 21:38:09 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_6455b5200fb852035c9d9b22e2aa509c.webp
+2025-09-28 21:38:15 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_f85c3b9c60fa256e51985a241cf116e2.png -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f85c3b9c60fa256e51985a241cf116e2.png exists=True size=940559
+2025-09-28 21:38:15 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-28 21:38:15 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_3126bea2684e5639ff229c4a56561752.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_3126bea2684e5639ff229c4a56561752.webp exists=True size=82944
+2025-09-28 21:38:15 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_3126bea2684e5639ff229c4a56561752.webp
+2025-09-28 21:38:15 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_3412dbc5c616ebfff577da72572c85cf.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_3412dbc5c616ebfff577da72572c85cf.webp exists=True size=52444
+2025-09-28 21:38:15 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_3412dbc5c616ebfff577da72572c85cf.webp
+2025-09-28 21:38:15 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_f85c3b9c60fa256e51985a241cf116e2.png
+2025-09-28 21:38:15 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_3126bea2684e5639ff229c4a56561752.webp
+2025-09-28 21:38:15 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_3412dbc5c616ebfff577da72572c85cf.webp
+2025-09-28 21:38:17 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_f80f7af8846c1bbc058c1c1ca98d12cb.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_f80f7af8846c1bbc058c1c1ca98d12cb.webp exists=True size=27636
+2025-09-28 21:38:17 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_f80f7af8846c1bbc058c1c1ca98d12cb.webp
+2025-09-28 21:38:17 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_0bdfbae0d51ada6c99e0c3e6d15cb15b.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_0bdfbae0d51ada6c99e0c3e6d15cb15b.webp exists=True size=68482
+2025-09-28 21:38:17 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_0bdfbae0d51ada6c99e0c3e6d15cb15b.webp
+2025-09-28 21:38:17 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_f80f7af8846c1bbc058c1c1ca98d12cb.webp
+2025-09-28 21:38:17 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_0bdfbae0d51ada6c99e0c3e6d15cb15b.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_dc1b966b1dd51f1e27736356d2646633.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_dc1b966b1dd51f1e27736356d2646633.webp exists=True size=89238
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_dc1b966b1dd51f1e27736356d2646633.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_2969eb1a2ef73b5788ead99f37f34540.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_2969eb1a2ef73b5788ead99f37f34540.webp exists=True size=92704
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_7135ca903521b890db5371256d929a25.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_7135ca903521b890db5371256d929a25.webp exists=True size=63264
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_2969eb1a2ef73b5788ead99f37f34540.webp
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_7135ca903521b890db5371256d929a25.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_422e676965b80f2343cccd4faf130e34.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_422e676965b80f2343cccd4faf130e34.webp exists=True size=127662
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_d9a6418b661c0b7d075d3354eab9e1a9.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_d9a6418b661c0b7d075d3354eab9e1a9.webp exists=True size=88096
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_422e676965b80f2343cccd4faf130e34.webp
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_d9a6418b661c0b7d075d3354eab9e1a9.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_dc1b966b1dd51f1e27736356d2646633.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_2969eb1a2ef73b5788ead99f37f34540.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_7135ca903521b890db5371256d929a25.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_988777636d547f174d8dcba46d1eeb77.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_988777636d547f174d8dcba46d1eeb77.webp exists=True size=92268
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_988777636d547f174d8dcba46d1eeb77.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_422e676965b80f2343cccd4faf130e34.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_d9a6418b661c0b7d075d3354eab9e1a9.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_988777636d547f174d8dcba46d1eeb77.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_27f63f4a8c78e6798257b2ff5f037688.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_27f63f4a8c78e6798257b2ff5f037688.webp exists=True size=78402
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_27f63f4a8c78e6798257b2ff5f037688.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_a39bd5062a062a2fe646bbf4adcc20e0.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_a39bd5062a062a2fe646bbf4adcc20e0.webp exists=True size=48174
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_a39bd5062a062a2fe646bbf4adcc20e0.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_fde546289195bf9a900e588c602c48bc.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_fde546289195bf9a900e588c602c48bc.webp exists=True size=76824
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_fde546289195bf9a900e588c602c48bc.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_ac14b89cb2b3c8c2c43481f3555166ad.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_ac14b89cb2b3c8c2c43481f3555166ad.webp exists=True size=49750
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_ac14b89cb2b3c8c2c43481f3555166ad.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_27f63f4a8c78e6798257b2ff5f037688.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_e91a2dcde623f8327e1c7b21e3c123ef.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_e91a2dcde623f8327e1c7b21e3c123ef.webp exists=True size=76982
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_a39bd5062a062a2fe646bbf4adcc20e0.webp
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_e91a2dcde623f8327e1c7b21e3c123ef.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_fde546289195bf9a900e588c602c48bc.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_ac14b89cb2b3c8c2c43481f3555166ad.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_e91a2dcde623f8327e1c7b21e3c123ef.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_66c82b47faedd97337276e0e272dc39c.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_66c82b47faedd97337276e0e272dc39c.webp exists=True size=74606
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_66c82b47faedd97337276e0e272dc39c.webp
+2025-09-28 21:38:18 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_547c604482b9ea9a2f9972d4921cef59.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_547c604482b9ea9a2f9972d4921cef59.webp exists=True size=61142
+2025-09-28 21:38:18 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_547c604482b9ea9a2f9972d4921cef59.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_66c82b47faedd97337276e0e272dc39c.webp
+2025-09-28 21:38:18 | INFO     | backend.main:get_response:44 - [Static:generated] status=304 path=ai_gen_547c604482b9ea9a2f9972d4921cef59.webp
+2025-09-28 21:38:30 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:324 - PrepareStart start wish=项羽
+2025-09-28 21:38:30 | DEBUG    | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:326 - prepare context building
+2025-09-28 21:38:30 | DEBUG    | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:328 - prepare context ready recommended_chapters=10
+2025-09-28 21:38:30 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:335 - prepare LLM request prompt_len=513
+2025-09-28 21:38:32 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:38:32 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 935
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:337 - prepare LLM done raw_len=201
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:364 - prepare json parsed fields=level_title|background|main_quest
+2025-09-28 21:38:32 | DEBUG    | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:376 - prepare data parsed title=霸王重生：巨鹿破局 quest=率军击溃秦军主力，夺取巨鹿之战胜利
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:108 - pregeneration start
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=prepare_start wish=项羽 | api.story:prepare_start_level:408 - prepare background thread starteduser=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:113 - pregeneration reuse existing session
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:130 - pregeneration reuse root node
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:150 - pregeneration cache stored
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:155 - pregeneration speculation enqueueddepth=0
+2025-09-28 21:38:32 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:157 - pregeneration done
+2025-09-28 21:38:32 | DEBUG    | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:168 - pregeneration db closed
+2025-09-28 21:38:51 | INFO     | trace=320a8394 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:447 - start request wish=项羽
+2025-09-28 21:38:51 | DEBUG    | trace=320a8394 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:450 - start wish validated
+2025-09-28 21:38:51 | DEBUG    | trace=320a8394 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:454 - start cache keycache_key=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:38:51 | DEBUG    | api.story:_cache_pop:92 - [预生成] 从缓存中取出 key=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:470 - start trace resumed
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 task=start wish=项羽 | api.story:start_new_story:471 - start cache first hithit=True
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:488 - start use pregenerated
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:509 - start use cached nodesession_id=12 node_id=11
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:569 - start donetext_len=169 choice_count=3 image=http://127.0.0.1:8000/static/generated/ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:576 - start image filefile_exists=True size=37534 path=C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:579 - start speculation enqueuedepth=1
+2025-09-28 21:38:51 | DEBUG    | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=speculation | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=12 node=11 depth=1
+2025-09-28 21:38:51 | INFO     | trace=3ffcdaf3 user=ff258ee1-869b-40f7-aae7-d9e1c48ecdf1 session=12 node=11 task=start wish=项羽 | api.story:start_new_story:582 - start response readyimage=http://127.0.0.1:8000/static/generated/ai_gen_feb82d921135ca235cc1263c21b640a2.webp
+2025-09-28 21:38:51 | DEBUG    | core.speculation:_generate_children_pipeline:205 - [Speculation] no new choices to generate for node=11
+2025-09-28 21:38:58 | INFO     | backend.database.crud:create_user:37 - 创建新用户: 2930922@qq.com
+2025-09-28 21:39:08 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:324 - PrepareStart start wish=项羽
+2025-09-28 21:39:08 | DEBUG    | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:326 - prepare context building
+2025-09-28 21:39:08 | DEBUG    | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:328 - prepare context ready recommended_chapters=10
+2025-09-28 21:39:08 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:335 - prepare LLM request prompt_len=513
+2025-09-28 21:39:09 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:39:09 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 920
+2025-09-28 21:39:09 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:337 - prepare LLM done raw_len=199
+2025-09-28 21:39:09 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:364 - prepare json parsed fields=level_title|background|main_quest
+2025-09-28 21:39:09 | DEBUG    | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:376 - prepare data parsed title=霸王重生：巨鹿之始 quest=在诸侯面前立威，确立西楚霸主地位
+2025-09-28 21:39:09 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:108 - pregeneration start
+2025-09-28 21:39:09 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=prepare_start wish=项羽 | api.story:prepare_start_level:408 - prepare background thread starteduser=dbcf516e-6d67-4dca-ace8-0f168208849f
+2025-09-28 21:39:09 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:118 - pregeneration session created
+2025-09-28 21:39:09 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:133 - pregeneration story engine start
+2025-09-28 21:39:09 | INFO     | core.story_engine:start_story:386 - 收到新的故事开始请求，愿望是: '项羽'
+2025-09-28 21:39:12 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:39:12 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1386
+2025-09-28 21:39:12 | INFO     | core.story_engine:start_story:402 - [LLM raw][start] 长度=816 预览='{"text": "夜色如墨，楚营外的篝火在寒风中摇曳，映得项羽的铠甲泛出冷光。斥候急报：刘邦军正悄然调动，意图绕道袭我粮道。你凝视着沙盘上那条蜿蜒的暗线，耳边是将士们压抑的喘息与战马低鸣。远处传来铁蹄轻响，仿佛命运的鼓点正步步逼近。你握紧剑柄，心中翻涌着怒意与决断——是挥兵迎击，还是设伏诱敌？亦或以雷霆手段震慑敌胆，令其不战自溃？每一步都关乎西楚存亡，而你的选择，将决定这乱世的走向。", "choices": [{"option": "亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾", "summary": "以勇猛破局，直击敌军命脉", "effects": {"delta_progress'
+2025-09-28 21:39:12 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=816 预览='{"text": "夜色如墨，楚营外的篝火在寒风中摇曳，映得项羽的铠甲泛出冷光。斥候急报：刘邦军正悄然调动，意图绕道袭我粮道。你凝视着沙盘上那条蜿蜒的暗线，耳边是将士们压抑的喘息与战马低鸣。远处传来铁蹄轻响，仿佛命运的鼓点正步步逼近。你握紧剑柄，心中翻涌着怒意与决断——是挥兵迎击，还是设伏诱敌？亦或以雷霆手段震慑敌胆，'
+2025-09-28 21:39:12 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=816 预览='{"text": "夜色如墨，楚营外的篝火在寒风中摇曳，映得项羽的铠甲泛出冷光。斥候急报：刘邦军正悄然调动，意图绕道袭我粮道。你凝视着沙盘上那条蜿蜒的暗线，耳边是将士们压抑的喘息与战马低鸣。远处传来铁蹄轻响，仿佛命运的鼓点正步步逼近。你握紧剑柄，心中翻涌着怒意与决断——是挥兵迎击，还是设伏诱敌？亦或以雷霆手段震慑敌胆，'
+2025-09-28 21:39:12 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=184
+2025-09-28 21:39:12 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=184 preview="夜色如墨，楚营外的篝火在寒风中摇曳，映得项羽的铠甲泛出冷光。斥候急报：刘邦军正悄然调动，意图绕道袭我粮道。你凝视着沙盘上那条蜿蜒的暗线，耳边是将士们压抑的喘息与战马低鸣。远处传来铁蹄轻响，仿佛命运的鼓点正步步逼近。你握紧剑柄，心中翻涌着怒意与决断——是挥兵迎击，还是设伏诱敌？亦或以雷霆手段震慑敌胆，令其不战自溃？每一步都关乎西楚存亡，而你的选择，将决定这乱世的走向。"
+
+2025-09-28 21:39:12 | INFO     | core.image_generation:__init__:24 - 图像生成客户端初始化完成，使用提供商: openai
+2025-09-28 21:39:12 | INFO     | core.image_storage:__init__:34 - 图像存储服务初始化完成，存储目录: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images
+
+2025-09-28 21:39:12 | INFO     | core.image_storage:__init__:35 - 图像web访问前缀: http://127.0.0.1:8000/static/generated
+
+2025-09-28 21:39:12 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，楚营外的篝火在寒风中摇曳，映得项羽的铠甲泛出冷光。斥候急报：刘邦军正悄然调动，意图绕道袭我粮道。你凝视着沙盘上那条蜿蜒的暗线，耳边是将…"
+
+2025-09-28 21:39:12 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，楚营外的篝火在...
+2025-09-28 21:39:24 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:39:24 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:39:24 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759066764423_028.png
+2025-09-28 21:39:24 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759066764423_028.png
+
+2025-09-28 21:39:24 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759066764423_028.png
+
+2025-09-28 21:39:26 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_8c119c567eb6a29fc34b4127c9932a22.png (大小: 1357642 字节)
+
+2025-09-28 21:39:26 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp 大小 74754 字节 (原始 1357642 字节, 压缩比 0.06)
+
+2025-09-28 21:39:26 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_8c119c567eb6a29fc34b4127c9932a22.png
+
+2025-09-28 21:39:26 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+
+2025-09-28 21:39:26 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+
+2025-09-28 21:39:26 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+
+2025-09-28 21:39:26 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:26 | INFO     | core.story_engine:start_story:447 - 新故事生成成功
+2025-09-28 21:39:26 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:135 - pregeneration story readytext_len=184
+2025-09-28 21:39:26 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:140 - pregeneration node created
+2025-09-28 21:39:26 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:141 - pregeneration node imageimage=http://127.0.0.1:8000/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:26 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:150 - pregeneration cache stored
+2025-09-28 21:39:26 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:155 - pregeneration speculation enqueueddepth=0
+2025-09-28 21:39:26 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:157 - pregeneration done
+2025-09-28 21:39:26 | DEBUG    | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=pregeneration wish=项羽 | api.story:_background_generate_with_pregeneration:168 - pregeneration db closed
+2025-09-28 21:39:29 | INFO     | trace=f2fde283 user=dbcf516e-6d67-4dca-ace8-0f168208849f task=start wish=项羽 | api.story:start_new_story:447 - start request wish=项羽
+2025-09-28 21:39:29 | DEBUG    | trace=f2fde283 user=dbcf516e-6d67-4dca-ace8-0f168208849f task=start wish=项羽 | api.story:start_new_story:450 - start wish validated
+2025-09-28 21:39:29 | DEBUG    | trace=f2fde283 user=dbcf516e-6d67-4dca-ace8-0f168208849f task=start wish=项羽 | api.story:start_new_story:454 - start cache keycache_key=dbcf516e-6d67-4dca-ace8-0f168208849f:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:39:29 | DEBUG    | api.story:_cache_pop:92 - [预生成] 从缓存中取出 key=dbcf516e-6d67-4dca-ace8-0f168208849f:7865e02d41aa67b5b63c21fda711c5216856f3f413c5ff4f7bda5467e5d1aedd
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=start wish=项羽 | api.story:start_new_story:470 - start trace resumed
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f task=start wish=项羽 | api.story:start_new_story:471 - start cache first hithit=True
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=start wish=项羽 | api.story:start_new_story:488 - start use pregenerated
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=start wish=项羽 | api.story:start_new_story:509 - start use cached nodesession_id=19 node_id=83
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=start wish=项羽 | api.story:start_new_story:569 - start donetext_len=184 choice_count=3 image=http://127.0.0.1:8000/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=start wish=项羽 | api.story:start_new_story:576 - start image filefile_exists=True size=74754 path=C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=start wish=项羽 | api.story:start_new_story:579 - start speculation enqueuedepth=1
+2025-09-28 21:39:29 | DEBUG    | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=speculation | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=19 node=83 depth=1
+2025-09-28 21:39:29 | INFO     | trace=fb225a0e user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=start wish=项羽 | api.story:start_new_story:582 - start response readyimage=http://127.0.0.1:8000/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:29 | DEBUG    | core.speculation:_generate_children_pipeline:213 - [Speculation] pipeline generating 3 children for node=83
+2025-09-28 21:39:29 | INFO     | core.speculation:_generate_child_node:245 - [Speculation] start | parent=83 | choice="亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾"
+2025-09-28 21:39:29 | INFO     | core.speculation:_generate_child_node:245 - [Speculation] start | parent=83 | choice="命人伪造密信，散布谣言称刘邦欲背盟投秦，挑起其内斗"
+2025-09-28 21:39:29 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾
+2025-09-28 21:39:29 | INFO     | core.speculation:_generate_child_node:245 - [Speculation] start | parent=83 | choice="召集群将，当众宣誓血盟，以气势压倒敌军士气"
+2025-09-28 21:39:29 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 命人伪造密信，散布谣言称刘邦欲背盟投秦，挑起其内斗
+2025-09-28 21:39:29 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 召集群将，当众宣誓血盟，以气势压倒敌军士气
+2025-09-28 21:39:29 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp exists=True size=74754
+2025-09-28 21:39:29 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:29 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_8c119c567eb6a29fc34b4127c9932a22.webp
+2025-09-28 21:39:33 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:39:33 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1605
+2025-09-28 21:39:33 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=868 预览='{"text": "寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火——可别忘了，这天下，本就是我项羽用血与刀劈出来的！’你转身大步走向校场，命人擂鼓聚将，战马嘶鸣，士卒列阵如林。你立于高台，目光扫过一张张坚毅的脸庞，手中长戟指向天际：‘今夜，我们不攻，也不守——我们要让敌人知道，西楚的雷霆，从不在他们预料之中。’", "choices": [{"option": "下令全军偃旗息鼓，暗中调集精锐埋伏于山隘，以静制动诱敌深入", "summary": "以沉寂之姿藏锋芒，等待敌军踏入死局", "ef'
+2025-09-28 21:39:33 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=868 预览='{"text": "寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火——可别忘了，这天下，本就是我项羽用血与刀劈出来的！’你转身大步走向校场，命人擂鼓聚将，战马嘶鸣，士卒列阵如林。你立于高台，目光扫过一张张坚毅的脸庞，手中长'
+2025-09-28 21:39:33 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=868 预览='{"text": "寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火——可别忘了，这天下，本就是我项羽用血与刀劈出来的！’你转身大步走向校场，命人擂鼓聚将，战马嘶鸣，士卒列阵如林。你立于高台，目光扫过一张张坚毅的脸庞，手中长'
+2025-09-28 21:39:33 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=196
+2025-09-28 21:39:33 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=196 preview="寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火——可别忘了，这天下，本就是我项羽用血与刀劈出来的！’你转身大步走向校场，命人擂鼓聚将，战马嘶鸣，士卒列阵如林。你立于高台，目光扫过一张张坚毅的脸庞，手中长戟指向天际：‘今夜，我们不攻，也不守——我们要让敌人知道，西楚的雷霆，从不在他们预料之中。’"
+
+2025-09-28 21:39:33 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火…"
+
+2025-09-28 21:39:33 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗，猎猎作响。...
+2025-09-28 21:39:33 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:39:33 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1635
+2025-09-28 21:39:33 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=897 预览='{"text": "寒风卷起战旗，猎猎如血。项羽立于高台，目光如刀扫过沙盘上那条蜿蜒的敌军行迹。他猛地一掌拍碎案几，木屑飞溅：‘刘邦小儿，竟敢绕道断我粮道！’ 士兵们齐声怒吼，战鼓轰鸣。然而就在千钧一发之际，远处火光忽明忽暗——是敌军设伏？还是诱敌之计？你眼中闪过一丝杀意，手已按在剑柄，却听见帐外传来马蹄急响，一名斥候跌撞而入：‘大王！粮道无恙，但有密使潜入我营，自称是韩信旧部，愿献奇谋！’ 乱局之中，真假难辨，而每一秒都可能改写战局。", "choices": [{"option": "命人将密使押至辕门，当众斩首示众，以儆效尤", "summary": "以雷霆手段震慑营中异心，立威于军前'
+2025-09-28 21:39:33 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=897 预览='{"text": "寒风卷起战旗，猎猎如血。项羽立于高台，目光如刀扫过沙盘上那条蜿蜒的敌军行迹。他猛地一掌拍碎案几，木屑飞溅：‘刘邦小儿，竟敢绕道断我粮道！’ 士兵们齐声怒吼，战鼓轰鸣。然而就在千钧一发之际，远处火光忽明忽暗——是敌军设伏？还是诱敌之计？你眼中闪过一丝杀意，手已按在剑柄，却听见帐外传来马蹄急响，一名斥候'
+2025-09-28 21:39:33 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=897 预览='{"text": "寒风卷起战旗，猎猎如血。项羽立于高台，目光如刀扫过沙盘上那条蜿蜒的敌军行迹。他猛地一掌拍碎案几，木屑飞溅：‘刘邦小儿，竟敢绕道断我粮道！’ 士兵们齐声怒吼，战鼓轰鸣。然而就在千钧一发之际，远处火光忽明忽暗——是敌军设伏？还是诱敌之计？你眼中闪过一丝杀意，手已按在剑柄，却听见帐外传来马蹄急响，一名斥候'
+2025-09-28 21:39:33 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=210
+2025-09-28 21:39:33 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=210 preview="寒风卷起战旗，猎猎如血。项羽立于高台，目光如刀扫过沙盘上那条蜿蜒的敌军行迹。他猛地一掌拍碎案几，木屑飞溅：‘刘邦小儿，竟敢绕道断我粮道！’ 士兵们齐声怒吼，战鼓轰鸣。然而就在千钧一发之际，远处火光忽明忽暗——是敌军设伏？还是诱敌之计？你眼中闪过一丝杀意，手已按在剑柄，却听见帐外传来马蹄急响，一名斥候跌撞而入：‘大王！粮道无恙，但有密使潜入我营，自称是韩信旧部，愿献奇谋！’ 乱局之中，真假难辨，而每…"
+
+2025-09-28 21:39:33 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗，猎猎如血。项羽立于高台，目光如刀扫过沙盘上那条蜿蜒的敌军行迹。他猛地一掌拍碎案几，木屑飞溅：‘刘邦小儿，竟敢绕道断我粮道！’ 士兵…"
+
+2025-09-28 21:39:33 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗，猎猎如血。...
+2025-09-28 21:39:33 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:39:33 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1598
+2025-09-28 21:39:33 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=862 预览='{"text": "寒风卷起战旗，猎猎如雷。项羽立于高台，目光如刃扫过沙盘上那条逼近粮道的暗线。他忽然冷笑一声，拔剑劈向案几，木屑飞溅：‘刘邦想偷我命根子？那就让他尝尝什么叫断臂之痛！’他转身大步走向营帐深处，铁甲铿锵如战鼓。亲卫欲言又止，只见他抽出一卷火漆密函，掷于案上——那是早已埋伏在山口的死士名单。他眼中燃起野火，低语道：‘不是我怕你来，是你不敢走这条路。’夜色如墨，战鼓未响，但杀机已如蛛网密布于每一寸空气之中。", "choices": [{"option": "亲率精锐骑兵突袭敌军侧翼，以雷霆之势搅乱其阵型", "summary": "以猛攻破敌谋，展现霸王无畏气概", "effec'
+2025-09-28 21:39:33 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=862 预览='{"text": "寒风卷起战旗，猎猎如雷。项羽立于高台，目光如刃扫过沙盘上那条逼近粮道的暗线。他忽然冷笑一声，拔剑劈向案几，木屑飞溅：‘刘邦想偷我命根子？那就让他尝尝什么叫断臂之痛！’他转身大步走向营帐深处，铁甲铿锵如战鼓。亲卫欲言又止，只见他抽出一卷火漆密函，掷于案上——那是早已埋伏在山口的死士名单。他眼中燃起野火'
+2025-09-28 21:39:33 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=862 预览='{"text": "寒风卷起战旗，猎猎如雷。项羽立于高台，目光如刃扫过沙盘上那条逼近粮道的暗线。他忽然冷笑一声，拔剑劈向案几，木屑飞溅：‘刘邦想偷我命根子？那就让他尝尝什么叫断臂之痛！’他转身大步走向营帐深处，铁甲铿锵如战鼓。亲卫欲言又止，只见他抽出一卷火漆密函，掷于案上——那是早已埋伏在山口的死士名单。他眼中燃起野火'
+2025-09-28 21:39:33 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=201
+2025-09-28 21:39:33 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=201 preview="寒风卷起战旗，猎猎如雷。项羽立于高台，目光如刃扫过沙盘上那条逼近粮道的暗线。他忽然冷笑一声，拔剑劈向案几，木屑飞溅：‘刘邦想偷我命根子？那就让他尝尝什么叫断臂之痛！’他转身大步走向营帐深处，铁甲铿锵如战鼓。亲卫欲言又止，只见他抽出一卷火漆密函，掷于案上——那是早已埋伏在山口的死士名单。他眼中燃起野火，低语道：‘不是我怕你来，是你不敢走这条路。’夜色如墨，战鼓未响，但杀机已如蛛网密布于每一寸空气之中…"
+
+2025-09-28 21:39:33 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗，猎猎如雷。项羽立于高台，目光如刃扫过沙盘上那条逼近粮道的暗线。他忽然冷笑一声，拔剑劈向案几，木屑飞溅：‘刘邦想偷我命根子？那就让他…"
+
+2025-09-28 21:39:33 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 寒风卷起战旗，猎猎如雷。...
+2025-09-28 21:39:45 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:39:45 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:39:45 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759066784903_452.png
+2025-09-28 21:39:45 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759066784903_452.png
+
+2025-09-28 21:39:45 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759066784903_452.png
+
+2025-09-28 21:39:46 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:39:46 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:39:46 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759066785775_339.png
+2025-09-28 21:39:46 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759066785775_339.png
+
+2025-09-28 21:39:46 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759066785775_339.png
+
+2025-09-28 21:39:47 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:39:47 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:39:47 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759066787018_873.png
+2025-09-28 21:39:47 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759066787018_873.png
+
+2025-09-28 21:39:47 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759066787018_873.png
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_26a3373e1d20dcd6b757c5924a9204e5.png (大小: 1061880 字节)
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_26a3373e1d20dcd6b757c5924a9204e5.webp 大小 51032 字节 (原始 1061880 字节, 压缩比 0.05)
+
+2025-09-28 21:39:48 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_26a3373e1d20dcd6b757c5924a9204e5.png
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_26a3373e1d20dcd6b757c5924a9204e5.webp
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_26a3373e1d20dcd6b757c5924a9204e5.webp
+
+2025-09-28 21:39:48 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_26a3373e1d20dcd6b757c5924a9204e5.webp
+
+2025-09-28 21:39:48 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_26a3373e1d20dcd6b757c5924a9204e5.webp
+2025-09-28 21:39:48 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-28 21:39:48 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=83 | choice="命人伪造密信，散布谣言称刘邦欲背盟投秦，挑起其内斗" | text_len=201 | text="寒风卷起战旗，猎猎如雷。项羽立于高台，目光如刃扫过沙盘上那条逼近粮道的暗线。他忽然冷笑一声，拔剑劈向案几，木屑飞溅：‘刘邦想偷我命根子？那就让他尝尝什么叫断臂之痛！’他转身大步走向营帐深处，铁甲铿锵如战鼓。亲卫欲言又止，只见他抽出一卷火漆密函，掷于案上——那是早已埋伏在山口的死士名单。他眼中燃起野火，低语道：‘不是我怕你来，是你不敢走这条路。’夜色如墨，战鼓未响，但杀机已如蛛网密布于每一寸空气之中。"
+2025-09-28 21:39:48 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=83 | choice="命人伪造密信，散布谣言称刘邦欲背盟投秦，挑起其内斗" | node=84 | text_len=201 | image=http://127.0.0.1:8000/static/generated/ai_gen_26a3373e1d20dcd6b757c5924a9204e5.webp
+2025-09-28 21:39:48 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_0a4b8b0efafaea4950963e62bbd1194e.png (大小: 1538599 字节)
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_0a4b8b0efafaea4950963e62bbd1194e.webp 大小 93332 字节 (原始 1538599 字节, 压缩比 0.06)
+
+2025-09-28 21:39:48 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_0a4b8b0efafaea4950963e62bbd1194e.png
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_0a4b8b0efafaea4950963e62bbd1194e.webp
+
+2025-09-28 21:39:48 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_0a4b8b0efafaea4950963e62bbd1194e.webp
+
+2025-09-28 21:39:48 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_0a4b8b0efafaea4950963e62bbd1194e.webp
+
+2025-09-28 21:39:48 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_0a4b8b0efafaea4950963e62bbd1194e.webp
+2025-09-28 21:39:48 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-28 21:39:48 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=83 | choice="召集群将，当众宣誓血盟，以气势压倒敌军士气" | text_len=210 | text="寒风卷起战旗，猎猎如血。项羽立于高台，目光如刀扫过沙盘上那条蜿蜒的敌军行迹。他猛地一掌拍碎案几，木屑飞溅：‘刘邦小儿，竟敢绕道断我粮道！’ 士兵们齐声怒吼，战鼓轰鸣。然而就在千钧一发之际，远处火光忽明忽暗——是敌军设伏？还是诱敌之计？你眼中闪过一丝杀意，手已按在剑柄，却听见帐外传来马蹄急响，一名斥候跌撞而入：‘大王！粮道无恙，但有密使潜入我营，自称是韩信旧部，愿献奇谋！’ 乱局之中，真假难辨，而每一秒都可能改写战局。"
+2025-09-28 21:39:48 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=83 | choice="召集群将，当众宣誓血盟，以气势压倒敌军士气" | node=85 | text_len=210 | image=http://127.0.0.1:8000/static/generated/ai_gen_0a4b8b0efafaea4950963e62bbd1194e.webp
+2025-09-28 21:39:49 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_4abbd006899296c09e3d06de055b10f8.png (大小: 1563244 字节)
+
+2025-09-28 21:39:49 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_4abbd006899296c09e3d06de055b10f8.webp 大小 99976 字节 (原始 1563244 字节, 压缩比 0.06)
+
+2025-09-28 21:39:49 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_4abbd006899296c09e3d06de055b10f8.png
+
+2025-09-28 21:39:49 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+
+2025-09-28 21:39:49 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+
+2025-09-28 21:39:49 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+
+2025-09-28 21:39:49 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+2025-09-28 21:39:49 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-28 21:39:49 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=83 | choice="亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾" | text_len=196 | text="寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火——可别忘了，这天下，本就是我项羽用血与刀劈出来的！’你转身大步走向校场，命人擂鼓聚将，战马嘶鸣，士卒列阵如林。你立于高台，目光扫过一张张坚毅的脸庞，手中长戟指向天际：‘今夜，我们不攻，也不守——我们要让敌人知道，西楚的雷霆，从不在他们预料之中。’"
+2025-09-28 21:39:49 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=83 | choice="亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾" | node=86 | text_len=196 | image=http://127.0.0.1:8000/static/generated/ai_gen_4abbd006899296c09e3d06de055b10f8.webp

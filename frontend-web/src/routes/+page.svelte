@@ -40,16 +40,6 @@
     forceNewGame = true;
   }
 
-  function handleReturnToGate() {
-    console.debug('[+page] returnToGate event received');
-    try { gameStateStore.set(null); } catch {}
-    restoredGameState = null;
-    initialWish = '';
-    initialLevelMeta = null;
-    introComplete = false;
-    forceNewGame = false;
-  }
-
   // Subscribe to userStore to reset state on logout
   userStore.subscribe(user => {
     if (!user) {
@@ -65,7 +55,7 @@
 <main>
   {#if restoredGameState}
     <!-- Priority 1: Restoring from WelcomeBack/chronicle via local captured state -->
-    <Game session={$userStore} initialState={restoredGameState} on:returnToGate={handleReturnToGate} />
+    <Game session={$userStore} initialState={restoredGameState} />
   {:else if $userStore}
     {#if $userStore.nickname}
       {#if !introComplete}
@@ -79,7 +69,7 @@
         />
       {:else}
         <!-- Intro 完成，开始游戏（新局或从外部指定的 wish） -->
-        <Game session={$userStore} wish={initialWish} initialLevel={initialLevelMeta} on:returnToGate={handleReturnToGate} />
+        <Game session={$userStore} wish={initialWish} initialLevel={initialLevelMeta} />
       {/if}
     {:else}
       <!-- If user profile is NOT complete, show the profile form -->

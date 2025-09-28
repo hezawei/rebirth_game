@@ -107,23 +107,38 @@ def _background_generate_with_pregeneration(user_id: str, wish: str, trace: str 
     try:
         log.info("pregeneration start" + kv_text())
 
-        # 1. 生成第一节故事
-        log.info("pregeneration story engine start")
-        raw_data = story_engine.start_story(wish=wish_norm)
-        log.info("pregeneration story ready" + kv_text(text_len=len(raw_data.text)))
+        session = crud.get_session_by_user_and_wish(db, user_id=user_id, wish=wish_norm)
+        if session:
+            log = log.bind(session=session.id)
+            log.info("pregeneration reuse existing session")
+        else:
+            try:
+                session = crud.create_game_session(db, wish=wish_norm, user_id=user_id)
+                log = log.bind(session=session.id)
+                log.info("pregeneration session created")
+            except IntegrityError:
+                db.rollback()
+                session = crud.get_session_by_user_and_wish(db, user_id=user_id, wish=wish_norm)
+                if not session:
+                    raise
+                log = log.bind(session=session.id)
+                log.info("pregeneration session reused after IntegrityError")
 
-        # 2. 创建游戏会话
-        session = crud.create_game_session(db, wish=wish_norm, user_id=user_id)
-        log = log.bind(session=session.id)
-        log.info("pregeneration session created")
+        node = crud.get_root_node_for_session(db, session.id)
+        if node:
+            log = log.bind(node=node.id)
+            log.info("pregeneration reuse root node")
+        else:
+            # 1. 生成第一节故事
+            log.info("pregeneration story engine start")
+            raw_data = story_engine.start_story(wish=wish_norm)
+            log.info("pregeneration story ready" + kv_text(text_len=len(raw_data.text)))
 
-        # 3. 创建第一个故事节点
-        node = crud.create_story_node(db, session_id=session.id, segment=raw_data)
-        log = log.bind(node=node.id)
-        log.info("pregeneration node created")
-        
-        # 注意：raw_data.image_url 已经通过 story_engine 处理过图像逻辑了
-        log.info("pregeneration node image" + kv_text(image=raw_data.image_url))
+            # 3. 创建第一个故事节点
+            node = crud.create_story_node(db, session_id=session.id, segment=raw_data)
+            log = log.bind(node=node.id)
+            log.info("pregeneration node created")
+            log.info("pregeneration node image" + kv_text(image=raw_data.image_url))
 
         # 4. 缓存会话和节点信息供start接口使用
         cache_key = _make_cache_key(user_id, wish_norm)
