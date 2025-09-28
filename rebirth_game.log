@@ -2213,3 +2213,141 @@ DETAIL:  Key (user_id, wish)=(ff258ee1-869b-40f7-aae7-d9e1c48ecdf1, 项羽) alre
 2025-09-28 21:39:49 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
 2025-09-28 21:39:49 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=83 | choice="亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾" | text_len=196 | text="寒风卷起战旗，猎猎作响。你凝视沙盘上那条悄然逼近的敌线，忽然冷笑一声，将铁戟重重插地。‘刘邦想抄我粮道？’你声音如裂帛，‘那便让他尝尝楚军的怒火——可别忘了，这天下，本就是我项羽用血与刀劈出来的！’你转身大步走向校场，命人擂鼓聚将，战马嘶鸣，士卒列阵如林。你立于高台，目光扫过一张张坚毅的脸庞，手中长戟指向天际：‘今夜，我们不攻，也不守——我们要让敌人知道，西楚的雷霆，从不在他们预料之中。’"
 2025-09-28 21:39:49 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=83 | choice="亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾" | node=86 | text_len=196 | image=http://127.0.0.1:8000/static/generated/ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+2025-09-28 21:45:46 | INFO     | trace=4dd43fb3 user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=83 task=continue | api.story:continue_existing_story:610 - continue requestchoice=亲率精骑突袭敌后，以雷霆之势斩断其运粮队首尾
+2025-09-28 21:45:46 | INFO     | trace=4dd43fb3 user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=86 task=continue | api.story:continue_existing_story:656 - continue node ready check
+2025-09-28 21:45:46 | INFO     | api.story:_wait_for_node_complete:180 - [NodeComplete] 开始等待节点完全准备：node_id=86
+2025-09-28 21:45:46 | INFO     | api.story:_wait_for_node_complete:233 - [NodeComplete] ✅ 节点完全准备就绪：node_id=86 (等待了 0.0 秒)
+2025-09-28 21:45:46 | INFO     | trace=4dd43fb3 user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=86 task=continue | api.story:continue_existing_story:659 - continue node ready success
+2025-09-28 21:45:46 | INFO     | trace=4dd43fb3 user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=86 task=continue | api.story:continue_existing_story:668 - continue speculation enqueue existingdepth=1
+2025-09-28 21:45:46 | DEBUG    | trace=4dd43fb3 user=dbcf516e-6d67-4dca-ace8-0f168208849f session=19 node=86 task=speculation | core.speculation:enqueue:60 - [Speculation] enqueue PIPELINE session=19 node=86 depth=1
+2025-09-28 21:45:46 | DEBUG    | core.speculation:_generate_children_pipeline:213 - [Speculation] pipeline generating 3 children for node=86
+2025-09-28 21:45:46 | INFO     | core.speculation:_generate_child_node:245 - [Speculation] start | parent=86 | choice="下令全军偃旗息鼓，暗中调集精锐埋伏于山隘，以静制动诱敌深入"
+2025-09-28 21:45:46 | INFO     | core.speculation:_generate_child_node:245 - [Speculation] start | parent=86 | choice="亲率百骑突袭敌营后方，以雷霆之势斩其主将首级，震慑群敌"
+2025-09-28 21:45:46 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 下令全军偃旗息鼓，暗中调集精锐埋伏于山隘，以静制动诱敌深入
+2025-09-28 21:45:46 | INFO     | core.speculation:_generate_child_node:245 - [Speculation] start | parent=86 | choice="命人伪造粮草溃败假象，引敌军轻敌冒进，再以火攻断其归路"
+2025-09-28 21:45:46 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 亲率百骑突袭敌营后方，以雷霆之势斩其主将首级，震慑群敌
+2025-09-28 21:45:46 | INFO     | backend.main:_static_probe:116 - [StaticProbe] generated hit path=/static/generated/ai_gen_4abbd006899296c09e3d06de055b10f8.webp -> C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_4abbd006899296c09e3d06de055b10f8.webp exists=True size=99976
+2025-09-28 21:45:46 | DEBUG    | backend.main:get_response:41 - [Static:generated] request path=ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+2025-09-28 21:45:46 | INFO     | core.story_engine:continue_story:462 - 继续故事，用户选择: 命人伪造粮草溃败假象，引敌军轻敌冒进，再以火攻断其归路
+2025-09-28 21:45:46 | INFO     | backend.main:get_response:44 - [Static:generated] status=200 path=ai_gen_4abbd006899296c09e3d06de055b10f8.webp
+2025-09-28 21:45:50 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:45:50 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1800
+2025-09-28 21:45:50 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=897 预览='{"text": "夜色如墨，寒风卷起楚军战旗，猎猎作响。你率三千精骑悄然出营，马蹄裹布，铁甲无声。前方十里，便是刘邦运粮队的必经之路——一条狭窄的山谷隘口。你下令全军潜伏于两侧山林，只待敌军首尾相接、阵型拉长之时，便如雷霆般自天而降。火把熄灭，唯有星月为引，战马低鸣，将士们紧握兵刃，呼吸凝滞。你立于高坡之上，目光如炬，手中长戟指向山谷深处：‘等他们走进来，就让这山涧，变成他们的葬身之地。’远处传来车轮碾过碎石的声响，越来越近……", "choices": [{"option": "命人点燃预先埋设的火油桶，制造混乱后突袭断头部队", "summary": "以烈焰扰乱敌军阵型，趁机斩杀前锋"'
+2025-09-28 21:45:50 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=897 预览='{"text": "夜色如墨，寒风卷起楚军战旗，猎猎作响。你率三千精骑悄然出营，马蹄裹布，铁甲无声。前方十里，便是刘邦运粮队的必经之路——一条狭窄的山谷隘口。你下令全军潜伏于两侧山林，只待敌军首尾相接、阵型拉长之时，便如雷霆般自天而降。火把熄灭，唯有星月为引，战马低鸣，将士们紧握兵刃，呼吸凝滞。你立于高坡之上，目光如炬'
+2025-09-28 21:45:50 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=897 预览='{"text": "夜色如墨，寒风卷起楚军战旗，猎猎作响。你率三千精骑悄然出营，马蹄裹布，铁甲无声。前方十里，便是刘邦运粮队的必经之路——一条狭窄的山谷隘口。你下令全军潜伏于两侧山林，只待敌军首尾相接、阵型拉长之时，便如雷霆般自天而降。火把熄灭，唯有星月为引，战马低鸣，将士们紧握兵刃，呼吸凝滞。你立于高坡之上，目光如炬'
+2025-09-28 21:45:50 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=207
+2025-09-28 21:45:50 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=207 preview="夜色如墨，寒风卷起楚军战旗，猎猎作响。你率三千精骑悄然出营，马蹄裹布，铁甲无声。前方十里，便是刘邦运粮队的必经之路——一条狭窄的山谷隘口。你下令全军潜伏于两侧山林，只待敌军首尾相接、阵型拉长之时，便如雷霆般自天而降。火把熄灭，唯有星月为引，战马低鸣，将士们紧握兵刃，呼吸凝滞。你立于高坡之上，目光如炬，手中长戟指向山谷深处：‘等他们走进来，就让这山涧，变成他们的葬身之地。’远处传来车轮碾过碎石的声响…"
+
+2025-09-28 21:45:50 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，寒风卷起楚军战旗，猎猎作响。你率三千精骑悄然出营，马蹄裹布，铁甲无声。前方十里，便是刘邦运粮队的必经之路——一条狭窄的山谷隘口。你下令…"
+
+2025-09-28 21:45:50 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜色如墨，寒风卷起楚军战...
+2025-09-28 21:45:50 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:45:50 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1833
+2025-09-28 21:45:50 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=924 预览='{"text": "夜如墨染，寒星隐现。你亲率三千铁骑，踏碎霜原，马蹄声如雷滚过荒野，仿佛千军万马奔腾于幽冥之间。火把在风中摇曳，映得你披风猎猎，长戟指向敌后那条蜿蜒的粮道。斥候传来密报：运粮队已至断崖谷口，前队正缓缓入谷，后队尚在山外。你冷笑一声，挥戟为令——‘以火为号，三更时分，杀入腹心！’战马嘶鸣，铁甲铿锵，三千精骑如黑潮般潜行于山脊暗影之中，只待雷霆一击。前方，是刘邦的命脉；身后，是西楚的生死。此刻，不是胜负，而是天意与胆魄的对决。", "choices": [{"option": "命轻骑佯攻山口，引敌主力出营，趁机从侧翼穿插突袭粮车", "summary": "以虚张声势诱敌，再以'
+2025-09-28 21:45:50 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=924 预览='{"text": "夜如墨染，寒星隐现。你亲率三千铁骑，踏碎霜原，马蹄声如雷滚过荒野，仿佛千军万马奔腾于幽冥之间。火把在风中摇曳，映得你披风猎猎，长戟指向敌后那条蜿蜒的粮道。斥候传来密报：运粮队已至断崖谷口，前队正缓缓入谷，后队尚在山外。你冷笑一声，挥戟为令——‘以火为号，三更时分，杀入腹心！’战马嘶鸣，铁甲铿锵，三千'
+2025-09-28 21:45:50 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=924 预览='{"text": "夜如墨染，寒星隐现。你亲率三千铁骑，踏碎霜原，马蹄声如雷滚过荒野，仿佛千军万马奔腾于幽冥之间。火把在风中摇曳，映得你披风猎猎，长戟指向敌后那条蜿蜒的粮道。斥候传来密报：运粮队已至断崖谷口，前队正缓缓入谷，后队尚在山外。你冷笑一声，挥戟为令——‘以火为号，三更时分，杀入腹心！’战马嘶鸣，铁甲铿锵，三千'
+2025-09-28 21:45:50 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=212
+2025-09-28 21:45:50 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=212 preview="夜如墨染，寒星隐现。你亲率三千铁骑，踏碎霜原，马蹄声如雷滚过荒野，仿佛千军万马奔腾于幽冥之间。火把在风中摇曳，映得你披风猎猎，长戟指向敌后那条蜿蜒的粮道。斥候传来密报：运粮队已至断崖谷口，前队正缓缓入谷，后队尚在山外。你冷笑一声，挥戟为令——‘以火为号，三更时分，杀入腹心！’战马嘶鸣，铁甲铿锵，三千精骑如黑潮般潜行于山脊暗影之中，只待雷霆一击。前方，是刘邦的命脉；身后，是西楚的生死。此刻，不是胜负…"
+
+2025-09-28 21:45:50 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 夜如墨染，寒星隐现。你亲率三千铁骑，踏碎霜原，马蹄声如雷滚过荒野，仿佛千军万马奔腾于幽冥之间。火把在风中摇曳，映得你披风猎猎，长戟指向敌后那条蜿…"
+
+2025-09-28 21:45:50 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜如墨染，寒星隐现。你亲...
+2025-09-28 21:45:51 | INFO     | core.llm_clients:generate:240 - [JSON-in-JSON] 检测到并成功解析了嵌套的JSON响应。
+2025-09-28 21:45:51 | INFO     | core.llm_clients:generate:250 - 模型生成成功 - 模型: qwen-flash-2025-07-28, tokens使用: 1869
+2025-09-28 21:45:51 | INFO     | core.story_engine:continue_story:492 - [LLM raw][continue] 长度=950 预览='{"text": "夜如墨染，寒星隐现。你率三千铁骑自密林疾驰而出，马蹄踏碎霜雪，战旗如血刃撕裂黑暗。前方火光摇曳，正是刘邦运粮队的辎重行营——粮车连绵如龙，守卫疏于防备。你低喝一声，亲执长戟，率军如雷霆般从侧翼突入，刀锋划破寂静，火把应声熄灭。敌军惊乱，尚未列阵，已有数辆粮车轰然倾覆，烈焰腾空而起，映红半边天幕。你纵马冲入敌阵中央，怒吼震落树梢残雪，一戟劈开敌将头盔，血花溅上你的面甲。‘楚军在此！’这声咆哮如雷贯耳，令敌胆俱裂。然而，你亦知此战虽胜，却已暴露行踪，刘邦必遣精兵追击，后方大营恐成孤岛。", "choices": [{"option": "命人焚烧剩余粮草，引燃整条补给线，再率部'
+2025-09-28 21:45:51 | DEBUG    | core.story_engine:_extract_json:203 - [JSON] 原始长度=950 预览='{"text": "夜如墨染，寒星隐现。你率三千铁骑自密林疾驰而出，马蹄踏碎霜雪，战旗如血刃撕裂黑暗。前方火光摇曳，正是刘邦运粮队的辎重行营——粮车连绵如龙，守卫疏于防备。你低喝一声，亲执长戟，率军如雷霆般从侧翼突入，刀锋划破寂静，火把应声熄灭。敌军惊乱，尚未列阵，已有数辆粮车轰然倾覆，烈焰腾空而起，映红半边天幕。你纵'
+2025-09-28 21:45:51 | DEBUG    | core.story_engine:_extract_json:246 - [JSON] 括号配对提取成功，长度=950 预览='{"text": "夜如墨染，寒星隐现。你率三千铁骑自密林疾驰而出，马蹄踏碎霜雪，战旗如血刃撕裂黑暗。前方火光摇曳，正是刘邦运粮队的辎重行营——粮车连绵如龙，守卫疏于防备。你低喝一声，亲执长戟，率军如雷霆般从侧翼突入，刀锋划破寂静，火把应声熄灭。敌军惊乱，尚未列阵，已有数辆粮车轰然倾覆，烈焰腾空而起，映红半边天幕。你纵'
+2025-09-28 21:45:51 | INFO     | core.image_service:get_image_for_story:180 - [ImageService] start | text_len=243
+2025-09-28 21:45:51 | INFO     | core.image_service:_log:84 - [AIImageGen] start | text_len=243 preview="夜如墨染，寒星隐现。你率三千铁骑自密林疾驰而出，马蹄踏碎霜雪，战旗如血刃撕裂黑暗。前方火光摇曳，正是刘邦运粮队的辎重行营——粮车连绵如龙，守卫疏于防备。你低喝一声，亲执长戟，率军如雷霆般从侧翼突入，刀锋划破寂静，火把应声熄灭。敌军惊乱，尚未列阵，已有数辆粮车轰然倾覆，烈焰腾空而起，映红半边天幕。你纵马冲入敌阵中央，怒吼震落树梢残雪，一戟劈开敌将头盔，血花溅上你的面甲。‘楚军在此！’这声咆哮如雷贯耳…"
+
+2025-09-28 21:45:51 | INFO     | core.image_service:_log:84 - [AIImageGen] prompt | value="Create a cinematic and atmospheric image that captures the essence of this story scene: 夜如墨染，寒星隐现。你率三千铁骑自密林疾驰而出，马蹄踏碎霜雪，战旗如血刃撕裂黑暗。前方火光摇曳，正是刘邦运粮队的辎重行营——粮车连绵如龙，守卫疏…"
+
+2025-09-28 21:45:51 | INFO     | core.image_generation:_generate_oneapi:107 - 发送图像生成请求，模型: nano-banana, 提示词: Create a cinematic and atmospheric image that captures the essence of this story scene: 夜如墨染，寒星隐现。你率...
+2025-09-28 21:46:02 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 774 (attempt 1/2)
+2025-09-28 21:46:02 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=131
+
+2025-09-28 21:46:02 | WARNING  | core.image_service:_extract_image_url:151 - 无法从AI响应中提取图像URL: Here's an image that aims to capture the dramatic and cinematic essence of the scene you described: 
+
+|>
+请注意,回复提前终止,原因:IMAGE_SAFETY...
+2025-09-28 21:46:02 | WARNING  | core.image_service:generate_image_realtime:118 - [AIImageGen] no_url | fallback=random
+2025-09-28 21:46:02 | INFO     | core.image_service:get_random_image_from_library:48 - [ImageLibrary] select | size=6
+2025-09-28 21:46:02 | INFO     | core.image_service:get_random_image_from_library:61 - [ImageLibrary] result | file=magic_forest.jpg | url=http://127.0.0.1:8000/static/magic_forest.jpg
+2025-09-28 21:46:02 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/magic_forest.jpg
+2025-09-28 21:46:02 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-28 21:46:02 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=86 | choice="命人伪造粮草溃败假象，引敌军轻敌冒进，再以火攻断其归路" | text_len=243 | text="夜如墨染，寒星隐现。你率三千铁骑自密林疾驰而出，马蹄踏碎霜雪，战旗如血刃撕裂黑暗。前方火光摇曳，正是刘邦运粮队的辎重行营——粮车连绵如龙，守卫疏于防备。你低喝一声，亲执长戟，率军如雷霆般从侧翼突入，刀锋划破寂静，火把应声熄灭。敌军惊乱，尚未列阵，已有数辆粮车轰然倾覆，烈焰腾空而起，映红半边天幕。你纵马冲入敌阵中央，怒吼震落树梢残雪，一戟劈开敌将头盔，血花溅上你的面甲。‘楚军在此！’这声咆哮如雷贯耳，令敌胆俱裂。然而，你亦知此战虽胜，却已暴露行踪，刘邦必遣精兵追击，后方大营恐成孤岛。"
+2025-09-28 21:46:02 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=86 | choice="命人伪造粮草溃败假象，引敌军轻敌冒进，再以火攻断其归路" | node=87 | text_len=243 | image=http://127.0.0.1:8000/static/magic_forest.jpg
+2025-09-28 21:46:02 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:46:02 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:46:02 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759067162471_926.png
+2025-09-28 21:46:02 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759067162471_926.png
+
+2025-09-28 21:46:02 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759067162471_926.png
+
+2025-09-28 21:46:03 | INFO     | core.image_generation:_generate_oneapi:128 - 图像生成成功，响应长度: 705 (attempt 1/2)
+2025-09-28 21:46:03 | INFO     | core.image_service:_log:84 - [AIImageGen] api_success | response_len=73
+
+2025-09-28 21:46:03 | DEBUG    | core.image_service:_extract_image_url:148 - 从AI响应中提取到URL: https://cloudflarer2.nananobanana.com/png/1759067162633_764.png
+2025-09-28 21:46:03 | INFO     | core.image_service:_log:84 - [AIImageGen] url | value=https://cloudflarer2.nananobanana.com/png/1759067162633_764.png
+
+2025-09-28 21:46:03 | INFO     | core.image_storage:save_ai_image:55 - 开始下载AI图像: https://cloudflarer2.nananobanana.com/png/1759067162633_764.png
+
+2025-09-28 21:46:13 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_b999720e72ce83027758e488279469de.png (大小: 1562013 字节)
+
+2025-09-28 21:46:13 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_b999720e72ce83027758e488279469de.webp 大小 104800 字节 (原始 1562013 字节, 压缩比 0.07)
+
+2025-09-28 21:46:13 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_b999720e72ce83027758e488279469de.png
+
+2025-09-28 21:46:13 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_b999720e72ce83027758e488279469de.webp
+
+2025-09-28 21:46:13 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_b999720e72ce83027758e488279469de.webp
+
+2025-09-28 21:46:13 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_b999720e72ce83027758e488279469de.webp
+
+2025-09-28 21:46:13 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_b999720e72ce83027758e488279469de.webp
+2025-09-28 21:46:13 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-28 21:46:13 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=86 | choice="下令全军偃旗息鼓，暗中调集精锐埋伏于山隘，以静制动诱敌深入" | text_len=207 | text="夜色如墨，寒风卷起楚军战旗，猎猎作响。你率三千精骑悄然出营，马蹄裹布，铁甲无声。前方十里，便是刘邦运粮队的必经之路——一条狭窄的山谷隘口。你下令全军潜伏于两侧山林，只待敌军首尾相接、阵型拉长之时，便如雷霆般自天而降。火把熄灭，唯有星月为引，战马低鸣，将士们紧握兵刃，呼吸凝滞。你立于高坡之上，目光如炬，手中长戟指向山谷深处：‘等他们走进来，就让这山涧，变成他们的葬身之地。’远处传来车轮碾过碎石的声响，越来越近……"
+2025-09-28 21:46:13 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=86 | choice="下令全军偃旗息鼓，暗中调集精锐埋伏于山隘，以静制动诱敌深入" | node=88 | text_len=207 | image=http://127.0.0.1:8000/static/generated/ai_gen_b999720e72ce83027758e488279469de.webp
+2025-09-28 21:46:14 | INFO     | core.image_storage:save_ai_image:101 - ✅ 图像下载成功: ai_gen_050471d39c1cc2152ae4c26e3c8396e4.png (大小: 1607837 字节)
+
+2025-09-28 21:46:14 | INFO     | core.image_storage:_convert_to_webp:178 - [WebP] 转换成功: ai_gen_050471d39c1cc2152ae4c26e3c8396e4.webp 大小 117536 字节 (原始 1607837 字节, 压缩比 0.07)
+
+2025-09-28 21:46:14 | DEBUG    | core.image_storage:_convert_to_webp:183 - [WebP] 已删除原始文件: ai_gen_050471d39c1cc2152ae4c26e3c8396e4.png
+
+2025-09-28 21:46:14 | INFO     | core.image_storage:save_ai_image:108 - [图像访问URL]: http://127.0.0.1:8000/static/generated/ai_gen_050471d39c1cc2152ae4c26e3c8396e4.webp
+
+2025-09-28 21:46:14 | INFO     | core.image_storage:save_ai_image:109 - [本地文件路径]: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images\ai_gen_050471d39c1cc2152ae4c26e3c8396e4.webp
+
+2025-09-28 21:46:14 | INFO     | core.image_service:_log:84 - [AIImageGen] saved | path=http://127.0.0.1:8000/static/generated/ai_gen_050471d39c1cc2152ae4c26e3c8396e4.webp
+
+2025-09-28 21:46:14 | INFO     | core.image_service:get_image_for_story:191 - [ImageService] success | source=ai | url=http://127.0.0.1:8000/static/generated/ai_gen_050471d39c1cc2152ae4c26e3c8396e4.webp
+2025-09-28 21:46:14 | INFO     | core.story_engine:continue_story:573 - 故事继续生成成功
+2025-09-28 21:46:14 | INFO     | core.speculation:_generate_child_node:261 - [Speculation] story | parent=86 | choice="亲率百骑突袭敌营后方，以雷霆之势斩其主将首级，震慑群敌" | text_len=212 | text="夜如墨染，寒星隐现。你亲率三千铁骑，踏碎霜原，马蹄声如雷滚过荒野，仿佛千军万马奔腾于幽冥之间。火把在风中摇曳，映得你披风猎猎，长戟指向敌后那条蜿蜒的粮道。斥候传来密报：运粮队已至断崖谷口，前队正缓缓入谷，后队尚在山外。你冷笑一声，挥戟为令——‘以火为号，三更时分，杀入腹心！’战马嘶鸣，铁甲铿锵，三千精骑如黑潮般潜行于山脊暗影之中，只待雷霆一击。前方，是刘邦的命脉；身后，是西楚的生死。此刻，不是胜负，而是天意与胆魄的对决。"
+2025-09-28 21:46:14 | INFO     | core.speculation:_generate_child_node:299 - [Speculation] complete | parent=86 | choice="亲率百骑突袭敌营后方，以雷霆之势斩其主将首级，震慑群敌" | node=89 | text_len=212 | image=http://127.0.0.1:8000/static/generated/ai_gen_050471d39c1cc2152ae4c26e3c8396e4.webp
+2025-09-28 21:46:27 | INFO     | backend.main:shutdown_event:251 - 重生之我是……API服务关闭
+2025-09-28 21:46:28 | INFO     | core.image_service:_load_image_library:41 - 成功从 'C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images' 载入 6 张预置图片（已排除错误占位符）
+2025-09-28 21:46:29 | DEBUG    | core.llm_clients:__init__:81 - [CLIENT PARAMS] {'api_key': 'sk-e2eae7aa4d794271890b0772c963b102', 'base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1', 'default_headers': {'User-Agent': 'PostmanRuntime/7.47.1', 'Accept': '*/*', 'Cache-Control': 'no-cache', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}}
+2025-09-28 21:46:29 | INFO     | core.llm_clients:__init__:84 - LLM客户端初始化成功 - 提供商: OpenAI (兼容层)
+2025-09-28 21:46:29 | INFO     | core.llm_clients:__init__:89 - 模型: qwen-flash-2025-07-28
+2025-09-28 21:46:29 | INFO     | core.llm_clients:__init__:90 - API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
+2025-09-28 21:46:29 | INFO     | core.story_engine:__init__:25 - 故事引擎初始化完成
+2025-09-28 21:46:29 | INFO     | database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:46:30 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:46:30 | INFO     | core.speculation:__init__:29 - [Speculation] enabled depth=1 choice_workers=9 mode=thread-per-enqueue (no global pool)
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:75 - AI生成图像服务已挂载到 /static/generated 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\generated_images (热重载兼容模式)
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:78 - [静态文件服务] 后端完整访问地址示例: http://127.0.0.1:8000/static/generated/xxx.png
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:90 - 静态文件服务已挂载到 /static 路径: C:\Users\SuperV\Desktop\ai_game\rebirth_game\assets\images
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:101 - [RouteDump] #0 type=Route path=/openapi.json
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:101 - [RouteDump] #1 type=Route path=/docs
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:101 - [RouteDump] #2 type=Route path=/docs/oauth2-redirect
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:101 - [RouteDump] #3 type=Route path=/redoc
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:101 - [RouteDump] #4 type=Mount path=/static/generated
+2025-09-28 21:46:30 | INFO     | backend.main:<module>:101 - [RouteDump] #5 type=Mount path=/static
+2025-09-28 21:46:30 | INFO     | backend.main:_run_alembic_cmd:225 - Running Alembic: D:\python3.11\python.exe -m alembic upgrade head
+2025-09-28 21:46:30 | INFO     | backend.database.base:<module>:24 - 数据库配置: vendor=postgresql, url=postgresql+psycopg2://rebirth:StrongPass%21@127.0.0.1:5432/rebirth
+2025-09-28 21:46:30 | ERROR    | backend.main:_run_alembic_cmd:229 - Alembic migration failed: Command '['D:\\python3.11\\python.exe', '-m', 'alembic', 'upgrade', 'head']' returned non-zero exit status 1.
+2025-09-28 21:46:30 | INFO     | backend.main:startup_event:238 - 重生之我是……API服务启动
+2025-09-28 21:46:30 | INFO     | backend.main:startup_event:239 - 调试模式: True
+2025-09-28 21:46:30 | INFO     | backend.main:startup_event:244 - 当前使用模型: qwen-flash-2025-07-28
+2025-09-28 21:46:30 | INFO     | backend.main:startup_event:245 - 模型API地址: https://dashscope.aliyuncs.com/compatible-mode/v1
