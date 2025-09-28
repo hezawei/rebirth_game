@@ -45,21 +45,22 @@ class ImageService:
         """
         从图库中随机选择一张图片作为备用图片
         """
-        LOGGER.info(f"[ImageLibrary] 从图库随机选择图片，图库大小: {len(self.image_library)}")
+        LOGGER.info(
+            f"[ImageLibrary] select | size={len(self.image_library)}"
+        )
 
         base_url = resolve_public_base_url()
 
         if not self.image_library:
-            LOGGER.error("[ImageLibrary] 图片库为空，返回错误占位符")
-            return f"{base_url}/static/error_placeholder.png"
+            placeholder = f"{base_url}/static/error_placeholder.png"
+            LOGGER.error("[ImageLibrary] empty | returning=error_placeholder.png")
+            return placeholder
 
-        # 直接随机选择，不做任何关键字匹配
         selected_image = random.choice(self.image_library)
-        # 【关键修复】使用完整的后端URL
         result_url = f"{base_url}/static/{selected_image}"
-        
-        LOGGER.info(f"[ImageLibrary] ✅ 随机选择图片: {selected_image}")
-        LOGGER.info(f"[ImageLibrary] 🎯 返回图片URL: {result_url}")
+        LOGGER.info(
+            f"[ImageLibrary] result | file={selected_image} | url={result_url}"
+        )
         return result_url
 
     def generate_image_realtime(self, story_text: str) -> str:
@@ -67,48 +68,58 @@ class ImageService:
         即时生成图片的接口
         使用AI模型根据故事文本生成图片，并保存到本地
         """
-        LOGGER.info(f"[AIImageGen] 🚀 开始即时生成图片，故事文本长度: {len(story_text)}")
-        
+        def _compact(text: str, limit: int = 200) -> str:
+            single_line = " ".join(text.split())
+            return single_line if len(single_line) <= limit else f"{single_line[:limit]}…"
+
+        def _log(stage: str, **fields):
+            parts: list[str] = []
+            for key, value in fields.items():
+                if value is None:
+                    continue
+                parts.append(f"{key}={value}")
+            message = f"[AIImageGen] {stage}"
+            if parts:
+                message += " | " + " ".join(parts)
+            LOGGER.opt(colors=False).info(message + "\n")
+
+        _log("start", text_len=len(story_text), preview=f'"{_compact(story_text)}"')
+
         try:
             # 导入图像生成客户端和存储服务（延迟导入避免循环依赖）
-            LOGGER.debug("[AIImageGen] 导入图像生成客户端和存储服务...")
             from .image_generation import image_client
             from .image_storage import image_storage
             
             # 提取故事的关键元素作为提示词
-            LOGGER.debug("[AIImageGen] 提取图像提示词...")
             prompt = self._extract_image_prompt(story_text)
-            LOGGER.info(f"[AIImageGen] 📝 生成的图像提示词: {prompt[:100]}...")
+            _log("prompt", value=f'"{_compact(prompt, 160)}"')
             
             # 调用AI生成图像
-            LOGGER.info("[AIImageGen] 🎨 调用AI生成图像中...")
             ai_result = image_client.generate_image(prompt)
-            LOGGER.info(f"[AIImageGen] ✅ AI图像生成API调用成功，响应长度: {len(str(ai_result))}")
+            _log("api_success", response_len=len(str(ai_result)))
             
             # 从AI响应中提取图像URL
-            LOGGER.debug("[AIImageGen] 提取图像URL...")
             image_url = self._extract_image_url(ai_result)
             
             if image_url:
-                LOGGER.info(f"[AIImageGen] 🔗 提取到图像URL: {image_url}")
+                _log("url", value=image_url)
                 
                 # 下载并保存图像到本地
-                LOGGER.info("[AIImageGen] 💾 开始下载并保存图像到本地...")
                 local_path = image_storage.save_ai_image(image_url, story_text)
                 
                 if local_path:
-                    LOGGER.info(f"[AIImageGen] ✅ 图像已完全保存并验证可访问: {local_path}")
+                    _log("saved", path=local_path)
                     return local_path
                 else:
-                    LOGGER.error("[AIImageGen] ❌ 图像保存或验证失败，降级到随机图库")
+                    LOGGER.error("[AIImageGen] save_failed | fallback=random")
                     # 保存失败，立即降级到随机图库
                     return self.get_random_image_from_library()
             else:
-                LOGGER.warning("[AIImageGen] ⚠️ 无法从AI响应中提取图像URL，降级到随机图库")
+                LOGGER.warning("[AIImageGen] no_url | fallback=random")
                 return self.get_random_image_from_library()
             
         except Exception as e:
-            LOGGER.error(f"[AIImageGen] ❌ 即时图片生成失败: {e}，降级到随机图库")
+            LOGGER.error(f"[AIImageGen] error | detail={e} | fallback=random")
             # 失败时降级到随机图库
             return self.get_random_image_from_library()
     
@@ -166,32 +177,31 @@ class ImageService:
         - 如果开关开启：优先AI生成 → 失败则随机本地图片
         - 如果开关关闭：直接随机本地图片
         """
-        LOGGER.info(f"[ImageService] 🎨 开始为故事获取图片，故事文本长度: {len(story_text)}")
+        LOGGER.info(
+            f"[ImageService] start | text_len={len(story_text)}"
+        )
         
         if settings.enable_ai_image_generation:
             # 策略A：AI优先模式
-            LOGGER.info("[ImageService] 🤖 AI图像生成已启用，优先尝试AI生成...")
-            
             try:
                 # 尝试AI生成图像
                 ai_result = self.generate_image_realtime(story_text)
                 # 检查是否是错误占位符（AI生成失败的标志）
                 if ai_result and not ai_result.endswith("error_placeholder.png"):
-                    LOGGER.info(f"[ImageService] ✅ AI生成成功: {ai_result}")
+                    LOGGER.info(f"[ImageService] success | source=ai | url={ai_result}")
                     return ai_result
                 else:
-                    LOGGER.warning("[ImageService] ⚠️ AI生成返回错误占位符，降级到随机图库")
+                    LOGGER.warning("[ImageService] ai_placeholder | fallback=random")
                     return self.get_random_image_from_library()
                 
             except Exception as e:
-                LOGGER.warning(f"[ImageService] ❌ AI图像生成失败: {e}")
-                LOGGER.info("[ImageService] 🔄 降级到本地图库随机选择...")
+                LOGGER.warning(f"[ImageService] ai_error | detail={e} | fallback=random")
                 
                 # AI失败，降级到本地随机图片
                 return self.get_random_image_from_library()
         else:
             # 策略B：仅本地模式
-            LOGGER.info("[ImageService] 📁 AI图像生成已禁用，直接使用本地图库...")
+            LOGGER.info("[ImageService] local_only")
             return self.get_random_image_from_library()
 
 

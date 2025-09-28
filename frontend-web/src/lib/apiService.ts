@@ -128,42 +128,6 @@ export const api = {
         });
     },
 
-    // --- Story Saves ---
-
-    // POST /story/saves
-    createSave: (sessionId: number, nodeId: number, title: string) => {
-        return request('/story/saves', {
-            method: 'POST',
-            body: JSON.stringify({ session_id: sessionId, node_id: nodeId, title }),
-        });
-    },
-
-    // GET /story/saves
-    listSaves: (status?: string) => {
-        const query = status ? `?status_filter=${encodeURIComponent(status)}` : '';
-        return request(`/story/saves${query}`);
-    },
-
-    // GET /story/saves/{id}
-    getSaveDetail: (saveId: number) => {
-        return request(`/story/saves/${saveId}`);
-    },
-
-    // PATCH /story/saves/{id}
-    updateSave: (saveId: number, payload: { title?: string; status?: string }) => {
-        return request(`/story/saves/${saveId}`, {
-            method: 'PATCH',
-            body: JSON.stringify(payload),
-        });
-    },
-
-    // DELETE /story/saves/{id}
-    deleteSave: (saveId: number) => {
-        return request(`/story/saves/${saveId}`, {
-            method: 'DELETE',
-        });
-    },
-
     // --- Chronicle Endpoints ---
 
     // GET /story/sessions

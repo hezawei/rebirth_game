@@ -75,6 +75,10 @@ class GameSession(Base):
     story_nodes = relationship("StoryNode", back_populates="session", cascade="all, delete-orphan")
     saves = relationship("StorySave", back_populates="session", cascade="all, delete-orphan")
 
+    __table_args__ = (
+        UniqueConstraint('user_id', 'wish', name='uq_game_sessions_user_wish'),
+    )
+
 
 class StoryNode(Base):
     __tablename__ = "story_nodes"

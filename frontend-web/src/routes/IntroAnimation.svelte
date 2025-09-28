@@ -11,23 +11,19 @@
   let videoPlayer: HTMLVideoElement;
   let showSkipButton = false;
   let wish = ''; // 用于绑定输入框
-  let showNarrator = false; // 控制字幕显示
   let wishChecking = false; // 愿望校验中
   let wishError: string = '';
   let wishBoxEl: HTMLDivElement;
-  let narratorEl: HTMLParagraphElement;
-  let wishVisible = false
-  let preparedLevel: any = null
+  let wishVisible = false;
+  let preparedLevel: any = null;
 
   $: user = $userStore;
 
-  let text1 = '', text2 = '', text3 = '';
+  let text2 = '';
 
   onMount(() => {
     if (user) {
-      text1 = `你，是地球online游戏 ${user.age || '未知'} 级用户，你前世是一个 ${user.identity || '未知'}，现在你在前往重生之门的路上`;
       text2 = `${user.nickname || '旅人'}，欢迎你来到重生之门，请说出你希望重生成为什么吧！`;
-      text3 = `很好，${user.nickname || '旅人'}，请跳下重生之门，开始这次重生之旅吧！`;
     }
   });
 
@@ -35,14 +31,12 @@
     preparedLevel = null;
     wishError = '';
     currentStep = 1;
-    showNarrator = true; // 字幕出现
     // Wait for Svelte to update the DOM and render the video element
     await tick(); 
     try {
       await videoPlayer.play(); // This is now user-initiated, so sound will work
-      // 1秒后允许跳过第一段；同时在5秒后隐藏字幕
+      // 1秒后允许跳过第一段
       setTimeout(() => { showSkipButton = true; }, 1000);
-      setTimeout(() => { showNarrator = false; }, 5000);
     } catch (err) {
       console.error("Video play failed:", err);
       // If play fails, skip the animation
@@ -90,15 +84,13 @@
     }
 
     preparedLevel = prep;
-    const nickname = user?.nickname || '旅人';
-    text3 = `很好，${nickname}，你的首个使命是「${prep.main_quest}」，准备迎接命运的召唤吧！`;
 
     currentStep = 3;
     videoSrc = '/interact_1.webm';
+    showSkipButton = false;
     setTimeout(async () => {
       try {
         await videoPlayer.play();
-        setTimeout(() => { showSkipButton = true; }, 1000);
       } catch (err) {
         console.error("Outro video play failed:", err);
         dispatch('complete', { wish });
@@ -112,7 +104,6 @@
     if (currentStep === 1) {
       currentStep = 2;
       showSkipButton = false;
-      showNarrator = false;
       wishVisible = false;
       measurePositions('skip to step 2');
       requestAnimationFrame(() => {
@@ -143,7 +134,6 @@
     requestAnimationFrame(() => {
       console.debug(`[Intro][measure RAF] ${tag}`);
       logRect('video', videoPlayer);
-      logRect('narrator', narratorEl);
       logRect('wishBox', wishBoxEl);
     });
   }
@@ -171,15 +161,11 @@
     ></video>
   {/if}
 
-  {#if showSkipButton && (currentStep === 1 || currentStep === 3)}
+  {#if showSkipButton && currentStep === 1}
     <button class="skip-button" on:click={skipIntro} in:fade>跳过 >></button>
   {/if}
 
   <div class="overlay">
-    {#if currentStep === 1 && showNarrator}
-      <p class="narrator narrator-pos" bind:this={narratorEl} transition:fade={{ duration: 1500 }}>{text1}</p>
-    {/if}
-
     {#if currentStep === 2}
       {#if wishVisible}
       <div class="dialog-box wish-box wish-pos" bind:this={wishBoxEl}>
@@ -205,10 +191,6 @@
         </div>
       </div>
       {/if}
-    {/if}
-
-    {#if currentStep === 3}
-       <p class="narrator narrator-pos" in:fade={{ duration: 1500 }}>{text3}</p>
     {/if}
   </div>
 </div>
@@ -297,16 +279,6 @@
     pointer-events: none; /* Allow clicks to pass through overlay */
   }
 
-  /* Absolute anchored positions to avoid reflow-based shifts */
-  .narrator-pos {
-    position: absolute;
-    left: 50%;
-    transform: translate3d(-50%, 0, 0);
-    bottom: 30vh;
-    max-width: 90vw;
-    will-change: transform;
-  }
-
   .wish-pos {
     position: absolute;
     left: 50%;
@@ -319,17 +291,6 @@
   
   .dialog-box {
     pointer-events: all; /* But allow interaction with the dialog */
-  }
-
-  .narrator {
-    color: white;
-    font-size: 1.5rem;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    max-width: 80%;
-    text-shadow: 2px 2px 4px black;
   }
 
   .dialog-box {

@@ -237,14 +237,19 @@ class SpeculationService:
 
     def _generate_child_node(self, db: Any, session: Any, parent_node: StoryNode, choice_text: str, history: list, expiry_at: Optional[datetime]) -> Optional[StoryNode]:
         """为单个选项生成子节点的独立任务单元（故事+图像串行块）"""
-        LOGGER.info(f"[Speculation] 开始生成故事+图像块：parent={parent_node.id} choice='{choice_text}'")
-        
+
+        def _compact(text: str, limit: int = 400) -> str:
+            single_line = " ".join(text.split())
+            return single_line if len(single_line) <= limit else f"{single_line[:limit]}…"
+
+        LOGGER.info(
+            f"[Speculation] start | parent={parent_node.id} | choice=\"{choice_text}\""
+        )
+
         try:
-            # 【阶段1：故事生成】
             chapter_number = extract_chapter_number(parent_node)
             base_success_rate = parent_node.success_rate if parent_node.success_rate is not None else 50
 
-            LOGGER.info(f"[Speculation] 第1阶段-故事生成开始：parent={parent_node.id} choice='{choice_text}'")
             raw = story_engine.continue_story(
                 wish=session.wish,
                 story_history=history,
@@ -253,17 +258,19 @@ class SpeculationService:
                 current_success_rate=base_success_rate,
                 parent_metadata=parent_node.get_metadata(),
             )
-            LOGGER.info(f"[Speculation] 第1阶段-故事生成完成：parent={parent_node.id} choice='{choice_text}' text_length={len(raw.text)}")
-            
+            LOGGER.info(
+                f"[Speculation] story | parent={parent_node.id} | choice=\"{choice_text}\" | text_len={len(raw.text)} | text=\"{_compact(raw.text, 2000)}\""
+            )
+
         except Exception as exc:
-            LOGGER.warning(f"[Speculation] 第1阶段-故事生成失败 parent={parent_node.id} choice='{choice_text}': {exc}")
+            LOGGER.warning(
+                f"[Speculation] story_failed | parent={parent_node.id} | choice=\"{choice_text}\" | error={exc}"
+            )
             with self._lock:
                 self.nodes_failed_total += 1
             return None
 
-        # 【阶段2：创建节点并生成图像】
         try:
-            LOGGER.info(f"[Speculation] 第2阶段-创建数据库节点开始：parent={parent_node.id} choice='{choice_text}'")
             child = crud.create_story_node(
                 db,
                 session_id=session.id,
@@ -273,23 +280,26 @@ class SpeculationService:
                 is_speculative=True,
                 speculative_depth=(parent_node.speculative_depth or self.max_depth) - 1,
             )
-            LOGGER.info(f"[Speculation] 第2阶段-数据库节点创建完成：node_id={child.id} parent={parent_node.id} choice='{choice_text}'")
-            
+
         except IntegrityError:
             db.rollback()
-            LOGGER.info(f"[Speculation] 第2阶段-发现重复节点，获取已存在的：parent={parent_node.id} choice='{choice_text}'")
             child = crud.get_child_by_parent_and_choice(db, session.id, parent_node.id, choice_text)
             if not child:
-                LOGGER.error(f"[Speculation] 第2阶段-无法获取重复节点：parent={parent_node.id} choice='{choice_text}'")
+                LOGGER.error(
+                    f"[Speculation] node_missing | parent={parent_node.id} | choice=\"{choice_text}\""
+                )
                 return None
         except Exception as exc:
-            LOGGER.error(f"[Speculation] 第2阶段-数据库节点创建失败：parent={parent_node.id} choice='{choice_text}': {exc}")
+            LOGGER.error(
+                f"[Speculation] node_failed | parent={parent_node.id} | choice=\"{choice_text}\" | error={exc}"
+            )
             db.rollback()
             return None
 
-        # 注意：child节点的图像已经通过story_engine处理了，无需额外处理
-        LOGGER.info(f"[Speculation] 第3阶段-节点创建完成，图像已由story_engine处理：node_id={child.id} image_url={child.image_url}")
-        
+        LOGGER.info(
+            f"[Speculation] complete | parent={parent_node.id} | choice=\"{choice_text}\" | node={child.id} | text_len={len(raw.text)} | image={child.image_url}"
+        )
+
         with self._lock:
             self.nodes_generated_total += 1
         return child

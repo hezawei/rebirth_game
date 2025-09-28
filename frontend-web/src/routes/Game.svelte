@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { createEventDispatcher, onMount, tick } from 'svelte';
   import { api } from '../lib/apiService';
   import { userStore, gameStateStore, lastSessionStore, lastSessionOwnerStore } from '../lib/stores';
   import { setSessionScoped, CHRONICLE_SNAPSHOT_KEY, CHRONICLE_RETURN_TO_KEY } from '$lib/sessionScope';
@@ -28,22 +28,10 @@
     main_quest: string;
     metadata?: any;
   } | null = null;
-  let saveLoading = false;
   // 分阶段状态（避免用户误以为“卡在校验”）
   let gameStage: 'idle' | 'validating' | 'animating' | 'preparing' = 'idle';
 
-  type ToastType = 'success' | 'error';
-  let toast: { type: ToastType; message: string } | null = null;
-  let toastTimer: any = null;
-
-  function showToast(message: string, type: ToastType = 'success', duration = 2500) {
-    if (toastTimer) clearTimeout(toastTimer);
-    toast = { type, message };
-    toastTimer = setTimeout(() => {
-      toast = null;
-      toastTimer = null;
-    }, duration);
-  }
+  const dispatch = createEventDispatcher();
 
   // Navigate to Chronicle after saving a snapshot and return target (per-user scoped)
   async function toChronicle(event?: Event) {
@@ -231,23 +219,6 @@
     }
   }
 
-  async function createSave() {
-    if (!sessionId || !nodeId) {
-      showToast('当前没有进行中的关卡，无法存档', 'error');
-      return;
-    }
-    saveLoading = true;
-    const title = `第${chapterCount}章存档 - ${new Date().toLocaleString('zh-CN')}`;
-    try {
-      const payload = await api.createSave(sessionId, nodeId, title);
-      showToast(`存档成功：「${payload.title}」`, 'success');
-    } catch (err: any) {
-      showToast(err?.message || '存档失败，请稍后再试', 'error');
-    } finally {
-      saveLoading = false;
-    }
-  }
-
   function resetGame() {
     wish = '';
     storyHistory = [];
@@ -261,7 +232,13 @@
     levelInfo = null;
     wishError = '';
     initialLevel = null;
-    toast = null;
+    preStartLoading = false;
+    gameStage = 'idle';
+  }
+
+  function returnToRebirthGate() {
+    resetGame();
+    dispatch('returnToGate');
   }
 </script>
 
@@ -270,7 +247,7 @@
     <div class="user-header">
       <span>欢迎, {(session && (session.nickname || session.email)) || ''}</span>
       <a href="/chronicle" class="chronicle-link" on:click|preventDefault={toChronicle}>📜 编年史</a>
-      <button class="save-button" on:click={createSave} disabled={saveLoading}>💾 存档</button>
+      <button class="return-button" on:click={returnToRebirthGate}>🌀 返回重生之门</button>
       <button class="logout-button" on:click={userStore.logout}>登出</button>
     </div>
 
@@ -279,15 +256,6 @@
         <p>发生了一个错误:</p>
         <p><strong>{error}</strong></p>
         <button on:click={acknowledgeError}>确定</button>
-      </div>
-    {/if}
-
-    {#if toast}
-      <div class="toast-container">
-        <div class={`toast ${toast.type}`}>
-          <span class="toast-glow"></span>
-          <span>{toast.message}</span>
-        </div>
       </div>
     {/if}
 
@@ -529,7 +497,7 @@
     background: #c53030;
   }
 
-  .save-button {
+  .return-button {
     background: rgba(108, 99, 255, 0.8);
     color: white;
     border: none;
@@ -538,11 +506,7 @@
     cursor: pointer;
     font-size: 0.8rem;
   }
-  .save-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  .save-button:not(:disabled):hover {
+  .return-button:hover {
     background: rgba(108, 99, 255, 1);
   }
 
@@ -603,24 +567,6 @@
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
-  }
-
-  .save-feedback {
-    margin: 1rem 0;
-    padding: 0.75rem 1rem;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 0.95rem;
-  }
-  .save-feedback.success {
-    background: rgba(72, 187, 120, 0.15);
-    border: 1px solid rgba(72, 187, 120, 0.6);
-    color: #68d391;
-  }
-  .save-feedback.error {
-    background: rgba(229, 62, 62, 0.15);
-    border: 1px solid rgba(229, 62, 62, 0.6);
-    color: #fc8181;
   }
 
   .start-screen, .in-game-screen {

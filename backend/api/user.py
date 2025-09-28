@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Request, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from typing import Optional
+from typing import Optional, Tuple
 
 from backend.database import crud, models
 from backend.database.base import get_db
@@ -29,6 +29,26 @@ def _pick_token_from_request(request: Request) -> str:
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="无法验证凭证",
     )
+
+
+def _issue_access_token(response: Response, user: models.User) -> Tuple[str, int]:
+    """Create JWT, write it into HttpOnly cookie, and return token plus expires_in (seconds)."""
+    expires_minutes = getattr(settings, "access_token_expire_minutes", 60)
+    expires_seconds = int(expires_minutes) * 60
+    token_version = int(getattr(user, "token_version", 0) or 0)
+    access_token = security.create_access_token(data={"sub": user.email, "ver": token_version})
+
+    secure_flag = not bool(getattr(settings, "debug", False))
+    response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=True,
+        samesite="lax",
+        secure=secure_flag,
+        path="/",
+        max_age=expires_seconds,
+    )
+    return access_token, expires_seconds
 
 # --- 安全依赖 ---
 async def get_current_user(
@@ -93,20 +113,21 @@ async def login_for_access_token(
     db.commit()
     db.refresh(user)
 
-    # 在token中加入版本号
-    access_token = security.create_access_token(data={"sub": user.email, "ver": int(user.token_version)})
-    # Set HttpOnly cookie for SSR guards and multi-tab consistency
-    secure_flag = not bool(getattr(settings, "debug", False))
-    response.set_cookie(
-        key="access_token",
-        value=access_token,
-        httponly=True,
-        samesite="lax",
-        secure=secure_flag,
-        path="/",
-        max_age=getattr(settings, "access_token_expire_minutes", 60) * 60,
-    )
-    return {"access_token": access_token, "token_type": "bearer"}
+    # 在token中加入版本号，并写入Cookie
+    access_token, expires_seconds = _issue_access_token(response, user)
+    return {"access_token": access_token, "token_type": "bearer", "expires_in": expires_seconds}
+
+
+@auth_router.post("/refresh")
+async def refresh_access_token(
+    response: Response,
+    current_user: models.User = Depends(get_current_user),
+):
+    """Refresh the HttpOnly access token cookie when the existing token is still valid."""
+    LOGGER.info("用户 %s 发起令牌续期", current_user.email)
+    access_token, expires_seconds = _issue_access_token(response, current_user)
+    LOGGER.debug("续期成功: expires_in=%s", expires_seconds)
+    return {"status": "success"}
 
 
 @auth_router.post("/logout", status_code=204)

@@ -7,11 +7,12 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Dict, Optional, Tuple, Any
+from collections import OrderedDict
 # 【核心修正】导入整个schemas模块，而不仅仅是其中的类
 from backend import schemas
 from core.story_engine import story_engine
 from core.history_context import build_prompt_context
-from config.logging_config import LOGGER
+from config.logging_config import LOGGER, story_logger, make_trace_id, kv_text, log_context
 from config.settings import settings
 from database.base import get_db, SessionLocal
 from database import crud, models
@@ -22,6 +23,7 @@ from core.prompt_templates import PREPARE_LEVEL_PROMPT
 from core.llm_clients import llm_client
 from core.story_state import build_story_history, extract_chapter_number, build_story_segment_from_node
 from core.speculation import speculation_service, speculation_get_metrics
+import hashlib
 import json
 import re
 import threading
@@ -61,58 +63,94 @@ def _build_save_detail(db: Session, save: models.StorySave) -> schemas.story.Sto
 router = APIRouter()
 
 # 简化的第一节故事预生成缓存
-_FIRST_STORY_CACHE: Dict[str, Any] = {}  # key: f"{user_id}:{wish_hash}"
+_FIRST_STORY_CACHE_MAX = getattr(settings, "first_story_cache_max_entries", 100)
+_FIRST_STORY_CACHE: "OrderedDict[str, Dict[str, Any]]" = OrderedDict()  # key: f"{user_id}:{wish_digest}"
 _CACHE_LOCK = threading.Lock()
 
 
-def _background_generate_with_pregeneration(user_id: str, wish: str) -> None:
+def _make_cache_key(user_id: str, wish: str) -> str:
+    wish_norm = (wish or "").strip()
+    digest = hashlib.sha256(wish_norm.encode("utf-8")).hexdigest()
+    return f"{user_id}:{digest}"
+
+
+def _cache_store(key: str, value: Dict[str, Any]) -> None:
+    with _CACHE_LOCK:
+        if key in _FIRST_STORY_CACHE:
+            _FIRST_STORY_CACHE.pop(key, None)
+        elif len(_FIRST_STORY_CACHE) >= _FIRST_STORY_CACHE_MAX:
+            evicted_key, _ = _FIRST_STORY_CACHE.popitem(last=False)
+            LOGGER.info(f"[预生成] 📦 缓存已满，淘汰最早的记录: {evicted_key}")
+        _FIRST_STORY_CACHE[key] = value
+        _FIRST_STORY_CACHE.move_to_end(key, last=True)
+
+
+def _cache_pop(key: str) -> Optional[Dict[str, Any]]:
+    with _CACHE_LOCK:
+        value = _FIRST_STORY_CACHE.pop(key, None)
+        if value:
+            LOGGER.debug(f"[预生成] 从缓存中取出 key={key}")
+        return value
+
+
+def _cache_remove(key: str) -> None:
+    with _CACHE_LOCK:
+        if _FIRST_STORY_CACHE.pop(key, None) is not None:
+            LOGGER.debug(f"[预生成] 已从缓存中移除 key={key}")
+
+
+def _background_generate_with_pregeneration(user_id: str, wish: str, trace: str | None = None) -> None:
     """后台生成第一节故事并创建完整数据库记录，触发预生成"""
+    wish_norm = (wish or "").strip()
+    log = story_logger(trace=trace or make_trace_id(), user_id=user_id, wish=wish_norm, task="pregeneration")
     db = SessionLocal()
     try:
-        LOGGER.info(f"[预生成] 开始完整故事生成流程: user={user_id}")
-        
+        log.info("pregeneration start" + kv_text())
+
         # 1. 生成第一节故事
-        LOGGER.info(f"[预生成] 调用story_engine.start_story开始: user={user_id}")
-        raw_data = story_engine.start_story(wish=wish)
-        LOGGER.info(f"[预生成] 第一节故事LLM生成完成: user={user_id}, text长度={len(raw_data.text)}")
-        
+        log.info("pregeneration story engine start")
+        raw_data = story_engine.start_story(wish=wish_norm)
+        log.info("pregeneration story ready" + kv_text(text_len=len(raw_data.text)))
+
         # 2. 创建游戏会话
-        session = crud.create_game_session(db, wish=wish.strip(), user_id=user_id)
-        LOGGER.info(f"[预生成] 创建会话成功: session_id={session.id}")
-        
+        session = crud.create_game_session(db, wish=wish_norm, user_id=user_id)
+        log = log.bind(session=session.id)
+        log.info("pregeneration session created")
+
         # 3. 创建第一个故事节点
         node = crud.create_story_node(db, session_id=session.id, segment=raw_data)
-        LOGGER.info(f"[预生成] 创建第一个节点成功: node_id={node.id}")
+        log = log.bind(node=node.id)
+        log.info("pregeneration node created")
         
         # 注意：raw_data.image_url 已经通过 story_engine 处理过图像逻辑了
-        LOGGER.info(f"[预生成] 首节点图像已由story_engine处理: node_id={node.id} image_url={raw_data.image_url}")
-        
+        log.info("pregeneration node image" + kv_text(image=raw_data.image_url))
+
         # 4. 缓存会话和节点信息供start接口使用
-        cache_key = f"{user_id}:{hash(wish)}"
-        with _CACHE_LOCK:
-            _FIRST_STORY_CACHE[cache_key] = {
-                "session_id": session.id,
-                "node_id": node.id
-            }
-        
+        cache_key = _make_cache_key(user_id, wish_norm)
+        _cache_store(cache_key, {
+            "session_id": session.id,
+            "node_id": node.id,
+            "trace": trace,
+        })
+        log.info("pregeneration cache stored")
+
         # 5. 触发预生成：第一节相对概要已占1层，这里只需补齐到 max_depth，因此使用 (max_depth - 1)
         pre_depth = max(0, int(getattr(settings, 'speculation_max_depth', 0)) - 1)
         speculation_service.enqueue(session.id, node.id, depth=pre_depth)
-        LOGGER.info(f"[预生成] 已触发speculation预生成: session={session.id}, node={node.id}")
-        
-        LOGGER.info(f"[预生成] 完整流程成功完成: user={user_id}, session={session.id}")
+        log.info("pregeneration speculation enqueued" + kv_text(depth=pre_depth))
+
+        log.info("pregeneration done")
         
     except Exception as exc:
-        LOGGER.error(f"[预生成] 完整流程失败: user={user_id}, error={exc}")
+        log.error("pregeneration failed" + kv_text(error=str(exc)))
         db.rollback()
         # 失败时清理缓存，让start接口降级到实时生成
-        cache_key = f"{user_id}:{hash(wish)}"
-        with _CACHE_LOCK:
-            _FIRST_STORY_CACHE.pop(cache_key, None)
+        cache_key = _make_cache_key(user_id, wish_norm)
+        _cache_remove(cache_key)
     finally:
         # 无论成功失败都确保关闭数据库会话
         db.close()
-        LOGGER.debug(f"[预生成] 数据库会话已安全关闭: user={user_id}")
+        log.debug("pregeneration db closed")
 
 
 
@@ -261,20 +299,27 @@ async def prepare_start_level(
     假设愿望已通过校验，直接生成故事概要。
     """
     # 故事概要生成（这是耗时操作，应该在校验之后单独调用）
-    LOGGER.info(f"[PrepareStart] 🚀 开始生成故事概要，愿望：{request.wish.strip()[:50]}...")
+    trace = make_trace_id()
+    base_log = story_logger(
+        trace=trace,
+        user_id=getattr(current_user, "id", None),
+        wish=request.wish.strip(),
+        task="prepare_start",
+    )
+    base_log.info("PrepareStart start " + kv_text(wish=request.wish.strip()))
 
-    LOGGER.debug("[PrepareStart] 构建提示词上下文...")
+    base_log.debug("prepare context building")
     prompt_context = build_prompt_context(request.wish.strip())
-    LOGGER.debug(f"[PrepareStart] 上下文构建完成，推荐章节数: {prompt_context.get('recommended_chapter_count', 'N/A')}")
+    base_log.debug("prepare context ready " + kv_text(recommended_chapters=prompt_context.get("recommended_chapter_count")))
     
     tpl = PREPARE_LEVEL_PROMPT
     prompt = tpl.format(
         wish=request.wish.strip(),
         history_context=prompt_context["context_block"],
     )
-    LOGGER.info(f"[PrepareStart] 📝 调用LLM生成关卡元信息，提示词长度: {len(prompt)}")
+    base_log.info("prepare LLM request " + kv_text(prompt_len=len(prompt)))
     raw = llm_client.generate(prompt)
-    LOGGER.info(f"[PrepareStart] ✅ LLM响应完成，响应长度: {len(str(raw))}")
+    base_log.info("prepare LLM done " + kv_text(raw_len=len(str(raw))))
     try:
         s = str(raw).strip()
         # 兼容 ```json 代码围栏
@@ -301,9 +346,9 @@ async def prepare_start_level(
                 else:
                     s = s[start:].strip()
         data = json.loads(s)
-        LOGGER.info(f"[PrepareStart] 📊 JSON解析成功，包含字段: {list(data.keys())}")
+        base_log.info("prepare json parsed " + kv_text(fields="|".join(list(map(str, data.keys())))))
     except Exception as e:
-        LOGGER.error(f"[PrepareStart] ❌ 解析关卡元信息失败: {e}; 原始响应: {str(raw)[:200]}...")
+        base_log.error("prepare json parse failed " + kv_text(error=str(e), preview=str(raw)[:120]))
         raise HTTPException(status_code=500, detail="生成关卡元信息失败，请稍后重试")
 
     level_title = data.get("level_title")
@@ -313,10 +358,10 @@ async def prepare_start_level(
     if not main_quest and isinstance(data.get("goal"), dict):
         main_quest = data["goal"].get("description")
     
-    LOGGER.debug(f"[PrepareStart] 解析结果 - title: {level_title}, background: {background[:50] if background else None}..., quest: {main_quest[:50] if main_quest else None}...")
+    base_log.debug("prepare data parsed " + kv_text(title=level_title, quest=main_quest))
     
     if not all([level_title, background, main_quest]):
-        LOGGER.error(f"[PrepareStart] ❌ 关卡元信息缺失字段: {data}")
+        base_log.error("prepare missing fields" + kv_text(payload=str(data)))
         raise HTTPException(status_code=500, detail="生成关卡元信息不完整，请稍后重试")
 
     meta = {
@@ -341,13 +386,13 @@ async def prepare_start_level(
     try:
         thread = threading.Thread(
             target=_background_generate_with_pregeneration,
-            args=(str(current_user.id), wish_norm),
+            args=(str(current_user.id), wish_norm, trace),
             daemon=True
         )
         thread.start()
-        LOGGER.info(f"[预生成] 已启动后台完整故事生成线程: user={current_user.id}")
+        base_log.info("prepare background thread started" + kv_text(user=current_user.id))
     except Exception as exc:
-        LOGGER.warning(f"[预生成] 启动后台生成失败: {exc}")
+        base_log.warning("prepare background thread failed " + kv_text(error=str(exc)))
 
     return schemas.story.PrepareStartResponse(
         level_title=level_title,
@@ -376,77 +421,95 @@ async def start_new_story(
     """
 
     user_id = current_user.id
-    LOGGER.info(f"[Start] 👤 用户 {user_id} 收到新故事请求，愿望: {request.wish[:50]}...")
+    wish_norm = request.wish.strip()
+    trace = make_trace_id()
+    base_log = story_logger(
+        trace=trace,
+        user_id=user_id,
+        wish=wish_norm,
+        task="start",
+    )
+    base_log.info("start request " + kv_text(wish=wish_norm))
 
     # 基本验证（愿望应该已通过check_wish校验）
-    LOGGER.debug(f"[Start] 愿望校验已通过，开始处理故事生成")
+    base_log.debug("start wish validated")
 
     # 优先使用预生成的session和node，否则降级到实时生成
-    wish_norm = request.wish.strip()
-    cache_key = f"{user_id}:{hash(wish_norm)}"
-    LOGGER.debug(f"[Start] 生成缓存键: {cache_key}")
+    cache_key = _make_cache_key(user_id, wish_norm)
+    base_log.debug("start cache key" + kv_text(cache_key=cache_key))
     
     cached_data = None
     cache_wait_seconds = getattr(settings, "start_cache_wait_seconds", 8)
     poll_interval = 0.4
     elapsed = 0.0
 
-    with _CACHE_LOCK:
-        cached_data = _FIRST_STORY_CACHE.pop(cache_key, None)
-        LOGGER.info(f"[Start] 🔍 缓存查询结果: {'命中' if cached_data else '未命中'} (初始)")
+    cached_data = _cache_pop(cache_key)
+    if cached_data and cached_data.get("trace"):
+        trace = cached_data["trace"]
+        base_log = story_logger(
+            trace=trace,
+            user_id=user_id,
+            wish=wish_norm,
+            task="start",
+        )
+        base_log.info("start trace resumed")
+    base_log.info("start cache first hit" + kv_text(hit=bool(cached_data)))
 
     while cached_data is None and elapsed < cache_wait_seconds:
         remaining = cache_wait_seconds - elapsed
         wait = poll_interval if remaining > poll_interval else remaining
-        LOGGER.info(f"[Start] ⏳ 缓存未就绪，等待 {wait:.1f}s 后重试 (已等待 {elapsed:.1f}s / {cache_wait_seconds}s)")
+        base_log.info("start cache wait" + kv_text(wait=wait, elapsed=elapsed, limit=cache_wait_seconds))
         threading.Event().wait(wait)
         elapsed += wait
-        with _CACHE_LOCK:
-            cached_data = _FIRST_STORY_CACHE.pop(cache_key, None)
-            if cached_data:
-                LOGGER.info(f"[Start] 🔁 等待后命中缓存: session={cached_data['session_id']}, node={cached_data['node_id']}, 总等待 {elapsed:.1f}s")
+        cached_data = _cache_pop(cache_key)
+        if cached_data:
+            base_log.info("start cache success" + kv_text(session_id=cached_data["session_id"], node_id=cached_data["node_id"], elapsed=elapsed))
 
     if cached_data is not None:
         # 使用预生成的session和node
         session_id = cached_data["session_id"]
         node_id = cached_data["node_id"]
-        LOGGER.info(f"[预生成] 命中缓存，使用预生成的会话和节点: session={session_id}, node={node_id}")
+        start_log = base_log.bind(session=session_id, node=node_id)
+        start_log.info("start use pregenerated")
         
         session = crud.get_session_by_id(db, session_id)
         node = crud.get_node_by_id(db, node_id)
         
         if not session or not node:
-            LOGGER.warning(f"[Start] ⚠️ 缓存的会话或节点不存在，降级到实时生成: session={bool(session)}, node={bool(node)}")
+            start_log.warning("start cache miss objects" + kv_text(session_exists=bool(session), node_exists=bool(node)))
             # 降级到实时生成
-            LOGGER.info(f"[Start] 🏗️ 创建新游戏会话...")
+            start_log.info("start fallback create session")
             session = crud.create_game_session(db, wish=wish_norm, user_id=user_id)
-            LOGGER.info(f"[Start] ✅ 会话创建完成: session_id={session.id}")
+            start_log.info("start fallback session created" + kv_text(session_id=session.id))
             
-            LOGGER.info(f"[Start] 🎲 调用故事引擎生成第一节故事...")
+            start_log.info("start fallback generate story")
             raw_data = story_engine.start_story(wish=wish_norm)
-            LOGGER.info(f"[Start] 📖 第一节故事生成完成，文本长度: {len(raw_data.text)}")
+            start_log.info("start fallback story done" + kv_text(text_len=len(raw_data.text)))
             
-            LOGGER.info(f"[Start] 💾 保存第一节故事到数据库...")
+            start_log.info("start fallback save node")
             node = crud.create_story_node(db, session_id=session.id, segment=raw_data)
-            LOGGER.info(f"[Start] ✅ 节点创建完成: node_id={node.id}")
+            start_log.info("start fallback node saved" + kv_text(node_id=node.id))
         else:
             # 使用预生成的节点，无需raw_data
-            LOGGER.info(f"[Start] ✅ 使用预生成节点: session_id={session.id}, node_id={node.id}")
+            start_log.info("start use cached node" + kv_text(session_id=session.id, node_id=node.id))
             raw_data = None
     else:
-        LOGGER.info(f"[Start] 🔄 未命中缓存，实时生成第一节故事: user={user_id}")
+        start_log = base_log
+        start_log.info("start cache miss -> realtime")
         # 降级到实时生成
-        LOGGER.info(f"[Start] 🏗️ 创建新游戏会话...")
+        start_log.info("start realtime create session")
         session = crud.create_game_session(db, wish=wish_norm, user_id=user_id)
-        LOGGER.info(f"[Start] ✅ 会话创建完成: session_id={session.id}")
-        
-        LOGGER.info(f"[Start] 🎲 调用故事引擎生成第一节故事...")
+        start_log = start_log.bind(session=session.id)
+        start_log.info("start realtime session created" + kv_text(session_id=session.id))
+
+        start_log.info("start realtime generate story")
         raw_data = story_engine.start_story(wish=wish_norm)
-        LOGGER.info(f"[Start] 📖 第一节故事生成完成，文本长度: {len(raw_data.text)}")
-        
-        LOGGER.info(f"[Start] 💾 保存第一节故事到数据库...")
+        start_log.info("start realtime story done" + kv_text(text_len=len(raw_data.text)))
+
+        start_log.info("start realtime save node")
         node = crud.create_story_node(db, session_id=session.id, segment=raw_data)
-        LOGGER.info(f"[Start] ✅ 节点创建完成: node_id={node.id}")
+        start_log = start_log.bind(node=node.id)
+        start_log.info("start realtime node saved" + kv_text(node_id=node.id))
 
     # 4. 【逻辑简化】开始故事永远是第1章
     chapter_number = 1
@@ -487,25 +550,21 @@ async def start_new_story(
         metadata=_sanitize_metadata(metadata),
     )
 
-    LOGGER.info(f"[Start] 🎉 新故事生成成功！session_id={result.session_id}, node_id={result.node_id}")
-    LOGGER.info(f"[Start] 📊 响应详情 - 文本长度: {len(result.text)}, 选择数: {len(result.choices or [])}, 图片: {result.image_url}")
-    LOGGER.info(f"[Start] 🖼️ [图片URL调试] 返回给前端的图片URL: {result.image_url}")
+    start_log = start_log.bind(session=result.session_id, node=result.node_id)
+    start_log.info("start done" + kv_text(text_len=len(result.text), choice_count=len(result.choices or []), image=result.image_url))
     # 【调试】检查图片文件是否真实存在
     if result.image_url and '/static/generated/' in result.image_url:
         filename = result.image_url.split('/')[-1]
         local_file_path = settings.BASE_DIR / "assets" / "generated_images" / filename
         file_exists = local_file_path.exists()
         file_size = local_file_path.stat().st_size if file_exists else 0
-        LOGGER.info(
-            f"[Start] 📁 [图片文件检查] 文件存在: {file_exists}, 大小: {file_size}字节, 路径: {local_file_path}"
-        )
+        start_log.info("start image file" + kv_text(file_exists=file_exists, size=file_size, path=local_file_path))
 
     # 动态窗口：无论是否命中预生成，都要从“当前节点=第一节”补齐到 max_depth 层
-    LOGGER.info(f"[Start] 🔮 触发动态窗口补齐: session={session.id}, node={node.id}, depth={settings.speculation_max_depth}")
-    speculation_service.enqueue(session.id, node.id, depth=settings.speculation_max_depth)
-    LOGGER.info(f"[Start] ✅ speculation补齐任务已启动")
-
-    LOGGER.info(f"[Start] 🚀 API响应即将返回，图片URL: {result.image_url}")
+    start_log.info("start speculation enqueue" + kv_text(depth=settings.speculation_max_depth))
+    with log_context(trace=trace, user=user_id, session=session.id, node=node.id, task="speculation"):
+        speculation_service.enqueue(session.id, node.id, depth=settings.speculation_max_depth)
+    start_log.info("start response ready" + kv_text(image=result.image_url))
     return result
 
 
@@ -525,7 +584,15 @@ async def continue_existing_story(
     Returns:
         StorySegment: 包含新故事文本、选择选项和图片的响应
     """
-    LOGGER.info(f"收到故事继续请求，选择: {request.choice}")
+    trace = make_trace_id()
+    base_log = story_logger(
+        trace=trace,
+        user_id=current_user.id,
+        session_id=request.session_id,
+        node_id=request.node_id,
+        task="continue",
+    )
+    base_log.info("continue request" + kv_text(choice=request.choice))
 
     # 验证输入
     if not request.choice or len(request.choice.strip()) == 0:
@@ -543,6 +610,8 @@ async def continue_existing_story(
     parent_node = crud.get_node_by_id(db, request.node_id)
     if not parent_node or parent_node.session_id != request.session_id:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="节点不存在或不属于该会话")
+
+    base_log = base_log.bind(session=session.id, node=parent_node.id)
 
     # 1. 构建从根到当前父节点的路径历史
     story_history = build_story_history(db, parent_node)
@@ -568,20 +637,22 @@ async def continue_existing_story(
             existing_child = crud.finalize_speculative_node(db, existing_child)
         
         # 【节点完整性检查】确保用户选择的节点(故事+图片)都完全准备好了
-        LOGGER.info(f"[NodeReady] 检查节点完整性：node_id={existing_child.id}")
-        
+        child_log = base_log.bind(node=existing_child.id)
+        child_log.info("continue node ready check")
+
         if _wait_for_node_complete(existing_child, db):
-            LOGGER.info(f"[NodeReady] ✅ 节点完全准备就绪：node_id={existing_child.id}")
+            child_log.info("continue node ready success")
         else:
-            LOGGER.warning(f"[NodeReady] ⚠️ 节点准备超时，但继续返回：node_id={existing_child.id}")
-        
+            child_log.warning("continue node ready timeout")
+
         chapter_number = crud.calculate_chapter_number(db, request.session_id, existing_child.id)
         metadata = existing_child.get_metadata() or {}
         metadata.update({"source": "continue", "chapter_number": chapter_number})
         metadata = _sanitize_metadata(metadata)
         # 补齐以“当前节点=已选择的子节点”为锚的 max_depth 窗口
-        LOGGER.info(f"[Continue] 🔮 触发动态窗口补齐(已存在子节点): session={request.session_id}, node={existing_child.id}, depth={settings.speculation_max_depth}")
-        speculation_service.enqueue(request.session_id, existing_child.id, depth=settings.speculation_max_depth)
+        child_log.info("continue speculation enqueue existing" + kv_text(depth=settings.speculation_max_depth))
+        with log_context(trace=trace, user=current_user.id, session=request.session_id, node=existing_child.id, task="speculation"):
+            speculation_service.enqueue(request.session_id, existing_child.id, depth=settings.speculation_max_depth)
         return schemas.story.StorySegment(
             session_id=request.session_id,
             node_id=existing_child.id,
@@ -593,6 +664,7 @@ async def continue_existing_story(
         )
 
     # 2b. 调用引擎生成下一段故事 (返回RawStoryData) — 在事务之外执行，避免长事务
+    base_log.info("continue generate child" + kv_text(choice=request.choice.strip()))
     raw_data = story_engine.continue_story(
         wish=session.wish,
         story_history=story_history,
@@ -633,6 +705,9 @@ async def continue_existing_story(
         if not new_node:
             raise
 
+    new_log = base_log.bind(node=new_node.id)
+    new_log.info("continue node created" + kv_text(parent=request.node_id))
+
     # 4. 【核心修改】在这里调用一次 calculate_chapter_number 即可
     chapter_number = crud.calculate_chapter_number(db, request.session_id, new_node.id)
 
@@ -656,9 +731,10 @@ async def continue_existing_story(
         metadata=_sanitize_metadata(metadata)
     )
 
-    LOGGER.info("故事继续生成成功")
-    LOGGER.info(f"[Continue] 🔮 触发动态窗口补齐(新子节点): session={request.session_id}, node={new_node.id}, depth={settings.speculation_max_depth}")
-    speculation_service.enqueue(request.session_id, new_node.id, depth=settings.speculation_max_depth)
+    new_log.info("continue response ready" + kv_text(text_len=len(raw_data.text), choices=len(choices_payload)))
+    new_log.info("continue speculation enqueue new" + kv_text(depth=settings.speculation_max_depth))
+    with log_context(trace=trace, user=current_user.id, session=request.session_id, node=new_node.id, task="speculation"):
+        speculation_service.enqueue(request.session_id, new_node.id, depth=settings.speculation_max_depth)
     return result
 
 

@@ -22,6 +22,7 @@ class User(UserBase):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    expires_in: int
 
 
 # --- 用户资料相关的Schema ---

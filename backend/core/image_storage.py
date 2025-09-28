@@ -31,8 +31,8 @@ class ImageStorageService:
         # 确保存储目录存在
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         
-        LOGGER.info(f"图像存储服务初始化完成，存储目录: {self.storage_dir}")
-        LOGGER.info(f"图像web访问前缀: {self.web_path_prefix}")
+        LOGGER.opt(colors=False).info(f"图像存储服务初始化完成，存储目录: {self.storage_dir}\n")
+        LOGGER.opt(colors=False).info(f"图像web访问前缀: {self.web_path_prefix}\n")
     
     def save_ai_image(self, image_url: str, story_context: str) -> Optional[str]:
         """
@@ -48,11 +48,11 @@ class ImageStorageService:
         
         if not self._is_external_url(image_url):
             # 如果已经是本地URL，直接返回
-            LOGGER.debug(f"图像已经是本地路径: {image_url}")
+            LOGGER.opt(colors=False).debug(f"图像已经是本地路径: {image_url}\n")
             return image_url
         
         try:
-            LOGGER.info(f"开始下载AI图像: {image_url}")
+            LOGGER.opt(colors=False).info(f"开始下载AI图像: {image_url}\n")
             
             # 生成唯一的文件名
             filename = self._generate_filename(image_url, story_context)
@@ -62,16 +62,16 @@ class ImageStorageService:
             # 如果已经存在 WebP 版本，直接返回
             if settings.enable_webp_conversion and webp_path.exists():
                 web_url = self._normalize_public_url(f"{self.web_path_prefix}/{webp_path.name}")
-                LOGGER.info(f"[WebP] 命中已存在的WebP文件，直接返回: {webp_path.name}")
+                LOGGER.opt(colors=False).info(f"[WebP] 命中已存在的WebP文件，直接返回: {webp_path.name}\n")
                 return web_url
 
             # 检查原始文件是否已存在（避免重复下载）
             if local_path.exists():
-                LOGGER.info(f"图像已存在，直接返回: {filename}")
+                LOGGER.opt(colors=False).info(f"图像已存在，直接返回: {filename}\n")
                 converted = self._convert_to_webp(local_path)
                 chosen_path = converted or local_path
                 web_url = self._normalize_public_url(f"{self.web_path_prefix}/{chosen_path.name}")
-                LOGGER.info(f"[图像访问URL]: {web_url}")
+                LOGGER.opt(colors=False).info(f"[图像访问URL]: {web_url}\n")
                 return web_url
             
             # 下载图像
@@ -98,19 +98,19 @@ class ImageStorageService:
             except:
                 pass  # 如果刷新失败也继续
             
-            LOGGER.info(f"✅ 图像下载成功: {filename} (大小: {local_path.stat().st_size} 字节)")
+            LOGGER.opt(colors=False).info(f"✅ 图像下载成功: {filename} (大小: {local_path.stat().st_size} 字节)\n")
 
             converted = self._convert_to_webp(local_path)
             chosen_path = converted or local_path
 
             # 返回完整的web访问路径
             web_url = self._normalize_public_url(f"{self.web_path_prefix}/{chosen_path.name}")
-            LOGGER.info(f"[图像访问URL]: {web_url}")
-            LOGGER.info(f"[本地文件路径]: {chosen_path}")
+            LOGGER.opt(colors=False).info(f"[图像访问URL]: {web_url}\n")
+            LOGGER.opt(colors=False).info(f"[本地文件路径]: {chosen_path}\n")
             return web_url
             
         except Exception as e:
-            LOGGER.error(f"❌ 图像下载失败: {e}")
+            LOGGER.opt(colors=False).error(f"❌ 图像下载失败: {e}\n")
             return None
     
     
@@ -162,7 +162,7 @@ class ImageStorageService:
         if not settings.enable_webp_conversion:
             return None
         if Image is None:
-            LOGGER.warning("[WebP] Pillow 未安装，跳过WebP转换")
+            LOGGER.opt(colors=False).warning("[WebP] Pillow 未安装，跳过WebP转换\n")
             return None
         if source_path.suffix.lower() == '.webp':
             return source_path
@@ -175,17 +175,17 @@ class ImageStorageService:
             original_size = source_path.stat().st_size
             webp_size = target_path.stat().st_size
             ratio = (webp_size / original_size) if original_size else 0
-            LOGGER.info(
-                f"[WebP] 转换成功: {target_path.name} 大小 {webp_size} 字节 (原始 {original_size} 字节, 压缩比 {ratio:.2f})"
+            LOGGER.opt(colors=False).info(
+                f"[WebP] 转换成功: {target_path.name} 大小 {webp_size} 字节 (原始 {original_size} 字节, 压缩比 {ratio:.2f})\n"
             )
             try:
                 source_path.unlink()
-                LOGGER.debug(f"[WebP] 已删除原始文件: {source_path.name}")
+                LOGGER.opt(colors=False).debug(f"[WebP] 已删除原始文件: {source_path.name}\n")
             except OSError as exc:
-                LOGGER.warning(f"[WebP] 删除原始文件失败: {exc}")
+                LOGGER.opt(colors=False).warning(f"[WebP] 删除原始文件失败: {exc}\n")
             return target_path
         except Exception as exc:
-            LOGGER.warning(f"[WebP] 转换失败，保留原图: {exc}")
+            LOGGER.opt(colors=False).warning(f"[WebP] 转换失败，保留原图: {exc}\n")
             if target_path.exists():
                 try:
                     target_path.unlink()

@@ -4,10 +4,12 @@ from typing import List, Optional
 
 from sqlalchemy import func
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 
 from backend.core import security
 from backend.schemas import user as user_schema
 from config.logging_config import LOGGER  # 导入日志
+from config.settings import settings
 from schemas.story import RawStoryData
 
 from . import models
@@ -41,9 +43,21 @@ def create_user(db: Session, user: user_schema.UserCreate) -> models.User:
 def create_game_session(db: Session, wish: str, user_id: str) -> models.GameSession:
     db_session = models.GameSession(wish=wish, user_id=user_id)
     db.add(db_session)
-    db.commit()
-    db.refresh(db_session)
-    return db_session
+    try:
+        db.commit()
+        db.refresh(db_session)
+        return db_session
+    except IntegrityError:
+        db.rollback()
+        existing = (
+            db.query(models.GameSession)
+            .filter(models.GameSession.user_id == user_id, models.GameSession.wish == wish)
+            .order_by(models.GameSession.id.desc())
+            .first()
+        )
+        if existing:
+            return existing
+        raise
 
 def create_story_node(
     db: Session,
@@ -300,34 +314,35 @@ def prune_story_after_node(db: Session, node_id: int) -> models.StoryNode:
 
     LOGGER.info(f"正在从节点 {target_node.id} 之后进行时空回溯...")
 
-    # 查找并记录所有需要删除的后代节点ID（广度优先）
-    descendant_ids = []
-    nodes_to_visit = list(target_node.children)
-    while nodes_to_visit:
-        current_node = nodes_to_visit.pop()
-        descendant_ids.append(current_node.id)
-        nodes_to_visit.extend(list(current_node.children))
+    # 遍历目标节点的所有子孙节点，统一标记为可复用的推演缓存，避免删除任何已生成内容
+    descendants: list[models.StoryNode] = []
+    stack = list(target_node.children)
+    while stack:
+        node = stack.pop()
+        descendants.append(node)
+        stack.extend(list(node.children))
 
-    if descendant_ids:
-        LOGGER.info(f"节点 {target_node.id} 的所有后代节点 {descendant_ids} 将被删除。")
-        # 统一使用批量删除，避免深层级残留
-        db.query(models.StoryNode).filter(models.StoryNode.id.in_(descendant_ids)).delete(synchronize_session=False)
-    else:
-        LOGGER.info(f"节点 {target_node.id} 没有后代，无需删除。")
+    fallback_depth = max(0, getattr(settings, "speculation_max_depth", 0) - 1)
+    for node in descendants:
+        node.is_speculative = True
+        node.speculative_depth = fallback_depth if fallback_depth > 0 else None
+        node.speculative_expires_at = None
 
     db.commit()
 
-    # 刷新目标节点的状态，确保其 'children' 集合为空
+    # 刷新目标节点的状态，确保其 'children' 集合指向最新数据
     db.refresh(target_node)
 
-    LOGGER.info(f"已成功完成回溯，当前故事线的终点为节点 {target_node.id}。")
+    if descendants:
+        LOGGER.info(
+            f"已完成回溯：保留并标记节点 {target_node.id} 的子孙节点 {[n.id for n in descendants]} 为推演缓存。"
+        )
+    else:
+        LOGGER.info(f"已完成回溯：节点 {target_node.id} 无子孙节点需要处理。")
+
     return target_node
 
-
-# ===== 存档相关 CRUD =====
-
-
-def create_story_save(db: Session, session_id: int, node_id: int, title: str, status: str = "active") -> models.StorySave:
+# ... (rest of the code remains the same)
     save = models.StorySave(session_id=session_id, node_id=node_id, title=title.strip(), status=status)
     db.add(save)
     db.commit()
